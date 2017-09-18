@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.BlogCommentsMapper" >
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.BlogComments" >
+    <id column="comment_id" property="commentId" jdbcType="BIGINT" />
+    <result column="article_id" property="articleId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="comment_created" property="commentCreated" jdbcType="TIMESTAMP" />
+    <result column="comment_updated" property="commentUpdated" jdbcType="TIMESTAMP" />
+    <result column="comment_status" property="commentStatus" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.keji.blog.dataobject.BlogComments" extends="BaseResultMap" >
+    <result column="comment_content" property="commentContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    comment_id, article_id, user_id, comment_created, comment_updated, comment_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    comment_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.keji.blog.dataobject.BlogCommentsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_comments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.BlogCommentsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_comments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_comments
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog_comments
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keji.blog.dataobject.BlogCommentsExample" >
+    delete from blog_comments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keji.blog.dataobject.BlogComments" >
+    insert into blog_comments (comment_id, article_id, user_id, 
+      comment_created, comment_updated, comment_status, 
+      comment_content)
+    values (#{commentId,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{commentCreated,jdbcType=TIMESTAMP}, #{commentUpdated,jdbcType=TIMESTAMP}, #{commentStatus,jdbcType=BIT}, 
+      #{commentContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.BlogComments" >
+    insert into blog_comments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="commentCreated != null" >
+        comment_created,
+      </if>
+      <if test="commentUpdated != null" >
+        comment_updated,
+      </if>
+      <if test="commentStatus != null" >
+        comment_status,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="commentCreated != null" >
+        #{commentCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentUpdated != null" >
+        #{commentUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentStatus != null" >
+        #{commentStatus,jdbcType=BIT},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keji.blog.dataobject.BlogCommentsExample" resultType="java.lang.Integer" >
+    select count(*) from blog_comments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blog_comments
+    <set >
+      <if test="record.commentId != null" >
+        comment_id = #{record.commentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleId != null" >
+        article_id = #{record.articleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.commentCreated != null" >
+        comment_created = #{record.commentCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commentUpdated != null" >
+        comment_updated = #{record.commentUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commentStatus != null" >
+        comment_status = #{record.commentStatus,jdbcType=BIT},
+      </if>
+      <if test="record.commentContent != null" >
+        comment_content = #{record.commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update blog_comments
+    set comment_id = #{record.commentId,jdbcType=BIGINT},
+      article_id = #{record.articleId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      comment_created = #{record.commentCreated,jdbcType=TIMESTAMP},
+      comment_updated = #{record.commentUpdated,jdbcType=TIMESTAMP},
+      comment_status = #{record.commentStatus,jdbcType=BIT},
+      comment_content = #{record.commentContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blog_comments
+    set comment_id = #{record.commentId,jdbcType=BIGINT},
+      article_id = #{record.articleId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      comment_created = #{record.commentCreated,jdbcType=TIMESTAMP},
+      comment_updated = #{record.commentUpdated,jdbcType=TIMESTAMP},
+      comment_status = #{record.commentStatus,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.BlogComments" >
+    update blog_comments
+    <set >
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="commentCreated != null" >
+        comment_created = #{commentCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentUpdated != null" >
+        comment_updated = #{commentUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentStatus != null" >
+        comment_status = #{commentStatus,jdbcType=BIT},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.keji.blog.dataobject.BlogComments" >
+    update blog_comments
+    set article_id = #{articleId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      comment_created = #{commentCreated,jdbcType=TIMESTAMP},
+      comment_updated = #{commentUpdated,jdbcType=TIMESTAMP},
+      comment_status = #{commentStatus,jdbcType=BIT},
+      comment_content = #{commentContent,jdbcType=LONGVARCHAR}
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.BlogComments" >
+    update blog_comments
+    set article_id = #{articleId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      comment_created = #{commentCreated,jdbcType=TIMESTAMP},
+      comment_updated = #{commentUpdated,jdbcType=TIMESTAMP},
+      comment_status = #{commentStatus,jdbcType=BIT}
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -13,7 +13,6 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
-    <import resource="classpath:mybatis/sqlMapConfig.xml"/>
+    <import resource="classpath:mybatis/mybatis-config.xml"/>
 
 </beans>

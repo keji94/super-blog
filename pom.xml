@@ -16,6 +16,13 @@
         <module>super-blog-starter</module>
     </modules>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <properties>
         <freemarker.version>1.4.1.RELEASE</freemarker.version>
         <junit.version>4.12</junit.version>
@@ -23,6 +30,11 @@
         <lombok.version>1.16.16</lombok.version>
         <spring.version>4.3.5.RELEASE</spring.version>
         <mybatis-starter.version>1.1.1</mybatis-starter.version>
+        <springboot-starter.version>1.5.6.RELEASE</springboot-starter.version>
+        <mysql.version>5.1.37</mysql.version>
+        <druid.version>1.0.29</druid.version>
+        <javax.version>3.1.0</javax.version>
+        <lombok.version>1.16.16</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -49,12 +61,6 @@
                 <artifactId>super-blog-controller</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--freemarker-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-freemarker</artifactId>
-                <version>${freemarker.version}</version>
-            </dependency>
             <!--junit-->
             <dependency>
                 <groupId>junit</groupId>
@@ -80,11 +86,48 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-starter.version}</version>
             </dependency>
+            <!--mysql-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!--连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--servlet-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.version}</version>
+            </dependency>
+            <!--LomBok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+
             <!--spring-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${springboot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${springboot-starter.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

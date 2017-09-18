@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.BlogCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.BlogCategory" >
+    <id column="category_id" property="categoryId" jdbcType="BIGINT" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="category_status" property="categoryStatus" jdbcType="BIT" />
+    <result column="category_url" property="categoryUrl" jdbcType="VARCHAR" />
+    <result column="category_orderNum" property="categoryOrdernum" jdbcType="INTEGER" />
+    <result column="category_isParent" property="categoryIsparent" jdbcType="BIT" />
+    <result column="categpry_parentId" property="categpryParentid" jdbcType="BIGINT" />
+    <result column="category_created" property="categoryCreated" jdbcType="TIMESTAMP" />
+    <result column="category_updated" property="categoryUpdated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    category_id, category_name, category_status, category_url, category_orderNum, category_isParent, 
+    categpry_parentId, category_created, category_updated
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.BlogCategoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog_category
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog_category
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keji.blog.dataobject.BlogCategoryExample" >
+    delete from blog_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keji.blog.dataobject.BlogCategory" >
+    insert into blog_category (category_id, category_name, category_status, 
+      category_url, category_orderNum, category_isParent, 
+      categpry_parentId, category_created, category_updated
+      )
+    values (#{categoryId,jdbcType=BIGINT}, #{categoryName,jdbcType=VARCHAR}, #{categoryStatus,jdbcType=BIT}, 
+      #{categoryUrl,jdbcType=VARCHAR}, #{categoryOrdernum,jdbcType=INTEGER}, #{categoryIsparent,jdbcType=BIT}, 
+      #{categpryParentid,jdbcType=BIGINT}, #{categoryCreated,jdbcType=TIMESTAMP}, #{categoryUpdated,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.BlogCategory" >
+    insert into blog_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="categoryName != null" >
+        category_name,
+      </if>
+      <if test="categoryStatus != null" >
+        category_status,
+      </if>
+      <if test="categoryUrl != null" >
+        category_url,
+      </if>
+      <if test="categoryOrdernum != null" >
+        category_orderNum,
+      </if>
+      <if test="categoryIsparent != null" >
+        category_isParent,
+      </if>
+      <if test="categpryParentid != null" >
+        categpry_parentId,
+      </if>
+      <if test="categoryCreated != null" >
+        category_created,
+      </if>
+      <if test="categoryUpdated != null" >
+        category_updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryStatus != null" >
+        #{categoryStatus,jdbcType=BIT},
+      </if>
+      <if test="categoryUrl != null" >
+        #{categoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryOrdernum != null" >
+        #{categoryOrdernum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryIsparent != null" >
+        #{categoryIsparent,jdbcType=BIT},
+      </if>
+      <if test="categpryParentid != null" >
+        #{categpryParentid,jdbcType=BIGINT},
+      </if>
+      <if test="categoryCreated != null" >
+        #{categoryCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryUpdated != null" >
+        #{categoryUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keji.blog.dataobject.BlogCategoryExample" resultType="java.lang.Integer" >
+    select count(*) from blog_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blog_category
+    <set >
+      <if test="record.categoryId != null" >
+        category_id = #{record.categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryName != null" >
+        category_name = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryStatus != null" >
+        category_status = #{record.categoryStatus,jdbcType=BIT},
+      </if>
+      <if test="record.categoryUrl != null" >
+        category_url = #{record.categoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryOrdernum != null" >
+        category_orderNum = #{record.categoryOrdernum,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryIsparent != null" >
+        category_isParent = #{record.categoryIsparent,jdbcType=BIT},
+      </if>
+      <if test="record.categpryParentid != null" >
+        categpry_parentId = #{record.categpryParentid,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryCreated != null" >
+        category_created = #{record.categoryCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.categoryUpdated != null" >
+        category_updated = #{record.categoryUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blog_category
+    set category_id = #{record.categoryId,jdbcType=BIGINT},
+      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_status = #{record.categoryStatus,jdbcType=BIT},
+      category_url = #{record.categoryUrl,jdbcType=VARCHAR},
+      category_orderNum = #{record.categoryOrdernum,jdbcType=INTEGER},
+      category_isParent = #{record.categoryIsparent,jdbcType=BIT},
+      categpry_parentId = #{record.categpryParentid,jdbcType=BIGINT},
+      category_created = #{record.categoryCreated,jdbcType=TIMESTAMP},
+      category_updated = #{record.categoryUpdated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.BlogCategory" >
+    update blog_category
+    <set >
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryStatus != null" >
+        category_status = #{categoryStatus,jdbcType=BIT},
+      </if>
+      <if test="categoryUrl != null" >
+        category_url = #{categoryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryOrdernum != null" >
+        category_orderNum = #{categoryOrdernum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryIsparent != null" >
+        category_isParent = #{categoryIsparent,jdbcType=BIT},
+      </if>
+      <if test="categpryParentid != null" >
+        categpry_parentId = #{categpryParentid,jdbcType=BIGINT},
+      </if>
+      <if test="categoryCreated != null" >
+        category_created = #{categoryCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryUpdated != null" >
+        category_updated = #{categoryUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.BlogCategory" >
+    update blog_category
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      category_status = #{categoryStatus,jdbcType=BIT},
+      category_url = #{categoryUrl,jdbcType=VARCHAR},
+      category_orderNum = #{categoryOrdernum,jdbcType=INTEGER},
+      category_isParent = #{categoryIsparent,jdbcType=BIT},
+      categpry_parentId = #{categpryParentid,jdbcType=BIGINT},
+      category_created = #{categoryCreated,jdbcType=TIMESTAMP},
+      category_updated = #{categoryUpdated,jdbcType=TIMESTAMP}
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </update>
+</mapper>

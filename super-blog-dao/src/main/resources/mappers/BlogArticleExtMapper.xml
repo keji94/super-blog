@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.BlogArticleExtMapper" >
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.BlogArticleExt" >
+    <id column="ext_id" property="extId" jdbcType="BIGINT" />
+    <result column="ext_good" property="extGood" jdbcType="INTEGER" />
+    <result column="ext_bad" property="extBad" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="BIGINT" />
+    <result column="ext_create" property="extCreate" jdbcType="TIMESTAMP" />
+    <result column="ext_updated" property="extUpdated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ext_id, ext_good, ext_bad, article_id, ext_create, ext_updated
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.BlogArticleExtExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_article_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog_article_ext
+    where ext_id = #{extId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog_article_ext
+    where ext_id = #{extId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keji.blog.dataobject.BlogArticleExtExample" >
+    delete from blog_article_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keji.blog.dataobject.BlogArticleExt" >
+    insert into blog_article_ext (ext_id, ext_good, ext_bad, 
+      article_id, ext_create, ext_updated
+      )
+    values (#{extId,jdbcType=BIGINT}, #{extGood,jdbcType=INTEGER}, #{extBad,jdbcType=INTEGER}, 
+      #{articleId,jdbcType=BIGINT}, #{extCreate,jdbcType=TIMESTAMP}, #{extUpdated,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.BlogArticleExt" >
+    insert into blog_article_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="extId != null" >
+        ext_id,
+      </if>
+      <if test="extGood != null" >
+        ext_good,
+      </if>
+      <if test="extBad != null" >
+        ext_bad,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="extCreate != null" >
+        ext_create,
+      </if>
+      <if test="extUpdated != null" >
+        ext_updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="extId != null" >
+        #{extId,jdbcType=BIGINT},
+      </if>
+      <if test="extGood != null" >
+        #{extGood,jdbcType=INTEGER},
+      </if>
+      <if test="extBad != null" >
+        #{extBad,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="extCreate != null" >
+        #{extCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extUpdated != null" >
+        #{extUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keji.blog.dataobject.BlogArticleExtExample" resultType="java.lang.Integer" >
+    select count(*) from blog_article_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blog_article_ext
+    <set >
+      <if test="record.extId != null" >
+        ext_id = #{record.extId,jdbcType=BIGINT},
+      </if>
+      <if test="record.extGood != null" >
+        ext_good = #{record.extGood,jdbcType=INTEGER},
+      </if>
+      <if test="record.extBad != null" >
+        ext_bad = #{record.extBad,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleId != null" >
+        article_id = #{record.articleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.extCreate != null" >
+        ext_create = #{record.extCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.extUpdated != null" >
+        ext_updated = #{record.extUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blog_article_ext
+    set ext_id = #{record.extId,jdbcType=BIGINT},
+      ext_good = #{record.extGood,jdbcType=INTEGER},
+      ext_bad = #{record.extBad,jdbcType=INTEGER},
+      article_id = #{record.articleId,jdbcType=BIGINT},
+      ext_create = #{record.extCreate,jdbcType=TIMESTAMP},
+      ext_updated = #{record.extUpdated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.BlogArticleExt" >
+    update blog_article_ext
+    <set >
+      <if test="extGood != null" >
+        ext_good = #{extGood,jdbcType=INTEGER},
+      </if>
+      <if test="extBad != null" >
+        ext_bad = #{extBad,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="extCreate != null" >
+        ext_create = #{extCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extUpdated != null" >
+        ext_updated = #{extUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ext_id = #{extId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.BlogArticleExt" >
+    update blog_article_ext
+    set ext_good = #{extGood,jdbcType=INTEGER},
+      ext_bad = #{extBad,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=BIGINT},
+      ext_create = #{extCreate,jdbcType=TIMESTAMP},
+      ext_updated = #{extUpdated,jdbcType=TIMESTAMP}
+    where ext_id = #{extId,jdbcType=BIGINT}
+  </update>
+</mapper>

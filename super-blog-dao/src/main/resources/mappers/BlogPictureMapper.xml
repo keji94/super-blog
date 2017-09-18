@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.BlogPictureMapper" >
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.BlogPicture" >
+    <id column="picture_id" property="pictureId" jdbcType="BIGINT" />
+    <result column="picture_name" property="pictureName" jdbcType="VARCHAR" />
+    <result column="picture_resource" property="pictureResource" jdbcType="VARCHAR" />
+    <result column="picture_status" property="pictureStatus" jdbcType="BIT" />
+    <result column="picture_orderNum" property="pictureOrdernum" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="BIGINT" />
+    <result column="picture_created" property="pictureCreated" jdbcType="TIMESTAMP" />
+    <result column="picture_updated" property="pictureUpdated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    picture_id, picture_name, picture_resource, picture_status, picture_orderNum, article_id, 
+    picture_created, picture_updated
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.BlogPictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog_picture
+    where picture_id = #{pictureId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog_picture
+    where picture_id = #{pictureId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keji.blog.dataobject.BlogPictureExample" >
+    delete from blog_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keji.blog.dataobject.BlogPicture" >
+    insert into blog_picture (picture_id, picture_name, picture_resource, 
+      picture_status, picture_orderNum, article_id, 
+      picture_created, picture_updated)
+    values (#{pictureId,jdbcType=BIGINT}, #{pictureName,jdbcType=VARCHAR}, #{pictureResource,jdbcType=VARCHAR}, 
+      #{pictureStatus,jdbcType=BIT}, #{pictureOrdernum,jdbcType=INTEGER}, #{articleId,jdbcType=BIGINT}, 
+      #{pictureCreated,jdbcType=TIMESTAMP}, #{pictureUpdated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.BlogPicture" >
+    insert into blog_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pictureId != null" >
+        picture_id,
+      </if>
+      <if test="pictureName != null" >
+        picture_name,
+      </if>
+      <if test="pictureResource != null" >
+        picture_resource,
+      </if>
+      <if test="pictureStatus != null" >
+        picture_status,
+      </if>
+      <if test="pictureOrdernum != null" >
+        picture_orderNum,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="pictureCreated != null" >
+        picture_created,
+      </if>
+      <if test="pictureUpdated != null" >
+        picture_updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pictureId != null" >
+        #{pictureId,jdbcType=BIGINT},
+      </if>
+      <if test="pictureName != null" >
+        #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureResource != null" >
+        #{pictureResource,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureStatus != null" >
+        #{pictureStatus,jdbcType=BIT},
+      </if>
+      <if test="pictureOrdernum != null" >
+        #{pictureOrdernum,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="pictureCreated != null" >
+        #{pictureCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureUpdated != null" >
+        #{pictureUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keji.blog.dataobject.BlogPictureExample" resultType="java.lang.Integer" >
+    select count(*) from blog_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blog_picture
+    <set >
+      <if test="record.pictureId != null" >
+        picture_id = #{record.pictureId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pictureName != null" >
+        picture_name = #{record.pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureResource != null" >
+        picture_resource = #{record.pictureResource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureStatus != null" >
+        picture_status = #{record.pictureStatus,jdbcType=BIT},
+      </if>
+      <if test="record.pictureOrdernum != null" >
+        picture_orderNum = #{record.pictureOrdernum,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleId != null" >
+        article_id = #{record.articleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pictureCreated != null" >
+        picture_created = #{record.pictureCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pictureUpdated != null" >
+        picture_updated = #{record.pictureUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blog_picture
+    set picture_id = #{record.pictureId,jdbcType=BIGINT},
+      picture_name = #{record.pictureName,jdbcType=VARCHAR},
+      picture_resource = #{record.pictureResource,jdbcType=VARCHAR},
+      picture_status = #{record.pictureStatus,jdbcType=BIT},
+      picture_orderNum = #{record.pictureOrdernum,jdbcType=INTEGER},
+      article_id = #{record.articleId,jdbcType=BIGINT},
+      picture_created = #{record.pictureCreated,jdbcType=TIMESTAMP},
+      picture_updated = #{record.pictureUpdated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.BlogPicture" >
+    update blog_picture
+    <set >
+      <if test="pictureName != null" >
+        picture_name = #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureResource != null" >
+        picture_resource = #{pictureResource,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureStatus != null" >
+        picture_status = #{pictureStatus,jdbcType=BIT},
+      </if>
+      <if test="pictureOrdernum != null" >
+        picture_orderNum = #{pictureOrdernum,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="pictureCreated != null" >
+        picture_created = #{pictureCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureUpdated != null" >
+        picture_updated = #{pictureUpdated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where picture_id = #{pictureId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.BlogPicture" >
+    update blog_picture
+    set picture_name = #{pictureName,jdbcType=VARCHAR},
+      picture_resource = #{pictureResource,jdbcType=VARCHAR},
+      picture_status = #{pictureStatus,jdbcType=BIT},
+      picture_orderNum = #{pictureOrdernum,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=BIGINT},
+      picture_created = #{pictureCreated,jdbcType=TIMESTAMP},
+      picture_updated = #{pictureUpdated,jdbcType=TIMESTAMP}
+    where picture_id = #{pictureId,jdbcType=BIGINT}
+  </update>
+</mapper>

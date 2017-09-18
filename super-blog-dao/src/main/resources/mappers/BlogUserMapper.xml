@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.BlogUserMapper" >
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.BlogUser" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_question" property="userQuestion" jdbcType="VARCHAR" />
+    <result column="user_answer" property="userAnswer" jdbcType="VARCHAR" />
+    <result column="user_picture" property="userPicture" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="BIT" />
+    <result column="user_created" property="userCreated" jdbcType="TIMESTAMP" />
+    <result column="user_updated" property="userUpdated" jdbcType="TIMESTAMP" />
+    <result column="user_ip" property="userIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_nickname, user_password, user_question, user_answer, user_picture, 
+    user_status, user_created, user_updated, user_ip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.BlogUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keji.blog.dataobject.BlogUserExample" >
+    delete from blog_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keji.blog.dataobject.BlogUser" >
+    insert into blog_user (user_id, user_name, user_nickname, 
+      user_password, user_question, user_answer, 
+      user_picture, user_status, user_created, 
+      user_updated, user_ip)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userQuestion,jdbcType=VARCHAR}, #{userAnswer,jdbcType=VARCHAR}, 
+      #{userPicture,jdbcType=VARCHAR}, #{userStatus,jdbcType=BIT}, #{userCreated,jdbcType=TIMESTAMP}, 
+      #{userUpdated,jdbcType=TIMESTAMP}, #{userIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.BlogUser" >
+    insert into blog_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userNickname != null" >
+        user_nickname,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userQuestion != null" >
+        user_question,
+      </if>
+      <if test="userAnswer != null" >
+        user_answer,
+      </if>
+      <if test="userPicture != null" >
+        user_picture,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="userCreated != null" >
+        user_created,
+      </if>
+      <if test="userUpdated != null" >
+        user_updated,
+      </if>
+      <if test="userIp != null" >
+        user_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null" >
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userQuestion != null" >
+        #{userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userAnswer != null" >
+        #{userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="userPicture != null" >
+        #{userPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="userCreated != null" >
+        #{userCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdated != null" >
+        #{userUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIp != null" >
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keji.blog.dataobject.BlogUserExample" resultType="java.lang.Integer" >
+    select count(*) from blog_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blog_user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickname != null" >
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userQuestion != null" >
+        user_question = #{record.userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAnswer != null" >
+        user_answer = #{record.userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPicture != null" >
+        user_picture = #{record.userPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=BIT},
+      </if>
+      <if test="record.userCreated != null" >
+        user_created = #{record.userCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userUpdated != null" >
+        user_updated = #{record.userUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userIp != null" >
+        user_ip = #{record.userIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blog_user
+    set user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_question = #{record.userQuestion,jdbcType=VARCHAR},
+      user_answer = #{record.userAnswer,jdbcType=VARCHAR},
+      user_picture = #{record.userPicture,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=BIT},
+      user_created = #{record.userCreated,jdbcType=TIMESTAMP},
+      user_updated = #{record.userUpdated,jdbcType=TIMESTAMP},
+      user_ip = #{record.userIp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.BlogUser" >
+    update blog_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null" >
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userQuestion != null" >
+        user_question = #{userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userAnswer != null" >
+        user_answer = #{userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="userPicture != null" >
+        user_picture = #{userPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="userCreated != null" >
+        user_created = #{userCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdated != null" >
+        user_updated = #{userUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIp != null" >
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.BlogUser" >
+    update blog_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_question = #{userQuestion,jdbcType=VARCHAR},
+      user_answer = #{userAnswer,jdbcType=VARCHAR},
+      user_picture = #{userPicture,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=BIT},
+      user_created = #{userCreated,jdbcType=TIMESTAMP},
+      user_updated = #{userUpdated,jdbcType=TIMESTAMP},
+      user_ip = #{userIp,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>
