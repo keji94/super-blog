@@ -14,5 +14,6 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <import resource="classpath:mybatis/mybatis-config.xml"/>
+    <import resource="classpath:thymeleaf-conf.xml"/>
 
 </beans>

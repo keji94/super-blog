@@ -35,6 +35,7 @@
         <druid.version>1.0.29</druid.version>
         <javax.version>3.1.0</javax.version>
         <lombok.version>1.16.16</lombok.version>
+        <freemarker.version>2.3.23</freemarker.version>
     </properties>
 
     <dependencyManagement>
@@ -111,6 +112,18 @@
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <!--thymeleaf-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${springboot-starter.version}</version>
+            </dependency>
+            <!--freemarker-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${springboot-starter.version}</version>
+            </dependency>
 
 
             <!--spring-->
@@ -131,6 +144,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 </project>
