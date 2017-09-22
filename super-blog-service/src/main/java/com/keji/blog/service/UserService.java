@@ -1,14 +1,11 @@
 package com.keji.blog.service;
 
-import com.keji.blog.dataobject.BlogUser;
-import com.keji.blog.result.BaseResult;
-
-import java.util.List;
+import com.keji.blog.dataobject.BlogUserDO;
 
 /**
  * Created by keji on 2017/7/31.
  */
 
 public interface UserService {
-    BlogUser showUserData(String userName);
+    BlogUserDO showUserData(String userName);
 }

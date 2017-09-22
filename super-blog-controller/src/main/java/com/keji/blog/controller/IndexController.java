@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    @RequestMapping("/admin/{page}")
+    public String amdinIndex(@PathVariable String page) {
+        return "/admin/" + page;
+    }
+
     @RequestMapping("/{page}")
     public String index(@PathVariable String page) {
-        return "admin/"+page;
+        return page;
     }
 }

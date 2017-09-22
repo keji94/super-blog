@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.BlogUserMapper" >
+    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.BlogUserDO" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="question" property="question" jdbcType="VARCHAR" />
+        <result column="answer" property="answer" jdbcType="VARCHAR" />
+        <result column="picture" property="picture" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="ip" property="ip" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,name,email,phone,password,question,answer,picture,
+        status,gmt_created,gmt_modified,ip
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from blog_user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.BlogUserDO" >
+        select
+        <include refid="Base_Column_List" />
+        from blog_user
+        <where>
+            <if test="email != null">
+                AND email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                AND password = #{password,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from blog_user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.keji.blog.dataobject.BlogUserDO" >
+        insert into blog_user (id, name,email,phone,
+        password, question, answer,
+        picture, status, gmt_created,
+        gmt_modified, ip)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}
+        #{password,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR},
+        #{picture,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{gmtCreated,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.keji.blog.dataobject.BlogUserDO" >
+        insert into blog_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="question != null" >
+                question,
+            </if>
+            <if test="answer != null" >
+                answer,
+            </if>
+            <if test="picture != null" >
+                picture,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="gmtCreated != null" >
+                gmtCreated,
+            </if>
+            <if test="gmtModified != null" >
+                gmtModified,
+            </if>
+            <if test="ip != null" >
+                ip,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null" >
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null" >
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null" >
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreated != null" >
+                #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null" >
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null" >
+                #{ip,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="count" resultType="java.lang.Integer" >
+        select count(*) from blog_user
+    </select>
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.BlogUserDO" >
+        update blog_user
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null" >
+                question = #{userQuestion,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null" >
+                answer = #{userAnswer,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null" >
+                picture = #{userPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{userStatus,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreated != null" >
+                gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null" >
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

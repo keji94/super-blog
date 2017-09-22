@@ -1,27 +1,45 @@
 package com.keji.blog.dao;
 
-import java.util.List;
-
 /**
  * Created by wb-ny291824 on 2017/6/28.
  */
 public interface BaseDao<T,Q> {
-    int insert(T objectData);
 
-    int update(T objectData);
+    /**
+     * 增加(所有属性)
+     * @param record
+     * @return
+     */
+    int insert(T record);
 
-    int deleteById(long id);
+    /**
+     * 增加(不为空的属性 )
+     */
+    int insertSelective(T record);
 
-    T getById(long id);
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    T selectByPrimaryKey(Long id);
 
-    List<T> queryByPage(Q query);
+    /**
+     * 根据属性查询
+     */
+    T selectSelective(Q record);
 
-    List<T> getAll();
+    /**
+     * 根据id更新不为空的字段
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(T record);
 
-    int count(Q query);
-
-    int batchInsert(final List<T> dataObjectList);
-
-    void deleteByQuery(Q query);
-
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    int deleteByPrimaryKey(Long id);
 }

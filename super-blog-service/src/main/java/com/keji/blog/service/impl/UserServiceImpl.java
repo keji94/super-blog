@@ -1,8 +1,7 @@
 package com.keji.blog.service.impl;
 
-import com.keji.blog.dao.BlogUserMapper;
-import com.keji.blog.dataobject.BlogUser;
-import com.keji.blog.dataobject.BlogUserExample;
+import com.keji.blog.dao.BlogUserDAO;
+import com.keji.blog.dataobject.BlogUserDO;
 import com.keji.blog.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,20 +16,13 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private BlogUserMapper userMapper;
+    private BlogUserDAO userMapper;
 
-    public BlogUser showUserData(String userName) {
-        BlogUserExample example = new BlogUserExample();
-        BlogUserExample.Criteria criteria = example.createCriteria();
-        criteria.andUserNameEqualTo(userName);
-        List<BlogUser> list = userMapper.selectByExample(example);
-        if (list != null && list.size() == 1){
-            return list.get(0);
-        }
+    public BlogUserDO showUserData(String userName) {
         return null;
     }
 }

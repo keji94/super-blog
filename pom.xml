@@ -142,6 +142,11 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${springboot-starter.version}</version>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-security</artifactId>-->
+                <!--<version>${springboot-starter.version}</version>-->
+            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
 </project>
