@@ -22,12 +22,10 @@ public class BlogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        ModelAndView mv = new ModelAndView();
         //获取session
         HttpSession session = request.getSession(true);
         //判断用户ID是否存在，不存在就跳转到登录界面
         if(session.getAttribute("username") == null){
-            mv.addObject("tip", ViewTipEnum.LOGIN_TIP.getValue());
             response.sendRedirect(request.getContextPath()+"/login");
             return false;
         }else{

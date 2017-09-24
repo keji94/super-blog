@@ -8,6 +8,7 @@ package com.keji.blog.result;
  */
 public enum BaseErrorEnum {
     SYSTEM_ERROR("500","系统错误"),
+    PARAM_ERROR("400", "参数错误"),
     FORBIDDEN("403","权限不足") ;
     private String errorCode;
     private String errorMsg;

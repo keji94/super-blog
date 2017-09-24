@@ -14,8 +14,8 @@ public class BlogUserConvertUtil {
 
     public static BlogUserDO userVO2DO(BlogUserVO userVO){
         BlogUserDO userDO = new BlogUserDO();
-        if (userVO.getUsername() != null) {
-            userDO.setName(userVO.getUsername());
+        if (userVO.getEmail() != null) {
+            userDO.setName(userVO.getEmail());
         }
         if (userVO.getPassword() != null) {
             userDO.setPassword(userVO.getPassword());

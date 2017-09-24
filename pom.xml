@@ -36,6 +36,7 @@
         <javax.version>3.1.0</javax.version>
         <lombok.version>1.16.16</lombok.version>
         <freemarker.version>2.3.23</freemarker.version>
+        <shiro.version>1.2.3</shiro.version>
     </properties>
 
     <dependencyManagement>
@@ -124,7 +125,12 @@
                 <artifactId>spring-boot-starter-freemarker</artifactId>
                 <version>${springboot-starter.version}</version>
             </dependency>
-
+            <!--shiro-->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
 
             <!--spring-->
             <dependency>
@@ -149,4 +155,17 @@
             <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

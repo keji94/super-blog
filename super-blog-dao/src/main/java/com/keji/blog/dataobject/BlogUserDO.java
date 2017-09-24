@@ -54,7 +54,7 @@ public class BlogUserDO {
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private Date gmtCreated;
 
     /**
      * 修改时间

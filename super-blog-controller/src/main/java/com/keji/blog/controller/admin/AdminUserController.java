@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,21 +20,26 @@ import javax.servlet.http.HttpSession;
  * Created by wb-ny291824 on 2017/8/7.
  */
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminUserController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private AdminUserService adminUserService;
 
-    @RequestMapping("/loginAdmin")
-    public BaseResult loginAdmin(BlogUserVO userVO,HttpSession session) {
+    @ResponseBody
+    @RequestMapping("/login")
+    public BaseResult login(BlogUserVO userVO, HttpSession session) {
+        if (userVO.getEmail() == null
+                || userVO.getPassword() == null) {
+            return BaseResult.makeFail(BaseErrorEnum.PARAM_ERROR);
+        }
         BlogUserConvertUtil.userVO2DO(userVO);
         BlogUserDO userDO = adminUserService.selectUserSelective(BlogUserConvertUtil.userVO2DO(userVO));
         if (userDO == null) {
-            return BaseResult.makeFail(BaseErrorEnum.FORBIDDEN);
+            return BaseResult.makeFail(BaseErrorEnum.PARAM_ERROR);
         }
-        session.setAttribute("user",userDO.getName());
+        session.setAttribute("username", userDO.getName());
         return BaseResult.makeSuccess();
     }
 

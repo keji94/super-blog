@@ -14,11 +14,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="super-blog" target="1.6" />
-      <module name="super-blog-common" target="1.6" />
-      <module name="super-blog-controller" target="1.6" />
-      <module name="super-blog-dao" target="1.6" />
-      <module name="super-blog-service" target="1.6" />
+      <module name="super-blog" target="1.8" />
+      <module name="super-blog-common" target="1.8" />
+      <module name="super-blog-controller" target="1.8" />
+      <module name="super-blog-dao" target="1.8" />
+      <module name="super-blog-service" target="1.8" />
       <module name="super-blog-starter" target="1.8" />
     </bytecodeTargetLevel>
   </component>
