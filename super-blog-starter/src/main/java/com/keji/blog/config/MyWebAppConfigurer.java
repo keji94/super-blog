@@ -46,7 +46,7 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter implements Appli
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截规则：除了login，其他都拦截判断
-        registry.addInterceptor(new BlogInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/login","/login");
+        registry.addInterceptor(new BlogInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/login","/login2","/index","/login");
         super.addInterceptors(registry);
     }
 }

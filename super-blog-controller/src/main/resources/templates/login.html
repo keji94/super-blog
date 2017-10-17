@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
     <title>克己blog-后台管理中心</title>
-    <link rel="stylesheet" href="/layui/css/layui.css"/>
-    <link rel="stylesheet" href="/css/global.css"/>
-    <script type="text/javascript" src="/layui/layui.js"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/static/css/global.css"/>
+    <script type="text/javascript" src="/static/layui/layui.js"></script>
 </head>
 <body>
 <style type="text/css">html{background: #f3f3f3;}</style>
 <div class="login_page">
-    <img class="logo-login" src="/images/login-logo.png" alt="logo"/>
+    <img class="logo-login" src="/static/images/keji.png" alt="logo"/>
     <h1>欢迎使用 克己 的博客</h1>
     <form class="layui-form">
 
@@ -33,10 +33,10 @@
     </form>
 </div>
 <script type="text/javascript">
+
     layui.use('form',function(){
         var form = layui.form,
             jq = layui.jquery;
-
     //监听提交
       form.on('submit(login)', function(data){
         loading = layer.load(2, {

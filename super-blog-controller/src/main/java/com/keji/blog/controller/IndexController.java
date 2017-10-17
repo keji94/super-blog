@@ -18,8 +18,8 @@ public class IndexController {
         return "/admin/" + page;
     }
 
-    @RequestMapping("/{page}")
-    public String index(@PathVariable String page) {
-        return page;
+    @RequestMapping("/login")
+    public String index() {
+        return "login2";
     }
 }

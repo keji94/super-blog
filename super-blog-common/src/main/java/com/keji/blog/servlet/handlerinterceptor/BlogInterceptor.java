@@ -26,7 +26,7 @@ public class BlogInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(true);
         //判断用户ID是否存在，不存在就跳转到登录界面
         if(session.getAttribute("username") == null){
-            response.sendRedirect(request.getContextPath()+"/login");
+            response.sendRedirect(request.getContextPath()+"/login2");
             return false;
         }else{
             session.setAttribute("userId", session.getAttribute("userId"));

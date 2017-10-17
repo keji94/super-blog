@@ -1,0 +1,5 @@
+1.springboot静态资源处理，以及加了拦截器之后的静态资源处理
+    在没有加拦截器之前，在页面中访问静态资源不需要加/static。比如：<link rel="stylesheet" href="/layui/css/layui.css"/>因为springbboot，会默认在/static目录下。
+    但是：
+        在加了拦截器之后，首先发现默认的静态资源配置不好用了，于是在MyWebAppConfigurer里面重新定义了资源位置。
+        然后需要在原来的link上面加上/static：<link rel="stylesheet" href="/static/layui/css/layui.css"/>
