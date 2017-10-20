@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.RoleDAO" >
+    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.RoleDO" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,role_code,role_name,status,gmt_created,gmt_modified
+    </sql>
+
+    <insert id="insert" parameterType="com.keji.blog.dataobject.RoleDO" >
+        insert into role (
+            id, role_code,role_name,
+            status, gmt_created,
+            gmt_modified)
+        values (
+            #{id,jdbcType=BIGINT}, #{roleCode,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+            #{status,jdbcType=TINYINT}, now(),now())
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.keji.blog.dataobject.RoleDO" >
+        insert into role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="roleCode != null" >
+                role_code,
+            </if>
+            <if test="roleName != null" >
+                role_name,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="gmtCreated != null" >
+                gmt_created,
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,roleCode=BIGINT},
+            </if>
+            <if test="roleCode != null" >
+                #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null" >
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreated != null" >
+                now(),
+            </if>
+            <if test="gmtModified != null" >
+                now()
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from role
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.RoleDO" >
+        update role
+        <set >
+            <if test="roleName != null" >
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null" >
+                role_code = #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            gmt_modified = now(),
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="count" resultType="java.lang.Integer" >
+        select count(*) from role
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.RoleDO" >
+        select
+        <include refid="Base_Column_List" />
+        from role
+        <where>
+            <if test="roleCode != null">
+                AND role_code = #{roleCode,jdbcType=VARCHAR}
+            </if>
+            <if test="roleName != null">
+                AND role_name = #{roleName,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from role b
+        WHERE EXISTS (
+          SELECT role_id from user_role_rel a WHERE user_id = #{userId,jdbcType=BIGINT} AND b.id = a.role_id
+        )
+    </select>
+
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.RoleDO" >
+        select
+        <include refid="Base_Column_List" />
+        from role
+        <where>
+            <if test="roleCode != null">
+                AND role_code = #{roleCode,jdbcType=VARCHAR}
+            </if>
+            <if test="roleName != null">
+                AND role_name = #{roleName,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+
+</mapper>

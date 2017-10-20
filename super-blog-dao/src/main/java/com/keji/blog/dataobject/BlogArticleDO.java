@@ -4,6 +4,12 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @author: wb-ny291824
+ * @description
+ * @date: Created in 2017/10/19
+ * @modified: By:
+ */
 @Data
 public class BlogArticleDO {
     private Long id;

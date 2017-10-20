@@ -1,6 +1,6 @@
 package com.keji.blog.config;
 
-import com.keji.blog.servlet.handlerinterceptor.BlogInterceptor;
+import com.keji.blog.codelibrary.servlet.handlerinterceptor.BlogInterceptor;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -13,10 +13,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * @Author: wb-ny291824
- * @Description   spring拦截规则配置
- * @Date: Created in 2017/9/19
- * @Modified: By:
+ * @author: wb-ny291824
+ * @description   spring拦截规则配置. 由于引入了shiro,这里的拦截器暂时不使用了，如果需要使用，将addInterceptors上的注解放开即可
+ * @date: Created in 2017/9/19
+ * @modified: By:
  */
 @Configuration
 @EnableWebMvc
@@ -46,7 +46,7 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter implements Appli
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截规则：除了login，其他都拦截判断
-        registry.addInterceptor(new BlogInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/login","/login2","/index","/login");
+//        registry.addInterceptor(new BlogInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/login","/index","/login");
         super.addInterceptors(registry);
     }
 }

@@ -1,16 +1,24 @@
 package com.keji.blog.result;
 
 /**
- * @Author: wb-ny291824
- * @Description
- * @Date: Created in 2017/9/18
- * @Modified: By:
+ * @author: wb-ny291824
+ * @description
+ * @date: Created in 2017/9/18
+ * @modified: By:
  */
 public enum BaseErrorEnum {
+
+    /** 系统错误 */
     SYSTEM_ERROR("500","系统错误"),
+
+    /** 参数错误 */
     PARAM_ERROR("400", "参数错误"),
+
+    /** 权限不足 */
     FORBIDDEN("403","权限不足") ;
+
     private String errorCode;
+
     private String errorMsg;
 
     private BaseErrorEnum(String errorCode, String errorMsg) {

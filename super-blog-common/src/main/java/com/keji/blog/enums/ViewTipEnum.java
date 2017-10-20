@@ -8,6 +8,9 @@ package com.keji.blog.enums;
  * @modified: By:
  */
 public enum ViewTipEnum {
+    /**
+     * 登录提示
+     */
     LOGIN_TIP("login","请登录!") ;
 
     private String key;

@@ -5,10 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: wb-ny291824
- * @Description
- * @Date: Created in 2017/9/18
- * @Modified: By:
+ * @author: wb-ny291824
+ * @description
+ * @date: Created in 2017/9/18
+ * @modified: By:
  */
 @Data
 public class BaseResult<T> implements Serializable{
@@ -94,6 +94,12 @@ public class BaseResult<T> implements Serializable{
         result.fail(errorCode,errorMsg);
         return result;
     }
+    public static <T> BaseResult<T> makeFail(String  errorMsg){
+        BaseResult<T> result = new BaseResult<T>();
+        result.fail("",errorMsg);
+        return result;
+    }
+
 
     @Override
     public String toString() {

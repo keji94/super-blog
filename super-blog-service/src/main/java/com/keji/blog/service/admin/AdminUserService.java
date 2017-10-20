@@ -1,14 +1,19 @@
 package com.keji.blog.service.admin;
 
-import com.keji.blog.dataobject.BlogUserDO;
+import com.keji.blog.dataobject.UserDO;
 
 /**
- * @Author: wb-ny291824
- * @Description
- * @Date: Created in 2017/9/20
- * @Modified: By:
+ * @author: wb-ny291824
+ * @description
+ * @date: Created in 2017/9/20
+ * @modified: By:
  */
 public interface AdminUserService {
 
-    BlogUserDO selectUserSelective(BlogUserDO userDO);
+    /**
+     * 按条件查询
+     * @param userDO
+     * @return
+     */
+    UserDO selectUserSelective(UserDO userDO);
 }

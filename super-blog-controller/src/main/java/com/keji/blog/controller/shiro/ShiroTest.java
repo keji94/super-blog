@@ -34,7 +34,8 @@ public class ShiroTest {
         } catch (AuthenticationException e) {
             //5、身份验证失败
         }
-        Assert.assertEquals(true, subject.isAuthenticated()); //断言用户已经登录
+        //断言用户已经登录
+        Assert.assertEquals(true, subject.isAuthenticated());
         //6、退出
         subject.logout();
     }

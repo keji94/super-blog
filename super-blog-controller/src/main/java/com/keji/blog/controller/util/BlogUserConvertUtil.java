@@ -1,19 +1,19 @@
 package com.keji.blog.controller.util;
 
 import com.keji.blog.controller.vo.BlogUserVO;
-import com.keji.blog.dataobject.BlogUserDO;
+import com.keji.blog.dataobject.UserDO;
 
 /**
- * @Author: wb-ny291824
- * @Description
- * @Date: Created in 2017/9/18
- * @Modified: By:
+ * @author: wb-ny291824
+ * @description
+ * @date: Created in 2017/9/18
+ * @modified: By:
  */
 public class BlogUserConvertUtil {
     private BlogUserConvertUtil(){}
 
-    public static BlogUserDO userVO2DO(BlogUserVO userVO){
-        BlogUserDO userDO = new BlogUserDO();
+    public static UserDO userVO2DO(BlogUserVO userVO){
+        UserDO userDO = new UserDO();
         if (userVO.getEmail() != null) {
             userDO.setName(userVO.getEmail());
         }

@@ -12,10 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Author: wb-ny291824
- * @Description  springboot 全局异常处理类 这种方式有个局限，无法根据不同的头部返回不同的数据格式，而且无法针对404、403等多种状态进行处理
- * @Date: Created in 2017/9/19
- * @Modified: By:
+ * @author: wb-ny291824
+ * @description  springboot 全局异常处理类 这种方式有个局限，无法根据不同的头部返回不同的数据格式，而且无法针对404、403等多种状态进行处理
+ * @date: Created in 2017/9/19
+ * @modified: By:
  */
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {
