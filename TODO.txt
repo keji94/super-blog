@@ -1,9 +1,9 @@
-1.完成一个安全的记住我功能。 --2017年10月18日17:56:49
+1.完成一个安全的记住我功能。 --2017年10月18日17:56:49   p0    finish at 2017年10月21日20:04:18
 
-2.引入shiro、1可以使用shiro的rememberMe功能来完成
+2.引入shiro、1可以使用shiro的rememberMe功能来完成       p0    finish at 2017年10月21日20:04:18
 
-3.引入mybatis分页插件
+3.引入mybatis分页插件                                   p1
 
-4.完成单测环境
+4.完成单测环境                                          p2
 
-5.使用google 的Producer 完成验证码的逻辑
+5.使用google 的Producer 完成验证码的逻辑                p1

@@ -1,16 +1,16 @@
 package com.keji.blog.config;
 
 import com.keji.blog.controller.shiro.MyShiroRealm;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -70,11 +70,12 @@ public class ShiroConfiguration {
 //        filterChainDefinitionMap.put("/logout", "logout");
         //<!-- authc:必须认证通过才可以访问; anon:可以匿名访问;perms["name"]:需要名为name权限的过滤器-->
 //        filterChainDefinitionMap.put("/**", "authc");   //所有的资源都需要认证
-            filterChainDefinitionMap.put("/admin/*", "authc");
-            filterChainDefinitionMap.put("/admin/login", "anon");
-            filterChainDefinitionMap.put("/static/**", "anon");
-            filterChainDefinitionMap.put("/login", "anon");
-            filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/admin/*", "user");
+        filterChainDefinitionMap.put("/admin/login", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/", "anon");
+        //配置记住我或认证通过可以访问的地址
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -82,10 +83,11 @@ public class ShiroConfiguration {
 
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager() {
-        DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager();
-        dwsm.setRealm(getShiroRealm());
-//        dwsm.setCacheManager(getEhCacheManager());
-        return dwsm;
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(getShiroRealm());
+//        securityManager.setCacheManager(getEhCacheManager());
+        securityManager.setRememberMeManager(rememberMeManager());
+        return securityManager;
     }
 
     @Bean(name = "myShiroRealm")
@@ -101,6 +103,33 @@ public class ShiroConfiguration {
 //        return em;
 //    }
 
+    /**
+     * cookie对象;
+     * rememberMeCookie()方法是设置Cookie的生成模版，比如cookie的name，cookie的有效时间等等。
+     * @return
+     */
+    @Bean
+    public SimpleCookie rememberMeCookie() {
+        //这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
+        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        //<!-- 记住我cookie生效时间30天 ,单位秒;-->
+        simpleCookie.setMaxAge(259200);
+        return simpleCookie;
 
+    }
+
+    /**
+     * cookie管理对象;
+     * rememberMeManager()方法是生成rememberMe管理器，而且要将这个rememberMe管理器设置到securityManager中
+     * @return
+     */
+    @Bean
+    public CookieRememberMeManager rememberMeManager(){
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
+        cookieRememberMeManager.setCipherKey(Base64.decode("2AvVhdsgUs0FSA3SDFAdag=="));
+        return cookieRememberMeManager;
+    }
 
 }

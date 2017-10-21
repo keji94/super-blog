@@ -28,7 +28,7 @@
         <div class="checkbox">
             <label>
                 <!--1会被springmvc封装为true,勾选之后才会传值-->
-                <input type="checkbox" value="1" name="rememberMe" id="rememberMe"> 记住我
+                <input type="checkbox" value="off" name="rememberMe" id="rememberMe"> 记住我
             </label>
         </div>
     </form>
@@ -42,15 +42,15 @@
 
 <script>
     $(function() {
+
         $("#loginButton").click(function() {
 
             var email = $("#inputEmail").val();
             var password = $("#inputPassword").val();
-
             $.ajax({
                 type : "post",
                 url : "/adminuser/login",
-                data : {"email":email,"password":password},
+                data : {"email":email,"password":password,"rememberMe":$("#rememberMe").is(':checked')},
                 dataType : "json",
                 success : function(data){
                     if (data.success == true) {

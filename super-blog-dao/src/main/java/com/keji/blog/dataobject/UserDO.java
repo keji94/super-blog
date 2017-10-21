@@ -2,6 +2,7 @@ package com.keji.blog.dataobject;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,10 @@ import java.util.Date;
  * @modified: By:
  */
 @Data
-public class UserDO {
+public class UserDO implements Serializable{
+
+    private static final long serialVersionUID = 1142535723756188983L;
+
     /**
      * 主键
      */
