@@ -20,29 +20,8 @@
         id,name,email,phone,password,question,answer,picture,
         status,gmt_created,gmt_modified,ip,series_number
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-        select
-        <include refid="Base_Column_List" />
-        from user
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.UserDO" >
-        select
-        <include refid="Base_Column_List" />
-        from user
-        <where>
-            <if test="email != null">
-                AND email = #{email,jdbcType=VARCHAR}
-            </if>
-            <if test="password != null">
-                AND password = #{password,jdbcType=VARCHAR}
-            </if>
-        </where>
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-        delete from user
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
+
+
     <insert id="insert" parameterType="com.keji.blog.dataobject.UserDO" >
         insert into user (id, name,email,phone,
         password, question, answer,
@@ -53,6 +32,7 @@
         #{picture,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{gmtCreated,jdbcType=TIMESTAMP},
         #{gmtModified,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},#{seriesNumber,jdbcType=VARCHAR})
     </insert>
+
     <insert id="insertSelective" parameterType="com.keji.blog.dataobject.UserDO" >
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -138,9 +118,13 @@
             </if>
         </trim>
     </insert>
-    <select id="count" resultType="java.lang.Integer" >
-        select count(*) from user
-    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+
     <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.UserDO" >
         update user
         <set >
@@ -183,4 +167,43 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.UserDO" >
+        select
+        <include refid="Base_Column_List" />
+        from user
+        <where>
+            <if test="email != null">
+                AND email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                AND password = #{password,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.UserDO" >
+        select
+        <include refid="Base_Column_List" />
+        from user
+        <where>
+            <if test="email != null">
+                AND email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                AND password = #{password,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" >
+        select count(*) from user
+    </select>
 </mapper>

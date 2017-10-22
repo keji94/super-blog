@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 @Data
 public class BaseResult<T> implements Serializable{
+
     private static final long serialVersionUID = 7448055195717653190L;
 
     /**

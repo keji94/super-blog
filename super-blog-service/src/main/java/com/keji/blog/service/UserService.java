@@ -1,6 +1,9 @@
 package com.keji.blog.service;
 
 import com.keji.blog.dataobject.UserDO;
+import com.keji.blog.result.PageResult;
+
+import java.util.List;
 
 /**
  * @author: wb-ny291824
@@ -23,4 +26,13 @@ public interface UserService {
      * @return
      */
     UserDO selectUserByEamil(String email);
+
+    /**
+     * 分页查询用户
+     * @param userDO
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    PageResult<List<UserDO>> queryUserByPage(UserDO userDO, Integer pageIndex, Integer pageSize);
 }

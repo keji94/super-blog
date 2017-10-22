@@ -30,6 +30,7 @@
         <lombok.version>1.16.16</lombok.version>
         <spring.version>4.3.5.RELEASE</spring.version>
         <mybatis-starter.version>1.1.1</mybatis-starter.version>
+        <pageHelper.version>4.1.6</pageHelper.version>
         <springboot-starter.version>1.5.6.RELEASE</springboot-starter.version>
         <mysql.version>5.1.37</mysql.version>
         <druid.version>1.0.29</druid.version>
@@ -87,6 +88,11 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pageHelper.version}</version>
             </dependency>
             <!--mysql-->
             <dependency>
@@ -163,11 +169,7 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${springboot-starter.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-security</artifactId>-->
-                <!--<version>${springboot-starter.version}</version>-->
-            <!--</dependency>-->
+
         </dependencies>
     </dependencyManagement>
     <build>
