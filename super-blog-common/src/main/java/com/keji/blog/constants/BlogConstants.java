@@ -10,7 +10,7 @@ public class BlogConstants {
 
     private BlogConstants(){}
 
-    public static final String LOGIN_ERROR = "用户名或者密码不正确";
+    public static final String LOGIN_ERROR = "*用户名或者密码不正确";
 
     public static final String ADMIN_USER_NAME = "admin@qq.com";
 
