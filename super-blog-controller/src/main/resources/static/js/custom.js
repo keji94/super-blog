@@ -749,8 +749,8 @@ function circle_progess() {
 		
 		endValue = value*percent;
 		
-		$(this).find(".count > .unit").html(unit);
-		$(this).find(".count > .number").countTo({
+		$(this).find(".totalCount > .unit").html(unit);
+		$(this).find(".totalCount > .number").countTo({
 			
 			from: 0,
 		    to: endValue,
@@ -759,7 +759,7 @@ function circle_progess() {
 		
 		});
 		
-		//$(this).find(".count").html(value*percent + unit);
+		//$(this).find(".totalCount").html(value*percent + unit);
 		
 	});
 	

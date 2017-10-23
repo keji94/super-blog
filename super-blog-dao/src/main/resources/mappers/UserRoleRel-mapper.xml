@@ -9,15 +9,50 @@
         <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     </resultMap>
+
     <sql id="Base_Column_List" >
         id,user_id,role_id,status,gmt_created,gmt_modified
     </sql>
+
+    <insert id="insert" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
+        insert into user_role_rel (
+        id, role_id,user_id,
+        status, gmt_created,
+        gmt_modified)
+        values (
+        #{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+        #{status,jdbcType=TINYINT}, now(),now())
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from user_role_rel
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
+        update user_role_rel
+        <set >
+            <if test="roleId != null" >
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            gmt_modified = now()
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select
         <include refid="Base_Column_List" />
         from user_role_rel
         where id = #{id,jdbcType=BIGINT}
     </select>
+
     <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
         select
         <include refid="Base_Column_List" />
@@ -34,79 +69,9 @@
             </if>
         </where>
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-        delete from user_role_rel
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
-    <insert id="insert" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
-        insert into user_role_rel (
-            id, role_id,user_id,
-            status, gmt_created,
-            gmt_modified)
-        values (
-            #{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
-            #{status,jdbcType=TINYINT}, now(),now())
-    </insert>
-    <insert id="insertSelective" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
-        insert into user_role_rel
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
-            <if test="roleId != null" >
-                role_id,
-            </if>
-            <if test="userId != null" >
-                user_id,
-            </if>
-            <if test="status != null" >
-                status,
-            </if>
-            <if test="gmtCreated != null" >
-                gmt_created,
-            </if>
-            <if test="gmtModified != null" >
-                gmt_modified
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,roleCode=BIGINT},
-            </if>
-            <if test="roleId != null" >
-                #{roleId,jdbcType=BIGINT},
-            </if>
-            <if test="userId != null" >
-                #{userId,jdbcType=BIGINT},
-            </if>
-            <if test="status != null" >
-                #{status,jdbcType=TINYINT},
-            </if>
-            <if test="gmtCreated != null" >
-                now(),
-            </if>
-            <if test="gmtModified != null" >
-                now()
-            </if>
-        </trim>
-    </insert>
-    <select id="count" resultType="java.lang.Integer" >
-        select count(*) from user_role_rel
+
+    <select id="totalCount" resultType="java.lang.Integer" >
+        select totalCount(*) from user_role_rel
     </select>
-    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
-        update user_role_rel
-        <set >
-            <if test="roleId != null" >
-                role_id = #{roleId,jdbcType=BIGINT},
-            </if>
-            <if test="userId != null" >
-                user_id = #{userId,jdbcType=BIGINT},
-            </if>
-            <if test="status != null" >
-                status = #{status,jdbcType=TINYINT},
-            </if>
-            gmt_modified = now(),
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
+
 </mapper>

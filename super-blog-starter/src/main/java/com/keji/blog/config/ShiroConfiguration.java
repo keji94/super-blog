@@ -1,6 +1,6 @@
 package com.keji.blog.config;
 
-import com.keji.blog.controller.shiro.MyShiroRealm;
+import com.keji.blog.shiro.MyShiroRealm;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -75,6 +75,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/vue", "anon");
         //配置记住我或认证通过可以访问的地址
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

@@ -1,14 +1,13 @@
 package com.keji.blog.controller.admin;
 
 import com.keji.blog.constants.BlogConstants;
-import com.keji.blog.controller.vo.BlogUserVO;
-import com.keji.blog.controller.vo.UserQueryVO;
+import com.keji.blog.vo.user.BlogUserVO;
+import com.keji.blog.vo.user.UserQueryVO;
 import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
 import com.keji.blog.result.PageResult;
-import com.keji.blog.service.UserService;
-import com.keji.blog.service.admin.AdminUserService;
+import com.keji.blog.service.user.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -18,12 +17,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import java.util.List;
 
 /**
@@ -81,17 +80,14 @@ public class AdminUserController {
 
     @ResponseBody
     @RequestMapping("/queryalluser")
-    public PageResult<List<UserDO>> queryAllUser(UserQueryVO userQueryVO) {
+    public PageResult<List<UserDO>> queryAllUser(@Valid UserQueryVO userQueryVO, BindingResult bindingResult) {
 
-        if (userQueryVO.getPageIndex() == null ||
-                userQueryVO.getPageSize() == null) {
-            return null;
+        if (bindingResult.hasErrors()) {
+            logger.warn("参数校验不通过，错误信息："+bindingResult);
+            return PageResult.makeFail(bindingResult);
         }
 
-
         PageResult<List<UserDO>> pageResult = userService.queryUserByPage(new UserDO(), userQueryVO.getPageIndex(), userQueryVO.getPageSize());
-        System.out.println(pageResult);
-
 
         return pageResult;
     }

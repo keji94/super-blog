@@ -12,21 +12,39 @@ import java.util.Date;
  */
 @Data
 public class BlogArticleDO {
+    /**
+     * 主键
+     */
     private Long id;
 
+    /**
+     * 需求标题
+     */
     private String title;
 
+    /**
+     * 需求内容
+     */
+    private String content;
+
+    /**
+     * 完成总结
+     */
+    private String  summary;
+
+    /**
+     * 状态
+     */
     private Integer status;
 
-    private Integer istop;
-
-    private Long userId;
-
-    private Long categoryId;
-
+    /**
+     * 创建时间
+     */
     private Date gmtCreated;
 
+    /**
+     * 修改时间
+     */
     private Date gmtModified;
 
-    private String content;
 }

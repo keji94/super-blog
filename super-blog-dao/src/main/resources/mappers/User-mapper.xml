@@ -33,92 +33,6 @@
         #{gmtModified,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},#{seriesNumber,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.keji.blog.dataobject.UserDO" >
-        insert into user
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
-            <if test="name != null" >
-                name,
-            </if>
-            <if test="email != null" >
-                email,
-            </if>
-            <if test="phone != null" >
-                phone,
-            </if>
-            <if test="password != null" >
-                password,
-            </if>
-            <if test="question != null" >
-                question,
-            </if>
-            <if test="answer != null" >
-                answer,
-            </if>
-            <if test="picture != null" >
-                picture,
-            </if>
-            <if test="status != null" >
-                status,
-            </if>
-            <if test="gmtCreated != null" >
-                gmt_created,
-            </if>
-            <if test="gmtModified != null" >
-                gmt_modified,
-            </if>
-            <if test="ip != null" >
-                ip,
-            </if>
-            <if test="seriesNumber != null" >
-                series_number,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="name != null" >
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null" >
-                #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null" >
-                #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null" >
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="question != null" >
-                #{question,jdbcType=VARCHAR},
-            </if>
-            <if test="answer != null" >
-                #{answer,jdbcType=VARCHAR},
-            </if>
-            <if test="picture != null" >
-                #{picture,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null" >
-                #{status,jdbcType=TINYINT},
-            </if>
-            <if test="gmtCreated != null" >
-                #{gmtCreated,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null" >
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
-            <if test="ip != null" >
-                #{ip,jdbcType=VARCHAR},
-            </if>
-            <if test="seriesNumber != null" >
-                #{seriesNumber,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
         delete from user
         where id = #{id,jdbcType=BIGINT}
@@ -155,15 +69,13 @@
             <if test="gmtCreated != null" >
                 gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null" >
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
             <if test="ip != null" >
                 ip = #{ip,jdbcType=VARCHAR},
             </if>
             <if test="seriesNumber != null" >
                 series_number = #{seriesNumber,jdbcType=VARCHAR},
             </if>
+              gmt_modified = now()
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -203,7 +115,7 @@
         </where>
     </select>
 
-    <select id="count" resultType="java.lang.Integer" >
-        select count(*) from user
+    <select id="totalCount" resultType="java.lang.Integer" >
+        select totalCount(*) from user
     </select>
 </mapper>

@@ -3,7 +3,7 @@ package com.keji.blog.controller.user;
 import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
-import com.keji.blog.service.UserService;
+import com.keji.blog.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

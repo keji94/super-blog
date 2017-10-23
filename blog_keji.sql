@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-10-21 20:07:01
+Date: 2017-10-23 11:53:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -153,6 +153,24 @@ INSERT INTO `picture` VALUES ('2', '首页图片轮播1', '/images/002.jpg', '0'
 INSERT INTO `picture` VALUES ('3', '首页图片轮播3', '/images/003.jpg', '0', '1', '1', '2017-08-07 15:06:35', '2017-08-07 15:06:38');
 INSERT INTO `picture` VALUES ('4', '首页图片轮播4', '/images/004.jpg', '0', '1', '1', '2017-08-07 15:07:05', '2017-08-07 15:07:09');
 INSERT INTO `picture` VALUES ('5', '首页图片轮播5', '/images/005.jpg', '0', '1', '1', '2017-08-07 15:19:52', '2017-08-07 15:19:58');
+
+-- ----------------------------
+-- Table structure for requirement
+-- ----------------------------
+DROP TABLE IF EXISTS `requirement`;
+CREATE TABLE `requirement` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '需求表',
+  `title` varchar(255) NOT NULL COMMENT '需求的标题',
+  `content` text COMMENT '需求内容',
+  `summarize` text COMMENT '完成总结',
+  `gmt_created` datetime NOT NULL,
+  `gmt_modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of requirement
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for resource

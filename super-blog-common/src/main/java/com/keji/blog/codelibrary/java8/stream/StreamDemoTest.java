@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
  * @description 流的中间操作：
  * filter、map、limit、sorted、distinct
  * 流的终端操作:
- * forEach、count、collect
+ * forEach、totalCount、collect
  * @date: Created in 2017/10/10
  * @modified: By:
  */

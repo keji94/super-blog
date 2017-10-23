@@ -2,14 +2,34 @@
 
 2.引入shiro、1可以使用shiro的rememberMe功能来完成       p0    finish at 2017年10月21日20:04:18
 
-3.引入mybatis分页插件                                   p1
+3.引入mybatis分页插件                                   p1    finished at 2017年10月23日09:44:58
 
-4.完成单测环境                                          p2
+4.完成单测环境                                          p2    finished at 2017年10月23日10:02:00
 
-5.使用google 的Producer 完成验证码的逻辑                p1
+5.使用google 的Producer 完成验证码的逻辑                p1    finished at 2017年10月23日11:45:36
 
-6.退出登录功能 --2017年10月22日18:58:45 p1 finished at 2017年10月22日19:03:20
+6.退出登录功能 --2017年10月22日18:58:45                 p1    finished at 2017年10月22日19:03:20
 
-7.自定义注解，实现查询参数的校验。--2017年10月22日19:57:39
+7.自定义注解，实现查询参数的校验。--2017年10月22日19:57:39    finished at 2017年10月23日10:46:15
+        @AssertFalse 校验false
+        @AssertTrue 校验true
+        @DecimalMax(value=,inclusive=) 小于等于value，
+        inclusive=true,是小于等于
+        @DecimalMin(value=,inclusive=) 与上类似
+        @Max(value=) 小于等于value
+        @Min(value=) 大于等于value
+        @NotNull 检查Null
+        @Past 检查日期
+        @Pattern(regex=,flag=) 正则
+        @Size(min=, max=) 字符串，集合，map限制大小
+        @Valid 对po实体类进行校验
 
-8.完善PageResult  --2017年10月22日20:52:39 p0
+8.完善PageResult  --2017年10月22日20:52:39 p0  finished at 2017年10月23日09:28:13
+
+9.完成一个图形化的需求管理。 p0 raise at 2017年10月23日12:08:47
+
+10.以后事务一律使用事务模板好了。p2 raise at 2017年10月23日19:44:45
+
+11.页面引入vue.js 学习vue.js   p0 raise at 2017年10月23日19:45:25   这个优先级最高，这个不做出来需求管理的页面也就做不出来。
+
+
