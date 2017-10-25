@@ -1,7 +1,9 @@
 package com.keji.blog.controller.admin;
 
+import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
-import com.keji.blog.vo.user.BlogUserVO;
+import com.keji.blog.util.UserConvertUtil;
+import com.keji.blog.vo.user.UserVO;
 import com.keji.blog.vo.user.UserQueryVO;
 import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.result.BaseErrorEnum;
@@ -42,7 +44,7 @@ public class AdminUserController {
 
     @ResponseBody
     @RequestMapping("/login")
-    public BaseResult login(BlogUserVO userVO) {
+    public BaseResult login(UserVO userVO) {
         if (userVO.getEmail() == null
                 || userVO.getPassword() == null
                 || userVO.getRememberMe() == null) {
@@ -87,9 +89,25 @@ public class AdminUserController {
             return PageResult.makeFail(bindingResult);
         }
 
-        PageResult<List<UserDO>> pageResult = userService.queryUserByPage(new UserDO(), userQueryVO.getPageIndex(), userQueryVO.getPageSize());
+        PageInfo<UserDO> pageInfo = null;
+        try {
+            pageInfo = userService.queryUserByPage(new UserDO(), userQueryVO.getPageIndex(),
+                userQueryVO.getPageSize());
+        } catch (Exception e) {
+            logger.error("查询用户失败,参数："+userQueryVO);
+            return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
+        }
 
-        return pageResult;
+        return PageResult.makeSuccess(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPages());
     }
 
+    @ResponseBody
+    @RequestMapping("/showUserInfo")
+    public BaseResult showUserData() {
+        UserDO userDO = (UserDO)SecurityUtils.getSubject().getPrincipal();
+        if (userDO == null) {
+            return BaseResult.makeFail(BaseErrorEnum.FORBIDDEN);
+        }
+        return BaseResult.makeSuccess(UserConvertUtil.userDO2VO(userDO));
+    }
 }

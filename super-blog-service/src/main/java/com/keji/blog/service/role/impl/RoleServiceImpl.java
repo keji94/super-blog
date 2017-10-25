@@ -22,8 +22,11 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public List<RoleDO> findAllRole() {
-        roleDAO.selectSelective(new RoleDO());
+        return roleDAO.selectByCondition(new RoleDO());
+    }
 
-        return null;
+    @Override
+    public List<RoleDO> findRoleByUserId(Long userId) {
+        return roleDAO.selectByUserId(userId);
     }
 }

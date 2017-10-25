@@ -2,10 +2,10 @@ package com.keji.blog.vo.requirement;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author: wb-ny291824
@@ -41,5 +41,19 @@ public class RequirementVO {
      * 状态
      */
     private Integer status;
+
+    /**
+     * 创建时间
+     */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date gmtCreated;
+
+    /**
+     * 修改时间
+     */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date gmtModified;
 
 }

@@ -20,9 +20,9 @@ public class PageResult<T> extends BaseResult<T> {
     protected Long totalCount;
 
     /**
-     * 排序方式
+     * 总页数
      */
-    protected String orderBy;
+    protected int totalPage;
 
     public PageResult(){
         super();
@@ -38,6 +38,15 @@ public class PageResult<T> extends BaseResult<T> {
         pageResult.setSuccess(true);
         pageResult.setTotalCount(totalCount);
         pageResult.setData(data);
+        return pageResult;
+    }
+
+    public static<T> PageResult<T> makeSuccess(T data, Long totalCount,int totalPage) {
+        PageResult<T> pageResult = new PageResult<>();
+        pageResult.setSuccess(true);
+        pageResult.setTotalCount(totalCount);
+        pageResult.setData(data);
+        pageResult.setTotalPage(totalPage);
         return pageResult;
     }
 

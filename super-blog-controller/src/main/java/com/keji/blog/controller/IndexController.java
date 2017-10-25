@@ -42,10 +42,14 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("/")
-    @RequiresPermissions("admin")
-    public String index() {
-        return "index";
+    @RequestMapping("/{page}")
+    public String index(@PathVariable String page) {
+        return page;
+    }
+
+    @RequestMapping("/modules/sys/{page}")
+    public String menuIndex(@PathVariable String page) {
+        return "/modules/sys/"+page;
     }
 
     @RequestMapping("/getCaptcha")

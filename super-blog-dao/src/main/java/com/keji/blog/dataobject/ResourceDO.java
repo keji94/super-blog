@@ -18,9 +18,9 @@ public class ResourceDO {
     private Long id;
 
     /**
-     * 资源编码
+     * 父资源id
      */
-    private String resourceCode;
+    private Long parentId;
 
     /**
      * 资源名称
@@ -33,9 +33,24 @@ public class ResourceDO {
     private String resourceUrl;
 
     /**
-     * 父资源id
+     * 对应权限
      */
-    private Long parentId;
+    private String permission;
+
+    /**
+     * 资源类型0：目录   1：菜单   2：按钮'
+     */
+    private Integer type;
+
+    /**
+     * 资源图标
+     */
+    private String icon;
+
+    /**
+     * 排序
+     */
+    private Integer orderNum;
 
     /**
      * 状态

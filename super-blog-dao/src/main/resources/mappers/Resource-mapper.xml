@@ -7,22 +7,40 @@
         <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
         <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
         <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+        <result column="permission" property="permission" jdbcType="VARCHAR" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="TINYINT" />
+        <result column="order_num" property="orderNum" jdbcType="TINYINT" />
         <result column="status" property="status" jdbcType="TINYINT" />
         <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     </resultMap>
+    <resultMap id="ResourceBOResultMap" type="com.keji.blog.bo.ResourceBO" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <id column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
+        <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+        <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+        <result column="permission" property="permission" jdbcType="VARCHAR" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="TINYINT" />
+        <result column="order_num" property="orderNum" jdbcType="TINYINT" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+    </resultMap>
+
+
     <sql id="Base_Column_List" >
-        id,parent_id,resource_code,resource_name,resource_url,status,gmt_created,gmt_modified
+        id,parent_id,resource_name,resource_url,permission,type,icon,order_num,status,gmt_created,gmt_modified
     </sql>
 
     <insert id="insert" parameterType="com.keji.blog.dataobject.ResourceDO" >
         insert into resource (
-            id, resource_code,resource_name,
-            resource_url,status, gmt_created,
+            id,parent_id,resource_name,
+            resource_url,permission,type,icon,order_num,status, gmt_created,
             gmt_modified)
         values (
-            #{id,jdbcType=BIGINT}, #{resourceCode,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR},
-            #{resourceUrl,jdbcType=VARCHAR},#{status,jdbcType=TINYINT}, now(),now())
+            #{id,jdbcType=BIGINT},#{parent_id,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR},
+            #{resourceUrl,jdbcType=VARCHAR},#{permission,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{icon,jdbcType=VARCHAR},#{orderNum,jdbcType=TINYINT},#{status,jdbcType=TINYINT}, now(),now())
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
@@ -36,11 +54,20 @@
             <if test="resourceName != null" >
                 resource_name = #{resourceName,jdbcType=VARCHAR},
             </if>
-            <if test="resourceCode != null" >
-                resource_code = #{resourceCode,jdbcType=VARCHAR},
-            </if>
             <if test="resourceUrl != null" >
                 resource_Url = #{resourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="permission != null" >
+                permission = #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null" >
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="order_num != null" >
+                order_num = #{order_num,jdbcType=TINYINT},
             </if>
             <if test="status != null" >
                 status = #{status,jdbcType=TINYINT},
@@ -66,8 +93,8 @@
         <include refid="Base_Column_List" />
         from resource
         <where>
-            <if test="resourceCode != null">
-                AND resource_code = #{resourceCode,jdbcType=VARCHAR}
+            <if test="permission != null">
+                AND permission = #{permission,jdbcType=VARCHAR}
             </if>
             <if test="resourceName != null">
                 AND resource_name = #{resourceName,jdbcType=VARCHAR}
@@ -83,8 +110,11 @@
         <include refid="Base_Column_List" />
         from resource
         <where>
-            <if test="resourceCode != null">
-                AND resource_code = #{resourceCode,jdbcType=VARCHAR}
+            <if test="permission != null">
+                AND permission = #{permission,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                AND parent_id = #{parentId,jdbcType=BIGINT}
             </if>
             <if test="resourceName != null">
                 AND resource_name = #{resourceName,jdbcType=VARCHAR}
@@ -102,6 +132,14 @@
         WHERE EXISTS (
         SELECT resource_id from role_resource_rel b WHERE role_id = #{roleId,jdbcType=BIGINT} AND a.id = b.resource_id
         )
+    </select>
+
+    <select id="selectByParentId" resultMap="ResourceBOResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from resource
+        WHERE parent_id = #{parentId,jdbcType=BIGINT}
+        AND status = 0
     </select>
 
 </mapper>

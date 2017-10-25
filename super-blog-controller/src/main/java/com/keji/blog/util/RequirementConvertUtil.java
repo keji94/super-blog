@@ -46,6 +46,8 @@ public class RequirementConvertUtil {
             requirementVO.setId(requirementDO.getId());
             requirementVO.setSummary(requirementDO.getSummary());
             requirementVO.setTitle(requirementDO.getTitle());
+            requirementVO.setGmtCreated(requirementDO.getGmtCreated());
+            requirementVO.setGmtModified(requirementDO.getGmtModified());
             listVO.add(requirementVO);
         });
         return listVO;

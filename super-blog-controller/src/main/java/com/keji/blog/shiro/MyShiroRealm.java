@@ -1,5 +1,6 @@
 package com.keji.blog.shiro;
 
+import com.google.common.collect.Sets;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.ResourceDAO;
 import com.keji.blog.dao.RoleDAO;
@@ -7,6 +8,7 @@ import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.dataobject.RoleDO;
 import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.service.user.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -16,7 +18,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -49,25 +53,33 @@ public class MyShiroRealm extends AuthorizingRealm{
         UserDO user = (UserDO) subject.getPrincipal();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+
+        List<String> permissions = null;
+
         if (user.getEmail().equals(BlogConstants.ADMIN_USER_NAME)) {
             // 如果admin ，查询所有角色和所有权限
             List<RoleDO> roles = roleDAO.selectByCondition(new RoleDO());
             roles.forEach(roleDO -> authorizationInfo.addRole(roleDO.getRoleCode()));
             List<ResourceDO> resourceDOS = resourceDAO.selectByCondition(new ResourceDO());
-            resourceDOS.forEach(resourceDO -> authorizationInfo.addStringPermission(resourceDO.getResourceCode()));
+            permissions = resourceDOS.stream().map(ResourceDO::getPermission).collect(Collectors.toList());
         } else {
-            // 普通用户 ， 根据当前用户，查询具有角色，通过角色获取权限
+            // 普通用户
             List<RoleDO> roles = roleDAO.selectByUserId(user.getId());
-            // 添加角色
-            roles.forEach(
-                    roleDO -> {
-                        authorizationInfo.addRole(roleDO.getRoleCode());
-                        List<ResourceDO> resourceDOS = resourceDAO.selectByRoleId(roleDO.getId());
-                        List<String> resourceCodes = resourceDOS.stream().map(ResourceDO::getResourceCode).collect(Collectors.toList());
-                        authorizationInfo.addStringPermissions(resourceCodes);
-                    }
-            );
+            roles.forEach(roleDO -> authorizationInfo.addRole(roleDO.getRoleCode()));
+            //查询当前用户的角色
+            List<ResourceDO> resourceDOS = userService.selectUserPermissions(user.getId());
+            permissions = resourceDOS.stream().map(ResourceDO::getPermission).collect(Collectors.toList());
         }
+
+        //给当前角色添加资源权限
+        Set<String> permissionString = Sets.newHashSet();
+        for (String permission : permissions) {
+            if (StringUtils.isBlank(permission)) {
+                continue;
+            }
+            permissionString.addAll(Arrays.asList(permission.trim().split(",")));
+        }
+        authorizationInfo.addStringPermissions(permissionString);
         return authorizationInfo;
     }
 

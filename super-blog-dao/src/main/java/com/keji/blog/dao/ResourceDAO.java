@@ -1,5 +1,6 @@
 package com.keji.blog.dao;
 
+import com.keji.blog.bo.ResourceBO;
 import com.keji.blog.dataobject.ResourceDO;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +21,13 @@ public interface ResourceDAO extends BaseDAO<ResourceDO,ResourceDO>{
      * @return
      */
     List<ResourceDO> selectByRoleId(Long roleId);
+
+    /**
+     * 根据parentId查询资源
+     * @param parentId
+     * @return
+     */
+    List<ResourceBO> selectByParentId(Long parentId);
+
 
 }

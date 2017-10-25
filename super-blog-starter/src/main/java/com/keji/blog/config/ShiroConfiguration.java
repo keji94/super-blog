@@ -71,6 +71,7 @@ public class ShiroConfiguration {
         //<!-- authc:必须认证通过才可以访问; anon:可以匿名访问;perms["name"]:需要名为name权限的过滤器-->
 //        filterChainDefinitionMap.put("/**", "authc");   //所有的资源都需要认证
         filterChainDefinitionMap.put("/admin/*", "user");
+        filterChainDefinitionMap.put("/index", "authc");
         filterChainDefinitionMap.put("/admin/login", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");

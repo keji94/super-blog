@@ -45,12 +45,8 @@
 </div>
 
 <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/static/js/vue.js"></script>
-
-
-
+<script type="text/javascript" src="/static/libs/vue.min.js"></script>
 <script>
-
     var vm = new Vue({
         el : '#loginApp',
         data:{
@@ -69,7 +65,7 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.success == true) {
-                            window.location.href = "/admin/index";
+                            window.location.href = "/index";
                         } else {
                             vm.error = true;
                             vm.errorMsg = data.errorMsg;

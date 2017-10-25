@@ -13,7 +13,6 @@ import com.keji.blog.service.requirement.RequirementService;
 import com.keji.blog.util.RequirementConvertUtil;
 import com.keji.blog.vo.requirement.RequirementQueryVO;
 import com.keji.blog.vo.requirement.RequirementVO;
-import com.sun.xml.internal.rngom.parse.host.Base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class RequirementController {
 
     @ResponseBody
     @RequestMapping("/query")
-    public PageResult<List<RequirementVO>> query(RequirementQueryVO queryVO, BindingResult bindingResult) {
+    public PageResult<List<RequirementVO>> query(@Valid RequirementQueryVO queryVO, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             logger.warn("参数校验不通过,queryVO:"+queryVO);

@@ -118,4 +118,13 @@
     <select id="totalCount" resultType="java.lang.Integer" >
         select totalCount(*) from user
     </select>
+
+    <select id="selectUserPermission" parameterType="java.lang.Long" resultType="com.keji.blog.dataobject.ResourceDO">
+        SELECT r.id,r.parent_id,r.resource_name,r.resource_url,r.permission,r.type,r.icon,
+                r.order_num,r.status,r.gmt_created,r.gmt_modified
+        FROM user_role_rel urr
+		LEFT JOIN role_resource_rel rrr ON urr.role_id = rrr.role_id
+		LEFT JOIN resource r ON rrr.resource_id = r.id
+        WHERE user_id = #{userId,jdbcType=BIGINT}
+    </select>
 </mapper>

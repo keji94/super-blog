@@ -3,8 +3,8 @@ package com.keji.blog.service.user.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dao.UserDAO;
+import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.dataobject.UserDO;
-import com.keji.blog.result.PageResult;
 import com.keji.blog.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,13 +42,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageResult<List<UserDO>> queryUserByPage(UserDO userDO, Integer pageIndex, Integer pageSize) {
+    public PageInfo<UserDO> queryUserByPage(UserDO userDO, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         List<UserDO> userDOS = userDAO.selectByCondition(userDO);
         PageInfo<UserDO> pageInfo = new PageInfo<>(userDOS);
-        PageResult<List<UserDO>> pageResult = new PageResult<>(userDOS, pageInfo.getTotal());
-        return pageResult;
+        return pageInfo;
     }
 
-
+    @Override
+    public List<ResourceDO> selectUserPermissions(Long userId) {
+        return userDAO.selectUserPermission(userId);
+    }
 }

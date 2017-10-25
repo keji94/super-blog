@@ -58,28 +58,12 @@
         select
         <include refid="Base_Column_List" />
         from requirement
-        <where>
-            <if test="email != null">
-                AND email = #{email,jdbcType=VARCHAR}
-            </if>
-            <if test="password != null">
-                AND password = #{password,jdbcType=VARCHAR}
-            </if>
-        </where>
     </select>
 
     <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.RequirementDO" >
         select
         <include refid="Base_Column_List" />
-        from user
-        <where>
-            <if test="email != null">
-                AND email = #{email,jdbcType=VARCHAR}
-            </if>
-            <if test="password != null">
-                AND password = #{password,jdbcType=VARCHAR}
-            </if>
-        </where>
+        from requirement
     </select>
 
     <select id="totalCount" resultType="java.lang.Integer" >

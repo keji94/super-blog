@@ -16,4 +16,11 @@ public interface RoleService {
      * @return
      */
     List<RoleDO> findAllRole();
+
+    /**
+     * 根据用户Id查询角色
+     * @param userId
+     * @return
+     */
+    List<RoleDO> findRoleByUserId(Long userId);
 }

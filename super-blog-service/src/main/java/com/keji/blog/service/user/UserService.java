@@ -1,8 +1,8 @@
 package com.keji.blog.service.user;
 
+import com.github.pagehelper.PageInfo;
+import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.dataobject.UserDO;
-import com.keji.blog.result.PageResult;
-
 import java.util.List;
 
 /**
@@ -34,5 +34,13 @@ public interface UserService {
      * @param pageSize
      * @return
      */
-    PageResult<List<UserDO>> queryUserByPage(UserDO userDO, Integer pageIndex, Integer pageSize);
+    PageInfo<UserDO> queryUserByPage(UserDO userDO, Integer pageIndex, Integer pageSize);
+
+    /**
+     * 查询用户的所有资源
+     * @param userId
+     * @return
+     */
+    List<ResourceDO> selectUserPermissions(Long userId);
+
 }
