@@ -14,23 +14,22 @@
         <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
         <result column="ip" property="ip" jdbcType="VARCHAR" />
-        <result column="series_number" property="seriesNumber" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List" >
         id,name,email,phone,password,question,answer,picture,
-        status,gmt_created,gmt_modified,ip,series_number
+        status,gmt_created,gmt_modified,ip
     </sql>
 
 
-    <insert id="insert" parameterType="com.keji.blog.dataobject.UserDO" >
+    <insert id="insert" parameterType="com.keji.blog.dataobject.UserDO" useGeneratedKeys="true" keyProperty="id">
         insert into user (id, name,email,phone,
         password, question, answer,
         picture, status, gmt_created,
-        gmt_modified, ip,series_number)
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}
+        gmt_modified, ip)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
         #{password,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR},
-        #{picture,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{gmtCreated,jdbcType=TIMESTAMP},
-        #{gmtModified,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},#{seriesNumber,jdbcType=VARCHAR})
+        #{picture,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, now(),
+        now(), #{ip,jdbcType=VARCHAR})
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
@@ -52,28 +51,22 @@
                 phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="password != null" >
-                password = #{userPassword,jdbcType=VARCHAR},
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="question != null" >
-                question = #{userQuestion,jdbcType=VARCHAR},
+                question = #{question,jdbcType=VARCHAR},
             </if>
             <if test="answer != null" >
-                answer = #{userAnswer,jdbcType=VARCHAR},
+                answer = #{answer,jdbcType=VARCHAR},
             </if>
             <if test="picture != null" >
-                picture = #{userPicture,jdbcType=VARCHAR},
+                picture = #{picture,jdbcType=VARCHAR},
             </if>
             <if test="status != null" >
-                status = #{userStatus,jdbcType=TINYINT},
-            </if>
-            <if test="gmtCreated != null" >
-                gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+                status = #{status,jdbcType=TINYINT},
             </if>
             <if test="ip != null" >
                 ip = #{ip,jdbcType=VARCHAR},
-            </if>
-            <if test="seriesNumber != null" >
-                series_number = #{seriesNumber,jdbcType=VARCHAR},
             </if>
               gmt_modified = now()
         </set>
@@ -111,6 +104,12 @@
             </if>
             <if test="password != null">
                 AND password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                AND name LIKE CONCAT(CONCAT('%', #{name}), '%')
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone,jdbcType=VARCHAR}
             </if>
         </where>
     </select>

@@ -33,6 +33,12 @@ public class PageResult<T> extends BaseResult<T> {
         this.totalCount = totalCount;
     }
 
+    public static <T> PageResult<T> makeSuccess(T data) {
+        PageResult<T> result = new PageResult<>();
+        result.success(data);
+        return result;
+    }
+
     public static<T> PageResult<T> makeSuccess(T data, Long totalCount) {
         PageResult<T> pageResult = new PageResult<>();
         pageResult.setSuccess(true);

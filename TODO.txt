@@ -23,6 +23,7 @@
         @Pattern(regex=,flag=) 正则
         @Size(min=, max=) 字符串，集合，map限制大小
         @Valid 对po实体类进行校验
+        @NotBlank 对空串null校验，注意不能作用在基本类型上
 
 8.完善PageResult  --2017年10月22日20:52:39 p0  finished at 2017年10月23日09:28:13
 

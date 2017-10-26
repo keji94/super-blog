@@ -76,9 +76,4 @@ public class UserDO implements Serializable{
      */
     private String ip;
 
-    /**
-     * 登录序列号
-     */
-    private String seriesNumber;
-
 }

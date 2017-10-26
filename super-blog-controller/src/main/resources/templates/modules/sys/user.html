@@ -9,7 +9,7 @@
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2">
-				<input type="text" class="form-control" v-model="q.username" @keyup.enter="query" placeholder="用户名">
+				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="用户名">
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
 			<#if shiro.hasPermission("sys:user:save")>
@@ -32,13 +32,13 @@
 			<div class="form-group">
 				<div class="col-sm-2 control-label">用户名</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="user.username" placeholder="登录账号"/>
+					<input type="text" class="form-control" v-model="user.name" placeholder="用户名"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-2 control-label">所属部门</div>
+				<div class="col-sm-2 control-label">登录邮箱</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" style="cursor:pointer;" v-model="user.deptName" @click="deptTree" readonly="readonly" placeholder="所属部门"/>
+					<input type="text" class="form-control" v-model="user.email" placeholder="登录邮箱"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -47,33 +47,28 @@
 					<input type="text" class="form-control" v-model="user.password" placeholder="密码"/>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-2 control-label">邮箱</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="user.email" placeholder="邮箱"/>
-				</div>
-			</div>
+
 			<div class="form-group">
 				<div class="col-sm-2 control-label">手机号</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="user.mobile" placeholder="手机号"/>
+					<input type="text" class="form-control" v-model="user.phone" placeholder="手机号"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">角色</div>
 				<div class="col-sm-10">
 					<label v-for="role in roleList" class="checkbox-inline">
-						<input type="checkbox" :value="role.roleId" v-model="user.roleIdList">{{role.roleName}}
+						<input type="checkbox" :value="role.id" v-model="user.roleIdList">{{role.roleName}}
 					</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">状态</div>
 				<label class="radio-inline">
-					<input type="radio" name="status" value="0" v-model="user.status"/> 禁用
+					<input type="radio" name="status" value="1" v-model="user.status"/> 禁用
 				</label>
 				<label class="radio-inline">
-					<input type="radio" name="status" value="1" v-model="user.status"/> 正常
+					<input type="radio" name="status" value="0" v-model="user.status"/> 正常
 				</label>
 			</div>
 			<div class="form-group">
@@ -83,11 +78,6 @@
 			</div>
 		</form>
 	</div>
-</div>
-
-<!-- 选择部门 -->
-<div id="deptLayer" style="display: none;padding:10px;">
-	<ul id="deptTree" class="ztree"></ul>
 </div>
 
 <script src="/static/js/modules/sys/user.js?_${.now?long}"></script>

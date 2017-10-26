@@ -1,13 +1,10 @@
 package com.keji.blog.enums;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/24
- * @modified: By:
+ * @author wb-ny291824
+ * @version $Id: BlogStatusEnum.java, v 0.1 2017-10-26 15:20 wb-ny291824 Exp $$
  */
-public enum ResourceStatusEnum {
-
+public enum  BlogStatusEnum {
     /**
      * 正常
      */
@@ -21,7 +18,7 @@ public enum ResourceStatusEnum {
 
     private String value;
 
-    ResourceStatusEnum(Integer key, String value) {
+    BlogStatusEnum(Integer key, String value) {
         this.key = key;
         this.value = value;
     }

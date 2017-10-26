@@ -1,5 +1,6 @@
 package com.keji.blog.service.role;
 
+import com.github.pagehelper.PageInfo;
 import com.keji.blog.dataobject.RoleDO;
 
 import java.util.List;
@@ -16,6 +17,15 @@ public interface RoleService {
      * @return
      */
     List<RoleDO> findAllRole();
+
+    /**
+     * 分页查询角色
+     * @param roleDO
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    PageInfo<RoleDO> queryByPage(RoleDO roleDO, Integer pageIndex, Integer pageSize);
 
     /**
      * 根据用户Id查询角色

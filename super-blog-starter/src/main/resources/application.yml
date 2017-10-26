@@ -1,0 +1,13 @@
+spring:
+    # 环境 dev|test|pro
+    profiles:
+        active: dev
+    # jackson时间格式化
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+server:
+  port: 8080
+
+logging:
+  level: debug

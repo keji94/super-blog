@@ -17,8 +17,8 @@ import lombok.Data;
 public class UserQueryVO extends BaseQueryVO{
 
     /**
-     * 查询条件
+     * 姓名
      */
-    private String condition;
+    private String name;
 
 }

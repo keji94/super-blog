@@ -14,14 +14,14 @@
         id,user_id,role_id,status,gmt_created,gmt_modified
     </sql>
 
-    <insert id="insert" parameterType="com.keji.blog.dataobject.UserRoleRelDO" >
+    <insert id="insert" parameterType="com.keji.blog.dataobject.UserRoleRelDO">
         insert into user_role_rel (
-        id, role_id,user_id,
+        role_id,user_id,
         status, gmt_created,
         gmt_modified)
         values (
-        #{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
-        #{status,jdbcType=TINYINT}, now(),now())
+        #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+        0, now(),now())
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

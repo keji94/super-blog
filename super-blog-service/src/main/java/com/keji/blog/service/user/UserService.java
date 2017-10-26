@@ -14,11 +14,11 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 根据用户名查询用户
-     * @param userName
+     * 根据id查询用户
+     * @param id
      * @return
      */
-    UserDO showUserData(String userName);
+    UserDO queryUserById(Long id);
 
     /**
      * 根据邮箱查询用户
@@ -26,6 +26,13 @@ public interface UserService {
      * @return
      */
     UserDO selectUserByEamil(String email);
+
+    /**
+     * 按条件查询用户(id,email,name,phone)
+     * @param userDO
+     * @return
+     */
+    List<UserDO> selectUserByCondition(UserDO userDO);
 
     /**
      * 分页查询用户
@@ -43,4 +50,25 @@ public interface UserService {
      */
     List<ResourceDO> selectUserPermissions(Long userId);
 
+    /**
+     * 新增用户
+     * @param userDO
+     * @param roleIds
+     * @return
+     */
+    int saveUser(UserDO userDO,List<Long> roleIds);
+
+    /**
+     * 更新用户
+     * @param userDO
+     * @return
+     */
+    int updateUser(UserDO userDO);
+
+    /**
+     * 禁用用户
+     * @param ids
+     * @return
+     */
+    int inValidateUser(Long[] ids);
 }

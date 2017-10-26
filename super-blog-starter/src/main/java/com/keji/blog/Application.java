@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * main() : 把程序在命令行当成一个可执行的jar运行
  */
 @SpringBootApplication(scanBasePackages = {"com.keji.blog"})
-@PropertySource(value = "classpath:application.properties")
+@PropertySource(value = "classpath:application.yml")
 @EnableTransactionManagement
 @ImportResource(value = {"classpath:/WEB-INF/base-config.xml"})
 @ServletComponentScan(basePackages = {"com.keji.blog.servlet"})
