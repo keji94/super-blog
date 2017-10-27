@@ -3,6 +3,8 @@ package com.keji.blog.service.resource.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.keji.blog.bo.ResourceBO;
 import com.keji.blog.dao.ResourceDAO;
@@ -77,5 +79,26 @@ public class ResourceServiceImpl implements ResourceService {
         });
 
         return result;
+    }
+
+    @Override
+    public PageInfo<ResourceDO> queryByPage(ResourceDO resourceDO, Integer pageIndex, Integer pageSize) {
+
+        PageHelper.startPage(pageIndex, pageSize);
+
+        List<ResourceDO> resourceDOS = resourceDAO.selectByCondition(resourceDO);
+        PageInfo<ResourceDO> pageInfo = new PageInfo<>(resourceDOS);
+        return pageInfo;
+    }
+
+    @Override
+    public List<ResourceDO> list() {
+        List<ResourceDO> resourceDOS = resourceDAO.selectByCondition(new ResourceDO());
+        return resourceDOS;
+    }
+
+    @Override
+    public List<ResourceDO> queryNoButtonResource() {
+        return resourceDAO.queryNoButtonResource();
     }
 }

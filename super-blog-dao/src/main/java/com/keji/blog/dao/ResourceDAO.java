@@ -29,5 +29,9 @@ public interface ResourceDAO extends BaseDAO<ResourceDO,ResourceDO>{
      */
     List<ResourceBO> selectByParentId(Long parentId);
 
-
+    /**
+     * 查找没有按钮级别的资源
+     * @return
+     */
+    List<ResourceDO> queryNoButtonResource();
 }

@@ -2,6 +2,7 @@ package com.keji.blog.service.resource;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.keji.blog.bo.ResourceBO;
 import com.keji.blog.dataobject.ResourceDO;
 
@@ -14,7 +15,7 @@ import com.keji.blog.dataobject.ResourceDO;
 public interface ResourceService {
 
     /**
-     * 获取所有的资源
+     * 获取所有的资源,父资源包含子资源
      * @return
      */
     List<ResourceBO> getAllResource();
@@ -26,5 +27,25 @@ public interface ResourceService {
      */
     List<ResourceDO> getResoureceById(List<Long> roleIds);
 
+    /**
+     * 分页查询资源
+     * @param resourceDO
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    PageInfo<ResourceDO> queryByPage(ResourceDO resourceDO, Integer pageIndex, Integer pageSize);
+
+    /**
+     * 查询所有的资源，没有层级包含关系
+     * @return
+     */
+    List<ResourceDO> list();
+
+    /**
+     * 查找没有按钮级别的资源
+     * @return
+     */
+    List<ResourceDO> queryNoButtonResource();
 
 }

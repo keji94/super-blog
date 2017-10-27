@@ -142,4 +142,13 @@
         AND status = 0
     </select>
 
+    <select id="queryNoButtonResource" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from resource a
+        WHERE TYPE != 2
+        AND status = 0
+        order by order_num asc
+    </select>
+
 </mapper>

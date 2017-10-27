@@ -26,7 +26,7 @@ public class ResourceVO {
     /**
      * 资源名称
      */
-    private String resourceName;
+    private String name;
 
     /**
      * 资源路径
@@ -62,5 +62,10 @@ public class ResourceVO {
      * 子资源
      */
     private List<ResourceVO> subResource;
+
+    /**
+     * ZTREE属性
+     */
+    private Boolean open;
 
 }

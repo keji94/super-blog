@@ -6,8 +6,11 @@ $(function () {
             { label: '角色ID', name: 'id', index: "id", width: 45, key: true },
             { label: '角色名称', name: 'roleName', index: "role_name", width: 75 },
             { label: '角色编码', name: 'roleCode', index: "role_code", width: 75 },
-            { label: '备注', name: 'remark', width: 100 },
-            { label: '创建时间', name: 'createTime', index: "create_time", width: 80}
+            { label: '状态', name: 'status', width: 60, formatter: function(value, options, row){
+                return value === 1 ?
+                    '<span class="label label-danger">禁用</span>' :
+                    '<span class="label label-success">正常</span>';
+            }}
         ],
         viewrecords: true,
         height: 385,
@@ -19,14 +22,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "data",
+            page: "pageIndex",
+            total: "totalPage",
+            records: "totalCount"
         },
         prmNames : {
-            page:"page",
-            rows:"limit",
+            page:"pageIndex",
+            rows:"pageSize",
             order: "order"
         },
         gridComplete:function(){
@@ -56,22 +59,6 @@ var menu_setting = {
     }
 };
 
-//部门结构树
-var dept_ztree;
-var dept_setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "deptId",
-            pIdKey: "parentId",
-            rootPId: -1
-        },
-        key: {
-            url:"nourl"
-        }
-    }
-};
-
 //数据树
 var data_ztree;
 var data_setting = {
@@ -97,7 +84,7 @@ var vm = new Vue({
     el:'#rrapp',
     data:{
         q:{
-            roleName: null
+            name: null
         },
         showList: true,
         title:null,
