@@ -3,25 +3,22 @@ package com.keji.blog.controller.resource;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.pagehelper.PageInfo;
-import com.keji.blog.bo.ResourceBO;
 import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
-import com.keji.blog.result.PageResult;
 import com.keji.blog.service.resource.ResourceService;
 import com.keji.blog.util.ResourceConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
-import com.keji.blog.validator.group.QueryGroup;
-import com.keji.blog.vo.resource.ResourceQueryVO;
+import com.keji.blog.validator.group.AddGroup;
+import com.keji.blog.validator.group.UpdateGroup;
 import com.keji.blog.vo.resource.ResourceVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -87,15 +84,11 @@ public class ResourceController {
     @RequestMapping("/queryById")
     public BaseResult<ResourceVO> queryById(Long id) {
 
-        List<ResourceDO> resoureceById;
+        ResourceDO resourceDO;
         ResourceVO resourceVO;
         try {
-            resoureceById = resourceService.getResoureceById(Arrays.asList(id));
-            resourceVO = ResourceConvertUtil.convertDO2VO(resoureceById.get(0));
-            if (CollectionUtils.isEmpty(resoureceById)) {
-                throw new RuntimeException();
-            }
-
+            resourceDO = resourceService.queryById(id);
+            resourceVO = ResourceConvertUtil.convertDO2VO(resourceDO);
         } catch (Exception e) {
             logger.error("根据id查询资源失败,id:"+id,e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
@@ -106,10 +99,61 @@ public class ResourceController {
 
     @ResponseBody
     @RequestMapping("/save")
-    public BaseResult save(ResourceVO resourceVO) {
+    public BaseResult save(@RequestBody ResourceVO resourceVO) {
+
+        try {
+            ValidatorUtils.validateEntity(resourceVO, AddGroup.class);
+        } catch (BlogException e) {
+            return BaseResult.makeFail(e.getMsg());
+        }
+
+        try {
+            Integer count = resourceService.save(ResourceConvertUtil.convertVO2DO(resourceVO));
+        } catch (Exception e) {
+            logger.error("新增接口失败...",e);
+            return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
+        }
+
         return BaseResult.makeSuccess();
     }
 
+    @ResponseBody
+    @RequestMapping("/update")
+    public BaseResult update(@RequestBody ResourceVO resourceVO) {
+
+        try {
+            ValidatorUtils.validateEntity(resourceVO, UpdateGroup.class);
+        } catch (BlogException e) {
+            return BaseResult.makeFail(e.getMsg());
+        }
+
+        try {
+            Integer count = resourceService.update(ResourceConvertUtil.convertVO2DO(resourceVO));
+        } catch (Exception e) {
+            logger.error("新增接口失败...",e);
+            return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
+        }
+
+        return BaseResult.makeSuccess();
+    }
+
+    @ResponseBody
+    @RequestMapping("/delete")
+    public BaseResult delete(Long id) {
+
+        if (id == null) {
+            return BaseResult.makeFail(BaseErrorEnum.PARAM_ERROR);
+        }
+
+        try {
+            Integer count = resourceService.remove(id);
+        } catch (Exception e) {
+            logger.error("新增接口失败...",e);
+            return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
+        }
+
+        return BaseResult.makeSuccess();
+    }
 
 
 }

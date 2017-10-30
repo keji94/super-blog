@@ -16,19 +16,22 @@ public interface ResourceService {
 
     /**
      * 获取所有的资源,父资源包含子资源
+     *
      * @return
      */
     List<ResourceBO> getAllResource();
 
     /**
      * 根据roleCode获取资源
+     *
      * @param roleIds
      * @return
      */
-    List<ResourceDO> getResoureceById(List<Long> roleIds);
+    List<ResourceDO> getResoureceByRoleId(List<Long> roleIds);
 
     /**
      * 分页查询资源
+     *
      * @param resourceDO
      * @param pageIndex
      * @param pageSize
@@ -37,15 +40,49 @@ public interface ResourceService {
     PageInfo<ResourceDO> queryByPage(ResourceDO resourceDO, Integer pageIndex, Integer pageSize);
 
     /**
+     * 根据id查找资源
+     *
+     * @param id
+     * @return
+     */
+    ResourceDO queryById(Long id);
+
+    /**
      * 查询所有的资源，没有层级包含关系
+     *
      * @return
      */
     List<ResourceDO> list();
 
     /**
      * 查找没有按钮级别的资源
+     *
      * @return
      */
     List<ResourceDO> queryNoButtonResource();
+
+    /**
+     * 新增资源
+     *
+     * @param resourceDO
+     * @return
+     */
+    Integer save(ResourceDO resourceDO);
+
+    /**
+     * 更新资源
+     *
+     * @param resourceDO
+     * @return
+     */
+    Integer update(ResourceDO resourceDO);
+
+    /**
+     * 删除资源，同步删除其子资源
+     *
+     * @param id
+     * @return
+     */
+    Integer remove(Long id);
 
 }

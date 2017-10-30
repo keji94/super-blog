@@ -70,7 +70,7 @@ public class SystemMenuController {
 
         List<ResourceDO> resourceDOS = null;
         try {
-            resourceDOS = resourceService.getResoureceById(
+            resourceDOS = resourceService.getResoureceByRoleId(
                 roleDOS.stream().map(RoleDO::getId).collect(Collectors.toList()));
         } catch (Exception e) {
             logger.error("根据角色查询资源失败",e);

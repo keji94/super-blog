@@ -2,7 +2,12 @@ package com.keji.blog.vo.resource;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import com.keji.blog.validator.group.AddGroup;
+import com.keji.blog.validator.group.UpdateGroup;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @author: wb-ny291824
@@ -21,11 +26,13 @@ public class ResourceVO {
     /**
      * 父资源id
      */
+    @NotNull(message = "上级目录不能为空",groups = {AddGroup.class,UpdateGroup.class})
     private Long parentId;
 
     /**
      * 资源名称
      */
+    @NotBlank(message = "资源名称不能为空", groups = {AddGroup.class, UpdateGroup.class})
     private String name;
 
     /**

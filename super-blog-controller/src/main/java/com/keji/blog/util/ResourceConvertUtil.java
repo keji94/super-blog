@@ -64,4 +64,17 @@ public class ResourceConvertUtil {
 
     }
 
+    public static ResourceDO convertVO2DO(ResourceVO resourceVO) {
+        ResourceDO resourceDO = new ResourceDO();
+        resourceDO.setId(resourceVO.getId());
+        resourceDO.setResourceName(resourceVO.getName());
+        resourceDO.setIcon(resourceVO.getIcon());
+        resourceDO.setParentId(resourceVO.getParentId());
+        resourceDO.setOrderNum(resourceVO.getOrderNum());
+        resourceDO.setPermission(resourceVO.getPermission());
+        resourceDO.setResourceUrl(resourceVO.getResourceUrl());
+        resourceDO.setType(resourceVO.getType());
+        return resourceDO;
+    }
+
 }

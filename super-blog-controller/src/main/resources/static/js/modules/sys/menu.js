@@ -64,10 +64,10 @@ var vm = new Vue({
             confirm('确定要删除选中的记录？', function(){
                 $.ajax({
                     type: "POST",
-                    url: baseURL + "sys/menu/delete",
+                    url: baseURL + "resource/delete",
                     data: "id=" + id,
                     success: function(r){
-                        if(r.code === 0){
+                        if(r.success){
                             alert('操作成功', function(){
                                 vm.reload();
                             });
@@ -132,7 +132,7 @@ var vm = new Vue({
             }
 
             //菜单
-            if(vm.menu.type === 1 && isBlank(vm.menu.url)){
+            if(vm.menu.type === 1 && isBlank(vm.menu.resourceUrl)){
                 alert("菜单URL不能为空");
                 return true;
             }

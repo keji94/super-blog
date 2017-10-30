@@ -39,8 +39,8 @@
             resource_url,permission,type,icon,order_num,status, gmt_created,
             gmt_modified)
         values (
-            #{id,jdbcType=BIGINT},#{parent_id,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR},
-            #{resourceUrl,jdbcType=VARCHAR},#{permission,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{icon,jdbcType=VARCHAR},#{orderNum,jdbcType=TINYINT},#{status,jdbcType=TINYINT}, now(),now())
+            #{id,jdbcType=BIGINT},#{parentId,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR},
+            #{resourceUrl,jdbcType=VARCHAR},#{permission,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{icon,jdbcType=VARCHAR},#{orderNum,jdbcType=TINYINT},0, now(),now())
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
@@ -66,8 +66,8 @@
             <if test="type != null" >
                 type = #{type,jdbcType=TINYINT},
             </if>
-            <if test="order_num != null" >
-                order_num = #{order_num,jdbcType=TINYINT},
+            <if test="orderNum != null" >
+                order_num = #{orderNum,jdbcType=TINYINT},
             </if>
             <if test="status != null" >
                 status = #{status,jdbcType=TINYINT},
