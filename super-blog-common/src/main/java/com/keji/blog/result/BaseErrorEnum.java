@@ -15,7 +15,7 @@ public enum BaseErrorEnum {
     PARAM_ERROR("400", "参数错误"),
 
     /** 参数校验失败 */
-    VALIDATE_PARAM_ERROR("401", "参数校验失败"),
+    VALIDATE_PARAM_ERROR("401", "参数校验发生异常"),
 
     /** 权限不足 */
     FORBIDDEN("403","权限不足") ;

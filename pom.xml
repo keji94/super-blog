@@ -41,6 +41,7 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <google-guava.version>22.0</google-guava.version>
         <commons.lang.version>2.6</commons.lang.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
     </properties>
 
     <dependencyManagement>
@@ -190,6 +191,12 @@
                 <artifactId>commons-lang</artifactId>
                 <version>${commons.lang.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

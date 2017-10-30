@@ -102,7 +102,7 @@ public class AdminUserController {
 
     @ResponseBody
     @RequestMapping("/queryalluser")
-    public PageResult<List<UserDO>> queryAllUser(@Valid UserQueryVO userQueryVO, BindingResult bindingResult) {
+    public PageResult<List<UserVO>> queryAllUser(@Valid UserQueryVO userQueryVO, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             logger.warn("参数校验不通过，错误信息：" + bindingResult);
@@ -110,14 +110,16 @@ public class AdminUserController {
         }
 
         PageInfo<UserDO> pageInfo = null;
+        List<UserVO> userVOS;
         try {
             pageInfo = userService.queryUserByPage(UserConvertUtil.userQueryVO2DO(userQueryVO), userQueryVO.getPageIndex(), userQueryVO.getPageSize());
+            userVOS = UserConvertUtil.userDOS2VOS(pageInfo.getList());
         } catch (Exception e) {
             logger.error("查询用户失败,参数：" + userQueryVO);
             return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 
-        return PageResult.makeSuccess(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
+        return PageResult.makeSuccess(userVOS, pageInfo.getTotal(), pageInfo.getPages());
     }
 
     @ResponseBody
