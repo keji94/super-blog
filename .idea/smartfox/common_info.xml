@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SmartFoxWorkToolsProjectState">
-    <option name="branch" value="role" />
+    <option name="branch" value="requirement" />
     <option name="gitUrl" value="https://github.com/keji94/super-blog.git" />
-    <option name="localBranch" value="role" />
-    <option name="revision" value="f463fb3068373b48337c56336c93759d0e14ea67" />
+    <option name="localBranch" value="requirement" />
+    <option name="revision" value="c8a05647c5d0acf35f19f8bc965516af30439329" />
   </component>
 </project>
