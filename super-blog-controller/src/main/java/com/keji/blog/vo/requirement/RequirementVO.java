@@ -2,7 +2,11 @@ package com.keji.blog.vo.requirement;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.keji.blog.validator.group.AddGroup;
+import com.keji.blog.validator.group.UpdateGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,12 +23,13 @@ public class RequirementVO {
     /**
      * 主键
      */
+    @NotNull(message = "更新时Id不能为空",groups = UpdateGroup.class)
     private Long id;
 
     /**
      * 需求标题
      */
-    @NotBlank(message = "需求标题不能为空")
+    @NotBlank(message = "需求标题不能为空",groups = {UpdateGroup.class, AddGroup.class})
     private String title;
 
     /**

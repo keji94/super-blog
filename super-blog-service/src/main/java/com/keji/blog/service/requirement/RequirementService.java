@@ -1,10 +1,8 @@
 package com.keji.blog.service.requirement;
 
-import java.util.List;
-
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dataobject.RequirementDO;
-import com.keji.blog.result.PageResult;
+
 
 /**
  * @author: wb-ny291824
@@ -16,6 +14,7 @@ public interface RequirementService {
 
     /**
      * 查询所有需求
+     *
      * @param requirementDO
      * @param pageIndex
      * @param pageSize
@@ -25,6 +24,7 @@ public interface RequirementService {
 
     /**
      * 新增需求
+     *
      * @param requirementDO
      * @return
      */
@@ -32,9 +32,26 @@ public interface RequirementService {
 
     /**
      * 更新需求
+     *
      * @param requirementDO
      * @return
      */
     Integer update(RequirementDO requirementDO);
+
+    /**
+     * 删除需求
+     *
+     * @param ids
+     * @return
+     */
+    Integer delete(Long[] ids);
+
+    /**
+     * 根据id查找需求
+     *
+     * @param id
+     * @return
+     */
+    RequirementDO queryById(Long id);
 
 }

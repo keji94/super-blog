@@ -6,10 +6,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dao.RequirementDAO;
 import com.keji.blog.dataobject.RequirementDO;
-import com.keji.blog.result.PageResult;
 import com.keji.blog.service.requirement.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author: wb-ny291824
@@ -38,7 +38,24 @@ public class RequirementServiceImpl implements RequirementService {
 
     @Override
     public Integer update(RequirementDO requirementDO) {
-
         return requirementDAO.updateByPrimaryKeySelective(requirementDO);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Integer delete(Long[] ids) {
+
+        Integer count = 0;
+        for (Long id : ids) {
+            count = requirementDAO.deleteByPrimaryKey(id);
+            count++;
+        }
+
+        return count;
+    }
+
+    @Override
+    public RequirementDO queryById(Long id) {
+        return requirementDAO.selectByPrimaryKey(id);
     }
 }

@@ -40,7 +40,7 @@
                 summary = #{summary,jdbcType=VARCHAR},
             </if>
             <if test="status != null" >
-                status = #{userStatus,jdbcType=TINYINT},
+                status = #{status,jdbcType=TINYINT},
             </if>
                 gmt_modified = now()
         </set>
@@ -64,6 +64,12 @@
         select
         <include refid="Base_Column_List" />
         from requirement
+        <where>
+            <if test="title != null">
+                AND title LIKE CONCAT(CONCAT('%', #{title}), '%')
+            </if>
+
+        </where>
     </select>
 
     <select id="totalCount" resultType="java.lang.Integer" >

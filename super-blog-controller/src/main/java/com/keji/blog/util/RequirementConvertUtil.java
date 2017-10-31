@@ -16,10 +16,12 @@ import com.keji.blog.vo.requirement.RequirementVO;
  */
 public class RequirementConvertUtil {
 
-    private RequirementConvertUtil (){}
+    private RequirementConvertUtil() {
+    }
 
     public static RequirementDO convertVO2DO(RequirementVO requirementVO) {
         RequirementDO requirementDO = new RequirementDO();
+        requirementDO.setId(requirementVO.getId());
         requirementDO.setContent(requirementVO.getContent());
         requirementDO.setStatus(requirementVO.getStatus());
         requirementDO.setSummary(requirementVO.getSummary());
@@ -51,5 +53,20 @@ public class RequirementConvertUtil {
             listVO.add(requirementVO);
         });
         return listVO;
+    }
+
+    public static RequirementVO convertDO2VO(RequirementDO requirementDO) {
+
+        RequirementVO requirementVO = new RequirementVO();
+
+        requirementVO.setGmtModified(requirementDO.getGmtModified());
+        requirementVO.setGmtCreated(requirementDO.getGmtCreated());
+        requirementVO.setTitle(requirementDO.getTitle());
+        requirementVO.setSummary(requirementDO.getSummary());
+        requirementVO.setId(requirementDO.getId());
+        requirementVO.setStatus(requirementDO.getStatus());
+        requirementVO.setContent(requirementDO.getContent());
+        return requirementVO;
+
     }
 }

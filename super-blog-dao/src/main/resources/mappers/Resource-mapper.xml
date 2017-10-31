@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.ResourceDO" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <id column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR" />
         <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
         <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
         <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
@@ -18,6 +19,7 @@
     <resultMap id="ResourceBOResultMap" type="com.keji.blog.bo.ResourceBO" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <id column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR" />
         <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
         <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
         <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
@@ -30,16 +32,16 @@
 
 
     <sql id="Base_Column_List" >
-        id,parent_id,resource_name,resource_url,permission,type,icon,order_num,status,gmt_created,gmt_modified
+        id,parent_id,parent_name,resource_name,resource_url,permission,type,icon,order_num,status,gmt_created,gmt_modified
     </sql>
 
     <insert id="insert" parameterType="com.keji.blog.dataobject.ResourceDO" >
         insert into resource (
-            id,parent_id,resource_name,
+            id,parent_id,parent_name,resource_name,
             resource_url,permission,type,icon,order_num,status, gmt_created,
             gmt_modified)
         values (
-            #{id,jdbcType=BIGINT},#{parentId,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR},
+            #{id,jdbcType=BIGINT},#{parentId,jdbcType=BIGINT},#{parentName,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR},
             #{resourceUrl,jdbcType=VARCHAR},#{permission,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{icon,jdbcType=VARCHAR},#{orderNum,jdbcType=TINYINT},0, now(),now())
     </insert>
 
@@ -65,6 +67,9 @@
             </if>
             <if test="type != null" >
                 type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="parentId != null" >
+                parent_id = #{parentId,jdbcType=TINYINT},
             </if>
             <if test="orderNum != null" >
                 order_num = #{orderNum,jdbcType=TINYINT},

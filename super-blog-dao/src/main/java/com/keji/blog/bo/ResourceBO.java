@@ -23,6 +23,11 @@ public class ResourceBO {
     private Long parentId;
 
     /**
+     * 父资源名称
+     */
+    private String parentName;
+
+    /**
      * 资源名称
      */
     private String resourceName;

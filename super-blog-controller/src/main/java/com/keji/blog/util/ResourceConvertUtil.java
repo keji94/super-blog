@@ -29,6 +29,7 @@ public class ResourceConvertUtil {
             resourceVO.setIcon(resourceDO.getIcon());
             resourceVO.setOrderNum(resourceDO.getOrderNum());
             resourceVO.setParentId(resourceDO.getParentId());
+            resourceVO.setParentName(resourceDO.getParentName());
             resourceVO.setPermission(resourceDO.getPermission());
             resourceVO.setName(resourceDO.getResourceName());
             resourceVO.setResourceUrl(resourceDO.getResourceUrl());
@@ -54,6 +55,7 @@ public class ResourceConvertUtil {
         resourceVO.setIcon(resourceDO.getIcon());
         resourceVO.setOrderNum(resourceDO.getOrderNum());
         resourceVO.setParentId(resourceDO.getParentId());
+        resourceVO.setParentName(resourceDO.getParentName());
         resourceVO.setPermission(resourceDO.getPermission());
         resourceVO.setName(resourceDO.getResourceName());
         resourceVO.setResourceUrl(resourceDO.getResourceUrl());
@@ -70,6 +72,7 @@ public class ResourceConvertUtil {
         resourceDO.setResourceName(resourceVO.getName());
         resourceDO.setIcon(resourceVO.getIcon());
         resourceDO.setParentId(resourceVO.getParentId());
+        resourceDO.setParentName(resourceVO.getParentName());
         resourceDO.setOrderNum(resourceVO.getOrderNum());
         resourceDO.setPermission(resourceVO.getPermission());
         resourceDO.setResourceUrl(resourceVO.getResourceUrl());

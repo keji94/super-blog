@@ -29,6 +29,12 @@ public class ResourceVO {
     @NotNull(message = "上级目录不能为空",groups = {AddGroup.class,UpdateGroup.class})
     private Long parentId;
 
+
+    /**
+     * 父资源名称
+     */
+    private String parentName;
+
     /**
      * 资源名称
      */
