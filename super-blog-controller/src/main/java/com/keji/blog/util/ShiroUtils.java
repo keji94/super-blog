@@ -16,13 +16,13 @@ import org.apache.shiro.subject.Subject;
 public class ShiroUtils {
 
 	/**  加密算法 */
-	public final static String hashAlgorithmName = "SHA-256";
+	public final static String HASH_ALGORITHM_NAME = "SHA-256";
 
 	/**  循环次数 */
-	public final static int hashIterations = 16;
+	public final static int HASH_ITERATIONS = 16;
 
 	public static String sha256(String password, String salt) {
-		return new SimpleHash(hashAlgorithmName, password, salt, hashIterations).toString();
+		return new SimpleHash(HASH_ALGORITHM_NAME, password, salt, HASH_ITERATIONS).toString();
 	}
 
 	public static Session getSession() {

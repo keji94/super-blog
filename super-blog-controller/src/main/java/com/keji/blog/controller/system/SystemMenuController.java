@@ -36,6 +36,8 @@ public class SystemMenuController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private static final String ADMIN = "admin";
+
     @Autowired
     private ResourceService resourceService;
     @Autowired
@@ -53,27 +55,29 @@ public class SystemMenuController {
 
         ArrayList<ResourceVO> resourceVOS = Lists.newArrayList();
 
-        if (subject.hasRole("admin")) {
+        if (subject.hasRole(ADMIN)) {
 
             List<ResourceBO> resourceBOS = null;
             try {
                 resourceBOS = resourceService.getAllResource();
             } catch (Exception e) {
-                logger.error("查询所有资源失败",e);
+                logger.error("查询所有资源失败", e);
                 return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
             }
+            //先直接返回BO对象了，懒得做转换，心情好了转换，要和下面的统一
             return BaseResult.makeSuccess(resourceBOS);
         }
-       UserDO userDO = (UserDO)subject.getPrincipal();
+        UserDO userDO = (UserDO)subject.getPrincipal();
 
         List<RoleDO> roleDOS = roleService.findRoleByUserId(userDO.getId());
 
+        //下方的逻辑暂时不可用，目前都是用admin的账号来登录的，啥时候心情好了再来修复这个。
         List<ResourceDO> resourceDOS = null;
         try {
             resourceDOS = resourceService.getResoureceByRoleIds(
-                roleDOS.stream().map(RoleDO::getId).collect(Collectors.toList()));
+                    roleDOS.stream().map(RoleDO::getId).collect(Collectors.toList()));
         } catch (Exception e) {
-            logger.error("根据角色查询资源失败",e);
+            logger.error("根据角色查询资源失败", e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 

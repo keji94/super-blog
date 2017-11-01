@@ -1,19 +1,18 @@
 package com.keji.blog.dao;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/19
- * @modified: By:
+ * 基础的DAO类，里面是一些共有的方法
+ *
+ * @author wb-ny291824
+ * @version $Id: BaseDAO.java, v 0.1 2017/11/1 14:11 wb-ny291824 Exp $
  */
-public interface BaseDAO<T,Q> {
+public interface BaseDAO<T, Q> {
 
     /**
      * 增加(所有属性)
+     *
      * @param record
      * @return
      */
@@ -21,12 +20,15 @@ public interface BaseDAO<T,Q> {
 
     /**
      * 增加(不为空的属性 )
+     *
      * @param record
+     * @return
      */
     int insertSelective(T record);
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */
@@ -34,18 +36,23 @@ public interface BaseDAO<T,Q> {
 
     /**
      * 根据属性查询
+     *
      * @param record
+     * @return
      */
     T selectSelective(Q record);
 
     /**
      * 查询所有记录，带分页
+     *
      * @param record
+     * @return
      */
     List<T> selectByCondition(Q record);
 
     /**
      * 根据id更新不为空的字段
+     *
      * @param record
      * @return
      */
@@ -53,6 +60,7 @@ public interface BaseDAO<T,Q> {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */

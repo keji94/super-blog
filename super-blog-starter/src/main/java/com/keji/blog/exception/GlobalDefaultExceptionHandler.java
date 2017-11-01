@@ -26,7 +26,7 @@ public class GlobalDefaultExceptionHandler {
           ModelAndView mav = new ModelAndView();
           mav.addObject("exception", e);
           mav.addObject("url", req.getRequestURL());
-          mav.setViewName("admin/404");
+          mav.setViewName("404");
           //TODO 发送邮件
           logger.error("exception occured...url:"+req.getRequestURI(),e);
           return mav;

@@ -59,7 +59,7 @@ public class ResourceController {
     @RequestMapping("/queryNoButtonResource")
     public BaseResult<List<ResourceVO>> queryNoButtonResource() {
 
-        List<ResourceDO> resourceDOS ;
+        List<ResourceDO> resourceDOS;
         List<ResourceVO> resourceVOS;
         try {
             resourceDOS = resourceService.queryNoButtonResource();
@@ -72,7 +72,7 @@ public class ResourceController {
             resourceDOS.add(root);
             resourceVOS = ResourceConvertUtil.convertDOS2VOS(resourceDOS);
         } catch (Exception e) {
-            logger.error("queryNoButtonResource 发生异常",e);
+            logger.error("queryNoButtonResource 发生异常", e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 
@@ -90,7 +90,7 @@ public class ResourceController {
             resourceDO = resourceService.queryById(id);
             resourceVO = ResourceConvertUtil.convertDO2VO(resourceDO);
         } catch (Exception e) {
-            logger.error("根据id查询资源失败,id:"+id,e);
+            logger.error("根据id查询资源失败,id:" + id, e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 
@@ -110,7 +110,7 @@ public class ResourceController {
         try {
             Integer count = resourceService.save(ResourceConvertUtil.convertVO2DO(resourceVO));
         } catch (Exception e) {
-            logger.error("新增接口失败...",e);
+            logger.error("新增接口失败...", e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 
@@ -130,7 +130,7 @@ public class ResourceController {
         try {
             Integer count = resourceService.update(ResourceConvertUtil.convertVO2DO(resourceVO));
         } catch (Exception e) {
-            logger.error("新增接口失败...",e);
+            logger.error("更新接口失败...", e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 
@@ -148,12 +148,11 @@ public class ResourceController {
         try {
             Integer count = resourceService.remove(id);
         } catch (Exception e) {
-            logger.error("新增接口失败...",e);
+            logger.error("删除接口失败...", e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 
         return BaseResult.makeSuccess();
     }
-
 
 }

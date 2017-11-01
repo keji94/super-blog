@@ -16,7 +16,6 @@ import com.keji.blog.util.RoleConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.QueryGroup;
-import com.keji.blog.vo.BaseQueryVO;
 import com.keji.blog.vo.role.RoleQueryVO;
 import com.keji.blog.vo.role.RoleVO;
 import org.apache.commons.lang.StringUtils;
@@ -157,12 +156,12 @@ public class RoleController {
     @ResponseBody
     @RequestMapping("/delete")
     public BaseResult delete(@RequestBody Long[] roleIds) {
-        if (roleIds == null || roleIds.length<=0) {
+        if (roleIds == null || roleIds.length <= 0) {
             return BaseResult.makeFail(BaseErrorEnum.PARAM_ERROR);
         }
 
         try {
-             roleService.delete(roleIds);
+            roleService.delete(roleIds);
         } catch (Exception e) {
             logger.error("删除角色失败，id：" + roleIds, e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);

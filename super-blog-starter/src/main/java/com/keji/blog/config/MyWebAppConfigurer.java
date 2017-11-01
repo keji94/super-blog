@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @author: wb-ny291824
- * @description   spring拦截规则配置. 由于引入了shiro,这里的拦截器暂时不使用了，如果需要使用，将addInterceptors上的注解放开即可
+ * @description spring拦截规则配置. 由于引入了shiro,这里的拦截器暂时不使用了，如果需要使用，将addInterceptors上的注解放开即可
  * @date: Created in 2017/9/19
  * @modified: By:
  */
@@ -25,10 +25,16 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter implements Appli
 
     private ApplicationContext applicationContext;
 
+    /**
+     * 定义静态资源和模板的位置
+     *
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");
-        registry.addResourceHandler("/templates/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/templates/");
+        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
+        registry.addResourceHandler("/templates/**").addResourceLocations(
+                ResourceUtils.CLASSPATH_URL_PREFIX + "/templates/");
         super.addResourceHandlers(registry);
     }
 
@@ -38,15 +44,16 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter implements Appli
     }
 
     /**
-     *       多个拦截器组成一个拦截器链
-             addPathPatterns 用于添加拦截规则
-             excludePathPatterns 用户排除拦截
+     * 多个拦截器组成一个拦截器链
+     * addPathPatterns 用于添加拦截规则
+     * excludePathPatterns 用户排除拦截
+     *
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截规则：除了login，其他都拦截判断
-//        registry.addInterceptor(new BlogInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/login","/index","/login");
+        //        registry.addInterceptor(new BlogInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/login","/index","/login");
         super.addInterceptors(registry);
     }
 }

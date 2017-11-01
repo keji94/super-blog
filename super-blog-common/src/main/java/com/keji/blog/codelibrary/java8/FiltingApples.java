@@ -38,7 +38,7 @@ public class FiltingApples {
 //        System.out.println(redApples2);
 
         /**
-         *  TODO 不清楚原理
+         *  不清楚原理
          */
         List<Apple> temp = filter(inventory, (Apple apple) -> "red".equals(apple.getColor()));
         System.out.println(temp);

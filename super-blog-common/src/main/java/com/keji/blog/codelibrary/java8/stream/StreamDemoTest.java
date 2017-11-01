@@ -62,8 +62,10 @@ public class StreamDemoTest {
     @Test
     public void demo3() {
         long count = MENU.stream()
-                .filter(dish -> dish.getCalories() > 300)    //中间操作
-                .count();                                   //终端操作
+                //中间操作
+                .filter(dish -> dish.getCalories() > 300)
+                //终端操作
+                .count();
         System.out.println(count);
     }
 
@@ -232,7 +234,6 @@ public class StreamDemoTest {
     public void demo16() {
         List<Integer> someNumbers = Arrays.asList(1, 2, 3, 4, 5);
         Optional<Integer> reduce = someNumbers.stream()
-//                .reduce(Integer::max);
                 .reduce(Integer::min);
         reduce.ifPresent(i-> System.out.println(i));
     }

@@ -3,6 +3,7 @@ package com.keji.blog.config;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import com.keji.blog.shiro.ShiroTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +23,15 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 public class FreemarkerConfig {
     @Autowired
     protected freemarker.template.Configuration configuration;
+
+    /**
+     * 自定义Shiro标签
+     *
+     * @param shiroTag
+     * @return
+     */
     @Bean
-    public FreeMarkerConfigurer freeMarkerConfigurer(ShiroTag shiroTag){
+    public FreeMarkerConfigurer freeMarkerConfigurer(ShiroTag shiroTag) {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
         configurer.setTemplateLoaderPath("classpath:/templates/");
 

@@ -1,7 +1,6 @@
 package com.keji.blog.controller.admin;
 
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.RoleDO;
@@ -22,6 +21,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,8 +53,8 @@ public class AdminUserController {
 
     private static final String PHONE = "手机";
     private static final String DUPLICATE_OF_PHONE = "手机号被占用";
-    private static final String EMAIl  = "邮箱";
-    private static final String DUPLICATE_OF_EMAIl  = "邮箱被占用";
+    private static final String EMAIL = "邮箱";
+    private static final String DUPLICATE_OF_EMAIL = "邮箱被占用";
 
 
     @Autowired
@@ -159,6 +159,7 @@ public class AdminUserController {
 
     @ResponseBody
     @RequestMapping("/save")
+    @RequiresPermissions("sys:user:save")
     public BaseResult save(@RequestBody UserVO userVO) {
 
         try {
@@ -241,7 +242,7 @@ public class AdminUserController {
             map.put(PHONE,userVO.getPhone());
         }
         if (userVO.getEmail() != null) {
-            map.put(EMAIl, userVO.getEmail());
+            map.put(EMAIL, userVO.getEmail());
         }
 
         if (userVO.getId() != null) {
@@ -256,7 +257,7 @@ public class AdminUserController {
                 message = DUPLICATE_OF_PHONE;
                 userDO.setPhone(userVO.getPhone());
             }else {
-                message = DUPLICATE_OF_EMAIl;
+                message = DUPLICATE_OF_EMAIL;
                 userDO.setEmail(userVO.getEmail());
             }
             List<UserDO> userDOS = userService.selectUserByCondition(userDO);

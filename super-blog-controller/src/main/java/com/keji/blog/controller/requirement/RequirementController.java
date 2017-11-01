@@ -49,8 +49,8 @@ public class RequirementController {
             return PageResult.makeFail(e.getMsg());
         }
 
-        PageInfo<RequirementDO> pageInfo ;
-        List<RequirementVO> pageResultVO ;
+        PageInfo<RequirementDO> pageInfo;
+        List<RequirementVO> pageResultVO;
         try {
             pageInfo = requirementService.query(RequirementConvertUtil.convertQueryVO2DO(queryVO),
                     queryVO.getPageIndex(), queryVO.getPageSize());
@@ -62,7 +62,6 @@ public class RequirementController {
         return PageResult.makeSuccess(pageResultVO, pageInfo.getTotal());
 
     }
-
 
     @ResponseBody
     @RequestMapping("/queryById")
@@ -84,7 +83,6 @@ public class RequirementController {
         return BaseResult.makeSuccess(requirementVO);
 
     }
-
 
     @ResponseBody
     @RequestMapping("/save")

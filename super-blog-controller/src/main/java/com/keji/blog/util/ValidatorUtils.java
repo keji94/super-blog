@@ -32,7 +32,9 @@ public class ValidatorUtils {
      * @throws BlogException 校验不通过，BlogException
      */
     public static void validateEntity(Object object, Class<?>... groups) throws BlogException {
+
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
+
         if (!constraintViolations.isEmpty()) {
             ConstraintViolation<Object> constraint = (ConstraintViolation<Object>)constraintViolations.iterator()
                     .next();

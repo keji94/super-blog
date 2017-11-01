@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/23
- * @modified: By:
+ * 注解进行参数校验的配置
+ *
+ * @author wb-ny291824
+ * @version $Id: ValidatorConfiguration.java, v 0.1 2017/10/31 11:24 wb-ny291824 Exp $
  */
 @Configuration
 public class ValidatorConfiguration {

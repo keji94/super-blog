@@ -56,27 +56,22 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean shiroFilterFactoryBean  = new ShiroFilterFactoryBean();
         //必须设置securityManager
         shiroFilterFactoryBean.setSecurityManager(getDefaultWebSecurityManager());
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+        // 如果不设置默认会自动寻找Web工程根目录下的"/login.html"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
-        // 登录成功后要跳转的链接
-//        shiroFilterFactoryBean.setSuccessUrl("/admin/index");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/login");
-
-        //拦截器.
+        shiroFilterFactoryBean.setUnauthorizedUrl("/");
+        //拦截器链.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         //配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        //TODO 退出登录待验证
-//        filterChainDefinitionMap.put("/logout", "logout");
         //<!-- authc:必须认证通过才可以访问; anon:可以匿名访问;perms["name"]:需要名为name权限的过滤器-->
-//        filterChainDefinitionMap.put("/**", "authc");   //所有的资源都需要认证
-        filterChainDefinitionMap.put("/admin/*", "user");
-        filterChainDefinitionMap.put("/index", "authc");
-        filterChainDefinitionMap.put("/admin/login", "anon");
+        filterChainDefinitionMap.put("/adminuser/login", "anon");
+        filterChainDefinitionMap.put("/getCaptcha", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/", "authc");
+        filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/vue", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
         //配置记住我或认证通过可以访问的地址
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

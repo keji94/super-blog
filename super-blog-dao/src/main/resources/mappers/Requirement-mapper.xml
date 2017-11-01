@@ -18,7 +18,7 @@
     <insert id="insert" parameterType="com.keji.blog.dataobject.RequirementDO" >
         insert into requirement (title,content,summary,status,gmt_created,gmt_modified)
         values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
-        #{summary,jdbcType=VARCHAR},0, now(),now())
+        #{summary,jdbcType=VARCHAR},#{status,jdbcType=TINYINT}, now(),now())
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
