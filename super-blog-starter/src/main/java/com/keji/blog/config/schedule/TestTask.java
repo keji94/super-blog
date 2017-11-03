@@ -20,4 +20,8 @@ public class TestTask {
     public void test() {
         logger.info("时间任务执行了...");
     }
+
+    public void test2() {
+        logger.info("test2 is running......................");
+    }
 }

@@ -1,10 +1,15 @@
 package com.keji.blog.util.schedule;
 
 import java.util.Date;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
+import java.util.concurrent.TimeUnit;
+
+import com.alibaba.druid.util.DaemonThreadFactory;
 
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.ScheduleJobDO;
@@ -26,8 +31,14 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
  * @date 2016年11月30日 下午12:44:21
  */
 public class ScheduleJob extends QuartzJobBean {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
-    private ExecutorService service = Executors.newSingleThreadExecutor();
+
+    /**
+     *  线程池:初始线程5,最大线程10，最大阻塞线程10,线程工厂使用德鲁伊,线程数量爆炸由AbortPolicy处理
+     */
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 10, TimeUnit.MINUTES,
+            new ArrayBlockingQueue<Runnable>(10), new DaemonThreadFactory("myThreadFactory"), new AbortPolicy());
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
@@ -55,9 +66,8 @@ public class ScheduleJob extends QuartzJobBean {
             }
             ScheduleRunnable task = new ScheduleRunnable(scheduleJob.getBeanName(), scheduleJob.getMethodName(),
                     scheduleJob.getParams());
-            Future<?> future = service.submit(task);
 
-            future.get();
+            executor.execute(task);
 
             //任务执行总时长
             long times = System.currentTimeMillis() - startTime;
