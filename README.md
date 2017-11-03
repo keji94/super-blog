@@ -6,7 +6,7 @@
 - 修改super-blog-dao工程 中db.properties，更新MySQL账号和密码
 - Eclipse、IDEA运行Application.java，则可启动项目
 - 项目访问路径：http://localhost:8080/
-- 登录账号密码：admin/admin
+- 登录账号密码：admin@qq.com/admin
 
 <br>
 
