@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-01 17:32:56
+Date: 2017-11-03 17:43:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -155,6 +155,249 @@ INSERT INTO `picture` VALUES ('4', '首页图片轮播4', '/images/004.jpg', '0'
 INSERT INTO `picture` VALUES ('5', '首页图片轮播5', '/images/005.jpg', '0', '1', '1', '2017-08-07 15:19:52', '2017-08-07 15:19:58');
 
 -- ----------------------------
+-- Table structure for qrtz_blob_triggers
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+CREATE TABLE `qrtz_blob_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `BLOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_blob_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_calendars
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_calendars`;
+CREATE TABLE `qrtz_calendars` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `CALENDAR_NAME` varchar(200) NOT NULL,
+  `CALENDAR` blob NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_calendars
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_cron_triggers
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+CREATE TABLE `qrtz_cron_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `CRON_EXPRESSION` varchar(120) NOT NULL,
+  `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_cron_triggers
+-- ----------------------------
+INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', '0/5 * * * * ? ', 'Asia/Shanghai');
+
+-- ----------------------------
+-- Table structure for qrtz_fired_triggers
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+CREATE TABLE `qrtz_fired_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `ENTRY_ID` varchar(95) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `FIRED_TIME` bigint(13) NOT NULL,
+  `SCHED_TIME` bigint(13) NOT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `STATE` varchar(16) NOT NULL,
+  `JOB_NAME` varchar(200) DEFAULT NULL,
+  `JOB_GROUP` varchar(200) DEFAULT NULL,
+  `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
+  `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`),
+  KEY `IDX_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`),
+  KEY `IDX_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_fired_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_job_details
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_job_details`;
+CREATE TABLE `qrtz_job_details` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `JOB_CLASS_NAME` varchar(250) NOT NULL,
+  `IS_DURABLE` varchar(1) NOT NULL,
+  `IS_NONCONCURRENT` varchar(1) NOT NULL,
+  `IS_UPDATE_DATA` varchar(1) NOT NULL,
+  `REQUESTS_RECOVERY` varchar(1) NOT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_job_details
+-- ----------------------------
+INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', null, 'com.keji.blog.util.schedule.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720026636F6D2E6B656A692E626C6F672E646174616F626A6563742E5363686564756C654A6F62444F26F5E3308839E4500200094C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000A676D74437265617465647400104C6A6176612F7574696C2F446174653B4C000B676D744D6F64696669656471007E000A4C000269647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B74000E302F35202A202A202A202A203F2070707372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000004740004746573747070737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0011000000007800);
+
+-- ----------------------------
+-- Table structure for qrtz_locks
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_locks`;
+CREATE TABLE `qrtz_locks` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `LOCK_NAME` varchar(40) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_locks
+-- ----------------------------
+INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'STATE_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'TRIGGER_ACCESS');
+
+-- ----------------------------
+-- Table structure for qrtz_paused_trigger_grps
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+CREATE TABLE `qrtz_paused_trigger_grps` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_paused_trigger_grps
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_scheduler_state
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+CREATE TABLE `qrtz_scheduler_state` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
+  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_scheduler_state
+-- ----------------------------
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31509694809902', '1509702194384', '15000');
+
+-- ----------------------------
+-- Table structure for qrtz_simple_triggers
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+CREATE TABLE `qrtz_simple_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `REPEAT_COUNT` bigint(7) NOT NULL,
+  `REPEAT_INTERVAL` bigint(12) NOT NULL,
+  `TIMES_TRIGGERED` bigint(10) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_simple_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_simprop_triggers
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+CREATE TABLE `qrtz_simprop_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `STR_PROP_1` varchar(512) DEFAULT NULL,
+  `STR_PROP_2` varchar(512) DEFAULT NULL,
+  `STR_PROP_3` varchar(512) DEFAULT NULL,
+  `INT_PROP_1` int(11) DEFAULT NULL,
+  `INT_PROP_2` int(11) DEFAULT NULL,
+  `LONG_PROP_1` bigint(20) DEFAULT NULL,
+  `LONG_PROP_2` bigint(20) DEFAULT NULL,
+  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
+  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
+  `BOOL_PROP_1` varchar(1) DEFAULT NULL,
+  `BOOL_PROP_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_simprop_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_triggers
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_triggers`;
+CREATE TABLE `qrtz_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `TRIGGER_STATE` varchar(16) NOT NULL,
+  `TRIGGER_TYPE` varchar(8) NOT NULL,
+  `START_TIME` bigint(13) NOT NULL,
+  `END_TIME` bigint(13) DEFAULT NULL,
+  `CALENDAR_NAME` varchar(200) DEFAULT NULL,
+  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`),
+  KEY `IDX_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qrtz_triggers
+-- ----------------------------
+INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', 'TASK_4', 'DEFAULT', null, '1509695735000', '1509695730000', '5', 'PAUSED', 'CRON', '1509694754000', '0', null, '2', '');
+
+-- ----------------------------
 -- Table structure for requirement
 -- ----------------------------
 DROP TABLE IF EXISTS `requirement`;
@@ -167,13 +410,14 @@ CREATE TABLE `requirement` (
   `gmt_created` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of requirement
 -- ----------------------------
-INSERT INTO `requirement` VALUES ('6', 'CodeReview', '前面完成了权限管理以及需求管理，可以先review一下代码', null, '1', '2017-10-31 10:20:43', '2017-10-31 10:21:11');
-INSERT INTO `requirement` VALUES ('10', '定时任务需求', '移植renren项目的定时任务', null, '1', '2017-11-01 14:43:38', '2017-11-01 14:43:38');
+INSERT INTO `requirement` VALUES ('6', 'CodeReview', '前面完成了权限管理以及需求管理，可以先review一下代码', null, '2', '2017-10-31 10:20:43', '2017-11-03 16:08:11');
+INSERT INTO `requirement` VALUES ('10', '定时任务需求', '移植renren项目的定时任务', '定时任务的相关知识还需要学习', '2', '2017-11-01 14:43:38', '2017-11-03 16:09:49');
+INSERT INTO `requirement` VALUES ('11', '定时任务有一个线程池操作，灵狐警告了，改掉', '学习总结java线程池相关知识', null, '1', '2017-11-03 16:09:15', '2017-11-03 16:09:15');
 
 -- ----------------------------
 -- Table structure for resource
@@ -193,12 +437,12 @@ CREATE TABLE `resource` (
   `gmt_created` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cog', '0', '0', '2017-10-19 14:54:31', '2017-10-19 14:54:34');
+INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cog', '0', '0', '2017-10-19 14:54:31', '2017-11-02 15:01:52');
 INSERT INTO `resource` VALUES ('2', '1', '系统管理', '用户管理', 'modules/sys/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2017-10-20 09:49:09');
 INSERT INTO `resource` VALUES ('3', '1', '系统管理', '菜单管理', 'modules/sys/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2017-10-24 15:44:11');
 INSERT INTO `resource` VALUES ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38');
@@ -214,10 +458,19 @@ INSERT INTO `resource` VALUES ('13', '12', '角色管理', '查看', null, 'sys:
 INSERT INTO `resource` VALUES ('14', '12', '角色管理', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', '0', '2017-10-25 10:36:50', '2017-10-25 10:36:52');
 INSERT INTO `resource` VALUES ('15', '12', '角色管理', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '0', '2017-10-25 10:37:10', '2017-10-25 10:37:12');
 INSERT INTO `resource` VALUES ('16', '12', '角色管理', '删除', null, 'sys:user:delete', '2', null, '0', '0', '2017-10-25 10:37:30', '2017-10-25 10:37:33');
-INSERT INTO `resource` VALUES ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-server', '0', '0', '2017-10-30 17:14:02', '2017-10-30 17:55:29');
+INSERT INTO `resource` VALUES ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-list', '0', '0', '2017-10-30 17:14:02', '2017-11-02 15:03:26');
 INSERT INTO `resource` VALUES ('47', '46', '需求管理', '新增', null, 'sys:requirement:save,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:48:48', '2017-10-30 17:50:03');
 INSERT INTO `resource` VALUES ('48', '46', '需求管理', '修改', null, 'sys:requirement:update,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:49:47', '2017-10-30 17:49:47');
 INSERT INTO `resource` VALUES ('49', '46', '需求管理', '删除', null, 'sys:requirement:delete,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:50:32', '2017-10-30 17:50:32');
+INSERT INTO `resource` VALUES ('50', '1', '系统管理', '定时任务', 'modules/job/schedule.html', null, '1', 'fa fa-tasks', '5', '0', '2017-11-02 15:01:52', '2017-11-03 10:33:16');
+INSERT INTO `resource` VALUES ('51', '50', '定时任务', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', '0', '2017-11-02 15:41:32', '2017-11-02 15:41:32');
+INSERT INTO `resource` VALUES ('52', '50', '定时任务', '新增', null, 'sys:schedule:save', '2', null, '0', '0', '2017-11-02 15:41:51', '2017-11-02 15:41:51');
+INSERT INTO `resource` VALUES ('53', '50', '定时任务', '修改', null, 'sys:schedule:update', '2', null, '0', '0', '2017-11-02 15:42:07', '2017-11-02 15:42:07');
+INSERT INTO `resource` VALUES ('54', '50', '定时任务', '删除', null, 'sys:schedule:delete', '2', null, '0', '0', '2017-11-02 15:42:19', '2017-11-02 15:42:19');
+INSERT INTO `resource` VALUES ('55', '50', '定时任务', '暂停', null, 'sys:schedule:pause', '2', null, '0', '0', '2017-11-02 15:42:34', '2017-11-02 15:42:34');
+INSERT INTO `resource` VALUES ('56', '50', '定时任务', '恢复', null, 'sys:schedule:resume', '2', null, '0', '0', '2017-11-02 15:42:48', '2017-11-03 10:32:22');
+INSERT INTO `resource` VALUES ('57', '50', '定时任务', '日志列表', null, 'sys:schedule:log', '2', null, '0', '0', '2017-11-02 15:43:11', '2017-11-02 15:43:11');
+INSERT INTO `resource` VALUES ('58', '50', '定时任务', '立即执行', null, 'sys:schedule:run', '2', null, '0', '0', '2017-11-03 10:33:00', '2017-11-03 10:33:00');
 
 -- ----------------------------
 -- Table structure for role
@@ -288,11 +541,40 @@ CREATE TABLE `schedule_job` (
   `gmt_created` datetime NOT NULL COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of schedule_job
 -- ----------------------------
+INSERT INTO `schedule_job` VALUES ('4', 'testTask', 'test', null, '0/5 * * * * ? ', null, '1', '2017-11-03 15:39:14', '2017-11-03 15:55:33');
+
+-- ----------------------------
+-- Table structure for schedule_job_log
+-- ----------------------------
+DROP TABLE IF EXISTS `schedule_job_log`;
+CREATE TABLE `schedule_job_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志id',
+  `job_id` bigint(20) NOT NULL COMMENT '任务id',
+  `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring bean名称',
+  `method_name` varchar(100) DEFAULT NULL COMMENT '方法名',
+  `params` varchar(2000) DEFAULT NULL COMMENT '参数',
+  `error_msg` varchar(2000) DEFAULT NULL COMMENT '失败信息',
+  `consume_time` int(11) NOT NULL COMMENT '耗时(单位：毫秒)',
+  `status` tinyint(4) NOT NULL COMMENT '任务状态    0：成功    1：失败',
+  `gmt_created` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `job_id` (`job_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13192 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+
+-- ----------------------------
+-- Records of schedule_job_log
+-- ----------------------------
+INSERT INTO `schedule_job_log` VALUES ('13187', '4', 'testTask', 'test', null, null, '5', '0', '2017-11-03 15:55:10', '2017-11-03 15:55:10');
+INSERT INTO `schedule_job_log` VALUES ('13188', '4', 'testTask', 'test', null, null, '3', '0', '2017-11-03 15:55:15', '2017-11-03 15:55:15');
+INSERT INTO `schedule_job_log` VALUES ('13189', '4', 'testTask', 'test', null, null, '5', '0', '2017-11-03 15:55:20', '2017-11-03 15:55:20');
+INSERT INTO `schedule_job_log` VALUES ('13190', '4', 'testTask', 'test', null, null, '1', '0', '2017-11-03 15:55:25', '2017-11-03 15:55:25');
+INSERT INTO `schedule_job_log` VALUES ('13191', '4', 'testTask', 'test', null, null, '3', '0', '2017-11-03 15:55:30', '2017-11-03 15:55:30');
 
 -- ----------------------------
 -- Table structure for user
