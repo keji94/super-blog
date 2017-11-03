@@ -1,5 +1,6 @@
 package com.keji.blog.controller.requirement;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
@@ -136,7 +137,7 @@ public class RequirementController {
         try {
             count = requirementService.delete(ids);
         } catch (Exception e) {
-            logger.error("删除失败..ids:" + ids, e);
+            logger.error("删除失败..ids:" + Arrays.toString(ids), e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
 

@@ -48,7 +48,7 @@ public class ScheduleJobLogVO implements Serializable {
     /**
      * 耗时
      */
-    private int consumeTime;
+    private Integer consumeTime;
 
     /**
      * 状态

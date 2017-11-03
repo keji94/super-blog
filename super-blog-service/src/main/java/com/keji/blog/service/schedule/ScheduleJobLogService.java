@@ -12,9 +12,10 @@ import com.keji.blog.dataobject.ScheduleJobLogDO;
 public interface ScheduleJobLogService {
 
     /**
-     * 新增时间任务设置
+     * 新增时间任务
      *
      * @param scheduleLog
+     * @return
      */
     Integer save(ScheduleJobLogDO scheduleLog);
 

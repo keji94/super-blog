@@ -41,7 +41,9 @@ public class ScheduleTest {
 
         try {
             // 把作业和触发器注册到任务调度中
-            scheduler.scheduleJob(jobDetail, trigger);
+            if (null != scheduler) {
+                scheduler.scheduleJob(jobDetail, trigger);
+            }
             //启动调度
             scheduler.start();
             // 停止调度

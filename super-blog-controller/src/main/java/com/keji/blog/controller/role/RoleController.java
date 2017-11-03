@@ -1,5 +1,6 @@
 package com.keji.blog.controller.role;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -163,7 +164,7 @@ public class RoleController {
         try {
             roleService.delete(roleIds);
         } catch (Exception e) {
-            logger.error("删除角色失败，id：" + roleIds, e);
+            logger.error("删除角色失败，id：" + Arrays.toString(roleIds), e);
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
         return BaseResult.makeSuccess();
