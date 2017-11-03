@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SmartFoxWorkToolsProjectState">
     <option name="gitUrl" value="https://github.com/keji94/super-blog.git" />
-    <option name="localBranch" value="codereview_2017-10-31" />
-    <option name="revision" value="95b444610315810e72e3300b21f9102e1fe1d31e" />
+    <option name="localBranch" value="schedule_2017_11_01" />
+    <option name="revision" value="524f213c2629e1d2a62805979c4c9b0479994d43" />
   </component>
 </project>

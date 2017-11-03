@@ -47,9 +47,9 @@ public class IndexController {
         return page;
     }
 
-    @RequestMapping("/modules/sys/{page}")
-    public String menuIndex(@PathVariable String page) {
-        return "/modules/sys/"+page;
+    @RequestMapping("/modules/{index}/{page}")
+    public String menuIndex(@PathVariable String index,@PathVariable String page) {
+        return "/modules/"+index+"/"+page;
     }
 
     @RequestMapping("/getCaptcha")

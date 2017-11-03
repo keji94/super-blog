@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * @author: wb-ny291824
- * @description  定时任务deomo,启动项目就开始执行拉。
+ * @description  spring定时任务deomo,启动项目就开始执行拉。
  * @date: Created in 2017/9/19
  * @modified: By:
  */

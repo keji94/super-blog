@@ -3,7 +3,7 @@ $(function () {
         url: baseURL + 'sys/scheduleLog/list',
         datatype: "json",
         colModel: [			
-            { label: '日志ID', name: 'logId', width: 50, key: true },
+            { label: '日志ID', name: 'id', width: 50, key: true },
 			{ label: '任务ID', name: 'jobId', width: 50},
 			{ label: 'bean名称', name: 'beanName', width: 60 },
 			{ label: '方法名称', name: 'methodName', width: 60 },
@@ -11,10 +11,10 @@ $(function () {
 			{ label: '状态', name: 'status', width: 50, formatter: function(value, options, row){
 				return value === 0 ? 
 					'<span class="label label-success">成功</span>' :
-					'<span class="label label-danger pointer" onclick="vm.showError('+row.logId+')">失败</span>';
+					'<span class="label label-danger pointer" onclick="vm.showError('+row.id+')">失败</span>';
 			}},
-			{ label: '耗时(单位：毫秒)', name: 'times', width: 70 },
-			{ label: '执行时间', name: 'createTime', width: 80 }
+			{ label: '耗时(单位：毫秒)', name: 'consumeTime', width: 70 },
+			{ label: '执行时间', name: 'gmtCreated', width: 80 }
         ],
 		viewrecords: true,
         height: 385,
@@ -26,14 +26,14 @@ $(function () {
         multiselect: false,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "data",
+            page: "pageIndex",
+            total: "totalPage",
+            records: "totalCount"
         },
         prmNames : {
-            page:"page", 
-            rows:"limit", 
+            page:"pageIndex",
+            rows:"pageSize",
             order: "order"
         },
         gridComplete:function(){
@@ -62,7 +62,7 @@ var vm = new Vue({
 				parent.layer.open({
 				  title:'失败信息',
 				  closeBtn:0,
-				  content: r.log.error
+				  content: r.data.errorMsg
 				});
 			});
 		},

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji.blog.dao.ScheduleJobLogDAO">
+    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.ScheduleJobLogDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="job_id" property="jobId" jdbcType="BIGINT"/>
+        <result column="bean_name" property="beanName" jdbcType="VARCHAR"/>
+        <result column="method_name" property="methodName" jdbcType="VARCHAR"/>
+        <result column="params" property="params" jdbcType="VARCHAR"/>
+        <result column="error_msg" property="errorMsg" jdbcType="VARCHAR"/>
+        <result column="consume_time" property="consumeTime" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,job_id,bean_name,method_name,params,error_msg,consume_time,
+        status,gmt_created,gmt_modified
+    </sql>
+
+
+    <insert id="insert" parameterType="com.keji.blog.dataobject.ScheduleJobLogDO" useGeneratedKeys="true" keyProperty="id">
+        insert into schedule_job_log (
+            id,job_id,bean_name,method_name,params,error_msg,consume_time,
+            status,gmt_created,gmt_modified
+        )
+        values (
+            #{id,jdbcType=BIGINT},#{jobId,jdbcType=BIGINT}, #{beanName,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR},#{params,jdbcType=VARCHAR},
+            #{errorMsg,jdbcType=VARCHAR}, #{consumeTime,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, now(),
+            now()
+        )
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from schedule_job_log
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ScheduleJobLogDO">
+        update schedule_job_log
+        <set>
+            <if test="beanName != null">
+                bean_name = #{beanName,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName != null">
+                method_name = #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                params = #{params,jdbcType=VARCHAR},
+            </if>
+            <if test="errorMsg != null">
+                error_msg = #{errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="consume_time != null">
+                consumeTime = #{consume_time,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            gmt_modified = now()
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from schedule_job_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.ScheduleJobLogDO">
+        select
+        <include refid="Base_Column_List"/>
+        from schedule_job_log
+        <where>
+            <if test="jobId != null">
+                AND job_id = #{jobId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+    <select id="totalCount" resultType="java.lang.Integer">
+        select totalCount(*) from schedule_job_log
+    </select>
+
+</mapper>

@@ -28,4 +28,9 @@ public class BlogConstants {
      */
     public static final String PHONE_REGULAR = "^1[0-9]{10}$";
 
+    /**
+     * 任务调度参数key
+     */
+    public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
+
 }

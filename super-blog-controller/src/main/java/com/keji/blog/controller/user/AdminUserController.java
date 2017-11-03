@@ -1,4 +1,4 @@
-package com.keji.blog.controller.admin;
+package com.keji.blog.controller.user;
 
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;

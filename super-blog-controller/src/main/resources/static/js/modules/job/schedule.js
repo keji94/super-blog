@@ -3,7 +3,7 @@ $(function () {
         url: baseURL + 'sys/schedule/list',
         datatype: "json",
         colModel: [			
-			{ label: '任务ID', name: 'jobId', width: 60, key: true },
+			{ label: '任务ID', name: 'id', width: 60, key: true },
 			{ label: 'bean名称', name: 'beanName', width: 100 },
 			{ label: '方法名称', name: 'methodName', width: 100 },
 			{ label: '参数', name: 'params', width: 100 },
@@ -25,14 +25,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "data",
+            page: "pageIndex",
+            total: "totalPage",
+            records: "totalCount"
         },
         prmNames : {
-            page:"page", 
-            rows:"limit", 
+            page:"pageIndex",
+            rows:"pageSize",
             order: "order"
         },
         gridComplete:function(){
@@ -70,23 +70,23 @@ var vm = new Vue({
 			$.get(baseURL + "sys/schedule/info/"+jobId, function(r){
 				vm.showList = false;
                 vm.title = "修改";
-				vm.schedule = r.schedule;
+				vm.schedule = r.data;
 			});
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.schedule.jobId == null ? "sys/schedule/save" : "sys/schedule/update";
+			var url = vm.schedule.id == null ? "sys/schedule/save" : "sys/schedule/update";
 			$.ajax({
 				type: "POST",
 			    url: baseURL + url,
                 contentType: "application/json",
 			    data: JSON.stringify(vm.schedule),
 			    success: function(r){
-			    	if(r.code === 0){
+			    	if(r.success){
 						alert('操作成功', function(index){
 							vm.reload();
 						});
 					}else{
-						alert(r.msg);
+						alert(r.errorMsg);
 					}
 				}
 			});
@@ -104,12 +104,12 @@ var vm = new Vue({
                     contentType: "application/json",
 				    data: JSON.stringify(jobIds),
 				    success: function(r){
-						if(r.code == 0){
+						if(r.success){
 							alert('操作成功', function(index){
 								vm.reload();
 							});
 						}else{
-							alert(r.msg);
+							alert(r.errorMsg);
 						}
 					}
 				});
@@ -128,12 +128,12 @@ var vm = new Vue({
                     contentType: "application/json",
 				    data: JSON.stringify(jobIds),
 				    success: function(r){
-						if(r.code == 0){
+						if(r.success){
 							alert('操作成功', function(index){
 								vm.reload();
 							});
 						}else{
-							alert(r.msg);
+							alert(r.errorMsg);
 						}
 					}
 				});
@@ -152,12 +152,12 @@ var vm = new Vue({
                     contentType: "application/json",
 				    data: JSON.stringify(jobIds),
 				    success: function(r){
-						if(r.code == 0){
+						if(r.success){
 							alert('操作成功', function(index){
 								vm.reload();
 							});
 						}else{
-							alert(r.msg);
+							alert(r.errorMsg);
 						}
 					}
 				});
@@ -176,12 +176,12 @@ var vm = new Vue({
                     contentType: "application/json",
 				    data: JSON.stringify(jobIds),
 				    success: function(r){
-						if(r.code == 0){
+						if(r.success){
 							alert('操作成功', function(index){
 								vm.reload();
 							});
 						}else{
-							alert(r.msg);
+							alert(r.errorMsg);
 						}
 					}
 				});
