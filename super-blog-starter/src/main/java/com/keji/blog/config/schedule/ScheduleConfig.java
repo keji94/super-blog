@@ -31,7 +31,7 @@ public class ScheduleConfig {
         prop.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
         prop.put("org.quartz.threadPool.threadCount", "20");
         prop.put("org.quartz.threadPool.threadPriority", "5");
-        //JobStore配置
+        //JobStore配置,持久化到数据库,如果使用内存存储：org.quartz.simpl.RAMJobStore
         prop.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
         //集群配置
         prop.put("org.quartz.jobStore.isClustered", "true");

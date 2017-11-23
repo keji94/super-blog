@@ -29,7 +29,7 @@ public class ScheduleTest {
 
         // 创建jobDetail实例，绑定Job实现类
         // 指明job的名称，所在组的名称，以及绑定job类
-        JobDetail jobDetail = JobBuilder.newJob(HelloQuartz.class).withIdentity("JobName", "JobGroupName").build();
+        JobDetail jobDetail = JobBuilder.newJob(HelloQuartzJob.class).withIdentity("JobName", "JobGroupName").build();
 
         //定义调度触发规则
         //1.SimpleTrigger的方式(每3秒执行一次,总共执行6+1次)

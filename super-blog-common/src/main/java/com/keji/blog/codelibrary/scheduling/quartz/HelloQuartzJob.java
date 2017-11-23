@@ -6,9 +6,9 @@ import org.quartz.JobExecutionException;
 
 /**
  * @author wb-ny291824
- * @version $Id: HelloQuartz.java, v 0.1 2017-11-02 16:45 wb-ny291824 Exp $$
+ * @version $Id: HelloQuartzJob.java, v 0.1 2017-11-02 16:45 wb-ny291824 Exp $$
  */
-public class HelloQuartz implements Job{
+public class HelloQuartzJob implements Job{
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("Hello Quartz!");

@@ -1,19 +1,13 @@
 package com.keji.blog.util.schedule;
 
 import java.util.Date;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
-import java.util.concurrent.TimeUnit;
 
-import com.alibaba.druid.util.DaemonThreadFactory;
 
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.ScheduleJobDO;
 import com.keji.blog.dataobject.ScheduleJobLogDO;
+import com.keji.blog.exception.BlogException;
 import com.keji.blog.service.schedule.ScheduleJobLogService;
 import com.keji.blog.util.SpringContextUtils;
 import org.apache.commons.lang.StringUtils;
@@ -34,12 +28,6 @@ public class ScheduleJob extends QuartzJobBean {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    /**
-     *  线程池:初始线程5,最大线程10，最大阻塞线程10,线程工厂使用德鲁伊,线程数量爆炸由AbortPolicy处理
-     */
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 10, TimeUnit.MINUTES,
-            new ArrayBlockingQueue<Runnable>(10), new DaemonThreadFactory("myThreadFactory"), new AbortPolicy());
-
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         ScheduleJobDO scheduleJob = (ScheduleJobDO)context.getMergedJobDataMap().get(BlogConstants.JOB_PARAM_KEY);
@@ -47,6 +35,7 @@ public class ScheduleJob extends QuartzJobBean {
         //获取spring bean
         ScheduleJobLogService scheduleJobLogService = (ScheduleJobLogService)SpringContextUtils.getBean(
                 "scheduleJobLogService");
+        ThreadPoolExecutor executor = SpringContextUtils.getBean("executor", ThreadPoolExecutor.class);
 
         //数据库保存执行记录
         ScheduleJobLogDO scheduleLog = new ScheduleJobLogDO();
@@ -86,6 +75,7 @@ public class ScheduleJob extends QuartzJobBean {
             //任务状态    0：成功    1：失败
             scheduleLog.setStatus(1);
             scheduleLog.setErrorMsg(StringUtils.substring(e.toString(), 0, 2000));
+            throw new BlogException("任务执行失败", e);
         } finally {
             scheduleJobLogService.save(scheduleLog);
         }

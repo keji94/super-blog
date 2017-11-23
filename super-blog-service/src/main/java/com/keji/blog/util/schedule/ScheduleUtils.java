@@ -115,14 +115,14 @@ public class ScheduleUtils {
     /**
      * 立即执行任务
      */
-    public static void run(Scheduler scheduler, com.keji.blog.dataobject.ScheduleJobDO scheduleJob) {
+    public static void run(Scheduler scheduler, ScheduleJobDO scheduleJob) {
         try {
             //参数
             JobDataMap dataMap = new JobDataMap();
             dataMap.put(BlogConstants.JOB_PARAM_KEY, scheduleJob);
 
             scheduler.triggerJob(getJobKey(scheduleJob.getId()), dataMap);
-        } catch (SchedulerException e) {
+        } catch (Exception e) {
             throw new BlogException("立即执行定时任务失败", e);
         }
     }
