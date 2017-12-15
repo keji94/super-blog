@@ -31,4 +31,16 @@ public class AdminUserTest extends ApplicationTests {
         List<ResourceDO> resourceDOS = userService.selectUserPermissions(1L);
         System.out.println(resourceDOS);
     }
+
+    @Test
+    public void testStringNumber() {
+        String num = "7a";
+
+        try {
+            long l = Long.parseLong(num);
+
+        } catch (Exception e) {
+            System.out.println("数字转换失败");
+        }
+    }
 }

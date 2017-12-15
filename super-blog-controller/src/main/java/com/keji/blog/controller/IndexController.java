@@ -5,10 +5,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.keji.blog.util.QrCodeUtil;
 import com.keji.blog.util.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -75,6 +77,20 @@ public class IndexController {
             return;
         }
 
+    }
+
+    @RequestMapping("/testQrCode")
+    public void testQrCode(HttpServletRequest request) {
+
+        String deskId = "201712150400170008";
+        String folderPath = request.getSession().getServletContext().getRealPath("");
+        String logoPath = request.getSession().getServletContext().getRealPath("/") + "resource/static/images/logo.png";
+
+        try {
+            QrCodeUtil.encode(deskId, "c:/a/logo.png","c:/a/", false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @RequestMapping("/vue")
