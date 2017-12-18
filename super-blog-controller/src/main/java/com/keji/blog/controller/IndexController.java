@@ -1,6 +1,7 @@
 package com.keji.blog.controller;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -12,10 +13,10 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.keji.blog.util.QrCodeUtil;
 import com.keji.blog.util.ShiroUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,8 +51,8 @@ public class IndexController {
     }
 
     @RequestMapping("/modules/{index}/{page}")
-    public String menuIndex(@PathVariable String index,@PathVariable String page) {
-        return "/modules/"+index+"/"+page;
+    public String menuIndex(@PathVariable String index, @PathVariable String page) {
+        return "/modules/" + index + "/" + page;
     }
 
     @RequestMapping("/getCaptcha")
@@ -80,14 +81,21 @@ public class IndexController {
     }
 
     @RequestMapping("/testQrCode")
-    public void testQrCode(HttpServletRequest request) {
+    public void testQrCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        String deskId = "201712150400170008";
-        String folderPath = request.getSession().getServletContext().getRealPath("");
-        String logoPath = request.getSession().getServletContext().getRealPath("/") + "resource/static/images/logo.png";
+        String content = "201712150400170008";
+        String deskCode = "1";
+        String deskName = "帝王蟹桌";
+        String savePath = "c:/a/";
+        ClassPathResource classPathResource = new ClassPathResource("/static/images/logo.png");
+        boolean exists = classPathResource.exists();
+        File logo = classPathResource.getFile();
 
         try {
-            QrCodeUtil.encode(deskId, "c:/a/logo.png","c:/a/", false);
+            BufferedImage image = QrCodeUtil.createQrCodeWithLogo(content, 300, logo, 64, 64, true);
+            image = QrCodeUtil.drawStringToImage(image, deskCode + "号桌", deskName, 600, 600);
+            QrCodeUtil.saveImageToDist(image, savePath, deskCode + "号桌" + ".jpg");
+
         } catch (Exception e) {
             System.out.println(e);
         }
