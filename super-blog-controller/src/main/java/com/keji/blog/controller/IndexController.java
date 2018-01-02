@@ -95,6 +95,7 @@ public class IndexController {
             BufferedImage image = QrCodeUtil.createQrCodeWithLogo(content, 300, logo, 64, 64, true);
             image = QrCodeUtil.drawStringToImage(image, deskCode + "号桌", deskName, 600, 600);
             QrCodeUtil.saveImageToDist(image, savePath, deskCode + "号桌" + ".jpg");
+            QrCodeUtil.download(image,response,"啦啦啦.png");
 
         } catch (Exception e) {
             System.out.println(e);

@@ -22,6 +22,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.keji.blog.exception.BlogException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -221,20 +222,33 @@ public class QrCodeUtil {
      * @throws Exception
      */
     public static void download(BufferedImage image, HttpServletResponse response, String fileName) throws Exception {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        ImageIO.write(image, "JPG", os);
-        InputStream is = new ByteArrayInputStream(os.toByteArray());
-        InputStream fis = new BufferedInputStream(is);
-        byte[] buffer = new byte[fis.available()];
-        fis.read(buffer);
-        fis.close();
-        response.reset();
-        response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-        toClient.write(buffer);
-        toClient.flush();
-        toClient.close();
+        InputStream fis = null;
+        OutputStream toClient = null;
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(image, "JPG", os);
+            InputStream is = new ByteArrayInputStream(os.toByteArray());
+            fis = new BufferedInputStream(is);
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+            response.reset();
+            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+           toClient = new BufferedOutputStream(response.getOutputStream());
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+            toClient.write(buffer);
+            toClient.flush();
+            toClient.close();
+        } catch (Exception e) {
+            throw new BlogException("下载文件是发生异常");
+        }finally {
+            if (null != fis) {
+                fis.close();
+            }
+            if (null != toClient) {
+                toClient.close();
+            }
+        }
     }
 
 }
