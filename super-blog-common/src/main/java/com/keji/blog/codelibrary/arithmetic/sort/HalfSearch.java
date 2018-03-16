@@ -1,10 +1,6 @@
 package com.keji.blog.codelibrary.arithmetic.sort;
 
 /**
- * Created by wb-ny291824 on 2017/8/19.
-
- */
-/**
  *  * 二分查找
  * 为了提高查找效率，可使用折半查找的方式，注意：这种查找只对有序的数组有效。
  * @author wb-ny291824

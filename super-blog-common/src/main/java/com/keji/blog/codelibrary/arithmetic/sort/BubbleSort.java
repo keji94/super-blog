@@ -19,14 +19,13 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         int[] arr = {1,5,6,21,24,121,11,14,23};
-        BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.bubbleSort(arr);
-        for (int i = 0; i < arr.length; i++) {
+        bubbleSort(arr);
+        for (int i : arr) {
             System.out.println(arr[i]);
         }
     }
 
-    public void bubbleSort(int[] data) {
+    private static void bubbleSort(int[] data) {
         int temp;
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data.length - i - 1; j++) {
