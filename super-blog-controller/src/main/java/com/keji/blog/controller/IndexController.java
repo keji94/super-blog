@@ -1,5 +1,6 @@
 package com.keji.blog.controller;
 
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +23,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/9/18
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: IndexController.java, v 0.1 2018/3/17 下午1:03 keji Exp $
  */
 @Controller
 public class IndexController {
@@ -50,6 +50,11 @@ public class IndexController {
         return page;
     }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "/home/index";
+    }
+
     @RequestMapping("/modules/{index}/{page}")
     public String menuIndex(@PathVariable String index, @PathVariable String page) {
         return "/modules/" + index + "/" + page;
@@ -72,10 +77,8 @@ public class IndexController {
             ImageIO.write(image, "jpg", out);
         } catch (IOException e) {
             logger.error("验证码写出失败!", e);
-            return;
         } catch (Exception e) {
             logger.error("系统错误!", e);
-            return;
         }
 
     }

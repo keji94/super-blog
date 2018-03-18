@@ -9,10 +9,9 @@ import com.keji.blog.vo.requirement.RequirementQueryVO;
 import com.keji.blog.vo.requirement.RequirementVO;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/23
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: RequirementConvertUtil.java, v 0.1 2018/3/18 下午2:48 keji Exp $
  */
 public class RequirementConvertUtil {
 

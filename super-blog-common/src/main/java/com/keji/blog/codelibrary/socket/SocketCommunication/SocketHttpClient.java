@@ -11,12 +11,14 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+
 /**
- * Created by wb-ny291824 on 2017/8/22.
- * 1.成功建立 socket 连接后，我们就能获得它的输入输出流，通信的本质是对输入输出流的处理
+ *  * 1.成功建立 socket 连接后，我们就能获得它的输入输出流，通信的本质是对输入输出流的处理
  *      。通过输入流，读取网络连接上传来的数据，通过输出流，将本地的数据传出给远端。
  * 2.关于 IO 流的处理，我们一般会用相应的包装类来处理 IO 流，如果直接处理的话，我们需要对 byte[] 进行操作，而这是相对比较繁琐的。
  *      如果采用包装类，我们可以直接以string、int等类型进行处理，简化了 IO 字节操作。
+ * @author keji
+ * @version $Id: SocketHttpClient.java, v 0.1 2018/3/18 下午3:00 keji Exp $
  */
 public class SocketHttpClient {
 

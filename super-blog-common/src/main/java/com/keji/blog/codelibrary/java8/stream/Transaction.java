@@ -1,10 +1,9 @@
 package com.keji.blog.codelibrary.java8.stream;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/9/18
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: Transaction.java, v 0.1 2018/3/18 下午2:57 keji Exp $
  */
 public class Transaction {
 

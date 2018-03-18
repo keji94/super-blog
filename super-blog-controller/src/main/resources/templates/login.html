@@ -6,8 +6,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="icon" href="/static/images/favicon.ico">
     <title>克己的博客系统</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/signin.css">
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/admin/signin.css">
 </head>
 
 <body>
@@ -44,8 +44,8 @@
 
 </div>
 
-<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/static/libs/vue.min.js"></script>
+<script type="text/javascript" src="/static/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/plugins/vue/vue.min.js"></script>
 <script>
     var vm = new Vue({
         el : '#loginApp',
@@ -65,7 +65,7 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.success == true) {
-                            window.location.href = "/index";
+                            window.location.href = "/admin/index";
                         } else {
                             vm.error = true;
                             vm.errorMsg = data.errorMsg;

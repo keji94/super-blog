@@ -1,17 +1,13 @@
 package com.keji.blog.vo.user;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import com.keji.blog.vo.BaseQueryVO;
 import lombok.Data;
 
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/9/18
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: UserQueryVO.java, v 0.1 2018/3/18 下午2:44 keji Exp $
  */
 @Data
 public class UserQueryVO extends BaseQueryVO{

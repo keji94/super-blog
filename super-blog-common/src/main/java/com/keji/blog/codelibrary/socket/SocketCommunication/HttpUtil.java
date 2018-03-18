@@ -1,7 +1,10 @@
 package com.keji.blog.codelibrary.socket.SocketCommunication;
 
+
 /**
- * Created by wb-ny291824 on 2017/8/22.
+ *
+ * @author keji
+ * @version $Id: HttpUtil.java, v 0.1 2018/3/18 下午3:00 keji Exp $
  */
 public class HttpUtil {
 

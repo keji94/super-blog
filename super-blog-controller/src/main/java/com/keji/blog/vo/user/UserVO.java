@@ -14,10 +14,9 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/9/18
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: UserVO.java, v 0.1 2018/3/18 下午2:45 keji Exp $
  */
 @Data
 public class UserVO {

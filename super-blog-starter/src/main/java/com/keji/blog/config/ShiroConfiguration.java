@@ -69,6 +69,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/getCaptcha", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/index", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/vue", "anon");
         filterChainDefinitionMap.put("/**", "authc");

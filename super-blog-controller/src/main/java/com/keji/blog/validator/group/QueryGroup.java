@@ -1,8 +1,9 @@
 package com.keji.blog.validator.group;
 
 /**
- * @author wb-ny291824
- * @version $Id: QueryGroup.java, v 0.1 2017-10-26 15:56 wb-ny291824 Exp $$
+ *
+ * @author keji
+ * @version $Id: QueryGroup.java, v 0.1 2018/3/18 下午2:46 keji Exp $
  */
 public interface QueryGroup {
 }

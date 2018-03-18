@@ -23,11 +23,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 /**
- * @author: wb-ny291824
- * @description shiro身份验证核心类
- * @date: Created in 2017/10/19
- * @modified: By:
+ * shiro身份验证核心类
+ *
+ * @author keji
+ * @version $Id: MyShiroRealm.java, v 0.1 2018/3/18 下午2:47 keji Exp $
  */
 public class MyShiroRealm extends AuthorizingRealm{
 

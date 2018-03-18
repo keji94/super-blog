@@ -5,15 +5,14 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * @author: wb-ny291824
- * @description 自定义监听器，使用@WebListener.此监听器监听ServletContext对象的创建和销毁。
+ * 自定义监听器，使用@WebListener.此监听器监听ServletContext对象的创建和销毁。
  *                  创建：服务器启动的时候,服务器为每个WEB应用创建一个属于该web项目的对象ServletContext.
  *                  销毁：服务器关闭或者项目从服务器中移除的时候.
  *                企业级应用：
  *                  1.加载配置文件，如spring的ContextLoaderListener
  *                  2.定时任务调度。
- * @date: Created in 2017/9/19
- * @modified: By:
+ * @author keji
+ * @version $Id: MyServletContextListener.java, v 0.1 2018/3/18 下午2:58 keji Exp $
  */
 //@WebListener
 public class MyServletContextListener implements ServletContextListener {

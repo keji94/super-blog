@@ -20,9 +20,13 @@ import java.util.Set;
 import com.keji.blog.codelibrary.socket.SocketCommunication.HttpConstant;
 import com.keji.blog.codelibrary.socket.SocketCommunication.HttpUtil;
 
+
+
 /**
- * Created by wb-ny291824 on 2017/8/22.
  * Selector选择器能够监听所有的IO操作，并且以事件的方式通知我们那些IO已经就绪了。
+ *
+ * @author keji
+ * @version $Id: NioBlockingHttpClient.java, v 0.1 2018/3/18 下午3:00 keji Exp $
  */
 public class NioBlockingHttpClient {
 
@@ -51,9 +55,8 @@ public class NioBlockingHttpClient {
         //建立连接
         this.socketChannel.connect(remote);
         //将cosketChannel注册到选择器中
-        socketChannel.register(selector, SelectionKey.OP_CONNECT
-                                            |SelectionKey.OP_READ
-                                            |SelectionKey.OP_WRITE); //设置连接、可读、可写事件监听
+        socketChannel.register(selector,
+                SelectionKey.OP_CONNECT | SelectionKey.OP_READ | SelectionKey.OP_WRITE); //设置连接、可读、可写事件监听
     }
 
     public static void main(String[] args) throws IOException {
@@ -70,7 +73,7 @@ public class NioBlockingHttpClient {
         pw.write(HttpUtil.compositeRequest(host));
         pw.flush();
         String msg;
-        while ((msg = br.readLine()) != null){
+        while ((msg = br.readLine()) != null) {
             System.out.println(msg);
         }
     }
@@ -101,18 +104,19 @@ public class NioBlockingHttpClient {
 
     private void connect(SelectionKey key) throws IOException {
         //获取事件句柄对应的SocketChannel
-        SocketChannel channel =(SocketChannel) key.channel();
+        SocketChannel channel = (SocketChannel)key.channel();
         //真正的完成socket连接
         channel.finishConnect();
         //打印连接信息
-        InetSocketAddress remote = (InetSocketAddress) channel.socket().getRemoteSocketAddress();
+        InetSocketAddress remote = (InetSocketAddress)channel.socket().getRemoteSocketAddress();
         String host = remote.getHostName();
         int port = remote.getPort();
-        System.out.println(String.format("访问地址：%s:%s 连接成功！",host,port));
+        System.out.println(String.format("访问地址：%s:%s 连接成功！", host, port));
     }
+
     private void write(SelectionKey key) throws IOException {
-        SocketChannel channel = (SocketChannel) key.channel();
-        InetSocketAddress remote = (InetSocketAddress) channel.socket().getRemoteSocketAddress();
+        SocketChannel channel = (SocketChannel)key.channel();
+        InetSocketAddress remote = (InetSocketAddress)channel.socket().getRemoteSocketAddress();
         String host = remote.getHostName();
 
         //获取HTTP请求
@@ -126,7 +130,7 @@ public class NioBlockingHttpClient {
     }
 
     private void receive(SelectionKey key) throws IOException {
-        SocketChannel channel = (SocketChannel) key.channel();
+        SocketChannel channel = (SocketChannel)key.channel();
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         channel.read(buffer);
         buffer.flip();

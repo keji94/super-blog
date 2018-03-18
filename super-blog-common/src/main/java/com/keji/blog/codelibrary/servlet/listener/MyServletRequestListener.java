@@ -4,13 +4,13 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
+
 /**
- * @author: wb-ny291824
- * @description 监听request对象的创建和销毁
+ * 监听request对象的创建和销毁
  *                  * 创建：客户端向服务器发送一次请求,服务器就会创建request对象.
-                    * 销毁：服务器对这次请求作出响应后就会销毁request对象.
- * @date: Created in 2017/9/19
- * @modified: By:
+ * 销毁：服务器对这次请求作出响应后就会销毁request对象.
+ * @author keji
+ * @version $Id: MyServletRequestListener.java, v 0.1 2018/3/18 下午2:58 keji Exp $
  */
 //@WebListener
 public class MyServletRequestListener implements ServletRequestListener {

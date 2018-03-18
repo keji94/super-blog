@@ -7,10 +7,9 @@ import com.keji.blog.validator.group.QueryGroup;
 import lombok.Data;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/23
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: BaseQueryVO.java, v 0.1 2018/3/18 下午2:44 keji Exp $
  */
 @Data
 public class BaseQueryVO {

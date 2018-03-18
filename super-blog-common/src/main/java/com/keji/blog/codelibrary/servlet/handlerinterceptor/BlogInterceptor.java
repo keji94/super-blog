@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author: wb-ny291824
- * @description  spring的拦截器和Filter类似，不过比Filter更加精细，比如在request被响应之前、request被响应之后、视图渲染之前以及request全部结束之后
+ * spring的拦截器和Filter类似，不过比Filter更加精细，比如在request被响应之前、request被响应之后、视图渲染之前以及request全部结束之后
  *                 在拦截器和Filter同时存在的情况下，先走Filter，再走拦截器
- * @date: Created in 2017/9/19
- * @modified: By:
+ * @author keji
+ * @version $Id: BlogInterceptor.java, v 0.1 2018/3/18 下午2:57 keji Exp $
  */
 public class BlogInterceptor implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

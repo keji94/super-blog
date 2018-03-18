@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * @author: wb-ny291824
- * @description  方法作为谓词p传递
- * @date: Created in 2017/9/24
- * @modified: By:
+ * 方法作为谓词p传递
+ *
+ * @author keji
+ * @version $Id: FilterApples.java, v 0.1 2018/3/18 下午2:55 keji Exp $
  */
 public class FilterApples {
 

@@ -1,10 +1,9 @@
 package com.keji.blog.validator.group;
 
 /**
- * 新增数据 Group
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2017-03-16 0:04
+ *
+ * @author keji
+ * @version $Id: AddGroup.java, v 0.1 2018/3/18 下午2:46 keji Exp $
  */
 public interface AddGroup {
 }

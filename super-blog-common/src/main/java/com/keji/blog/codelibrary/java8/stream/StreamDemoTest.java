@@ -12,13 +12,13 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 /**
- * @author: wb-ny291824
- * @description 流的中间操作：
+ * 流的中间操作：
  * filter、map、limit、sorted、distinct
  * 流的终端操作:
  * forEach、totalCount、collect
- * @date: Created in 2017/10/10
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: StreamDemoTest.java, v 0.1 2018/3/18 下午2:55 keji Exp $
  */
 public class StreamDemoTest {
 

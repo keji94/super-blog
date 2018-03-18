@@ -6,10 +6,9 @@ import java.time.*;
 import java.time.temporal.ChronoField;
 
 /**
- * @author: wb-ny291824
- * @description java8时间api demo
- * @date: Created in 2017/10/12
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: DateDemoTest.java, v 0.1 2018/3/18 下午2:56 keji Exp $
  */
 public class DateDemoTest {
 

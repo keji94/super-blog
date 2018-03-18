@@ -6,7 +6,9 @@ import java.util.concurrent.Executors;
 import org.junit.Test;
 
 /**
- * Created by wb-ny291824 on 2017/8/22.
+ *
+ * @author keji
+ * @version $Id: Application.java, v 0.1 2018/3/18 下午3:00 keji Exp $
  */
 public class Application {
 

@@ -8,14 +8,12 @@ import javax.validation.Validator;
 
 import com.keji.blog.exception.BlogException;
 
+
 /**
  * hibernate-validator校验工具类
  *
- * 参考文档：http://docs.jboss.org/hibernate/validator/5.4/reference/en-US/html_single/
- *
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2017-03-15 10:50
+ * @author keji
+ * @version $Id: ValidatorUtils.java, v 0.1 2018/3/18 下午2:46 keji Exp $
  */
 public class ValidatorUtils {
     private static Validator validator;

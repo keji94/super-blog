@@ -1,12 +1,10 @@
 package com.keji.blog.validator.group;
 
 /**
- * 更新数据 Group
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2017-03-15 21:21
+ *
+ * @author keji
+ * @version $Id: UpdateGroup.java, v 0.1 2018/3/18 下午2:46 keji Exp $
  */
-
 public interface UpdateGroup {
 
 }

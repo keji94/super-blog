@@ -10,10 +10,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/9/24
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: ShiroTest.java, v 0.1 2018/3/18 下午2:48 keji Exp $
  */
 public class ShiroTest {
 

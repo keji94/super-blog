@@ -4,10 +4,9 @@ import com.keji.blog.vo.BaseQueryVO;
 import lombok.Data;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/23
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: RequirementQueryVO.java, v 0.1 2018/3/18 下午2:45 keji Exp $
  */
 @Data
 public class RequirementQueryVO extends BaseQueryVO{

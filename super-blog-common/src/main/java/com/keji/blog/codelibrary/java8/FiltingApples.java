@@ -1,16 +1,14 @@
 package com.keji.blog.codelibrary.java8;
 
-import org.springframework.aop.ThrowsAdvice;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author: wb-ny291824
- * @description  使用策略设计模式，行为参数化。
- * @date: Created in 2017/9/24
- * @modified: By:
+ *
+ * 使用策略设计模式，行为参数化。
+ * @author keji
+ * @version $Id: FiltingApples.java, v 0.1 2018/3/18 下午2:56 keji Exp $
  */
 public class FiltingApples {
 

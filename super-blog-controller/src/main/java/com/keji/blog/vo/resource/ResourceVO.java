@@ -10,10 +10,9 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/24
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: ResourceVO.java, v 0.1 2018/3/18 下午2:46 keji Exp $
  */
 @Data
 public class ResourceVO {
