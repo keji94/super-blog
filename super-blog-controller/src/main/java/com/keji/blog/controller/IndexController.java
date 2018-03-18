@@ -40,6 +40,11 @@ public class IndexController {
         return "/admin/" + page;
     }
 
+    @RequestMapping("/admin/modules/sys/{page}")
+    public String amdinPage(@PathVariable String page) {
+        return "/admin/modules/sys/" + page;
+    }
+
     @RequestMapping("/login")
     public String login() {
         return "login";
