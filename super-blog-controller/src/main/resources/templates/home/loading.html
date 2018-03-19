@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+loading....请稍后！
+<script src="/static/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script>
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return decodeURI(r[2]);
+        return null; //返回参数值
+    }
+
+    $(function () {
+        //模拟加载
+        setTimeout(function () {
+            var to = getUrlParam("url");
+            location.href = to + ".html"
+        }, 1000)
+
+    })
+</script>
+</body>
+</html>

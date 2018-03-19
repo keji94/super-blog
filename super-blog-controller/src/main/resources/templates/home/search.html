@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/plugins/animate/animate.min.css">
+    <link rel="stylesheet" href="/static/plugins/blog/css/style.css">
+    <title>分享</title>
+</head>
+<body class="animated fadeIn">
+<!--顶部导航栏信息-->
+<div class="header">
+    <div class="layui-container">
+        <div class="layui-row nav-header">
+            <!--logo-->
+            <div class="layui-col-xs9 layui-col-sm3 layui-col-md3  animated flipInX">
+                <a class="logo" href="//"><i class="fa fa-graduation-cap"></i>&nbsp;BMY's Note</a>
+            </div>
+            <!--logo结束-->
+            <!--index页面的右上方导航-->
+            <div class="layui-col-xs3 layui-col-sm-offset2 layui-col-sm7 layui-hide-md layui-hide-lg nav-btn">
+                <a href="javascript:void(0);" id="side-nav"><i class="fa fa-navicon"></i> </a>
+            </div>
+            <div class="layui-col-md-offset2 layui-col-md7 layui-hide-sm layui-hide-xs layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
+                <a href="index.html"><i class="layui-icon">&#xe68e;</i> HOME</a>
+                <a href="note.html" class="active"><i class="layui-icon">&#xe609;</i> NOTE</a>
+                <a href="https://github.com/miyakowork" target="_blank"><i class="fa fa-github"
+                                                                           style="font-size: 18px;"></i> GITHUB</a>
+                <a href="mine.html"><i class="layui-icon">&#xe715;</i> MINE</a>
+            </div>
+            <!--右上方导航结束-->
+            <ul class="layui-nav layui-nav-tree layui-nav-side">
+                <li class="layui-nav-item"><a href="index.html"><i class="layui-icon">&#xe68e;</i>
+                    HOME</a></li>
+                <li class="layui-nav-item"><a href="note.html" class="layui-this"><i class="layui-icon">&#xe609;</i>NOTE</a>
+                </li>
+                <li class="layui-nav-item"><a href="https://github.com/miyakowork" target="_blank"><i
+                        class="fa fa-github" style="font-size: 18px;"></i> GITHUB</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--顶部导航栏结束-->
+<hr class="header-hr">
+<!--统计、时间戳部分-->
+<div class="layui-container">
+    <blockquote class="layui-elem-quote">
+        搜索统计：共【<span class="sum-font">88</span>】个结果；其中博文【<span class="sum-font">66</span>】篇，笔记【<span
+            class="sum-font">22</span>】篇；
+        <div class="clock layui-show-md-inline-block layui-show-lg-inline-block layui-hide-xs layui-hide-sm"><span
+                class="clock-font">当前日期</span>：<span id="current-datetime"></span></div>
+    </blockquote>
+</div>
+<!--统计、时间戳或部分结束-->
+<!--正文部分-->
+<div id="search-body" class="layui-container">
+    <div id="search-operate">
+        <div id="search-panel">
+            <div class="select-none layui-row layui-col-space20">
+                <div class="layui-inline layui-col-md-offset2 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                    <input type="text" name="title" required lay-verify="required" placeholder="键入Enter键以搜索"
+                           autocomplete="off" class="layui-input search-box">
+                </div>
+                <div class="layui-inline layui-col-md3 layui-show-md-inline-block layui-hide-sm">
+                    <div class="layui-input-inline">
+                        <button class="layui-btn">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="search-main" class="layui-row">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="120">
+                <col width="100">
+                <col>
+                <col width="100">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th>类型</th>
+                <th>标题</th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2018-01-22</td>
+                <td><i class="fa fa-book"></i> 笔记</td>
+                <td>用cglib生成的代理类取不到注解的问题</td>
+                <td><a href="blog.html" class="layui">前往浏览</a></td>
+            </tr>
+            <tr>
+                <td>张爱玲</td>
+                <td>汉族</td>
+                <td>1920-09-30</td>
+                <td><a href="blog.html" class="layui">前往浏览</a></td>
+            </tr>
+            <tr>
+                <td>Helen Keller</td>
+                <td>拉丁美裔</td>
+                <td>1880-06-27</td>
+                <td><a href="blog.html" class="layui">前往浏览</a></td>
+            </tr>
+            <tr>
+                <td>岳飞</td>
+                <td>汉族</td>
+                <td>1103-北宋崇宁二年</td>
+                <td><a href="blog.html" class="layui">前往浏览</a></td>
+            </tr>
+            <tr>
+                <td>孟子</td>
+                <td>华夏族</td>
+                <td>公元前-372年</td>
+                <td><a href="blog.html" class="layui">前往浏览</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!--底部-->
+<div class="layui-fluid bottom-nav">
+    <div class="layui-row">
+        <div class="layui-col-lg4 layui-col-lg-offset4 copyright">
+            <p style="text-align: center;"><i class="fa fa-copyright"></i>&nbsp;2015-2018 赣ICP备15003721号-2 ☆
+                designed by Wuwenbin in 2018 ver3.
+            </p>
+        </div>
+    </div>
+</div>
+<!--底部结束-->
+
+<script src="/static/plugins/layui/layui.js"></script>
+<script src="/static/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="/static/plugins/hc-sticky/hc-sticky.min.js"></script>
+<script src="/static/js/home/index.js"></script>
+
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>

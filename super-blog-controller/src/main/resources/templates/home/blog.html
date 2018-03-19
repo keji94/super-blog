@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/plugins/animate/animate.min.css">
+    <link rel="stylesheet" href="/static/css/home/style.css">
+    <title>文章页</title>
+</head>
+<body class="animated fadeIn">
+<!--顶部导航栏信息-->
+<div class="header">
+    <div class="layui-container">
+        <div class="layui-row nav-header">
+            <!--logo-->
+            <div class="layui-col-xs9 layui-col-sm3 layui-col-md3  animated rubberBand">
+                <a class="logo" href="//"><i class="fa fa-graduation-cap"></i>&nbsp;BMY's Note</a>
+            </div>
+            <!--logo结束-->
+            <!--index页面的右上方导航-->
+            <div class="layui-col-xs3 layui-col-sm-offset2 layui-col-sm7 layui-hide-md layui-hide-lg nav-btn">
+                <a href="javascript:void(0);" id="side-nav"><i class="fa fa-navicon"></i> </a>
+            </div>
+            <div class="layui-col-md-offset2 layui-col-md7 layui-hide-sm layui-hide-xs layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
+                <a href="index.html"><i class="layui-icon">&#xe68e;</i> HOME</a>
+                <a href="note.html"><i class="layui-icon">&#xe609;</i> NOTE</a>
+                <a href="https://github.com/miyakowork" target="_blank"><i class="fa fa-github"
+                                                                           style="font-size: 18px;"></i> GITHUB</a>
+                <a href="mine.html"><i class="layui-icon">&#xe715;</i> MINE</a>
+            </div>
+            <!--右上方导航结束-->
+            <ul class="layui-nav layui-nav-tree layui-nav-side">
+                <li class="layui-nav-item"><a href="index.html"><i class="layui-icon">&#xe68e;</i>
+                    HOME</a></li>
+                <li class="layui-nav-item"><a href="note.html"><i class="layui-icon">&#xe609;</i> NOTE</a></li>
+                <li class="layui-nav-item"><a href="https://github.com/miyakowork" target="_blank"><i
+                        class="fa fa-github" style="font-size: 18px;"></i> GITHUB</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--顶部导航栏结束-->
+<hr class="header-hr">
+<!--统计、时间戳部分-->
+<div class="layui-container">
+    <blockquote class="layui-elem-quote">
+       <span class="layui-breadcrumb">
+        <a href="">网站首页</a>
+        <a href="">博客文章</a>
+        <a href="">有关 WebMagic 爬虫扒取 magnet 磁力链接的一些问题的解决</a>
+        <a><cite>正文</cite></a>
+     </span>
+    </blockquote>
+</div>
+<!--统计、时间戳或部分结束-->
+<!--正文部分-->
+<div id="blog-body" class="layui-container">
+    <div class="layui-row layui-col-space10">
+        <div id="blog-info" class="layui-col-md9 animated fadeInUp">
+            <!--博文开始-->
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">有关 WebMagic
+                                爬虫扒取 magnet
+                                磁力链接的一些问题的解决
+                            </legend>
+                        </fieldset>
+                        <div class="layui-text layui-blog-body">
+                            <div class="layui-row">
+                                <div class="layui-col-md6 layui-col-md-offset3 text-center blog-base-info">
+                                    <span><i class="fa fa-clock-o"></i> 2018-01-10</span>
+                                    <span><i class="fa fa-user-o"></i> miako<svg class="icon" aria-hidden="true"><use
+                                            xlink:href="#icon-renzhengkaobei"></use></svg></span>
+                                    <span><i class="fa fa-comment-o"></i> 653</span>
+                                    <span><i class="fa fa-eye"></i> 8564</span>
+                                </div>
+                            </div>
+                            <hr>
+                            &nbsp;<div class="content detail">
+                            <div class="fly-panel detail-box">
+                                <div class="fly-detail-info"><span
+                                        class="layui-badge layui-bg-green fly-detail-column"> 动态 </span> <span
+                                        class="layui-badge" style="background-color: #999;">未结</span> <span
+                                        class="layui-badge layui-bg-black">置顶</span>
+                                    <div class="fly-admin-box" data-id="22388"></div>
+                                    <span class="fly-list-nums"> <a href="#comment"><i class="iconfont"
+                                                                                       title="回答"></i> 41</a> <i
+                                            class="iconfont" title="人气"></i> 9382 </span></div>
+                                <div class="detail-about"><a class="fly-avatar" href="/u/336/"> </a>
+                                    <div class="fly-detail-user"><a href="/u/336/" class="fly-link">
+                                        <cite>纸飞机</cite> <i class="iconfont icon-renzheng" title="认证信息：官方人员"></i>
+                                    </a> <span>7天前</span></div>
+                                    <div class="detail-hits" id="LAY_jieAdmin" data-id="22388"><span
+                                            style="padding-right: 10px; color: #FF7200">悬赏：20飞吻</span> <span
+                                            class="layui-btn layui-btn-xs jie-admin " type="collect"
+                                            data-type="add">收藏</span></div>
+                                </div>
+                                <div class="detail-body layui-text photos"> 转眼已到 2018 年，新一轮的年度案例已经启动，而过去的 2017
+                                    年度案例也终于定格。我们从所有案例中，结合以下条件综合考虑：<br>
+                                    <div class="layui-elem-quote">
+                                        <ul>
+                                            <li> 案例本身的参考价值</li>
+                                            <li> 案例创造的影响力/服务人群规模</li>
+                                            <li> 一年累计点赞数</li>
+                                            <li> 能正常预览。若是后台模板，还必须开放下载</li>
+                                            <li> 案例作者在社区的活跃度</li>
+                                        </ul>
+                                    </div>
+                                    特别挑选出其中 20 款案例，以微信公众号投票的形式，正式角逐最终的年度案例 TOP 10。<br> <br>参与方式：<br>
+                                    <div class="layui-elem-quote"> 扫码关注 “layui前端框架” 公众号后，点击里面的菜单，即可为你喜爱的案例投票</div>
+                                    <br>
+                                    <div class="layui-elem-quote"> 截止时间：2018-01-31</div>
+                                    <br>投票结束后，为鼓励 layui 生态发展，决出的TOP10案例奖励如下：<br>
+                                    <div class="layui-elem-quote">
+                                        <ul>
+                                            <li> 得票第 1 名：奖励 ￥666 现金</li>
+                                            <li> 得票第 2/3 名：分别奖励￥299 现金</li>
+                                            <li> 得票第 4-10 名：分别奖励一本技术书籍（自行挑选后，由我们代付，价格在 ￥100 以内即可）</li>
+                                        </ul>
+                                    </div>
+                                    <br>下面是进入候选的 20 款案例（排名暂时不分先后）：
+                                    <hr>
+                                    <div class="layui-elem-quote">
+                                        <ul>
+                                            <li><a href="http://layuicms.gitee.io/" target="_blank" rel="nofollow">layuiCMS后台管理模版</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3198216" target="_blank">驊驊龔頾</a>）
+                                            </li>
+                                            <li><a href="http://demo.larrycms.com/backstage/ " target="_blank"
+                                                   rel="nofollow">LarryCMS后台模板2017</a>（作者：<a
+                                                    href="http://fly.layui.com/u/109200" target="_blank">larry</a>）
+                                            </li>
+                                            <li><a href="http://kit.zhengjinfan.cn/ " target="_blank"
+                                                   rel="nofollow">KITADMIN</a>（作者：<a
+                                                    href="http://fly.layui.com/u/784224 "
+                                                    target="_blank">Layui_初学者 </a>）
+                                            </li>
+                                            <li><a href="http://win10ui.yuri2.cn/ " target="_blank" rel="nofollow">Win10-UI</a>（作者：<a
+                                                    href="http://fly.layui.com/u/5248152 " target="_blank">尤里2号 </a>）
+                                            </li>
+                                            <li><a href="https://think.ctolog.com/ " target="_blank" rel="nofollow">Think.Admin</a>（作者：<a
+                                                    href="http://fly.layui.com/u/1114176" target="_blank">Anyon</a>）
+                                            </li>
+                                            <li><a href="https://jqadmin.jqcool.net/ " target="_blank"
+                                                   rel="nofollow">jQadmin后台模板</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3622080" target="_blank">jQ酷</a>）
+                                            </li>
+                                            <li><a href="http://www.lyblogs.cn/ " target="_blank" rel="nofollow">不落阁个人博客模板</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3547992 "
+                                                    target="_blank">Absolutely</a>）
+                                            </li>
+                                            <li><a href="http://vip-admin.com/" target="_blank"
+                                                   rel="nofollow">vip-admin</a>（作者：<a
+                                                    href="http://fly.layui.com/u/2933112 "
+                                                    target="_blank">vip_admin </a>）
+                                            </li>
+                                            <li><a href="http://fslayuiplugin.fallsea.com/ " target="_blank"
+                                                   rel="nofollow">fsLayuiPlugin</a>（作者：<a
+                                                    href="http://fly.layui.com/u/1154664 "
+                                                    target="_blank">fallsea </a>）
+                                            </li>
+                                            <li><a href="http://www.zhubobook.com/ " target="_blank"
+                                                   rel="nofollow">主播百科</a>（作者：<a
+                                                    href="http://fly.layui.com/u/6414576 " target="_blank">主播百科</a>）
+                                            </li>
+                                            <li><a href="http://www.itkee.cn/ " target="_blank" rel="nofollow">ITKEE.CN社区</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3656688"
+                                                    target="_blank">SuperMan1992 </a>）
+                                            </li>
+                                            <li><a href="https://gitee.com/hisi/hisiphp " target="_blank"
+                                                   rel="nofollow">HisiPHP 快速开发框架</a>（作者：<a
+                                                    href="http://fly.layui.com/u/1851192" target="_blank">橘子疯 </a>）
+                                            </li>
+                                            <li><a href="http://hua966.cn:8080/lulichat/login.html " target="_blank"
+                                                   rel="nofollow">陆离 Chat</a>（作者：<a
+                                                    href="http://fly.layui.com/u/1468152 "
+                                                    target="_blank">蛋蛋的忧伤 </a>）
+                                            </li>
+                                            <li><a href="https://www.lotusadmin.top/ " target="_blank"
+                                                   rel="nofollow">LotusAdmin</a>（作者：<a
+                                                    href="http://fly.layui.com/u/2496144" target="_blank">夏季未央 </a>）
+                                            </li>
+                                            <li><a href="https://www.tpt360.com/ " target="_blank"
+                                                   rel="nofollow">TPTCMS</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3470712"
+                                                    target="_blank">Templet360 </a>）
+                                            </li>
+                                            <li><a href="http://www.m-finder.com/ " target="_blank" rel="nofollow">M-finder个人博客</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3483480"
+                                                    target="_blank">finder </a>）
+                                            </li>
+                                            <li><a href="http://blog.yurunsoft.com/ " target="_blank"
+                                                   rel="nofollow">宇润的博客</a>（作者：<a
+                                                    href="http://fly.layui.com/u/2872632" target="_blank">宇润</a>）
+                                            </li>
+                                            <li><a href="http://tools.guardui.net/ " target="_blank" rel="nofollow">GuiTools</a>（作者：<a
+                                                    href="http://fly.layui.com/u/398160" target="_blank">守护者_咖啡</a>）
+                                            </li>
+                                            <li><a href="http://8m8.top/ " target="_blank"
+                                                   rel="nofollow">8m8博客</a>（作者：<a
+                                                    href="http://fly.layui.com/u/4107768" target="_blank">SHUM</a>）
+                                            </li>
+                                            <li><a href="http://www.52nd.xin/ " target="_blank"
+                                                   rel="nofollow">知源大数据</a>（作者：<a
+                                                    href="http://fly.layui.com/u/3226440"
+                                                    target="_blank">志远有18CM</a>）
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    我们允许案例作者在相关技术群拉票，但决不允许恶意刷票，一经发现，将撤销资格<br> <br> <br></div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="layui-row text-center">
+                            <div class="layui-btn layui-btn-warm"><i class="fa fa-rmb"></i> 打赏</div>
+                            <div class="layui-btn"><i class="fa fa-thumbs-o-up"></i> 赞</div>
+                        </div>
+                        <div class="layui-row layui-mt20">
+                            <blockquote class="layui-elem-quote text-center " style="border: none;">
+                                <span class="layui-show-md-inline-block layui-hide">文章出处：Miako's Blog</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="layui-show-md-inline-block layui-hide">文章地址：http://localhost:63342/blogv20180108/blog.html</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span>转载注明下哦！o(≧v≦)o~~</span>
+                            </blockquote>
+                        </div>
+                        <div class="layui-row layui-mt20">
+                            <p class="blog-tags">
+                                标签：
+                                <span>Java</span>
+                                <span>API</span>
+                                <span>WEB开发</span>
+                                <span>前端</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--博文结束-->
+
+            <!--评论框-->
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article comment">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>随便说两句</legend>
+                            <div class="layui-field-box">
+                                <label for="comment-input"></label>
+                                <textarea id="comment-input" style="display: none;"></textarea>
+                            </div>
+                            <button class="layui-btn layui-btn-sm" style="float: right;width: 120px;">发表</button>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!--评论框结束-->
+
+            <!--评论区-->
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article comment">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>评论区</legend>
+                            <div class="layui-field-box">
+                                <div class="layui-row comment-block">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md1 layui-col-xs1 comment-avatar">
+                                            <img class="layui-circle"
+                                                 src="//avatar.ithome.com/avatars/001/24/27/40_60.jpg">
+                                        </div>
+                                        <div class="layui-col-md10 layui-col-xs8">
+                                            <i class="fa fa-user-o"></i> <span class="comment-user">会飞的猪</span><br/>
+                                            <i class="fa fa-clock-o"></i> <span class="comment-datetime">2018/01/10 15:33:52</span>
+                                        </div>
+                                    </div>
+                                    <div class="layui-row comment-block-content">
+                                        我那笔记本刷win10，每个版本其实变化都不大，每次更新完了看起来也没什么新的，直到有一天刷回最初版本（恢复出厂设置）：卧槽这是win10吗？
+                                    </div>
+                                    <div class="layui-row" style="text-align: right;">
+                                        <a href="javascript:void(0);"> <i class="fa fa-comment"></i> 回复</a>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="layui-row comment-block">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md1 layui-col-xs1 comment-avatar">
+                                            <img class="layui-circle"
+                                                 src="//avatar.ithome.com/avatars/001/24/27/40_60.jpg">
+                                        </div>
+                                        <div class="layui-col-md10 layui-col-xs8">
+                                            <i class="fa fa-user-o"></i> <span class="comment-user">会飞的猪</span><br/>
+                                            <i class="fa fa-clock-o"></i> <span class="comment-datetime">2018/01/10 15:33:52</span>
+                                        </div>
+                                    </div>
+                                    <div class="layui-row comment-block-content">
+                                        我那笔记本刷win10，每个版本其实变化都不大，每次更新完了看起来也没什么新的，直到有一天刷回最初版本（恢复出厂设置）：卧槽这是win10吗？
+                                    </div>
+                                    <div class="layui-row" style="text-align: right;">
+                                        <a href="javascript:void(0);"> <i
+                                                class="fa fa-comment"></i> 回复</a>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="layui-row comment-block">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md1 layui-col-xs1 comment-avatar">
+                                            <img class="layui-circle"
+                                                 src="//avatar.ithome.com/avatars/001/24/27/40_60.jpg">
+                                        </div>
+                                        <div class="layui-col-md10 layui-col-xs8">
+                                            <p><i class="fa fa-user-o"></i> <span class="comment-user">会飞的猪1</span></p>
+                                            <p><i class="fa fa-clock-o"></i> <span class="comment-datetime">2018/01/10 15:33:52</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="layui-row comment-block-content">
+                                        我那笔记本刷win10，每个版本其实变化都不大，每次更新完了看起来也没什么新的，直到有一天刷回最初版本（恢复出厂设置）：卧槽这是win10吗？
+                                    </div>
+                                    <div class="layui-row" style="text-align: right;">
+                                        <a href="javascript:void(0);"> <i
+                                                class="fa fa-comment"></i> 回复</a>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="layui-row comment-block">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md1 layui-col-xs1 comment-avatar">
+                                            <img class="layui-circle"
+                                                 src="//avatar.ithome.com/avatars/001/24/27/40_60.jpg">
+                                        </div>
+                                        <div class="layui-col-md10 layui-col-xs8">
+                                            <i class="fa fa-user-o"></i> <span class="comment-user">会飞的猪</span><br/>
+                                            <i class="fa fa-clock-o"></i> <span class="comment-datetime">2018/01/10 15:33:52</span>
+                                        </div>
+                                    </div>
+                                    <div class="layui-row comment-block-content">
+                                        我那笔记本刷win10，每个版本其实变化都不大，每次更新完了看起来也没什么新的，直到有一天刷回最初版本（恢复出厂设置）：卧槽这是win10吗？
+                                    </div>
+                                    <div class="layui-row" style="text-align: right;">
+                                        <a href="javascript:void(0);"> <i
+                                                class="fa fa-comment"></i> 回复</a>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!--评论区结束-->
+
+        </div>
+        <div class="layui-col-md3">
+            <div id="affix-side">
+                <div id="search-panel" class="layui-tab layui-tab-card">
+                    <div class="layui-tab-content select-none">
+                        <p class="title">搜一搜</p>
+                        <hr>
+                        <input type="text" name="title" required lay-verify="required" placeholder="键入Enter键以搜索"
+                               autocomplete="off" class="layui-input search-box">
+                    </div>
+                </div>
+
+                <div class="layui-tab layui-tab-card">
+                    <div class="layui-tab-content select-none">
+                        <p class="title">文章分类</p>
+                        <hr>
+                        <p><i class="layui-icon">&#xe60a;</i> Java基础 </p>
+                        <p><i class="layui-icon">&#xe60a;</i> SpringBoot </p>
+                        <p><i class="layui-icon">&#xe60a;</i> IT技术 </p>
+                        <p><i class="layui-icon">&#xe60a;</i> Web开发 </p>
+                    </div>
+                </div>
+
+                <div class="layui-tab layui-tab-card layui-similar">
+                    <div class="layui-tab-content select-none">
+                        <p class="title">相似文章</p>
+                        <hr>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                        <p>都是啦啦我选择的推</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<div class="layui-fluid bottom-nav">
+    <div class="layui-row">
+        <div class="layui-col-md4 layui-col-md-offset4 copyright">
+            <p style="text-align: center;"><i class="fa fa-copyright"></i>&nbsp;2015-2018 赣ICP备15003721号-2 ☆
+                designed by Wuwenbin in 2018 ver3.
+            </p>
+        </div>
+    </div>
+</div>
+<!--底部结束-->
+
+<script src="/static/plugins/layui/layui.js"></script>
+<script src="/static/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="/static/plugins/hc-sticky/hc-sticky.min.js"></script>
+<script src="/static/js/home/index.js"></script>
+<script src="/static/js/home/svg.js"></script>
+
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>

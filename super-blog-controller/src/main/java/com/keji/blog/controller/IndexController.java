@@ -59,6 +59,10 @@ public class IndexController {
     public String index() {
         return "/home/index";
     }
+    @RequestMapping("")
+    public String indexPage() {
+        return "/home/index";
+    }
 
     @RequestMapping("/modules/{index}/{page}")
     public String menuIndex(@PathVariable String index, @PathVariable String page) {

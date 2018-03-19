@@ -1,84 +1,480 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta th:replace="/home/fragment/style"/>
-    <title>克己的博客</title>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/plugins/animate/animate.min.css">
+    <link rel="stylesheet" href="/static/css/home/style.css">
+    <link rel="icon" href="/static/images/favicon.ico">
+    <title>首页</title>
 </head>
 <body class="animated fadeIn">
-<div id="index-app">
-    <bmy-header :params="params" :home="current"></bmy-header>
-    <hr class="header-hr">
-    <bmy-block :quote="quote"></bmy-block>
-    <bmy-articles>
-        <bmy-list slot="list"></bmy-list>
-        <bmy-info :utext="params.info_label" :qq="params.qq_login" slot="infoLabel" :su="su"
-                  :order="params.info_panel_order"></bmy-info>
-        <bmy-search :sw="sw" slot="search"></bmy-search>
-        <bmy-cate :cates="cates" slot="cate"></bmy-cate>
-        <bmy-random :articles="articles" slot="random"></bmy-random>
-        <bmy-tab :tabs="tabs" slot="tab"></bmy-tab>
-    </bmy-articles>
-    <bmy-footer :words="params.footer_words"></bmy-footer>
+<!--顶部导航栏信息-->
+<div class="header">
+    <div class="layui-container">
+        <div class="layui-row nav-header">
+            <!--logo-->
+            <div class="layui-col-xs9 layui-col-sm3 layui-col-md3  animated flipInX">
+                <a class="logo" href="index.html">
+                    <img src="/static/images/keji.png" style="height: 30px">
+                    &nbsp;的博客
+                </a>
+
+            </div>
+            <!--logo结束-->
+            <!--index页面的右上方导航-->
+            <div class="layui-col-xs3 layui-col-sm-offset2 layui-col-sm7 layui-hide-md layui-hide-lg nav-btn">
+                <a href="javascript:void(0);" id="side-nav"><i class="fa fa-navicon"></i> </a>
+            </div>
+
+
+
+            <div class="layui-col-md-offset2 layui-col-md7 layui-hide layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
+                <a href="index.html" class="active"><i class="layui-icon">&#xe68e;</i> 主页</a>
+                <a href="note.html"><i class="layui-icon">&#xe609;</i> 开发笔记</a>
+                <a href="https://github.com/miyakowork" target="_blank"><i class="fa fa-github"
+                                                                           style="font-size: 18px;"></i> GITHUB</a>
+                <a href="mine.html"><i class="layui-icon">&#xe6af;</i> 关于我</a>
+            </div>
+            <!--右上方导航结束-->
+            <ul class="layui-nav layui-nav-tree layui-nav-side">
+                <li class="layui-nav-item"><a href="index.html" class="layui-this"><i class="layui-icon">&#xe68e;</i>
+                    HOME</a></li>
+                <li class="layui-nav-item"><a href="note.html"><i class="layui-icon">&#xe609;</i> NOTE</a></li>
+                <li class="layui-nav-item"><a href="https://github.com/miyakowork" target="_blank"><i
+                        class="fa fa-github" style="font-size: 18px;"></i> GITHUB</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
-<div th:replace="frontend/fragment/script"></div>
-<script th:inline="javascript">
-    BMY.indexVM = new Vue({
-        el: "#index-app",
-        data: {
-            params: [[${indexVo.settings}]]
-            , cates: [[${indexVo.cateList}]]
-            , articles: [[${indexVo.randomArticles}]]
-            , tabs: [[${indexVo.tagList}]]
-            , current: true
-            , su: [[${su}]]
-            , quote: {
-                showBlog: true
-                , showSearch: false
-                , showText: true
-                , blogCount: [[${indexVo.blogCount}]]
-                , searchCount: 0
-                , showClock: true
-                , text: [[${indexVo.settings.index_top_words}]]
-            }
-            , sw: BMY.getParam("s") !== undefined ? decodeURIComponent(BMY.getParam("s")) : BMY.getParam("s")
-        },
-        mounted: function () {
-            BMY.stickyIt();
+<!--顶部导航栏结束-->
+<hr class="header-hr">
+<!--搜索、统计-->
+<div class="layui-container">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;搜一搜</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="输入内容,按Enter键搜索" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                博文统计：共【<span class="sum-font">51</span>】篇；笔记统计：共【<span class="sum-font">88</span>】条；继续加油，fighting！~\(≧▽≦)/~！
 
-            BMY.affix = new hcSticky("#affix-side", {
-                stickTo: '#main-body'
-                , innerSticker: '#search-panel'
-                , queries: {980: {disable: true}}
-                , top: 75
-                , onStart: function () {
-                    if (!BMY.sticky()) {
-                        BMY.affix.destroy();
-                    }
-                }
-            })
-        }
-    })
+            </div>
+        </div>
+    </form>
+</div>
+<!--搜索、统计部分结束-->
+<!--正文部分-->
+<div id="main-body" class="layui-container">
+    <div class="layui-row layui-col-space10 animated fadeInUp">
+        <div id="article-list" class="layui-col-md9">
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                <span class="layui-badge layui-bg-green">爬虫</span>
+                                <span class="layui-badge layui-bg-cyan">置顶</span>
+                                <a href="blog.html">有关 WebMagic 爬虫扒取 magnet 磁力链接的一些问题的解决</a>
+                            </legend>
+                            <div class="layui-field-box">
+                                &nbsp;&nbsp;&nbsp;&nbsp;最近在研究爬虫,想扒取资源.
+                                研究了多了国人的爬虫webCollector/webMagic等,最后决定使用webMagic,感觉这个比较容易上手,而且定义比较灵活,也容易懂.
+                                具体文档请移步:http://webmagic.io/<a class="loading select-none" href="blog.html"> 阅读全文<i
+                                    class="fa fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>爬虫</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>Java</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>开源</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>webmagic</span></span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                <span class="layui-badge layui-bg-green">Spring</span>
+                                <a href="blog.html">Spring4.1新特性之Jackson 以及 @JsonView</a>
+                            </legend>
+                            <div class="layui-field-box has-pic" style="word-break: break-all;">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-lg10 layui-col-md10 layui-col-sm10 layui-col-xs12">
+                                        <!--255个字符-->
+                                        qwertyjfdsgbyufjaw;fms../wer,fwrpw;ktrotgjio4t09wrik32[v[sjghifkp[agjm-0tkporghugiq-[tgifjnklgjo
+                                        pgj3w0ti23tkp[esgkvjgqawr]qwkffksd'fesrhjiwq3t]3[lplp[klp[kp';'gd;h.'/.;'.retl[w]elt.w';tkkepkrfefksp[eg[];
+                                        h[erhk[pglew-[ptyolgewgopbsl][h'er'uhj]erp[ytg-ew=[p
+                                        <a class="loading select-none" href="blog.html"> 阅读全文<i
+                                                class="fa fa-angle-double-right"></i> </a>
+                                    </div>
+                                    <div class="layui-col-lg2 layui-col-md2 layui-col-sm2">
+                                        <img class="panel-pic"
+                                             src="https://upload-images.jianshu.io/upload_images/3486498-e4caf2bb9ca03b04.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240"
+                                             alt="cover">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> 爬虫</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> Java</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> 开源</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> webmagic</span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                Spring4中关于 MappingJacksonHttpMessageConverter 报错解决办法
+                            </legend>
+                            <div class="layui-field-box">
+                                &nbsp;&nbsp;&nbsp;&nbsp;…先安利一波：JetBrains家族系列的IDE是真的好用。还没开搞的赶紧吧。。。。
+                                首先感谢lanyu大神。
+                                先列出我搭建的License Server服务器：http://jetbrains.wuwenbin.me:1609 ,启动IDE的时候选择<a
+                                    class="loading select-none"
+                                    href="blog.html">
+                                阅读全文<i class="fa fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> IDEA</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> Java</span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                <span class="layui-badge layui-bg-green">爬虫</span>
+                                <span class="layui-badge layui-bg-cyan">置顶</span>
+                                <a href="blog.html">有关 WebMagic 爬虫扒取 magnet 磁力链接的一些问题的解决</a>
+                            </legend>
+                            <div class="layui-field-box">
+                                &nbsp;&nbsp;&nbsp;&nbsp;最近在研究爬虫,想扒取资源.
+                                研究了多了国人的爬虫webCollector/webMagic等,最后决定使用webMagic,感觉这个比较容易上手,而且定义比较灵活,也容易懂.
+                                具体文档请移步:http://webmagic.io/<a class="loading select-none" href="blog.html"> 阅读全文<i
+                                    class="fa fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>爬虫</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>Java</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>开源</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>webmagic</span></span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                <span class="layui-badge layui-bg-green">Spring</span>
+                                <a href="blog.html">Spring4.1新特性之Jackson 以及 @JsonView</a>
+                            </legend>
+                            <div class="layui-field-box has-pic" style="word-break: break-all;">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-lg10 layui-col-md10 layui-col-sm10 layui-col-xs12">
+                                        <!--255个字符-->
+                                        qwertyjfdsgbyufjaw;fms../wer,fwrpw;ktrotgjio4t09wrik32[v[sjghifkp[agjm-0tkporghugiq-[tgifjnklgjo
+                                        pgj3w0ti23tkp[esgkvjgqawr]qwkffksd'fesrhjiwq3t]3[lplp[klp[kp';'gd;h.'/.;'.retl[w]elt.w';tkkepkrfefksp[eg[];
+                                        h[erhk[pglew-[ptyolgewgopbsl][h'er'uhj]erp[ytg-ew=[p
+                                        <a class="loading select-none" href="blog.html"> 阅读全文<i
+                                                class="fa fa-angle-double-right"></i> </a>
+                                    </div>
+                                    <div class="layui-col-lg2 layui-col-md2 layui-col-sm2">
+                                        <img class="panel-pic"
+                                             src="https://upload-images.jianshu.io/upload_images/3486498-e4caf2bb9ca03b04.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240"
+                                             alt="cover">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> 爬虫</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> Java</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> 开源</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> webmagic</span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                Spring4中关于 MappingJacksonHttpMessageConverter 报错解决办法
+                            </legend>
+                            <div class="layui-field-box">
+                                &nbsp;&nbsp;&nbsp;&nbsp;…先安利一波：JetBrains家族系列的IDE是真的好用。还没开搞的赶紧吧。。。。
+                                首先感谢lanyu大神。
+                                先列出我搭建的License Server服务器：http://jetbrains.wuwenbin.me:1609 ,启动IDE的时候选择<a
+                                    class="loading select-none"
+                                    href="blog.html">
+                                阅读全文<i class="fa fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> IDEA</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> Java</span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                <span class="layui-badge layui-bg-green">爬虫</span>
+                                <span class="layui-badge layui-bg-cyan">置顶</span>
+                                <a href="blog.html">有关 WebMagic 爬虫扒取 magnet 磁力链接的一些问题的解决</a>
+                            </legend>
+                            <div class="layui-field-box">
+                                &nbsp;&nbsp;&nbsp;&nbsp;最近在研究爬虫,想扒取资源.
+                                研究了多了国人的爬虫webCollector/webMagic等,最后决定使用webMagic,感觉这个比较容易上手,而且定义比较灵活,也容易懂.
+                                具体文档请移步:http://webmagic.io/<a class="loading select-none" href="blog.html"> 阅读全文<i
+                                    class="fa fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>爬虫</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>Java</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>开源</span></span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>webmagic</span></span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                <span class="layui-badge layui-bg-green">Spring</span>
+                                <a href="blog.html">Spring4.1新特性之Jackson 以及 @JsonView</a>
+                            </legend>
+                            <div class="layui-field-box has-pic" style="word-break: break-all;">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-lg10 layui-col-md10 layui-col-sm10 layui-col-xs12">
+                                        <!--255个字符-->
+                                        qwertyjfdsgbyufjaw;fms../wer,fwrpw;ktrotgjio4t09wrik32[v[sjghifkp[agjm-0tkporghugiq-[tgifjnklgjo
+                                        pgj3w0ti23tkp[esgkvjgqawr]qwkffksd'fesrhjiwq3t]3[lplp[klp[kp';'gd;h.'/.;'.retl[w]elt.w';tkkepkrfefksp[eg[];
+                                        h[erhk[pglew-[ptyolgewgopbsl][h'er'uhj]erp[ytg-ew=[p
+                                        <a class="loading select-none" href="blog.html"> 阅读全文<i
+                                                class="fa fa-angle-double-right"></i> </a>
+                                    </div>
+                                    <div class="layui-col-lg2 layui-col-md2 layui-col-sm2">
+                                        <img class="panel-pic"
+                                             src="https://upload-images.jianshu.io/upload_images/3486498-e4caf2bb9ca03b04.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240"
+                                             alt="cover">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> 爬虫</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> Java</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> 开源</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> webmagic</span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-collapse layui-panel layui-article">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-content layui-show layui-article">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="center-to-head">
+                                Spring4中关于 MappingJacksonHttpMessageConverter 报错解决办法
+                            </legend>
+                            <div class="layui-field-box">
+                                &nbsp;&nbsp;&nbsp;&nbsp;…先安利一波：JetBrains家族系列的IDE是真的好用。还没开搞的赶紧吧。。。。
+                                首先感谢lanyu大神。
+                                先列出我搭建的License Server服务器：http://jetbrains.wuwenbin.me:1609 ,启动IDE的时候选择<a
+                                    class="loading select-none"
+                                    href="blog.html">
+                                阅读全文<i class="fa fa-angle-double-right"></i> </a>
+                            </div>
+                            <div class="operation">
+                                <div class="tags">
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> IDEA</span>
+                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> Java</span>
+                                </div>
+                                <div class="info">
+                                    <span class="views select-none"><i class="fa fa-eye"></i> 265</span>
+                                    <span class="datetime select-none"><i class="fa fa-clock-o"></i> 2018-01-08</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div id="index-affix-side">
+                <div class="layui-tab layui-tab-card">
+                    <ul class="layui-tab-title select-none">
+                        <li class="layui-this">网站信息</li>
+                        <li>居委会</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show layui-text">
+                            <ul>
+                                <li>网站名称：克己的博客</li>
+                                <li>博客系统：<a href="//github.com/miyakowork" target="_blank"
+                                            style="font-style: italic;"><i class="layui-icon">&#xe628;</i> NoteBlog</a>
+                                </li>
+                                <li>qq群：123456789</li>
+                                <li>前端UI：<a href="//layui.com" target="_blank">layui 2.x</a></li>
+                                <li>后端架构：<a href="https://projects.spring.io/spring-boot/" target="_blank">Spring
+                                    Boot</a> 1.5.9 系列等
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="layui-tab-item">
+                            <p style="text-align: center">
+                                <a onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" href=""
+                                   class="layui-btn layui-btn-sm layui-btn-primary"><i class="fa fa-qq"></i>
+                                    网站用户</a>
+                                <a href="" class="layui-btn layui-btn-sm layui-btn-primary"><i class="fa fa-user-o"></i>
+                                    网站管理</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-</script>
-<script>
-    layui.config({base: '/static/assets/js/frontend/'}).extend({
-        article: 'article'
-    });
-    layui.use(['laytpl', 'element', 'flow', 'article'], function () {
-        var flow = layui.flow;
-        var element = layui.element;
-        var laytpl = layui.laytpl;
-        var article = layui.article;
+                <div class="layui-tab layui-tab-card layui-article-cate">
+                    <div class="layui-tab-content select-none ">
+                        <p class="title">文章分类</p>
+                        <hr>
+                        <p><i class="layui-icon">&#xe60a;</i> Java基础 </p>
+                        <p><i class="layui-icon">&#xe60a;</i> SpringBoot </p>
+                        <p><i class="layui-icon">&#xe60a;</i> IT技术 </p>
+                        <p><i class="layui-icon">&#xe60a;</i> Web开发 </p>
+                    </div>
+                </div>
 
-        flow.load({
-            elem: '#article-list' //流加载容器
-            , done: function (page, next) { //执行下一页的回调
-                return article(page, next, laytpl);
-            }
-        });
-    });
+                <div class="layui-tab layui-tab-card layui-master-recommend">
+                    <div class="layui-tab-content select-none">
+                        <p class="title">热门博客</p>
+                        <hr>
+                        <p><a href="index.html">深入JVM虚拟机</a>!</p>
+                        <p><a href="index.html">Java8 In Action</a>!</p>
+                        <p><a href="index.html">Spring实战</a>!</p>
+                    </div>
+                </div>
 
+                <div class="layui-tab layui-tab-card layui-tags">
+                    <div class="layui-tab-content select-none">
+                        <p class="title">热门标签</p>
+                        <hr>
+                        <span class="layui-badge-rim">Java(91)</span>
+                        <span class="layui-badge-rim">SpringBoot(91)</span>
+                        <span class="layui-badge-rim">爬虫(91)</span>
+                        <span class="layui-badge-rim">Linux(91)</span>
+                        <span class="layui-badge-rim">Java(91)</span>
+                        <span class="layui-badge-rim">SpringCloud(91)</span>
+                        <span class="layui-badge-rim">Spring(91)</span>
+                        <span class="layui-badge-rim">IDEA(91)</span>
+                        <span class="layui-badge-rim">Java(91)</span>
+                        <span class="layui-badge-rim">Java(91)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</script>
+<!--底部-->
+<div class="layui-fluid bottom-nav">
+    <div class="layui-row">
+        <div class="layui-col-md4 layui-col-md-offset4 copyright">
+            <p style="text-align: center;"><i class="fa fa-copyright"></i>&nbsp;2015-2018 赣ICP备15003721号-2 ☆ powered by
+                <a href="//wuwenbin.me" target="_blank" style="color: #1E9FFF;">NoteBlog</a> in 2018 ver3.
+            </p>
+        </div>
+    </div>
+</div>
+<!--底部结束-->
+
+<script src="/static/plugins/layui/layui.js"></script>
+<script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
+<script src="/static/plugins/hc-sticky/hc-sticky.min.js"></script>
+<script src="/static/js/home/index.js"></script>
+
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </body>
 </html>

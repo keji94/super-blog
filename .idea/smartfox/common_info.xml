@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SmartFoxWorkToolsProjectState">
-    <option name="branch" value="master" />
+    <option name="branch" value="index_page" />
     <option name="gitUrl" value="https://github.com/keji94/super-blog.git" />
-    <option name="localBranch" value="master" />
-    <option name="revision" value="658a68b5153a94cd3838d10ab56846b80e3dd530" />
+    <option name="localBranch" value="index_page" />
+    <option name="revision" value="231c404249df9c71e95904e9221d78e51dd08dcc" />
   </component>
 </project>
