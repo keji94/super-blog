@@ -35,8 +35,13 @@ public class AdminIndexController {
     }
 
     @RequestMapping("/admin/modules/sys/{page}")
-    public String amdinPage(@PathVariable String page) {
+    public String sysPage(@PathVariable String page) {
         return "/admin/modules/sys/" + page;
+    }
+
+    @RequestMapping("/admin/modules/authority/{page}")
+    public String authorityPage(@PathVariable String page) {
+        return "/admin/modules/authority/" + page;
     }
 
     @RequestMapping("/login")

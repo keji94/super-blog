@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页设置</title>
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">文本设置</li>
+        <li>评论设置</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">logo文本</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入logo文本" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">网站title</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入title" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">页眉文本</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">页尾文本</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入页尾文本" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主页名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">笔记名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">关于文本</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">搜索文本</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">信息版内容</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="layui-tab-item">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">全部评论</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">留言功能</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest2" lay-text="ON|OFF">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">公告信息</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">留言公告信息</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/plugins/layui/layui.js"></script>
+<script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
+<script src="/static/js/admin/modules/settings/settings.js"></script>
+
+</body>
+</html>
