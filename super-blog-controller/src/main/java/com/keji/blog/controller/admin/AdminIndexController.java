@@ -1,34 +1,28 @@
-package com.keji.blog.controller;
-
+package com.keji.blog.controller.admin;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import com.keji.blog.util.QrCodeUtil;
 import com.keji.blog.util.ShiroUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- *
  * @author keji
  * @version $Id: IndexController.java, v 0.1 2018/3/17 下午1:03 keji Exp $
  */
 @Controller
-public class IndexController {
+public class AdminIndexController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -53,15 +47,6 @@ public class IndexController {
     @RequestMapping("/{page}")
     public String index(@PathVariable String page) {
         return page;
-    }
-
-    @RequestMapping("/index")
-    public String index() {
-        return "/home/index";
-    }
-    @RequestMapping("")
-    public String indexPage() {
-        return "/home/index";
     }
 
     @RequestMapping("/modules/{index}/{page}")
@@ -90,32 +75,5 @@ public class IndexController {
             logger.error("系统错误!", e);
         }
 
-    }
-
-    @RequestMapping("/testQrCode")
-    public void testQrCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        String content = "201712150400170008";
-        String deskCode = "1";
-        String deskName = "帝王蟹桌";
-        String savePath = "c:/a/";
-        ClassPathResource classPathResource = new ClassPathResource("/static/images/logo.png");
-        boolean exists = classPathResource.exists();
-        File logo = classPathResource.getFile();
-
-        try {
-            BufferedImage image = QrCodeUtil.createQrCodeWithLogo(content, 300, logo, 64, 64, true);
-            image = QrCodeUtil.drawStringToImage(image, deskCode + "号桌", deskName, 600, 600);
-            QrCodeUtil.saveImageToDist(image, savePath, deskCode + "号桌" + ".jpg");
-            QrCodeUtil.download(image,response,"啦啦啦.png");
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    @RequestMapping("/vue")
-    public String vue() {
-        return "vuedemo";
     }
 }
