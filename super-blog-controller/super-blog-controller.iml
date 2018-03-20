@@ -66,24 +66,6 @@
     <orderEntry type="library" name="Maven: org.skyscreamer:jsonassert:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.29" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.alibaba:jconsole:1.8.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../java/jdk1.8/lib/jconsole.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: com.alibaba:tools:1.8.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../java/jdk1.8/lib/tools.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.8" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.10.RELEASE" level="project" />
