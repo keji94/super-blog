@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.ApplicationTests;
 import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.dataobject.UserDO;
-import com.keji.blog.service.user.UserService;
+import com.keji.blog.service.admin.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

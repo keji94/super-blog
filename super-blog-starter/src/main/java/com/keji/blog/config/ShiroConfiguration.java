@@ -48,7 +48,7 @@ public class ShiroConfiguration {
     public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor() {
         AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
         aasa.setSecurityManager(getDefaultWebSecurityManager());
-        return new AuthorizationAttributeSourceAdvisor();
+        return aasa;
     }
 
     @Bean(name="shiroFilter")

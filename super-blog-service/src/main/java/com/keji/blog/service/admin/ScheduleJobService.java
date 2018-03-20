@@ -1,4 +1,4 @@
-package com.keji.blog.service.schedule;
+package com.keji.blog.service.admin;
 
 import java.util.List;
 

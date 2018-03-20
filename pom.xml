@@ -46,6 +46,8 @@
         <commons.io.version>2.5</commons.io.version>
         <zxing-core.version>3.3.0</zxing-core.version>
         <commons-codec.version>1.8</commons-codec.version>
+        <jedis.version>2.9.0</jedis.version>
+        <spring-data-redis.version>2.0.5.RELEASE</spring-data-redis.version>
     </properties>
 
     <dependencyManagement>
@@ -154,6 +156,13 @@
                 <version>${shiro.version}</version>
             </dependency>
 
+            <!--redis-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
             <!--spring-->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -228,6 +237,24 @@
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec.version}</version>
             </dependency>
+
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

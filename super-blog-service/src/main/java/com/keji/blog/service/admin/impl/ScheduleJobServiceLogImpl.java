@@ -1,15 +1,12 @@
-package com.keji.blog.service.schedule.impl;
+package com.keji.blog.service.admin.impl;
 
 import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.keji.blog.dao.ScheduleJobDAO;
 import com.keji.blog.dao.ScheduleJobLogDAO;
-import com.keji.blog.dataobject.ScheduleJobDO;
 import com.keji.blog.dataobject.ScheduleJobLogDO;
-import com.keji.blog.service.schedule.ScheduleJobLogService;
-import com.keji.blog.service.schedule.ScheduleJobService;
+import com.keji.blog.service.admin.ScheduleJobLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

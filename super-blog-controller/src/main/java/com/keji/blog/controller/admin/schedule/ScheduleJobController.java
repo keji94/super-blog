@@ -7,7 +7,7 @@ import com.keji.blog.dataobject.ScheduleJobDO;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
 import com.keji.blog.result.PageResult;
-import com.keji.blog.service.schedule.ScheduleJobService;
+import com.keji.blog.service.admin.ScheduleJobService;
 import com.keji.blog.util.ScheduleJobConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.vo.schedule.ScheduleJobQueryVO;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

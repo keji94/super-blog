@@ -7,7 +7,7 @@ import com.keji.blog.dao.RoleDAO;
 import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.dataobject.RoleDO;
 import com.keji.blog.dataobject.UserDO;
-import com.keji.blog.service.user.UserService;
+import com.keji.blog.service.admin.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

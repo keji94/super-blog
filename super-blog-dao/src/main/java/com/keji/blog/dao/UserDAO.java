@@ -6,10 +6,9 @@ import com.keji.blog.dataobject.UserDO;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/19
- * @modified: By:
+ *
+ * @author wb-ny291824
+ * @version $Id: TextSettingsDAO.java, v 0.1 2018/3/20 10:09 wb-ny291824 Exp $
  */
 @Repository
 public interface UserDAO extends BaseDAO<UserDO,UserDO> {

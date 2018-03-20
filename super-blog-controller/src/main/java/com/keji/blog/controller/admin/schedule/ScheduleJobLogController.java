@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.dataobject.ScheduleJobLogDO;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.PageResult;
-import com.keji.blog.service.schedule.ScheduleJobLogService;
+import com.keji.blog.service.admin.ScheduleJobLogService;
 import com.keji.blog.util.ScheduleJobLogConvertUtil;
 import com.keji.blog.vo.schedule.ScheduleJobLogQueryVO;
 import com.keji.blog.vo.schedule.ScheduleJobLogVO;
@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

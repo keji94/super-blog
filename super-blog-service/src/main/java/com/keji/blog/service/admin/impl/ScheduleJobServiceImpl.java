@@ -1,4 +1,4 @@
-package com.keji.blog.service.schedule.impl;
+package com.keji.blog.service.admin.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.dao.ScheduleJobDAO;
 import com.keji.blog.dataobject.ScheduleJobDO;
 import com.keji.blog.enums.ScheduleStatusEnum;
-import com.keji.blog.service.schedule.ScheduleJobService;
+import com.keji.blog.service.admin.ScheduleJobService;
 import com.keji.blog.util.schedule.ScheduleUtils;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;

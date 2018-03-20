@@ -1,4 +1,4 @@
-package com.keji.blog.service.resource.impl;
+package com.keji.blog.service.admin.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,10 @@ import com.keji.blog.dao.ResourceDAO;
 import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.enums.ResourceTypeEnum;
-import com.keji.blog.service.resource.ResourceService;
+import com.keji.blog.service.admin.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * @author: wb-ny291824

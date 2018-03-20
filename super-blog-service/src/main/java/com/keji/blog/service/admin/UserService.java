@@ -1,4 +1,4 @@
-package com.keji.blog.service.user;
+package com.keji.blog.service.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dataobject.ResourceDO;

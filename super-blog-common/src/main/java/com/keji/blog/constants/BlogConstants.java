@@ -19,6 +19,11 @@ public class BlogConstants {
     public static final String USER_ID_STRING = "userId";
 
     /**
+     * 博客文案缓存key
+     */
+    public static final String TEXT_SETTINGS_KEY = "textSettingsDO";
+
+    /**
      * 员工姓名校验正则:2-6位无生僻字中文
      */
     public static final String NAME_REGULAR = "[\\u4e00-\\u9fa5]{2,6}";

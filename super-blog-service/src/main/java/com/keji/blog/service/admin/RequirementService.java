@@ -1,4 +1,4 @@
-package com.keji.blog.service.requirement;
+package com.keji.blog.service.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dataobject.RequirementDO;

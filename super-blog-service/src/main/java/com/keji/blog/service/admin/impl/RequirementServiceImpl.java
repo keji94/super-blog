@@ -1,4 +1,4 @@
-package com.keji.blog.service.requirement.impl;
+package com.keji.blog.service.admin.impl;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dao.RequirementDAO;
 import com.keji.blog.dataobject.RequirementDO;
-import com.keji.blog.service.requirement.RequirementService;
+import com.keji.blog.service.admin.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

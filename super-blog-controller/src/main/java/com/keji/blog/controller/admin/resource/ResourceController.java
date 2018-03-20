@@ -6,7 +6,7 @@ import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
-import com.keji.blog.service.resource.ResourceService;
+import com.keji.blog.service.admin.ResourceService;
 import com.keji.blog.util.ResourceConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;

@@ -8,7 +8,7 @@ import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.ScheduleJobDO;
 import com.keji.blog.dataobject.ScheduleJobLogDO;
 import com.keji.blog.exception.BlogException;
-import com.keji.blog.service.schedule.ScheduleJobLogService;
+import com.keji.blog.service.admin.ScheduleJobLogService;
 import com.keji.blog.util.SpringContextUtils;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;

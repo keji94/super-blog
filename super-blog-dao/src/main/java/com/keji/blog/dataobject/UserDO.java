@@ -6,10 +6,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/19
- * @modified: By:
+ *
+ * @author wb-ny291824
+ * @version $Id: UserDO.java, v 0.1 2018/3/20 10:26 wb-ny291824 Exp $
  */
 @Data
 public class UserDO implements Serializable{
