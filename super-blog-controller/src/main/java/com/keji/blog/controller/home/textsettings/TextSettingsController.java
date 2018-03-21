@@ -52,7 +52,7 @@ public class TextSettingsController {
 
     @ResponseBody
     @RequestMapping("/update")
-    public BaseResult update(@RequestBody TextSettingsVO textSettingsVO) {
+    public BaseResult update(TextSettingsVO textSettingsVO) {
         try {
             textSettingsService.update(convertVO2DO(textSettingsVO));
             return BaseResult.makeSuccess();
