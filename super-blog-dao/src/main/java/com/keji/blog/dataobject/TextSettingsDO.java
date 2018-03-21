@@ -73,6 +73,27 @@ public class TextSettingsDO  implements Serializable {
      */
     private String search;
 
+    /**
+     * 评论功能开启
+     */
+    private Integer commentOpen;
+
+    /**
+     * 留言功能开启
+     */
+    private Integer leaveWordOpen;
+
+    /**
+     * 公告板信息
+     */
+    private String announcement;
+
+    /**
+     * 留言公告板信息
+     */
+    private String leaveWordAnnouncement;
+
+
     public Long getId() {
         return id;
     }
@@ -167,6 +188,42 @@ public class TextSettingsDO  implements Serializable {
 
     public void setSearch(String search) {
         this.search = search == null ? null : search.trim();
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getCommentOpen() {
+        return commentOpen;
+    }
+
+    public void setCommentOpen(Integer commentOpen) {
+        this.commentOpen = commentOpen;
+    }
+
+    public Integer getLeaveWordOpen() {
+        return leaveWordOpen;
+    }
+
+    public void setLeaveWordOpen(Integer leaveWordOpen) {
+        this.leaveWordOpen = leaveWordOpen;
+    }
+
+    public String getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
+    }
+
+    public String getLeaveWordAnnouncement() {
+        return leaveWordAnnouncement;
+    }
+
+    public void setLeaveWordAnnouncement(String leaveWordAnnouncement) {
+        this.leaveWordAnnouncement = leaveWordAnnouncement;
     }
 
     @Override

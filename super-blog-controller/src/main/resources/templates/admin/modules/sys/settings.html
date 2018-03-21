@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>博客首页设置</title>
+    <#include "/alert.html" />
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
 </head>
@@ -10,109 +11,101 @@
 <div class="layui-tab">
     <ul class="layui-tab-title">
         <li class="layui-this">文本设置</li>
-        <li>评论设置</li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
-            <form class="layui-form" action="">
+            <form class="layui-form" id="textSettingForm" action="">
                 <div class="layui-form-item">
                     <label class="layui-form-label">logo文本</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入logo文本" class="layui-input">
+                        <input type="text" name="logo" id="logo" lay-verify="required" autocomplete="off" placeholder="请输入logo文本" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">网站title</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入title" autocomplete="off" class="layui-input">
+                        <input type="text" name="title" id="title" lay-verify="required" placeholder="请输入title" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">页眉文本</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                        <input type="text" name="pageHeader" id="pageHeader" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">页尾文本</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入页尾文本" autocomplete="off" class="layui-input">
+                        <input type="text" name="pageRooting" id="pageRooting" lay-verify="required" placeholder="请输入页尾文本" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">主页名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                        <input type="text" name="home" id="home" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">笔记名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                        <input type="text" name="note" id="note" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">关于文本</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                        <input type="text" name="about" id="about" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">搜索文本</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
+                        <input type="text" name="search" id="search" lay-verify="required" placeholder="请输入页面文本" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">信息版内容</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea placeholder="请输入内容" name="informationBoard" id="informationBoard" class="layui-textarea"></textarea>
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="layui-tab-item">
-            <form class="layui-form" action="">
                 <div class="layui-form-item">
                     <label class="layui-form-label">全部评论</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                        <input type="checkbox" name="commentOpen" value="1" id="commentOpen" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">留言功能</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest2" lay-text="ON|OFF">
+                        <input type="checkbox" checked="" name="leaveWordOpen" id="leaveWordOpen" lay-skin="switch" lay-filter="switchTest2" lay-text="ON|OFF">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">公告信息</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea" name="announcement" id="announcement"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">留言公告信息</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea" name="leaveWordAnnouncement" id="leaveWordAnnouncement"></textarea>
                     </div>
                 </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="submitBtn2">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+                <input class="textSettingId" name="id" type="hidden">
             </form>
         </div>
-
     </div>
 </div>
 
 <script src="/static/plugins/layui/layui.js"></script>
-<script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
 <script src="/static/js/admin/modules/settings/settings.js"></script>
 
 </body>

@@ -1,6 +1,5 @@
 package com.keji.blog.dao;
 
-import com.keji.blog.dataobject.ScheduleJobDO;
 import com.keji.blog.dataobject.ScheduleJobLogDO;
 import org.springframework.stereotype.Repository;
 
