@@ -5,8 +5,8 @@ $(function () {
         colModel: [
             { label: 'ID', name: 'id', index: "id", width: 45, key: true },
             { label: '名称', name: 'name', width: 75 },
-            { label: 'icon', name: 'email', width: 90 },
-            { label: 'url', name: 'phone', width: 100 },
+            { label: 'icon', name: 'icon', width: 90 },
+            { label: 'url', name: 'url', width: 100 },
             { label: '状态', name: 'status', width: 60, formatter: function(value){
                 return value === 1 ?
                     '<span class="label label-danger">禁用</span>' :
