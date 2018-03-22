@@ -1,12 +1,8 @@
 package com.keji.blog.service.home.impl;
 
-import java.io.IOException;
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.TextSettingsDAO;
 import com.keji.blog.dataobject.TextSettingsDO;
@@ -15,7 +11,6 @@ import com.keji.blog.service.home.TextSettingsService;
 import com.keji.blog.util.JsonUtil;
 import com.keji.blog.util.cache.CacheLoader;
 import com.keji.blog.util.cache.CacheTemplate;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,15 +31,9 @@ public class TextSettingsServiceImpl implements TextSettingsService {
     private RedisClient redisClient;
 
     @Override
-    public TextSettingsDO query() throws IOException {
-        textSettingsDAO.selectByCondition(new TextSettingsDO());
-        List<TextSettingsDO> data = cacheTemplate.findData(BlogConstants.TEXT_SETTINGS_KEY,
-                new TypeReference<TextSettingsDO>() {
-                }, textSettingsCacheLoader, new TextSettingsDO());
-        if (CollectionUtils.isEmpty(data)) {
-            return null;
-        }
-        return data.get(0);
+    public TextSettingsDO query(){
+        return cacheTemplate.findObject(BlogConstants.TEXT_SETTINGS_KEY,
+                TextSettingsDO.class, textSettingsCacheLoader, new TextSettingsDO());
     }
 
     @Override

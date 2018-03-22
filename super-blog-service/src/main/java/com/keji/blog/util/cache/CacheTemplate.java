@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keji.blog.redis.RedisClient;
+import com.keji.blog.util.JsonUtil;
 import com.keji.blog.util.LogUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,30 +30,64 @@ public class CacheTemplate {
 
     /**
      * 从缓存中获取数据，没有则从数据库获取
-     * @param key key
-     * @param clazz 数据类型
-     * @param cacheLoader 从数据库获取数据的实现
      * @param <T> 类型
+     * @param key key
+     * @param valueType 数据类型
+     * @param cacheLoader 从数据库获取数据的实现
      * @return t
      */
-    public <T> List<T> findData(String key, TypeReference<T> clazz, CacheLoader<T> cacheLoader,T condition) {
+    public <T> T findObject(String key, Class<T> valueType, CacheLoader<T> cacheLoader, T condition) {
 
         String json = null;
         try {
-            ObjectMapper mapper = new ObjectMapper();
             json = redisClient.get(key);
             if (StringUtils.isEmpty(json)) {
                 synchronized (this) {
                     if (StringUtils.isNotEmpty(json)) {
-                        return mapper.readValue(json, clazz);
+                        return JsonUtil.json2Object(json, valueType);
                     }
 
                     List<T> list = cacheLoader.load(condition);
-                    redisClient.set(key, mapper.writeValueAsString(list));
+                    if (CollectionUtils.isEmpty(list)) {
+                        return null;
+                    }
+                    redisClient.set(key, JsonUtil.object2Json(list.get(0)));
+
+                    return list.get(0);
+                }
+            }
+            return JsonUtil.json2Object(json, valueType);
+        } catch (IOException e) {
+            LogUtil.error(logger, e,"Json数据转换出现异常。key=%s,json=%s", key, json);
+            return null;
+        }
+    }
+
+    /**
+     * 从缓存中获取数据，没有则从数据库获取
+     * @param <T> 类型
+     * @param key key
+     * @param valueType 数据类型
+     * @param cacheLoader 从数据库获取数据的实现
+     * @return t
+     */
+    public <T> List<T> findList(String key, Class<T> valueType, CacheLoader<T> cacheLoader, T condition) {
+
+        String json = null;
+        try {
+            json = redisClient.get(key);
+            if (StringUtils.isEmpty(json)) {
+                synchronized (this) {
+                    if (StringUtils.isNotEmpty(json)) {
+                        return JsonUtil.json2List(json, valueType);
+                    }
+
+                    List<T> list = cacheLoader.load(condition);
+                    redisClient.set(key, JsonUtil.object2Json(list));
                     return list;
                 }
             }
-            return mapper.readValue(json, clazz);
+            return JsonUtil.json2List(json, valueType);
         } catch (IOException e) {
             LogUtil.error(logger, "Json数据转换出现异常。key=%s,json=%s", key, json);
             return null;

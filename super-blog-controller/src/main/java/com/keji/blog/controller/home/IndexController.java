@@ -1,11 +1,8 @@
 package com.keji.blog.controller.home;
 
-import java.io.IOException;
-
 import javax.annotation.Resource;
 
 import com.keji.blog.dataobject.TextSettingsDO;
-import com.keji.blog.result.BaseResult;
 import com.keji.blog.service.home.TextSettingsService;
 import com.keji.blog.util.LogUtil;
 import org.slf4j.Logger;
@@ -28,21 +25,14 @@ public class IndexController {
     @Resource
     private TextSettingsService textSettingsService;
 
-    @RequestMapping("/index")
+    @RequestMapping(value = {"", "/index"})
     public String index(Model model) {
         try {
             TextSettingsDO textSettingsDO = textSettingsService.query();
             model.addAttribute("settings", textSettingsDO);
-        } catch (IOException e) {
-            LogUtil.error(logger, e, "json转换时发生异常");
         } catch (Exception e) {
-            LogUtil.error(logger,e,"查询文本设置发生异常");
+            LogUtil.error(logger, e, "查询文本设置发生异常");
         }
-        return "/home/index";
-    }
-
-    @RequestMapping("")
-    public String indexPage() {
         return "/home/index";
     }
 }

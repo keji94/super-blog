@@ -1,7 +1,5 @@
 package com.keji.blog.service.home;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.keji.blog.dataobject.TextSettingsDO;
 
@@ -18,7 +16,7 @@ public interface TextSettingsService {
      *
      * @return
      */
-    TextSettingsDO query() throws IOException;
+    TextSettingsDO query();
 
     /**
      * 更新文案

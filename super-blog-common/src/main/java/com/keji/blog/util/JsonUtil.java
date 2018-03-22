@@ -1,8 +1,10 @@
 package com.keji.blog.util;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -22,5 +24,12 @@ public class JsonUtil {
     public static <T> T json2Object(String json,Class<T> clazz) throws IOException {
         return mapper.readValue(json, clazz);
     }
+
+    public static <T> List<T> json2List(String json,Class<T> clazz) throws IOException {
+        JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, clazz);
+        return mapper.readValue(json, javaType);
+
+    }
+
 
 }

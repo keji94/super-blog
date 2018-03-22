@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
@@ -44,8 +43,7 @@ public class NavServiceImpl implements NavService {
 
     @Override
     public List<NavDO> listAll(NavDO navDO) {
-        return cacheTemplate.findData(BlogConstants.NAV_KEY, new TypeReference<NavDO>() {
-        }, navCacheLoader, navDO);
+        return cacheTemplate.findList(BlogConstants.NAV_KEY, NavDO.class, navCacheLoader, navDO);
     }
 
     @Override

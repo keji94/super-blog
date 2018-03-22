@@ -1,22 +1,16 @@
 package com.keji.blog.controller.home.textsettings;
 
-import java.io.IOException;
-
 import javax.annotation.Resource;
 
 import com.keji.blog.dataobject.TextSettingsDO;
-import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
 import com.keji.blog.service.home.TextSettingsService;
 import com.keji.blog.util.LogUtil;
-import com.keji.blog.util.ValidatorUtils;
-import com.keji.blog.validator.group.UpdateGroup;
 import com.keji.blog.vo.textsetting.TextSettingsVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,9 +35,6 @@ public class TextSettingsController {
         try {
             TextSettingsDO textSettingsDO = textSettingsService.query();
             return BaseResult.makeSuccess(textSettingsDO);
-        } catch (IOException e) {
-            LogUtil.error(logger, e, "json转换时发生异常");
-            return BaseResult.makeFail("json转换时发生异常");
         } catch (Exception e) {
             LogUtil.error(logger,e,"查询文本设置发生异常");
             return BaseResult.makeFail("查询文本设置发生异常");
