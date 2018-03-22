@@ -29,9 +29,14 @@ layui.use(['form', 'element'], function () {
         var pageHeader = $("#pageHeader").val();
         var pageRooting = $("#pageRooting").val();
         var home = $("#home").val();
+        var homeIcon = $("#homeIcon").val();
         var note = $("#note").val();
+        var noteIcon = $("#noteIcon").val();
         var about = $("#about").val();
+        var aboutIcon = $("#aboutIcon").val();
         var search = $("#search").val();
+        var searchIcon = $("#searchIcon").val();
+        var iconUrl = $("#iconUrl").val();
         var informationBoard = $("#informationBoard").val();
         var id = $(".textSettingId").val();
         var announcement = $("#announcement").val();
@@ -49,9 +54,14 @@ layui.use(['form', 'element'], function () {
                 "pageHeader": pageHeader,
                 "pageRooting": pageRooting,
                 "home": home,
+                "homeIcon": homeIcon,
                 "note": note,
+                "noteIcon": noteIcon,
                 "about": about,
+                "aboutIcon": aboutIcon,
                 "search": search,
+                "searchIcon": searchIcon,
+                "iconUrl": iconUrl,
                 "informationBoard": informationBoard,
                 "id": id,
                 "announcement": announcement,
@@ -78,9 +88,14 @@ layui.use(['form', 'element'], function () {
             $("#pageHeader").val(data.data.pageHeader);
             $("#pageRooting").val(data.data.pageRooting);
             $("#home").val(data.data.home);
+            $("#homeIcon").val(data.data.homeIcon);
             $("#note").val(data.data.note);
+            $("#noteIcon").val(data.data.noteIcon);
             $("#about").val(data.data.about);
+            $("#aboutIcon").val(data.data.aboutIcon);
             $("#search").val(data.data.search);
+            $("#searchIcon").val(data.data.searchIcon);
+            $("#iconUrl").val(data.data.iconUrl);
             $("#informationBoard").val(data.data.informationBoard);
             $(".textSettingId").val(data.data.id);
             if (1 === data.data.commentOpen) {

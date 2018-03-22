@@ -1,13 +1,11 @@
 package com.keji.blog.vo.role;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
-import com.keji.blog.vo.resource.ResourceVO;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 

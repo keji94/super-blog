@@ -22,6 +22,10 @@ public class BlogConstants {
      * 博客文案缓存key
      */
     public static final String TEXT_SETTINGS_KEY = "textSettingsDO";
+    /**
+     * 导航缓存key
+     */
+    public static final String NAV_KEY = "navDO";
 
     /**
      * 员工姓名校验正则:2-6位无生僻字中文

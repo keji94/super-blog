@@ -1,6 +1,7 @@
 package com.keji.blog.util.cache;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -35,26 +36,26 @@ public class CacheTemplate {
      * @param <T> 类型
      * @return t
      */
-    public <T> T findData(String key, TypeReference<T> clazz, CacheLoader<T> cacheLoader) {
+    public <T> List<T> findData(String key, TypeReference<T> clazz, CacheLoader<T> cacheLoader,T condition) {
 
-        String josn = null;
+        String json = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            josn = redisClient.get(key);
-            if (StringUtils.isEmpty(josn)) {
+            json = redisClient.get(key);
+            if (StringUtils.isEmpty(json)) {
                 synchronized (this) {
-                    if (StringUtils.isNotEmpty(josn)) {
-                        return mapper.readValue(josn, clazz);
+                    if (StringUtils.isNotEmpty(json)) {
+                        return mapper.readValue(json, clazz);
                     }
 
-                    T t = cacheLoader.load();
-                    redisClient.set(key, mapper.writeValueAsString(t));
-                    return t;
+                    List<T> list = cacheLoader.load(condition);
+                    redisClient.set(key, mapper.writeValueAsString(list));
+                    return list;
                 }
             }
-            return mapper.readValue(josn, clazz);
+            return mapper.readValue(json, clazz);
         } catch (IOException e) {
-            LogUtil.error(logger, "Json数据转换出现异常。key=%s,json=%s", key, josn);
+            LogUtil.error(logger, "Json数据转换出现异常。key=%s,json=%s", key, json);
             return null;
         }
     }

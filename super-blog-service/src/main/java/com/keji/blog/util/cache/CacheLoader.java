@@ -1,5 +1,7 @@
 package com.keji.blog.util.cache;
 
+import java.util.List;
+
 /**
  * 从数据库加载缓存的实现
  *
@@ -12,6 +14,6 @@ public interface CacheLoader<T> {
      * 从数据库查询要放入缓存的数据
      * @return T
      */
-    T load();
+    List<T> load(T t);
 
 }

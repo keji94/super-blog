@@ -19,9 +19,6 @@ layui.use(['layer', 'form', 'laypage', 'laydate', 'element', 'util', 'flow', 'la
         , article = layui.article
         , note = layui.note;
 
-    layer.msg('Hello World');
-    //页面时钟效果
-    clock.now();
     //文章加载
     flow.load({
         elem: '#article-list' //流加载容器

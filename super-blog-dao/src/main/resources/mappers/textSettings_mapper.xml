@@ -10,19 +10,24 @@
         <result column="page_header" property="pageHeader" jdbcType="VARCHAR" />
         <result column="page_rooting" property="pageRooting" jdbcType="VARCHAR" />
         <result column="home" property="home" jdbcType="VARCHAR" />
+        <result column="home_icon" property="homeIcon" jdbcType="VARCHAR" />
         <result column="note" property="note" jdbcType="VARCHAR" />
+        <result column="note_icon" property="noteIcon" jdbcType="VARCHAR" />
         <result column="about" property="about" jdbcType="VARCHAR" />
+        <result column="about_icon" property="aboutIcon" jdbcType="VARCHAR" />
         <result column="information_board" property="informationBoard" jdbcType="VARCHAR" />
         <result column="search" property="search" jdbcType="VARCHAR" />
+        <result column="search_icon" property="searchIcon" jdbcType="VARCHAR" />
         <result column="comment_open" property="commentOpen" jdbcType="INTEGER" />
         <result column="leave_word_open" property="leaveWordOpen" jdbcType="INTEGER" />
         <result column="announcement" property="announcement" jdbcType="VARCHAR" />
         <result column="leave_word_announcement" property="leaveWordAnnouncement" jdbcType="VARCHAR" />
+        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, gmt_create, gmt_modified, logo, title, page_header, page_rooting, home, note,
-        about, information_board, search,comment_open,leave_word_open,announcement,leave_word_announcement
+        id, gmt_create, gmt_modified, logo,title, page_header, page_rooting, home,home_icon, note,note_icon,
+        about,about_icon, information_board, search,search_icon,comment_open,leave_word_open,announcement,leave_word_announcement,icon_url
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -67,17 +72,29 @@
             <if test="home != null" >
                 home = #{home,jdbcType=VARCHAR},
             </if>
+            <if test="homeIcon != null" >
+                home_icon = #{homeIcon,jdbcType=VARCHAR},
+            </if>
             <if test="note != null" >
                 note = #{note,jdbcType=VARCHAR},
             </if>
+            <if test="noteIcon != null" >
+                note_icon = #{noteIcon,jdbcType=VARCHAR},
+            </if>
             <if test="about != null" >
                 about = #{about,jdbcType=VARCHAR},
+            </if>
+            <if test="aboutIcon != null" >
+                about_icon = #{aboutIcon,jdbcType=VARCHAR},
             </if>
             <if test="informationBoard != null" >
                 information_board = #{informationBoard,jdbcType=VARCHAR},
             </if>
             <if test="search != null" >
                 search = #{search,jdbcType=VARCHAR},
+            </if>
+            <if test="searchIcon != null" >
+                search_icon = #{searchIcon,jdbcType=VARCHAR},
             </if>
             <if test="commentOpen != null" >
                 comment_open = #{commentOpen,jdbcType=INTEGER},
@@ -90,6 +107,9 @@
             </if>
             <if test="leaveWordAnnouncement != null" >
                 leave_word_announcement = #{leaveWordAnnouncement,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null" >
+                icon_url = #{iconUrl,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}

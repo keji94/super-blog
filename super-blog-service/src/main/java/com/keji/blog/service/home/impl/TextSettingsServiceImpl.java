@@ -1,6 +1,7 @@
 package com.keji.blog.service.home.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -14,6 +15,7 @@ import com.keji.blog.service.home.TextSettingsService;
 import com.keji.blog.util.JsonUtil;
 import com.keji.blog.util.cache.CacheLoader;
 import com.keji.blog.util.cache.CacheTemplate;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +38,13 @@ public class TextSettingsServiceImpl implements TextSettingsService {
     @Override
     public TextSettingsDO query() throws IOException {
         textSettingsDAO.selectByCondition(new TextSettingsDO());
-        return cacheTemplate.findData(BlogConstants.TEXT_SETTINGS_KEY, new TypeReference<TextSettingsDO>() {
-        }, textSettingsCacheLoader);
+        List<TextSettingsDO> data = cacheTemplate.findData(BlogConstants.TEXT_SETTINGS_KEY,
+                new TypeReference<TextSettingsDO>() {
+                }, textSettingsCacheLoader, new TextSettingsDO());
+        if (CollectionUtils.isEmpty(data)) {
+            return null;
+        }
+        return data.get(0);
     }
 
     @Override

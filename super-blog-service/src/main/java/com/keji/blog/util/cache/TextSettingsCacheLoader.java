@@ -21,11 +21,7 @@ public class TextSettingsCacheLoader implements CacheLoader<TextSettingsDO>{
     private TextSettingsDAO textSettingsDAO;
 
     @Override
-    public TextSettingsDO load() {
-        List<TextSettingsDO> textSettingsDOS = textSettingsDAO.selectByCondition(new TextSettingsDO());
-        if (CollectionUtils.isNotEmpty(textSettingsDOS)) {
-            return textSettingsDOS.get(0);
-        }
-        return null;
+    public List<TextSettingsDO> load(TextSettingsDO textSettingsDO) {
+        return textSettingsDAO.selectByCondition(textSettingsDO);
     }
 }

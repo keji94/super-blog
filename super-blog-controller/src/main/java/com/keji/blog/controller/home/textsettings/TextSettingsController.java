@@ -66,19 +66,24 @@ public class TextSettingsController {
     private TextSettingsDO convertVO2DO(TextSettingsVO settingsVO) {
         TextSettingsDO textSettingsDO = new TextSettingsDO();
         textSettingsDO.setAbout(settingsVO.getAbout());
+        textSettingsDO.setAboutIcon(settingsVO.getAboutIcon());
         textSettingsDO.setHome(settingsVO.getHome());
+        textSettingsDO.setHomeIcon(settingsVO.getHomeIcon());
         textSettingsDO.setInformationBoard(settingsVO.getInformationBoard());
         textSettingsDO.setLogo(settingsVO.getLogo());
         textSettingsDO.setNote(settingsVO.getNote());
+        textSettingsDO.setNoteIcon(settingsVO.getNoteIcon());
         textSettingsDO.setPageHeader(settingsVO.getPageHeader());
         textSettingsDO.setPageRooting(settingsVO.getPageRooting());
         textSettingsDO.setSearch(settingsVO.getSearch());
+        textSettingsDO.setSearchIcon(settingsVO.getSearchIcon());
         textSettingsDO.setTitle(settingsVO.getTitle());
         textSettingsDO.setId(settingsVO.getId());
         textSettingsDO.setCommentOpen(settingsVO.getCommentOpen());
         textSettingsDO.setLeaveWordOpen(settingsVO.getLeaveWordOpen());
         textSettingsDO.setAnnouncement(settingsVO.getAnnouncement());
         textSettingsDO.setLeaveWordAnnouncement(settingsVO.getLeaveWordAnnouncement());
+        textSettingsDO.setIconUrl(settingsVO.getIconUrl());
         return textSettingsDO;
     }
 
