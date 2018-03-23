@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-22 18:53:55
+Date: 2018-03-23 17:12:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -138,12 +138,17 @@ CREATE TABLE `nav` (
   `name` varchar(20) NOT NULL COMMENT '导航的名称',
   `icon` varchar(20) NOT NULL COMMENT 'icon',
   `url` varchar(255) NOT NULL COMMENT '跳转地址',
+  `status` tinyint(4) NOT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='首页导航表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='首页导航表';
 
 -- ----------------------------
 -- Records of nav
 -- ----------------------------
+INSERT INTO `nav` VALUES ('5', '2018-03-23 14:05:22', '2018-03-23 14:05:22', '主页', 'icon-home1', '/index', '1');
+INSERT INTO `nav` VALUES ('6', '2018-03-23 14:07:35', '2018-03-23 14:07:35', '笔记', 'icon-timeline', '/home/note.html', '1');
+INSERT INTO `nav` VALUES ('7', '2018-03-23 14:11:53', '2018-03-23 14:11:53', 'Github', 'icon-GitHub', 'https://github.com/', '1');
+INSERT INTO `nav` VALUES ('8', '2018-03-23 14:12:40', '2018-03-23 14:12:40', '关于', 'icon-about', '/home/about.html', '1');
 
 -- ----------------------------
 -- Table structure for picture
@@ -328,7 +333,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- Records of qrtz_scheduler_state
 -- ----------------------------
 INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000');
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31521715322567', '1521716028651', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31521786631601', '1521796369365', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -607,18 +612,12 @@ CREATE TABLE `text_settings` (
   `title` varchar(20) NOT NULL DEFAULT '' COMMENT '博客标题',
   `page_header` varchar(40) DEFAULT NULL COMMENT '页眉文案',
   `page_rooting` varchar(20) DEFAULT NULL COMMENT '页尾',
-  `home` varchar(20) NOT NULL COMMENT '顶部右侧主页文案',
-  `home_icon` varchar(20) DEFAULT NULL,
-  `note` varchar(255) NOT NULL COMMENT '顶部右侧笔记文案',
-  `note_icon` varchar(20) DEFAULT NULL,
-  `about` varchar(255) NOT NULL COMMENT '顶部右侧关于文案',
-  `about_icon` varchar(20) DEFAULT NULL,
   `information_board` varchar(255) NOT NULL COMMENT '信息板文案',
   `search` varchar(20) NOT NULL COMMENT '搜索文案',
   `search_icon` varchar(20) DEFAULT NULL,
   `comment_open` tinyint(4) NOT NULL DEFAULT '1' COMMENT '评论功能0:关闭,1:开启',
   `leave_word_open` tinyint(4) NOT NULL COMMENT '留言功能0:关闭,1:开启',
-  `announcement` varchar(255) DEFAULT NULL COMMENT '公告信息',
+  `announcement` text COMMENT '公告信息',
   `leave_word_announcement` varchar(255) DEFAULT NULL COMMENT '留言公告信息',
   `icon_url` varchar(100) NOT NULL COMMENT 'http://iconfont.cn/manage/index?spm=a313x.7781069.1998910419.11&manage_type=myprojects&projectId=601117 最新地址',
   PRIMARY KEY (`id`)
@@ -627,7 +626,7 @@ CREATE TABLE `text_settings` (
 -- ----------------------------
 -- Records of text_settings
 -- ----------------------------
-INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '主页', 'icon-home4', '笔记', 'icon-notebook', '关于我2', 'icon-about1', '信息板2222', '搜一搜2', 'icon-search1', '1', '1', '111', '1111', '//at.alicdn.com/t/font_601117_6q8kbudpgaw6ogvi.js');
+INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '信息板2222', '搜一搜2', 'icon-search1', '1', '1', '                                <li>网站名称：克己的博客</li>\n                                <li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"\n                                            style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a>\n                                </li>\n                                <li>qq群：123456789</li>\n                                <li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li>\n                                <li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">Spring\n                                    Boot</a> 1.5.9 系列等\n                                </li>', '1111', '//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
 
 -- ----------------------------
 -- Table structure for user
