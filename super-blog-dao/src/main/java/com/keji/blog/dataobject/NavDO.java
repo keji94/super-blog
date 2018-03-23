@@ -22,4 +22,6 @@ public class NavDO {
     private String icon;
 
     private String url;
+
+    private Integer status;
 }

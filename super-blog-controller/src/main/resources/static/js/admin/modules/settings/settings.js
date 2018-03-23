@@ -72,7 +72,6 @@ layui.use(['form', 'element'], function () {
             success: function (r) {
                 if (r.success) {
                     alertSuccess("修改成功");
-                    form.render();
                 } else {
                     alertFail("修改异常");
                 }

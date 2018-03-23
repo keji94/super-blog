@@ -8,10 +8,11 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, name, icon, url
+    id, gmt_create, gmt_modified, name, icon, url,status
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -35,6 +36,9 @@
             <if test="url != null">
                 AND url = #{url,jdbcType=VARCHAR}
             </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 
@@ -47,17 +51,16 @@
   <delete id="deleteBatch">
     delete from nav
     where id in
-    <foreach collection="ids" item="id" open="(" separator="," close=")">
+    <foreach collection="array" item="id" open="(" separator="," close=")">
         #{id}
     </foreach>
   </delete>
 
-
   <insert id="insert" parameterType="com.keji.blog.dataobject.NavDO" >
     insert into nav (id, gmt_create, gmt_modified, 
-      name, icon, url)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+      name, icon, url,status)
+    values (#{id,jdbcType=BIGINT}, now(), now(),
+      #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}),1
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.NavDO" >
@@ -65,9 +68,6 @@
     <set >
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -78,6 +78,10 @@
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+          status = #{status,jdbcType=INTEGER},
+      </if>
+        gmt_modified = now()
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>

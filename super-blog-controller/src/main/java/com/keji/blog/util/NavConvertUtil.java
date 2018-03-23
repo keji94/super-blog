@@ -26,6 +26,8 @@ public class NavConvertUtil {
         navDO.setId(navVO.getId());
         navDO.setGmtCreate(navVO.getGmtCreate());
         navDO.setGmtModified(navVO.getGmtModified());
+        navDO.setGmtModified(navVO.getGmtModified());
+        navDO.setStatus(navVO.getStatus());
         return navDO;
     }
 }

@@ -8,7 +8,6 @@ import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author wb-ny291824
@@ -31,5 +30,11 @@ public class NavVO {
 
     @NotBlank(message = "url为空",groups = {AddGroup.class,UpdateGroup.class})
     private String url;
+
+    /**
+     * 状态
+     */
+    @NotBlank(message = "状态为空",groups = {UpdateGroup.class})
+    private Integer status;
 
 }

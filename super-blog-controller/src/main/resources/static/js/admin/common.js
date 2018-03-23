@@ -68,7 +68,8 @@ function getSelectedRows() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
     if(!rowKey){
-    	alert("请选择一条记录");
+    	//没效果请引入alert.html
+    	alertFail("请选择一条记录");
     	return ;
     }
     
