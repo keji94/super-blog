@@ -1,10 +1,9 @@
 package com.keji.blog.constants;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/18
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: BlogConstants.java, v 0.1 2018/3/23 下午9:22 keji Exp $
  */
 public class BlogConstants {
 
@@ -26,6 +25,10 @@ public class BlogConstants {
      * 导航缓存key
      */
     public static final String NAV_KEY = "navDO";
+    /**
+     * 信息板缓存key
+     */
+    public static final String INFO_BOARD_KEY = "infoBoard";
 
     /**
      * 员工姓名校验正则:2-6位无生僻字中文
