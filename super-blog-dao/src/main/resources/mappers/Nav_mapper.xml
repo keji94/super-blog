@@ -60,7 +60,7 @@
     insert into nav (id, gmt_create, gmt_modified, 
       name, icon, url,status)
     values (#{id,jdbcType=BIGINT}, now(), now(),
-      #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}),1
+      #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},1)
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.NavDO" >

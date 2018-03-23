@@ -22,8 +22,7 @@ layui.use(['form', 'element'], function () {
     });
 
     //监听提交
-    form.on('submit(submitBtn2)', function (data) {
-
+    form.on('submit(submitBtn2)', function () {
         var logo = $("#logo").val();
         var title = $("#title").val();
         var pageHeader = $("#pageHeader").val();
@@ -111,6 +110,5 @@ layui.use(['form', 'element'], function () {
             alertFail("获取文案信息失败");
         }
 
-    })
-
+    });
 });

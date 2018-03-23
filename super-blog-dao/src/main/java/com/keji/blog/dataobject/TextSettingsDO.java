@@ -52,33 +52,6 @@ public class TextSettingsDO implements Serializable {
     private String pageRooting;
 
     /**
-     * 主页文案
-     */
-    private String home;
-    /**
-     * home icon
-     */
-    private String homeIcon;
-
-    /**
-     * 开发笔记文案
-     */
-    private String note;
-    /**
-     * note icon
-     */
-    private String noteIcon;
-
-    /**
-     * 关于文案
-     */
-    private String about;
-    /**
-     * 关于 icon
-     */
-    private String aboutIcon;
-
-    /**
      * 信息板文案
      */
     private String informationBoard;

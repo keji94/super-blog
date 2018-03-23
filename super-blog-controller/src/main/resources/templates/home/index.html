@@ -28,16 +28,13 @@
             <!--logo结束-->
             <!--index页面的右上方导航-->
             <div class="layui-col-md-offset2 layui-col-md7 layui-hide layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
-                <a href="index.html" class="active">
-                    <svg class="icon" aria-hidden="true"><use xlink:href="#${settings.homeIcon}"></use></svg>${settings.home}</a>
-                <a href="note.html"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.noteIcon}"></use></svg>${settings.home}</a>
-                <a href="note.html"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.noteIcon}"></use></svg>${settings.home}</a>
-                <a href="note.html"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.noteIcon}"></use></svg>${settings.home}</a>
-                <a href="note.html"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.noteIcon}"></use></svg>${settings.home}</a>
-                <a href="note.html"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.noteIcon}"></use></svg>${settings.home}</a>
-                <a href="https://github.com/miyakowork" target="_blank"><i class="fa fa-github"
-                                                                           style="font-size: 18px;"></i> GITHUB</a>
-                <a href="mine.html"><i class="layui-icon">&#xe6af;</i> ${settings.about}</a>
+                <#list navDOS as navDO>
+                    <#if navDO_index == 0>
+                        <a href="${navDO.url}" class="active"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
+                        <#else>
+                            <a href="${navDO.url}"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
+                    </#if>
+                </#list>
             </div>
             <!--右上方导航结束-->
         </div>
@@ -56,8 +53,7 @@
                 </div>
             </div>
             <div class="layui-inline">
-                博文统计：共【<span class="sum-font">51</span>】篇；笔记统计：共【<span class="sum-font">88</span>】条；继续加油，fighting！~\(≧▽≦)/~！
-
+                ${settings.pageHeader}
             </div>
         </div>
     </form>
@@ -381,15 +377,9 @@
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show layui-text">
                             <ul>
-                                <li>网站名称：克己的博客</li>
-                                <li>博客系统：<a href="//github.com/miyakowork" target="_blank"
-                                            style="font-style: italic;"><i class="layui-icon">&#xe628;</i> NoteBlog</a>
-                                </li>
-                                <li>qq群：123456789</li>
-                                <li>前端UI：<a href="//layui.com" target="_blank">layui 2.x</a></li>
-                                <li>后端架构：<a href="https://projects.spring.io/spring-boot/" target="_blank">Spring
-                                    Boot</a> 1.5.9 系列等
-                                </li>
+                                <pre class="layui-code">
+                                ${settings.announcement}
+                                    </pre>
                             </ul>
                         </div>
                         <div class="layui-tab-item">
@@ -451,7 +441,7 @@
     <div class="layui-row">
         <div class="layui-col-md4 layui-col-md-offset4 copyright">
             <p style="text-align: center;"><i class="fa fa-copyright"></i>&nbsp;2015-2018 赣ICP备15003721号-2 ☆ powered by
-                <a href="//wuwenbin.me" target="_blank" style="color: #1E9FFF;">NoteBlog</a> in 2018 ver3.
+                <a href="//wuwenbin.me" target="_blank" style="color: #1E9FFF;">KejiBlog</a> in 2018 ver3.
             </p>
         </div>
     </div>
