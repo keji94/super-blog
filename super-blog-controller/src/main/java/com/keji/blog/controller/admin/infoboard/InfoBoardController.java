@@ -39,6 +39,7 @@ public class InfoBoardController {
     @Resource
     private InfoBoardService infoBoardService;
 
+    @ResponseBody
     @RequestMapping("/list")
     public PageResult list(InfoBoardQueryVO queryVO) {
 
@@ -61,6 +62,7 @@ public class InfoBoardController {
 
     }
 
+    @ResponseBody
     @RequestMapping("/add")
     public BaseResult add(InfoBoardVO boardVO) {
         try {

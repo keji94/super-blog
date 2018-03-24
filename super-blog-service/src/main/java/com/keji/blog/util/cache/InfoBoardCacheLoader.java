@@ -6,11 +6,13 @@ import javax.annotation.Resource;
 
 import com.keji.blog.dao.InfoBoardDAO;
 import com.keji.blog.dataobject.InfoBoardDO;
+import org.springframework.stereotype.Component;
 
 /**
  * @author keji
  * @version $Id: InfoBoardCacheLoader.java, v 0.1 2018-03-23 下午9:17 keji Exp $$
  */
+@Component
 public class InfoBoardCacheLoader implements CacheLoader<InfoBoardDO>{
 
     @Resource

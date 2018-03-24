@@ -28,13 +28,15 @@
             <!--logo结束-->
             <!--index页面的右上方导航-->
             <div class="layui-col-md-offset2 layui-col-md7 layui-hide layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
-                <#list navDOS as navDO>
-                    <#if navDO_index == 0>
-                        <a href="${navDO.url}" class="active"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
-                        <#else>
-                            <a href="${navDO.url}"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
-                    </#if>
-                </#list>
+                <#if navDOS??>
+                    <#list navDOS as navDO>
+                        <#if navDO_index == 0>
+                            <a href="${navDO.url}" class="active"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
+                            <#else>
+                                <a href="${navDO.url}"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
+                        </#if>
+                    </#list>
+                </#if>
             </div>
             <!--右上方导航结束-->
         </div>
@@ -369,28 +371,26 @@
         </div>
         <div class="layui-col-md3">
             <div id="index-affix-side">
+
+                <#if titleList??>
                 <div class="layui-tab layui-tab-card">
                     <ul class="layui-tab-title select-none">
-                        <li class="layui-this">网站信息</li>
-                        <li>居委会</li>
+                        <#list titleList as title>
+                        <#if title_index = 0>
+                            <li class="layui-this">${title}</li>
+                        <#else/>
+                        <li>${title}</li>
+                        </#if>
+                        </#list>
                     </ul>
                     <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show layui-text">
-                            <ul>
-                                <pre class="layui-code">
-                                ${settings.announcement}
-                                    </pre>
-                            </ul>
-                        </div>
-                        <div class="layui-tab-item">
-                            <p style="text-align: center">
-                                <a onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" href=""
-                                   class="layui-btn layui-btn-sm layui-btn-primary"><i class="fa fa-qq"></i>
-                                    网站用户</a>
-                                <a href="" class="layui-btn layui-btn-sm layui-btn-primary"><i class="fa fa-user-o"></i>
-                                    网站管理</a>
-                            </p>
-                        </div>
+                        <#list contentList as content>
+                        <#if content_index = 0>
+                            <div class="layui-tab-item layui-show layui-text">${content.content}</div>
+                        <#else/>
+                            <div class="layui-tab-item">${content.content}</div>
+                        </#if>
+                        </#list>
                     </div>
                 </div>
 
@@ -431,6 +431,7 @@
                         <span class="layui-badge-rim">Java(91)</span>
                     </div>
                 </div>
+                </#if>
             </div>
         </div>
     </div>

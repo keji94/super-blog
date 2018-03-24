@@ -1,7 +1,8 @@
 package com.keji.blog.vo.infoboard;
 
-import java.rmi.MarshalException;
 import java.util.Date;
+
+import javax.validation.constraints.NotNull;
 
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
@@ -16,7 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Data
 public class InfoBoardVO {
 
-    @NotBlank(message = "id不能为空",groups = {UpdateGroup.class})
+    @NotNull(message = "id不能为空", groups = {UpdateGroup.class})
     private Long id;
 
     private Date gmtCreate;
