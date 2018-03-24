@@ -14,6 +14,7 @@ import com.keji.blog.service.home.TextSettingsService;
 import com.keji.blog.util.LogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class IndexController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Resource
+    @Autowired
     private TextSettingsService textSettingsService;
     @Resource
     private NavService navService;

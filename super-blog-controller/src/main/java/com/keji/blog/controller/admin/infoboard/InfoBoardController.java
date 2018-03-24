@@ -2,8 +2,6 @@ package com.keji.blog.controller.admin.infoboard;
 
 import java.util.Arrays;
 
-import javax.annotation.Resource;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.dataobject.InfoBoardDO;
@@ -20,6 +18,7 @@ import com.keji.blog.vo.infoboard.InfoBoardQueryVO;
 import com.keji.blog.vo.infoboard.InfoBoardVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +35,7 @@ public class InfoBoardController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    @Resource
+    @Autowired
     private InfoBoardService infoBoardService;
 
     @ResponseBody
