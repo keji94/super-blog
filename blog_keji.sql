@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : utf-8
 
- Date: 03/24/2018 11:05:57 AM
+ Date: 03/24/2018 11:13:45 AM
 */
 
 SET NAMES utf8;
@@ -337,7 +337,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 --  Records of `qrtz_scheduler_state`
 -- ----------------------------
 BEGIN;
-INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000'), ('RenrenScheduler', 'nieyideMacBook-Pro.local1521859226483', '1521860748463', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000'), ('RenrenScheduler', 'nieyideMacBook-Pro.local1521859226483', '1521861213644', '15000');
 COMMIT;
 
 -- ----------------------------
@@ -568,7 +568,6 @@ CREATE TABLE `text_settings` (
   `title` varchar(20) NOT NULL DEFAULT '' COMMENT '博客标题',
   `page_header` varchar(40) DEFAULT NULL COMMENT '页眉文案',
   `page_rooting` varchar(20) DEFAULT NULL COMMENT '页尾',
-  `information_board` varchar(255) NOT NULL COMMENT '信息板文案',
   `search` varchar(20) NOT NULL COMMENT '搜索文案',
   `search_icon` varchar(20) DEFAULT NULL,
   `comment_open` tinyint(4) NOT NULL DEFAULT '1' COMMENT '评论功能0:关闭,1:开启',
@@ -583,7 +582,7 @@ CREATE TABLE `text_settings` (
 --  Records of `text_settings`
 -- ----------------------------
 BEGIN;
-INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '信息板2222', '搜一搜2', 'icon-search1', '1', '1', '<li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.5.9 系列等</li>', '1111', '//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
+INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '搜一搜', 'icon-search', '1', '1', '<li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.5.9 系列等</li>', '1111', '//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
 COMMIT;
 
 -- ----------------------------

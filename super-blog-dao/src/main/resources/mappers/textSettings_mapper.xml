@@ -9,7 +9,6 @@
         <result column="title" property="title" jdbcType="VARCHAR" />
         <result column="page_header" property="pageHeader" jdbcType="VARCHAR" />
         <result column="page_rooting" property="pageRooting" jdbcType="VARCHAR" />
-        <result column="information_board" property="informationBoard" jdbcType="VARCHAR" />
         <result column="search" property="search" jdbcType="VARCHAR" />
         <result column="search_icon" property="searchIcon" jdbcType="VARCHAR" />
         <result column="comment_open" property="commentOpen" jdbcType="INTEGER" />
@@ -21,7 +20,7 @@
 
     <sql id="Base_Column_List" >
         id, gmt_create, gmt_modified, logo,title, page_header, page_rooting,
-        information_board, search,search_icon,comment_open,leave_word_open,announcement,leave_word_announcement,icon_url
+        search,search_icon,comment_open,leave_word_open,announcement,leave_word_announcement,icon_url
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -62,9 +61,6 @@
             </if>
             <if test="pageRooting != null" >
                 page_rooting = #{pageRooting,jdbcType=VARCHAR},
-            </if>
-            <if test="informationBoard != null" >
-                information_board = #{informationBoard,jdbcType=VARCHAR},
             </if>
             <if test="search != null" >
                 search = #{search,jdbcType=VARCHAR},

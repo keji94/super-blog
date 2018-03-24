@@ -47,11 +47,6 @@ public class TextSettingsVO{
     private String pageRooting;
 
     /**
-     * 信息板文案
-     */
-    private String informationBoard;
-
-    /**
      * 搜索文案
      */
     private String search;

@@ -56,7 +56,6 @@ public class TextSettingsController {
 
     private TextSettingsDO convertVO2DO(TextSettingsVO settingsVO) {
         TextSettingsDO textSettingsDO = new TextSettingsDO();
-        textSettingsDO.setInformationBoard(settingsVO.getInformationBoard());
         textSettingsDO.setLogo(settingsVO.getLogo());
         textSettingsDO.setPageHeader(settingsVO.getPageHeader());
         textSettingsDO.setPageRooting(settingsVO.getPageRooting());
