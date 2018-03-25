@@ -28,7 +28,6 @@ var vm = new Vue({
         getCategory: function(){
             //加载菜单树
             $.get(baseURL + "category/categoryTree", function(r){
-                debugger;
                 ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
                 var node = ztree.getNodeByParam("categoryId", vm.category.parentId);
                 ztree.selectNode(node);

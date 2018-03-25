@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
     <link rel="stylesheet" href="/static/plugins/animate/animate.min.css">
+    <link rel="stylesheet" href="/static/plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="/static/plugins/treegrid/jquery.treegrid.css">
     <link rel="stylesheet" href="/static/css/home/style.css">
+    <link rel="stylesheet" href="/static/css/admin/bootstrap-table.min.css">
     <link rel="stylesheet" href="/static/css/home/index.css">
     <link rel="icon" href="/static/images/favicon.ico">
     <title>${settings.title}</title>
@@ -397,10 +400,7 @@
                     <div class="layui-tab-content select-none ">
                         <p class="title">文章分类</p>
                         <hr>
-                        <p><i class="layui-icon">&#xe60a;</i> Java基础 </p>
-                        <p><i class="layui-icon">&#xe60a;</i> SpringBoot </p>
-                        <p><i class="layui-icon">&#xe60a;</i> IT技术 </p>
-                        <p><i class="layui-icon">&#xe60a;</i> Web开发 </p>
+                        <ul id="categoryTree" class="ztree"></ul>
                     </div>
                 </div>
 
@@ -452,6 +452,12 @@
 <script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
 <script src="/static/plugins/hc-sticky/hc-sticky.min.js"></script>
 <script type="text/javascript" language="javascript" src="${settings.iconUrl}"></script>
+<script src="/static/js/admin/bootstrap-table.min.js"></script>
+<script src="/static/plugins/treegrid/jquery.treegrid.min.js"></script>
+<script src="/static/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
+<script src="/static/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="/static/plugins/treegrid/jquery.treegrid.extension.js"></script>
+<script src="/static/plugins/treegrid/tree.table.js"></script>
 <script src="/static/js/home/index.js"></script>
 
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->

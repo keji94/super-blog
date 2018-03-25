@@ -1,3 +1,39 @@
+var setting = {
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "id",
+            pIdKey: "parentId",
+            rootPId: -1
+        }
+    },
+
+    callback:{
+        beforeClick:getCurrentNode,
+        onclick:zTreeOnclick
+    }
+};
+var ztree;
+
+function getCurrentNode(treeId, treeNode) {
+     var curNode = treeNode;
+    zTreeOnclick(curNode);
+}
+
+function getCategory() {
+    //加载菜单树
+    $.get("admin/category/list", function(r){
+        ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
+    })
+}
+
+function zTreeOnclick(treeNode) {
+    var name = treeNode.name;
+    //todo   根据name查询文章
+}
+
+
+
 layui.config({
     base: '/static/js/home/'
 }).extend({
@@ -155,6 +191,8 @@ $(function ($) {
                 width: "0"
             }, 200)
         }
-    })
+    });
+
+    getCategory();
 
 });
