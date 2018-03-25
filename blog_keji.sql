@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : utf-8
 
- Date: 03/24/2018 11:13:45 AM
+ Date: 03/25/2018 20:04:37 PM
 */
 
 SET NAMES utf8;
@@ -37,13 +37,6 @@ CREATE TABLE `article` (
   CONSTRAINT `FK_Reference_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_Reference_7` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章表';
-
--- ----------------------------
---  Records of `article`
--- ----------------------------
-BEGIN;
-INSERT INTO `article` VALUES ('1', '第一篇', '123', '0', '1', '1', '1', '2017-08-07 15:01:24', '2017-08-07 15:01:26');
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `article_ext`
@@ -75,22 +68,20 @@ CREATE TABLE `blog_keji` (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0表示正常，1表示删除',
-  `url` varchar(255) DEFAULT NULL,
-  `order_num` int(11) NOT NULL DEFAULT '1' COMMENT '数值越低，优先级越大',
-  `is_parent` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否是父节点:0表示是，1表示不是',
+  `name` varchar(10) NOT NULL,
+  `parent_name` varchar(10) NOT NULL,
+  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否是父节点:1表示是，0表示不是',
   `parent_id` bigint(20) NOT NULL DEFAULT '0',
   `gmt_created` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 --  Records of `category`
 -- ----------------------------
 BEGIN;
-INSERT INTO `category` VALUES ('1', '首页', '0', '/index', '1', '1', '0', '2017-08-07 15:01:46', '2017-08-07 15:01:49'), ('2', '后台', '0', '/backstage/index', '1', '0', '1', '2017-08-07 16:14:15', '2017-08-07 16:14:15'), ('3', 'test', '0', null, '1', '0', '1', '2017-09-13 12:32:35', '2017-09-13 12:32:35');
+INSERT INTO `category` VALUES ('4', 'redis', '一级菜单', '0', '0', '2018-03-25 16:51:03', '2018-03-25 17:57:15'), ('6', 'redis入門', 'cashi22', '1', '4', '2018-03-25 17:27:38', '2018-03-25 17:57:33'), ('7', 'java', '一级菜单', '0', '0', '2018-03-25 17:57:01', '2018-03-25 17:57:01'), ('8', 'java基础', 'java', '1', '7', '2018-03-25 17:57:57', '2018-03-25 17:59:29');
 COMMIT;
 
 -- ----------------------------
@@ -186,13 +177,6 @@ CREATE TABLE `picture` (
   KEY `FK_Reference_6` (`article_id`),
   CONSTRAINT `FK_Reference_6` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='图片表';
-
--- ----------------------------
---  Records of `picture`
--- ----------------------------
-BEGIN;
-INSERT INTO `picture` VALUES ('1', '首页图片轮播1', '/images/001.jpg', '1', '1', '1', '2017-08-07 14:57:35', '2017-08-07 14:57:38'), ('2', '首页图片轮播1', '/images/002.jpg', '0', '1', '1', '2017-08-07 15:05:55', '2017-08-07 15:05:58'), ('3', '首页图片轮播3', '/images/003.jpg', '0', '1', '1', '2017-08-07 15:06:35', '2017-08-07 15:06:38'), ('4', '首页图片轮播4', '/images/004.jpg', '0', '1', '1', '2017-08-07 15:07:05', '2017-08-07 15:07:09'), ('5', '首页图片轮播5', '/images/005.jpg', '0', '1', '1', '2017-08-07 15:19:52', '2017-08-07 15:19:58');
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `qrtz_blob_triggers`
@@ -337,7 +321,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 --  Records of `qrtz_scheduler_state`
 -- ----------------------------
 BEGIN;
-INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000'), ('RenrenScheduler', 'nieyideMacBook-Pro.local1521859226483', '1521861213644', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000'), ('RenrenScheduler', 'nieyideMacBook-Pro.local1521966391919', '1521979463923', '15000');
 COMMIT;
 
 -- ----------------------------
@@ -462,13 +446,13 @@ CREATE TABLE `resource` (
   `gmt_created` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `resource`
 -- ----------------------------
 BEGIN;
-INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-23 22:46:15'), ('2', '59', '系统管理', '用户管理', 'modules/authority/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2018-03-19 17:29:31'), ('3', '59', '系统管理', '菜单管理', 'modules/authority/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2018-03-19 17:29:37'), ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38'), ('5', '3', '菜单管理', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:18', '2017-10-24 20:35:21'), ('6', '3', '菜单管理', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:50', '2017-10-24 20:35:54'), ('7', '3', '菜单管理', '删除', null, 'sys:menu:delete', '2', null, '0', '0', '2017-10-24 20:36:27', '2017-10-24 20:36:30'), ('8', '2', '用户管理', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', '0', '2017-10-25 10:30:47', '2017-10-25 10:30:50'), ('9', '2', '用户管理', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:21', '2017-10-25 10:31:23'), ('10', '2', '用户管理', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:53', '2017-10-25 10:31:55'), ('11', '2', '用户管理', '删除', null, 'sys:role:delete', '2', null, '0', '0', '2017-10-25 10:32:18', '2017-10-25 10:32:21'), ('12', '59', '系统管理', '角色管理', 'modules/authority/role.html', null, '1', 'fa fa-user-secret', '3', '0', '2017-10-25 10:34:56', '2018-03-19 17:29:44'), ('13', '12', '角色管理', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0', '0', '2017-10-25 10:36:27', '2017-10-25 10:36:29'), ('14', '12', '角色管理', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', '0', '2017-10-25 10:36:50', '2017-10-25 10:36:52'), ('15', '12', '角色管理', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '0', '2017-10-25 10:37:10', '2017-10-25 10:37:12'), ('16', '12', '角色管理', '删除', null, 'sys:user:delete', '2', null, '0', '0', '2017-10-25 10:37:30', '2017-10-25 10:37:33'), ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-list', '0', '0', '2017-10-30 17:14:02', '2017-11-02 15:03:26'), ('47', '46', '需求管理', '新增', null, 'sys:requirement:save,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:48:48', '2017-10-30 17:50:03'), ('48', '46', '需求管理', '修改', null, 'sys:requirement:update,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:49:47', '2017-10-30 17:49:47'), ('49', '46', '需求管理', '删除', null, 'sys:requirement:delete,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:50:32', '2017-10-30 17:50:32'), ('50', '1', '系统管理', '定时任务', 'modules/sys/schedule.html', null, '1', 'fa fa-tasks', '5', '0', '2017-11-02 15:01:52', '2018-03-19 14:36:58'), ('51', '50', '定时任务', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', '0', '2017-11-02 15:41:32', '2017-11-02 15:41:32'), ('52', '50', '定时任务', '新增', null, 'sys:schedule:save', '2', null, '0', '0', '2017-11-02 15:41:51', '2017-11-02 15:41:51'), ('53', '50', '定时任务', '修改', null, 'sys:schedule:update', '2', null, '0', '0', '2017-11-02 15:42:07', '2017-11-02 15:42:07'), ('54', '50', '定时任务', '删除', null, 'sys:schedule:delete', '2', null, '0', '0', '2017-11-02 15:42:19', '2017-11-02 15:42:19'), ('55', '50', '定时任务', '暂停', null, 'sys:schedule:pause', '2', null, '0', '0', '2017-11-02 15:42:34', '2017-11-02 15:42:34'), ('56', '50', '定时任务', '恢复', null, 'sys:schedule:resume', '2', null, '0', '0', '2017-11-02 15:42:48', '2017-11-03 10:32:22'), ('57', '50', '定时任务', '日志列表', null, 'sys:schedule:log', '2', null, '0', '0', '2017-11-02 15:43:11', '2017-11-02 15:43:11'), ('58', '50', '定时任务', '立即执行', null, 'sys:schedule:run', '2', null, '0', '0', '2017-11-03 10:33:00', '2017-11-03 10:33:00'), ('59', '0', '一级菜单', '权限控制', null, null, '0', 'fa fa-user-circle', '2', '0', '2018-03-19 17:25:20', '2018-03-19 17:39:06'), ('60', '1', '系统管理', '博客设置', 'modules/sys/settings.html', 'admin_sys_setting', '1', 'fa fa-cog', '1', '0', '2018-03-19 17:32:17', '2018-03-19 17:44:06'), ('61', '1', '系统管理', '导航管理', 'modules/sys/nav', 'modules:sys:nav', '1', 'fa fa-bars', '3', '0', '2018-03-22 16:18:47', '2018-03-22 16:18:47'), ('62', '1', '系统管理', '信息板管理', '/admin/modules/sys/infoBoard.html', 'sys:infoBoard', '1', 'fa fa-info', '3', '0', '2018-03-23 22:46:15', '2018-03-23 22:46:15');
+INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-25 14:58:31'), ('2', '59', '系统管理', '用户管理', 'modules/authority/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2018-03-19 17:29:31'), ('3', '59', '系统管理', '菜单管理', 'modules/authority/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2018-03-19 17:29:37'), ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38'), ('5', '3', '菜单管理', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:18', '2017-10-24 20:35:21'), ('6', '3', '菜单管理', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:50', '2017-10-24 20:35:54'), ('7', '3', '菜单管理', '删除', null, 'sys:menu:delete', '2', null, '0', '0', '2017-10-24 20:36:27', '2017-10-24 20:36:30'), ('8', '2', '用户管理', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', '0', '2017-10-25 10:30:47', '2017-10-25 10:30:50'), ('9', '2', '用户管理', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:21', '2017-10-25 10:31:23'), ('10', '2', '用户管理', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:53', '2017-10-25 10:31:55'), ('11', '2', '用户管理', '删除', null, 'sys:role:delete', '2', null, '0', '0', '2017-10-25 10:32:18', '2017-10-25 10:32:21'), ('12', '59', '系统管理', '角色管理', 'modules/authority/role.html', null, '1', 'fa fa-user-secret', '3', '0', '2017-10-25 10:34:56', '2018-03-19 17:29:44'), ('13', '12', '角色管理', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0', '0', '2017-10-25 10:36:27', '2017-10-25 10:36:29'), ('14', '12', '角色管理', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', '0', '2017-10-25 10:36:50', '2017-10-25 10:36:52'), ('15', '12', '角色管理', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '0', '2017-10-25 10:37:10', '2017-10-25 10:37:12'), ('16', '12', '角色管理', '删除', null, 'sys:user:delete', '2', null, '0', '0', '2017-10-25 10:37:30', '2017-10-25 10:37:33'), ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-list', '0', '0', '2017-10-30 17:14:02', '2018-03-25 14:45:21'), ('47', '46', '需求管理', '新增', null, 'sys:requirement:save,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:48:48', '2017-10-30 17:50:03'), ('48', '46', '需求管理', '修改', null, 'sys:requirement:update,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:49:47', '2017-10-30 17:49:47'), ('49', '46', '需求管理', '删除', null, 'sys:requirement:delete,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:50:32', '2017-10-30 17:50:32'), ('50', '1', '系统管理', '定时任务', 'modules/sys/schedule.html', null, '1', 'fa fa-tasks', '5', '0', '2017-11-02 15:01:52', '2018-03-19 14:36:58'), ('51', '50', '定时任务', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', '0', '2017-11-02 15:41:32', '2017-11-02 15:41:32'), ('52', '50', '定时任务', '新增', null, 'sys:schedule:save', '2', null, '0', '0', '2017-11-02 15:41:51', '2017-11-02 15:41:51'), ('53', '50', '定时任务', '修改', null, 'sys:schedule:update', '2', null, '0', '0', '2017-11-02 15:42:07', '2017-11-02 15:42:07'), ('54', '50', '定时任务', '删除', null, 'sys:schedule:delete', '2', null, '0', '0', '2017-11-02 15:42:19', '2017-11-02 15:42:19'), ('55', '50', '定时任务', '暂停', null, 'sys:schedule:pause', '2', null, '0', '0', '2017-11-02 15:42:34', '2017-11-02 15:42:34'), ('56', '50', '定时任务', '恢复', null, 'sys:schedule:resume', '2', null, '0', '0', '2017-11-02 15:42:48', '2017-11-03 10:32:22'), ('57', '50', '定时任务', '日志列表', null, 'sys:schedule:log', '2', null, '0', '0', '2017-11-02 15:43:11', '2017-11-02 15:43:11'), ('58', '50', '定时任务', '立即执行', null, 'sys:schedule:run', '2', null, '0', '0', '2017-11-03 10:33:00', '2017-11-03 10:33:00'), ('59', '0', '一级菜单', '权限控制', null, null, '0', 'fa fa-user-circle', '2', '0', '2018-03-19 17:25:20', '2018-03-19 17:39:06'), ('60', '1', '系统管理', '博客设置', 'modules/sys/settings.html', 'admin_sys_setting', '1', 'fa fa-cog', '1', '0', '2018-03-19 17:32:17', '2018-03-19 17:44:06'), ('61', '1', '系统管理', '导航管理', 'modules/sys/nav', 'modules:sys:nav', '1', 'fa fa-bars', '3', '0', '2018-03-22 16:18:47', '2018-03-22 16:18:47'), ('62', '1', '系统管理', '信息板管理', '/admin/modules/sys/infoBoard.html', 'sys:infoBoard', '1', 'fa fa-info', '3', '0', '2018-03-23 22:46:15', '2018-03-23 22:46:15'), ('64', '1', '系统管理', '分类管理', 'modules/sys/category.html', 'sys:category', '1', 'fa fa-coffee', '5', '0', '2018-03-25 14:58:31', '2018-03-25 16:32:20');
 COMMIT;
 
 -- ----------------------------
