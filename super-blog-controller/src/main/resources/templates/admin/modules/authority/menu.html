@@ -14,7 +14,7 @@
 <body>
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
-		<div class="grid-btn">
+		<div class="grid-btn" style="padding-top: 10px;padding-left: 5px">
 			<#if shiro.hasPermission("sys:menu:save")>
 			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			</#if>
