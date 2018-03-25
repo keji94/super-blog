@@ -29,6 +29,10 @@ public class BlogConstants {
      * 信息板缓存key
      */
     public static final String INFO_BOARD_KEY = "infoBoard";
+    /**
+     * 分类信息缓存key
+     */
+    public static final String CATEGORY_KEY = "category";
 
     /**
      * 员工姓名校验正则:2-6位无生僻字中文

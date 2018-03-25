@@ -2,20 +2,18 @@ package com.keji.blog.service.admin.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.InfoBoardDAO;
 import com.keji.blog.dataobject.InfoBoardDO;
-import com.keji.blog.dataobject.NavDO;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.util.JsonUtil;
 import com.keji.blog.util.cache.CacheTemplate;
 import com.keji.blog.util.cache.InfoBoardCacheLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,13 +24,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class InfoBoardServiceImpl implements InfoBoardService {
 
-    @Resource
+    @Autowired
     private InfoBoardDAO boardDAO;
-    @Resource
+    @Autowired
     private CacheTemplate cacheTemplate;
-    @Resource
+    @Autowired
     private InfoBoardCacheLoader cacheLoader;
-    @Resource
+    @Autowired
     private RedisClient redisClient;
 
     @Override

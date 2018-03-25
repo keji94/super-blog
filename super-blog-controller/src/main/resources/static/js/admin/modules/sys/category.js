@@ -14,49 +14,49 @@ var setting = {
 var ztree;
 
 var vm = new Vue({
-    el:'#rrapp',
+    el:'#app',
     data:{
         showList: true,
         title: null,
-        menu:{
+        category:{
             parentName:null,
             parentId:0,
-            type:1,
-            orderNum:0
+            type:1
         }
     },
     methods: {
-        getMenu: function(id){
+        getCategory: function(){
             //加载菜单树
-            $.get(baseURL + "resource/queryNoButtonResource", function(r){
-                ztree = $.fn.zTree.init($("#menuTree"), setting, r);
-                var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
+            $.get(baseURL + "category/categoryTree", function(r){
+                debugger;
+                ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
+                var node = ztree.getNodeByParam("categoryId", vm.category.parentId);
                 ztree.selectNode(node);
-                vm.menu.parentName = node.name;
+                vm.category.parentName = node.name;
             })
         },
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.menu = {parentName:null,parentId:0,type:1,orderNum:0};
-            vm.getMenu();
+            vm.category = {parentName:null,parentId:0,type:1};
+            vm.getCategory();
         },
         update: function () {
-            var id = getMenuId();
+            var id = getCategoryId();
             if(id == null){
                 return ;
             }
 
-            $.get(baseURL + "resource/queryById?id="+id, function(r){
+            $.get(baseURL + "category/queryById?id="+id, function(r){
                 vm.showList = false;
                 vm.title = "修改";
-                vm.menu = r.data;
+                vm.category = r.data;
 
-                vm.getMenu();
+                vm.getCategory();
             });
         },
         del: function () {
-            var id = getMenuId();
+            var id = getCategoryId();
             if(id == null){
                 return ;
             }
@@ -64,7 +64,7 @@ var vm = new Vue({
             confirm('确定要删除选中的记录？', function(){
                 $.ajax({
                     type: "POST",
-                    url: baseURL + "resource/delete",
+                    url: baseURL + "category/delete",
                     data: "id=" + id,
                     success: function(r){
                         if(r.success){
@@ -83,12 +83,12 @@ var vm = new Vue({
                 return ;
             }
 
-            var url = vm.menu.id == null ? "resource/save" : "resource/update";
+            var url = vm.category.id == null ? "category/save" : "category/update";
             $.ajax({
                 type: "POST",
                 url:  baseURL + url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.menu),
+                data: JSON.stringify(vm.category),
                 success: function(r){
                     if(r.success){
                         alert('操作成功', function(){
@@ -100,7 +100,7 @@ var vm = new Vue({
                 }
             });
         },
-        menuTree: function(){
+        categoryTree: function(){
             layer.open({
                 type: 1,
                 offset: '50px',
@@ -109,13 +109,13 @@ var vm = new Vue({
                 area: ['300px', '450px'],
                 shade: 0,
                 shadeClose: false,
-                content: jQuery("#menuLayer"),
+                content: jQuery("#categoryLayer"),
                 btn: ['确定', '取消'],
                 btn1: function (index) {
                     var node = ztree.getSelectedNodes();
                     //选择上级菜单
-                    vm.menu.parentId = node[0].id;
-                    vm.menu.parentName = node[0].name;
+                    vm.category.parentId = node[0].id;
+                    vm.category.parentName = node[0].name;
 
                     layer.close(index);
                 }
@@ -123,17 +123,11 @@ var vm = new Vue({
         },
         reload: function () {
             vm.showList = true;
-            Menu.table.refresh();
+            Category.table.refresh();
         },
         validator: function () {
-            if(isBlank(vm.menu.name)){
+            if(isBlank(vm.category.name)){
                 alert("菜单名称不能为空");
-                return true;
-            }
-
-            //菜单
-            if(vm.menu.type === 1 && isBlank(vm.menu.resourceUrl)){
-                alert("菜单URL不能为空");
                 return true;
             }
         }
@@ -141,8 +135,8 @@ var vm = new Vue({
 });
 
 
-var Menu = {
-    id: "menuTable",
+var Category = {
+    id: "categoryTable",
     table: null,
     layerIndex: -1
 };
@@ -150,35 +144,37 @@ var Menu = {
 /**
  * 初始化表格的列
  */
-Menu.initColumn = function () {
+Category.initColumn = function () {
     var columns = [
         {field: 'selectItem', radio: true},
         {title: 'ID', field: 'id', visible: false, align: 'center', valign: 'middle', width: '80px'},
         {title: '资源名称', field: 'name', align: 'center', valign: 'middle', sortable: true, width: '180px'},
         {title: '上级资源', field: 'parentName', align: 'center', valign: 'middle', sortable: true, width: '100px'},
-        {title: '图标', field: 'icon', align: 'center', valign: 'middle', sortable: true, width: '80px', formatter: function(item, index){
-            return item.icon == null ? '' : '<i class="'+item.icon+' fa-lg"></i>';
-        }},
-        {title: '类型', field: 'type', align: 'center', valign: 'middle', sortable: true, width: '100px', formatter: function(item, index){
-            if(item.type === 0){
-                return '<span class="label label-primary">目录</span>';
+        {
+            title: '类型',
+            field: 'type',
+            align: 'center',
+            valign: 'middle',
+            sortable: true,
+            width: '100px',
+            formatter: function (item, index) {
+                if (item.type === 0) {
+                    return '<span class="label label-primary">目录</span>';
+                }
+                if (item.type === 1) {
+                    return '<span class="label label-success">菜单</span>';
+                }
+                if (item.type === 2) {
+                    return '<span class="label label-warning">按钮</span>';
+                }
             }
-            if(item.type === 1){
-                return '<span class="label label-success">菜单</span>';
-            }
-            if(item.type === 2){
-                return '<span class="label label-warning">按钮</span>';
-            }
-        }},
-        {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true, width: '100px'},
-        {title: '资源URL', field: 'resourceUrl', align: 'center', valign: 'middle', sortable: true, width: '160px'},
-        {title: '授权标识', field: 'permission', align: 'center', valign: 'middle', sortable: true}]
+        }];
     return columns;
 };
 
 
-function getMenuId () {
-    var selected = $('#menuTable').bootstrapTreeTable('getSelections');
+function getCategoryId () {
+    var selected = $('#categoryTable').bootstrapTreeTable('getSelections');
     if (selected.length == 0) {
         alert("请选择一条记录");
         return false;
@@ -189,13 +185,13 @@ function getMenuId () {
 
 
 $(function () {
-    var colunms = Menu.initColumn();
-    var table = new TreeTable(Menu.id, baseURL + "resource/query", colunms);
+    var colunms = Category.initColumn();
+    var table = new TreeTable(Category.id, baseURL + "category/list", colunms);
     table.setExpandColumn(2);
     table.setIdField("id");
     table.setCodeField("id");
     table.setParentCodeField("parentId");
-    table.setExpandAll(false);
+    table.setExpandAll(true);
     table.init();
-    Menu.table = table;
+    Category.table = table;
 });
