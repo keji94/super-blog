@@ -6,8 +6,8 @@
 </head>
 <body>
 <div id="rrapp" v-cloak>
-	<div v-show="showList">
-		<div class="grid-btn">
+	<div v-show="showList" >
+		<div class="grid-btn" style="padding-top: 10px">
 			<div class="form-group col-sm-2">
 				<input type="text" class="form-control" v-model="q.title" @keyup.enter="query" placeholder="需求标题">
 			</div>
