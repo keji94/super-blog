@@ -1,24 +1,22 @@
 /*
- Navicat MySQL Data Transfer
+Navicat MySQL Data Transfer
 
- Source Server         : keji
- Source Server Type    : MySQL
- Source Server Version : 50718
- Source Host           : localhost
- Source Database       : blog_keji
+Source Server         : blog-keji
+Source Server Version : 50717
+Source Host           : localhost:3306
+Source Database       : blog_keji
 
- Target Server Type    : MySQL
- Target Server Version : 50718
- File Encoding         : utf-8
+Target Server Type    : MYSQL
+Target Server Version : 50717
+File Encoding         : 65001
 
- Date: 03/25/2018 20:04:37 PM
+Date: 2018-03-26 17:15:39
 */
 
-SET NAMES utf8;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
---  Table structure for `article`
+-- Table structure for article
 -- ----------------------------
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
@@ -36,10 +34,16 @@ CREATE TABLE `article` (
   KEY `FK_Reference_7` (`category_id`),
   CONSTRAINT `FK_Reference_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_Reference_7` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
---  Table structure for `article_ext`
+-- Records of article
+-- ----------------------------
+INSERT INTO `article` VALUES ('1', '1', '1', '0', '1', '1', '4', '2018-03-26 16:26:41', '2018-03-26 16:26:43');
+INSERT INTO `article` VALUES ('2', '2', '2', '0', '1', '1', '4', '2018-03-26 16:28:30', '2018-03-26 16:28:33');
+
+-- ----------------------------
+-- Table structure for article_ext
 -- ----------------------------
 DROP TABLE IF EXISTS `article_ext`;
 CREATE TABLE `article_ext` (
@@ -55,7 +59,34 @@ CREATE TABLE `article_ext` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章的扩展属性表：图片 点击量 顶 踩等';
 
 -- ----------------------------
---  Table structure for `blog_keji`
+-- Records of article_ext
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for article_tag_rel
+-- ----------------------------
+DROP TABLE IF EXISTS `article_tag_rel`;
+CREATE TABLE `article_tag_rel` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '修改时间',
+  `article_id` bigint(20) NOT NULL,
+  `tag_id` bigint(20) NOT NULL,
+  `tag_name` varchar(20) NOT NULL COMMENT '标签名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of article_tag_rel
+-- ----------------------------
+INSERT INTO `article_tag_rel` VALUES ('1', '2018-03-26 16:27:30', '2018-03-26 16:27:32', '1', '1', 'java');
+INSERT INTO `article_tag_rel` VALUES ('2', '2018-03-26 16:27:55', '2018-03-26 16:27:57', '1', '2', 'spring');
+INSERT INTO `article_tag_rel` VALUES ('3', '2018-03-26 16:28:43', '2018-03-26 16:28:44', '2', '1', 'java');
+INSERT INTO `article_tag_rel` VALUES ('4', '2018-03-26 16:42:45', '2018-03-26 16:42:47', '2', '2', 'spring');
+INSERT INTO `article_tag_rel` VALUES ('5', '2018-03-26 16:43:10', '2018-03-26 16:43:12', '1', '2', 'spring');
+
+-- ----------------------------
+-- Table structure for blog_keji
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_keji`;
 CREATE TABLE `blog_keji` (
@@ -63,7 +94,11 @@ CREATE TABLE `blog_keji` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `category`
+-- Records of blog_keji
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for category
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
@@ -78,14 +113,15 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
---  Records of `category`
+-- Records of category
 -- ----------------------------
-BEGIN;
-INSERT INTO `category` VALUES ('4', 'redis', '一级菜单', '0', '0', '2018-03-25 16:51:03', '2018-03-25 17:57:15'), ('6', 'redis入門', 'cashi22', '1', '4', '2018-03-25 17:27:38', '2018-03-25 17:57:33'), ('7', 'java', '一级菜单', '0', '0', '2018-03-25 17:57:01', '2018-03-25 17:57:01'), ('8', 'java基础', 'java', '1', '7', '2018-03-25 17:57:57', '2018-03-25 17:59:29');
-COMMIT;
+INSERT INTO `category` VALUES ('4', 'redis', '一级菜单', '0', '0', '2018-03-25 16:51:03', '2018-03-25 17:57:15');
+INSERT INTO `category` VALUES ('6', 'redis入門', 'cashi22', '1', '4', '2018-03-25 17:27:38', '2018-03-25 17:57:33');
+INSERT INTO `category` VALUES ('7', 'java', '一级菜单', '0', '0', '2018-03-25 17:57:01', '2018-03-25 17:57:01');
+INSERT INTO `category` VALUES ('8', 'java基础', 'java', '1', '7', '2018-03-25 17:57:57', '2018-03-25 17:59:29');
 
 -- ----------------------------
---  Table structure for `comments`
+-- Table structure for comments
 -- ----------------------------
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
@@ -104,7 +140,11 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
 
 -- ----------------------------
---  Table structure for `hits`
+-- Records of comments
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for hits
 -- ----------------------------
 DROP TABLE IF EXISTS `hits`;
 CREATE TABLE `hits` (
@@ -119,7 +159,11 @@ CREATE TABLE `hits` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='点击量表';
 
 -- ----------------------------
---  Table structure for `info_board`
+-- Records of hits
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for info_board
 -- ----------------------------
 DROP TABLE IF EXISTS `info_board`;
 CREATE TABLE `info_board` (
@@ -132,14 +176,13 @@ CREATE TABLE `info_board` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Xin xi ban ';
 
 -- ----------------------------
---  Records of `info_board`
+-- Records of info_board
 -- ----------------------------
-BEGIN;
-INSERT INTO `info_board` VALUES ('2', '2018-03-24 10:19:50', '2018-03-24 11:02:12', '网站信息', '<ul><li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\" style=\"font-style: italic;\"><i class=\"layui-icon\"></i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.6.9 系列等</li></ul>'), ('3', '2018-03-24 11:03:48', '2018-03-24 11:03:48', '用户登录', '请登录');
-COMMIT;
+INSERT INTO `info_board` VALUES ('2', '2018-03-24 10:19:50', '2018-03-24 11:02:12', '网站信息', '<ul><li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\" style=\"font-style: italic;\"><i class=\"layui-icon\"></i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.6.9 系列等</li></ul>');
+INSERT INTO `info_board` VALUES ('3', '2018-03-24 11:03:48', '2018-03-24 11:03:48', '用户登录', '请登录');
 
 -- ----------------------------
---  Table structure for `nav`
+-- Table structure for nav
 -- ----------------------------
 DROP TABLE IF EXISTS `nav`;
 CREATE TABLE `nav` (
@@ -154,14 +197,15 @@ CREATE TABLE `nav` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='首页导航表';
 
 -- ----------------------------
---  Records of `nav`
+-- Records of nav
 -- ----------------------------
-BEGIN;
-INSERT INTO `nav` VALUES ('5', '2018-03-23 14:05:22', '2018-03-23 14:05:22', '主页', 'icon-home1', '/index', '1'), ('6', '2018-03-23 14:07:35', '2018-03-23 14:07:35', '笔记', 'icon-timeline', '/home/note.html', '1'), ('7', '2018-03-23 14:11:53', '2018-03-23 14:11:53', 'Github', 'icon-GitHub', 'https://github.com/', '1'), ('8', '2018-03-23 14:12:40', '2018-03-23 14:12:40', '关于', 'icon-about', '/home/about.html', '1');
-COMMIT;
+INSERT INTO `nav` VALUES ('5', '2018-03-23 14:05:22', '2018-03-23 14:05:22', '主页', 'icon-home1', '/index', '1');
+INSERT INTO `nav` VALUES ('6', '2018-03-23 14:07:35', '2018-03-23 14:07:35', '笔记', 'icon-timeline', '/home/note.html', '1');
+INSERT INTO `nav` VALUES ('7', '2018-03-23 14:11:53', '2018-03-23 14:11:53', 'Github', 'icon-GitHub', 'https://github.com/', '1');
+INSERT INTO `nav` VALUES ('8', '2018-03-23 14:12:40', '2018-03-23 14:12:40', '关于', 'icon-about', '/home/about.html', '1');
 
 -- ----------------------------
---  Table structure for `picture`
+-- Table structure for picture
 -- ----------------------------
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
@@ -179,7 +223,11 @@ CREATE TABLE `picture` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='图片表';
 
 -- ----------------------------
---  Table structure for `qrtz_blob_triggers`
+-- Records of picture
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_blob_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_blob_triggers`;
 CREATE TABLE `qrtz_blob_triggers` (
@@ -193,7 +241,11 @@ CREATE TABLE `qrtz_blob_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `qrtz_calendars`
+-- Records of qrtz_blob_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_calendars
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_calendars`;
 CREATE TABLE `qrtz_calendars` (
@@ -204,7 +256,11 @@ CREATE TABLE `qrtz_calendars` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `qrtz_cron_triggers`
+-- Records of qrtz_calendars
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_cron_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_cron_triggers`;
 CREATE TABLE `qrtz_cron_triggers` (
@@ -218,14 +274,12 @@ CREATE TABLE `qrtz_cron_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `qrtz_cron_triggers`
+-- Records of qrtz_cron_triggers
 -- ----------------------------
-BEGIN;
 INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', '0/5 * * * * ? ', 'Asia/Shanghai');
-COMMIT;
 
 -- ----------------------------
---  Table structure for `qrtz_fired_triggers`
+-- Table structure for qrtz_fired_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_fired_triggers`;
 CREATE TABLE `qrtz_fired_triggers` (
@@ -252,7 +306,11 @@ CREATE TABLE `qrtz_fired_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `qrtz_job_details`
+-- Records of qrtz_fired_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_job_details
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_job_details`;
 CREATE TABLE `qrtz_job_details` (
@@ -272,14 +330,12 @@ CREATE TABLE `qrtz_job_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `qrtz_job_details`
+-- Records of qrtz_job_details
 -- ----------------------------
-BEGIN;
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', null, 'com.keji.blog.util.schedule.ScheduleJob', '0', '0', '0', '0', 0xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787001737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000d4a4f425f504152414d5f4b455973720026636f6d2e6b656a692e626c6f672e646174616f626a6563742e5363686564756c654a6f62444f26f5e3308839e4500200094c00086265616e4e616d657400124c6a6176612f6c616e672f537472696e673b4c000e63726f6e45787072657373696f6e71007e00094c000a676d74437265617465647400104c6a6176612f7574696c2f446174653b4c000b676d744d6f64696669656471007e000a4c000269647400104c6a6176612f6c616e672f4c6f6e673b4c000a6d6574686f644e616d6571007e00094c0006706172616d7371007e00094c000672656d61726b71007e00094c00067374617475737400134c6a6176612f6c616e672f496e74656765723b7870740008746573745461736b74000e302f35202a202a202a202a203f2070707372000e6a6176612e6c616e672e4c6f6e673b8be490cc8f23df0200014a000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000000000000004740004746573747070737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c75657871007e0011000000007800);
-COMMIT;
+INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', null, 'com.keji.blog.util.schedule.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720026636F6D2E6B656A692E626C6F672E646174616F626A6563742E5363686564756C654A6F62444F26F5E3308839E4500200094C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000A676D74437265617465647400104C6A6176612F7574696C2F446174653B4C000B676D744D6F64696669656471007E000A4C000269647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B74000E302F35202A202A202A202A203F2070707372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000004740004746573747070737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0011000000007800);
 
 -- ----------------------------
---  Table structure for `qrtz_locks`
+-- Table structure for qrtz_locks
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_locks`;
 CREATE TABLE `qrtz_locks` (
@@ -289,14 +345,15 @@ CREATE TABLE `qrtz_locks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `qrtz_locks`
+-- Records of qrtz_locks
 -- ----------------------------
-BEGIN;
-INSERT INTO `qrtz_locks` VALUES ('BlogScheduler', 'STATE_ACCESS'), ('BlogScheduler', 'TRIGGER_ACCESS'), ('RenrenScheduler', 'STATE_ACCESS'), ('RenrenScheduler', 'TRIGGER_ACCESS');
-COMMIT;
+INSERT INTO `qrtz_locks` VALUES ('BlogScheduler', 'STATE_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('BlogScheduler', 'TRIGGER_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'STATE_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'TRIGGER_ACCESS');
 
 -- ----------------------------
---  Table structure for `qrtz_paused_trigger_grps`
+-- Table structure for qrtz_paused_trigger_grps
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
 CREATE TABLE `qrtz_paused_trigger_grps` (
@@ -306,7 +363,11 @@ CREATE TABLE `qrtz_paused_trigger_grps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `qrtz_scheduler_state`
+-- Records of qrtz_paused_trigger_grps
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_scheduler_state
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_scheduler_state`;
 CREATE TABLE `qrtz_scheduler_state` (
@@ -318,14 +379,13 @@ CREATE TABLE `qrtz_scheduler_state` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `qrtz_scheduler_state`
+-- Records of qrtz_scheduler_state
 -- ----------------------------
-BEGIN;
-INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000'), ('RenrenScheduler', 'nieyideMacBook-Pro.local1521966391919', '1521979463923', '15000');
-COMMIT;
+INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31522053239995', '1522055725965', '15000');
 
 -- ----------------------------
---  Table structure for `qrtz_simple_triggers`
+-- Table structure for qrtz_simple_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_simple_triggers`;
 CREATE TABLE `qrtz_simple_triggers` (
@@ -340,7 +400,11 @@ CREATE TABLE `qrtz_simple_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `qrtz_simprop_triggers`
+-- Records of qrtz_simple_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_simprop_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
 CREATE TABLE `qrtz_simprop_triggers` (
@@ -363,7 +427,11 @@ CREATE TABLE `qrtz_simprop_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `qrtz_triggers`
+-- Records of qrtz_simprop_triggers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for qrtz_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_triggers`;
 CREATE TABLE `qrtz_triggers` (
@@ -400,14 +468,12 @@ CREATE TABLE `qrtz_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `qrtz_triggers`
+-- Records of qrtz_triggers
 -- ----------------------------
-BEGIN;
 INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', 'TASK_4', 'DEFAULT', null, '1510105655000', '1510105650000', '5', 'PAUSED', 'CRON', '1509694754000', '0', null, '2', '');
-COMMIT;
 
 -- ----------------------------
---  Table structure for `requirement`
+-- Table structure for requirement
 -- ----------------------------
 DROP TABLE IF EXISTS `requirement`;
 CREATE TABLE `requirement` (
@@ -422,14 +488,14 @@ CREATE TABLE `requirement` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `requirement`
+-- Records of requirement
 -- ----------------------------
-BEGIN;
-INSERT INTO `requirement` VALUES ('6', 'CodeReview', '前面完成了权限管理以及需求管理，可以先review一下代码', null, '2', '2017-10-31 10:20:43', '2017-11-03 16:08:11'), ('10', '定时任务需求', '移植renren项目的定时任务', '定时任务的相关知识还需要学习', '2', '2017-11-01 14:43:38', '2017-11-03 16:09:49'), ('11', '定时任务有一个线程池操作，灵狐警告了，改掉', '学习总结java线程池相关知识', null, '2', '2017-11-03 16:09:15', '2017-11-06 10:55:49');
-COMMIT;
+INSERT INTO `requirement` VALUES ('6', 'CodeReview', '前面完成了权限管理以及需求管理，可以先review一下代码', null, '2', '2017-10-31 10:20:43', '2017-11-03 16:08:11');
+INSERT INTO `requirement` VALUES ('10', '定时任务需求', '移植renren项目的定时任务', '定时任务的相关知识还需要学习', '2', '2017-11-01 14:43:38', '2017-11-03 16:09:49');
+INSERT INTO `requirement` VALUES ('11', '定时任务有一个线程池操作，灵狐警告了，改掉', '学习总结java线程池相关知识', null, '2', '2017-11-03 16:09:15', '2017-11-06 10:55:49');
 
 -- ----------------------------
---  Table structure for `resource`
+-- Table structure for resource
 -- ----------------------------
 DROP TABLE IF EXISTS `resource`;
 CREATE TABLE `resource` (
@@ -446,17 +512,49 @@ CREATE TABLE `resource` (
   `gmt_created` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `resource`
+-- Records of resource
 -- ----------------------------
-BEGIN;
-INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-25 14:58:31'), ('2', '59', '系统管理', '用户管理', 'modules/authority/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2018-03-19 17:29:31'), ('3', '59', '系统管理', '菜单管理', 'modules/authority/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2018-03-19 17:29:37'), ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38'), ('5', '3', '菜单管理', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:18', '2017-10-24 20:35:21'), ('6', '3', '菜单管理', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:50', '2017-10-24 20:35:54'), ('7', '3', '菜单管理', '删除', null, 'sys:menu:delete', '2', null, '0', '0', '2017-10-24 20:36:27', '2017-10-24 20:36:30'), ('8', '2', '用户管理', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', '0', '2017-10-25 10:30:47', '2017-10-25 10:30:50'), ('9', '2', '用户管理', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:21', '2017-10-25 10:31:23'), ('10', '2', '用户管理', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:53', '2017-10-25 10:31:55'), ('11', '2', '用户管理', '删除', null, 'sys:role:delete', '2', null, '0', '0', '2017-10-25 10:32:18', '2017-10-25 10:32:21'), ('12', '59', '系统管理', '角色管理', 'modules/authority/role.html', null, '1', 'fa fa-user-secret', '3', '0', '2017-10-25 10:34:56', '2018-03-19 17:29:44'), ('13', '12', '角色管理', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0', '0', '2017-10-25 10:36:27', '2017-10-25 10:36:29'), ('14', '12', '角色管理', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', '0', '2017-10-25 10:36:50', '2017-10-25 10:36:52'), ('15', '12', '角色管理', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '0', '2017-10-25 10:37:10', '2017-10-25 10:37:12'), ('16', '12', '角色管理', '删除', null, 'sys:user:delete', '2', null, '0', '0', '2017-10-25 10:37:30', '2017-10-25 10:37:33'), ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-list', '0', '0', '2017-10-30 17:14:02', '2018-03-25 14:45:21'), ('47', '46', '需求管理', '新增', null, 'sys:requirement:save,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:48:48', '2017-10-30 17:50:03'), ('48', '46', '需求管理', '修改', null, 'sys:requirement:update,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:49:47', '2017-10-30 17:49:47'), ('49', '46', '需求管理', '删除', null, 'sys:requirement:delete,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:50:32', '2017-10-30 17:50:32'), ('50', '1', '系统管理', '定时任务', 'modules/sys/schedule.html', null, '1', 'fa fa-tasks', '5', '0', '2017-11-02 15:01:52', '2018-03-19 14:36:58'), ('51', '50', '定时任务', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', '0', '2017-11-02 15:41:32', '2017-11-02 15:41:32'), ('52', '50', '定时任务', '新增', null, 'sys:schedule:save', '2', null, '0', '0', '2017-11-02 15:41:51', '2017-11-02 15:41:51'), ('53', '50', '定时任务', '修改', null, 'sys:schedule:update', '2', null, '0', '0', '2017-11-02 15:42:07', '2017-11-02 15:42:07'), ('54', '50', '定时任务', '删除', null, 'sys:schedule:delete', '2', null, '0', '0', '2017-11-02 15:42:19', '2017-11-02 15:42:19'), ('55', '50', '定时任务', '暂停', null, 'sys:schedule:pause', '2', null, '0', '0', '2017-11-02 15:42:34', '2017-11-02 15:42:34'), ('56', '50', '定时任务', '恢复', null, 'sys:schedule:resume', '2', null, '0', '0', '2017-11-02 15:42:48', '2017-11-03 10:32:22'), ('57', '50', '定时任务', '日志列表', null, 'sys:schedule:log', '2', null, '0', '0', '2017-11-02 15:43:11', '2017-11-02 15:43:11'), ('58', '50', '定时任务', '立即执行', null, 'sys:schedule:run', '2', null, '0', '0', '2017-11-03 10:33:00', '2017-11-03 10:33:00'), ('59', '0', '一级菜单', '权限控制', null, null, '0', 'fa fa-user-circle', '2', '0', '2018-03-19 17:25:20', '2018-03-19 17:39:06'), ('60', '1', '系统管理', '博客设置', 'modules/sys/settings.html', 'admin_sys_setting', '1', 'fa fa-cog', '1', '0', '2018-03-19 17:32:17', '2018-03-19 17:44:06'), ('61', '1', '系统管理', '导航管理', 'modules/sys/nav', 'modules:sys:nav', '1', 'fa fa-bars', '3', '0', '2018-03-22 16:18:47', '2018-03-22 16:18:47'), ('62', '1', '系统管理', '信息板管理', '/admin/modules/sys/infoBoard.html', 'sys:infoBoard', '1', 'fa fa-info', '3', '0', '2018-03-23 22:46:15', '2018-03-23 22:46:15'), ('64', '1', '系统管理', '分类管理', 'modules/sys/category.html', 'sys:category', '1', 'fa fa-coffee', '5', '0', '2018-03-25 14:58:31', '2018-03-25 16:32:20');
-COMMIT;
+INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-26 11:03:02');
+INSERT INTO `resource` VALUES ('2', '59', '系统管理', '用户管理', 'modules/authority/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2018-03-19 17:29:31');
+INSERT INTO `resource` VALUES ('3', '59', '系统管理', '菜单管理', 'modules/authority/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2018-03-19 17:29:37');
+INSERT INTO `resource` VALUES ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38');
+INSERT INTO `resource` VALUES ('5', '3', '菜单管理', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:18', '2017-10-24 20:35:21');
+INSERT INTO `resource` VALUES ('6', '3', '菜单管理', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:50', '2017-10-24 20:35:54');
+INSERT INTO `resource` VALUES ('7', '3', '菜单管理', '删除', null, 'sys:menu:delete', '2', null, '0', '0', '2017-10-24 20:36:27', '2017-10-24 20:36:30');
+INSERT INTO `resource` VALUES ('8', '2', '用户管理', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', '0', '2017-10-25 10:30:47', '2017-10-25 10:30:50');
+INSERT INTO `resource` VALUES ('9', '2', '用户管理', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:21', '2017-10-25 10:31:23');
+INSERT INTO `resource` VALUES ('10', '2', '用户管理', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:53', '2017-10-25 10:31:55');
+INSERT INTO `resource` VALUES ('11', '2', '用户管理', '删除', null, 'sys:role:delete', '2', null, '0', '0', '2017-10-25 10:32:18', '2017-10-25 10:32:21');
+INSERT INTO `resource` VALUES ('12', '59', '系统管理', '角色管理', 'modules/authority/role.html', null, '1', 'fa fa-user-secret', '3', '0', '2017-10-25 10:34:56', '2018-03-19 17:29:44');
+INSERT INTO `resource` VALUES ('13', '12', '角色管理', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0', '0', '2017-10-25 10:36:27', '2017-10-25 10:36:29');
+INSERT INTO `resource` VALUES ('14', '12', '角色管理', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', '0', '2017-10-25 10:36:50', '2017-10-25 10:36:52');
+INSERT INTO `resource` VALUES ('15', '12', '角色管理', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '0', '2017-10-25 10:37:10', '2017-10-25 10:37:12');
+INSERT INTO `resource` VALUES ('16', '12', '角色管理', '删除', null, 'sys:user:delete', '2', null, '0', '0', '2017-10-25 10:37:30', '2017-10-25 10:37:33');
+INSERT INTO `resource` VALUES ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-list', '0', '0', '2017-10-30 17:14:02', '2018-03-25 14:45:21');
+INSERT INTO `resource` VALUES ('47', '46', '需求管理', '新增', null, 'sys:requirement:save,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:48:48', '2017-10-30 17:50:03');
+INSERT INTO `resource` VALUES ('48', '46', '需求管理', '修改', null, 'sys:requirement:update,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:49:47', '2017-10-30 17:49:47');
+INSERT INTO `resource` VALUES ('49', '46', '需求管理', '删除', null, 'sys:requirement:delete,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:50:32', '2017-10-30 17:50:32');
+INSERT INTO `resource` VALUES ('50', '1', '系统管理', '定时任务', 'modules/sys/schedule.html', null, '1', 'fa fa-tasks', '5', '0', '2017-11-02 15:01:52', '2018-03-19 14:36:58');
+INSERT INTO `resource` VALUES ('51', '50', '定时任务', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', '0', '2017-11-02 15:41:32', '2017-11-02 15:41:32');
+INSERT INTO `resource` VALUES ('52', '50', '定时任务', '新增', null, 'sys:schedule:save', '2', null, '0', '0', '2017-11-02 15:41:51', '2017-11-02 15:41:51');
+INSERT INTO `resource` VALUES ('53', '50', '定时任务', '修改', null, 'sys:schedule:update', '2', null, '0', '0', '2017-11-02 15:42:07', '2017-11-02 15:42:07');
+INSERT INTO `resource` VALUES ('54', '50', '定时任务', '删除', null, 'sys:schedule:delete', '2', null, '0', '0', '2017-11-02 15:42:19', '2017-11-02 15:42:19');
+INSERT INTO `resource` VALUES ('55', '50', '定时任务', '暂停', null, 'sys:schedule:pause', '2', null, '0', '0', '2017-11-02 15:42:34', '2017-11-02 15:42:34');
+INSERT INTO `resource` VALUES ('56', '50', '定时任务', '恢复', null, 'sys:schedule:resume', '2', null, '0', '0', '2017-11-02 15:42:48', '2017-11-03 10:32:22');
+INSERT INTO `resource` VALUES ('57', '50', '定时任务', '日志列表', null, 'sys:schedule:log', '2', null, '0', '0', '2017-11-02 15:43:11', '2017-11-02 15:43:11');
+INSERT INTO `resource` VALUES ('58', '50', '定时任务', '立即执行', null, 'sys:schedule:run', '2', null, '0', '0', '2017-11-03 10:33:00', '2017-11-03 10:33:00');
+INSERT INTO `resource` VALUES ('59', '0', '一级菜单', '权限控制', null, null, '0', 'fa fa-user-circle', '2', '0', '2018-03-19 17:25:20', '2018-03-19 17:39:06');
+INSERT INTO `resource` VALUES ('60', '1', '系统管理', '博客设置', 'modules/sys/settings.html', 'admin_sys_setting', '1', 'fa fa-cog', '1', '0', '2018-03-19 17:32:17', '2018-03-19 17:44:06');
+INSERT INTO `resource` VALUES ('61', '1', '系统管理', '导航管理', 'modules/sys/nav', 'modules:sys:nav', '1', 'fa fa-bars', '3', '0', '2018-03-22 16:18:47', '2018-03-22 16:18:47');
+INSERT INTO `resource` VALUES ('62', '1', '系统管理', '信息板管理', '/admin/modules/sys/infoBoard.html', 'sys:infoBoard', '1', 'fa fa-info', '3', '0', '2018-03-23 22:46:15', '2018-03-23 22:46:15');
+INSERT INTO `resource` VALUES ('64', '1', '系统管理', '分类管理', 'modules/sys/category.html', 'sys:category', '1', 'fa fa-coffee', '5', '0', '2018-03-25 14:58:31', '2018-03-25 16:32:20');
+INSERT INTO `resource` VALUES ('65', '1', '系统管理', '标签管理', 'modules/sys/tag.html', 'sys:tag', '1', 'fa fa-tags', '5', '0', '2018-03-26 11:03:02', '2018-03-26 11:03:32');
 
 -- ----------------------------
---  Table structure for `role`
+-- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
@@ -470,14 +568,13 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `role`
+-- Records of role
 -- ----------------------------
-BEGIN;
-INSERT INTO `role` VALUES ('1', 'admin', '管理员', '0', '2017-10-19 10:55:39', '2017-10-19 10:55:43'), ('2', 'common', '普通会员', '0', '2017-10-19 10:56:52', '2017-10-19 10:56:55');
-COMMIT;
+INSERT INTO `role` VALUES ('1', 'admin', '管理员', '0', '2017-10-19 10:55:39', '2017-10-19 10:55:43');
+INSERT INTO `role` VALUES ('2', 'common', '普通会员', '0', '2017-10-19 10:56:52', '2017-10-19 10:56:55');
 
 -- ----------------------------
---  Table structure for `role_resource_rel`
+-- Table structure for role_resource_rel
 -- ----------------------------
 DROP TABLE IF EXISTS `role_resource_rel`;
 CREATE TABLE `role_resource_rel` (
@@ -491,14 +588,27 @@ CREATE TABLE `role_resource_rel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `role_resource_rel`
+-- Records of role_resource_rel
 -- ----------------------------
-BEGIN;
-INSERT INTO `role_resource_rel` VALUES ('1', '2', '2', '0', '2017-10-19 14:55:30', '2017-10-19 14:55:32'), ('2', '1', '1', '0', '2017-10-19 14:55:40', '2017-10-19 14:55:43'), ('3', '1', '2', '0', '2017-10-25 10:00:41', '2017-10-25 10:00:44'), ('4', '1', '3', '0', '2017-10-25 10:01:16', '2017-10-25 10:01:19'), ('5', '1', '4', '0', '2017-10-25 10:02:19', '2017-10-25 10:02:22'), ('6', '1', '5', '0', '2017-10-25 10:02:29', '2017-10-25 10:02:31'), ('7', '1', '6', '0', '2017-10-25 10:02:40', '2017-10-25 10:02:42'), ('9', '1', '8', '0', '2017-10-25 10:32:42', '2017-10-25 10:32:45'), ('10', '1', '9', '0', '2017-10-25 10:32:52', '2017-10-25 10:32:54'), ('11', '1', '10', '0', '2017-10-25 10:33:02', '2017-10-25 10:33:04'), ('12', '1', '11', '0', '2017-10-25 10:33:11', '2017-10-25 10:33:14'), ('13', '1', '12', '0', '2017-10-25 10:37:54', '2017-10-25 10:37:56'), ('14', '1', '13', '0', '2017-10-25 10:38:03', '2017-10-25 10:38:06'), ('15', '1', '14', '0', '2017-10-25 10:38:16', '2017-10-25 10:38:18'), ('16', '1', '15', '0', '2017-10-25 10:38:45', '2017-10-25 10:38:48'), ('17', '1', '16', '0', '2017-10-25 10:38:55', '2017-10-25 10:38:58');
-COMMIT;
+INSERT INTO `role_resource_rel` VALUES ('1', '2', '2', '0', '2017-10-19 14:55:30', '2017-10-19 14:55:32');
+INSERT INTO `role_resource_rel` VALUES ('2', '1', '1', '0', '2017-10-19 14:55:40', '2017-10-19 14:55:43');
+INSERT INTO `role_resource_rel` VALUES ('3', '1', '2', '0', '2017-10-25 10:00:41', '2017-10-25 10:00:44');
+INSERT INTO `role_resource_rel` VALUES ('4', '1', '3', '0', '2017-10-25 10:01:16', '2017-10-25 10:01:19');
+INSERT INTO `role_resource_rel` VALUES ('5', '1', '4', '0', '2017-10-25 10:02:19', '2017-10-25 10:02:22');
+INSERT INTO `role_resource_rel` VALUES ('6', '1', '5', '0', '2017-10-25 10:02:29', '2017-10-25 10:02:31');
+INSERT INTO `role_resource_rel` VALUES ('7', '1', '6', '0', '2017-10-25 10:02:40', '2017-10-25 10:02:42');
+INSERT INTO `role_resource_rel` VALUES ('9', '1', '8', '0', '2017-10-25 10:32:42', '2017-10-25 10:32:45');
+INSERT INTO `role_resource_rel` VALUES ('10', '1', '9', '0', '2017-10-25 10:32:52', '2017-10-25 10:32:54');
+INSERT INTO `role_resource_rel` VALUES ('11', '1', '10', '0', '2017-10-25 10:33:02', '2017-10-25 10:33:04');
+INSERT INTO `role_resource_rel` VALUES ('12', '1', '11', '0', '2017-10-25 10:33:11', '2017-10-25 10:33:14');
+INSERT INTO `role_resource_rel` VALUES ('13', '1', '12', '0', '2017-10-25 10:37:54', '2017-10-25 10:37:56');
+INSERT INTO `role_resource_rel` VALUES ('14', '1', '13', '0', '2017-10-25 10:38:03', '2017-10-25 10:38:06');
+INSERT INTO `role_resource_rel` VALUES ('15', '1', '14', '0', '2017-10-25 10:38:16', '2017-10-25 10:38:18');
+INSERT INTO `role_resource_rel` VALUES ('16', '1', '15', '0', '2017-10-25 10:38:45', '2017-10-25 10:38:48');
+INSERT INTO `role_resource_rel` VALUES ('17', '1', '16', '0', '2017-10-25 10:38:55', '2017-10-25 10:38:58');
 
 -- ----------------------------
---  Table structure for `schedule_job`
+-- Table structure for schedule_job
 -- ----------------------------
 DROP TABLE IF EXISTS `schedule_job`;
 CREATE TABLE `schedule_job` (
@@ -515,14 +625,12 @@ CREATE TABLE `schedule_job` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `schedule_job`
+-- Records of schedule_job
 -- ----------------------------
-BEGIN;
 INSERT INTO `schedule_job` VALUES ('4', 'testTask', 'test', null, '0/5 * * * * ? ', null, '1', '2017-11-03 15:39:14', '2017-11-08 09:47:31');
-COMMIT;
 
 -- ----------------------------
---  Table structure for `schedule_job_log`
+-- Table structure for schedule_job_log
 -- ----------------------------
 DROP TABLE IF EXISTS `schedule_job_log`;
 CREATE TABLE `schedule_job_log` (
@@ -541,7 +649,30 @@ CREATE TABLE `schedule_job_log` (
 ) ENGINE=InnoDB AUTO_INCREMENT=59365 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
---  Table structure for `text_settings`
+-- Records of schedule_job_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tag
+-- ----------------------------
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '修改时间',
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tag
+-- ----------------------------
+INSERT INTO `tag` VALUES ('1', '2018-03-26 11:03:49', '2018-03-26 11:05:13', 'java');
+INSERT INTO `tag` VALUES ('2', '2018-03-26 11:05:18', '2018-03-26 11:05:18', 'spring');
+INSERT INTO `tag` VALUES ('4', '2018-03-26 11:05:29', '2018-03-26 11:05:29', 'redis');
+
+-- ----------------------------
+-- Table structure for text_settings
 -- ----------------------------
 DROP TABLE IF EXISTS `text_settings`;
 CREATE TABLE `text_settings` (
@@ -556,21 +687,21 @@ CREATE TABLE `text_settings` (
   `search_icon` varchar(20) DEFAULT NULL,
   `comment_open` tinyint(4) NOT NULL DEFAULT '1' COMMENT '评论功能0:关闭,1:开启',
   `leave_word_open` tinyint(4) NOT NULL COMMENT '留言功能0:关闭,1:开启',
+  `create_time_icon` varchar(20) DEFAULT NULL,
   `announcement` text COMMENT '公告信息',
+  `hot_icon` varchar(20) DEFAULT NULL COMMENT '文章热度icon',
   `leave_word_announcement` varchar(255) DEFAULT NULL COMMENT '留言公告信息',
   `icon_url` varchar(100) NOT NULL COMMENT 'http://iconfont.cn/manage/index?spm=a313x.7781069.1998910419.11&manage_type=myprojects&projectId=601117 最新地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `text_settings`
+-- Records of text_settings
 -- ----------------------------
-BEGIN;
-INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '搜一搜', 'icon-search', '1', '1', '<li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.5.9 系列等</li>', '1111', '//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
-COMMIT;
+INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '搜一搜', 'icon-search', '1', '1', 'icon-time', '<li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.5.9 系列等</li>', 'icon-temperature-', '1111', '//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
 
 -- ----------------------------
---  Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -591,14 +722,14 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
---  Records of `user`
+-- Records of user
 -- ----------------------------
-BEGIN;
-INSERT INTO `user` VALUES ('1', 'admin@qq.com', '克己', 'admin', '啥时候脱单？', '等我完成100功', null, null, null, null, '1', '2017-08-07 11:13:00', '2017-08-07 11:13:02'), ('2', '123@qq.com', '克己', '2870386', '你小时候最好的朋友', '123', null, '10.63.14.102', null, '17671689099', '1', '2017-08-07 17:04:43', '2017-10-26 15:26:02'), ('5', 'nieyinie2008@163.com', '聂毅', '2870386', null, null, null, null, null, '17671689059', '1', '2017-10-26 11:08:28', '2017-10-26 15:26:01');
-COMMIT;
+INSERT INTO `user` VALUES ('1', 'admin@qq.com', '克己', 'admin', '啥时候脱单？', '等我完成100功', null, null, null, null, '1', '2017-08-07 11:13:00', '2017-08-07 11:13:02');
+INSERT INTO `user` VALUES ('2', '123@qq.com', '克己', '2870386', '你小时候最好的朋友', '123', null, '10.63.14.102', null, '17671689099', '1', '2017-08-07 17:04:43', '2017-10-26 15:26:02');
+INSERT INTO `user` VALUES ('5', 'nieyinie2008@163.com', '聂毅', '2870386', null, null, null, null, null, '17671689059', '1', '2017-10-26 11:08:28', '2017-10-26 15:26:01');
 
 -- ----------------------------
---  Table structure for `user_role_rel`
+-- Table structure for user_role_rel
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role_rel`;
 CREATE TABLE `user_role_rel` (
@@ -612,10 +743,9 @@ CREATE TABLE `user_role_rel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `user_role_rel`
+-- Records of user_role_rel
 -- ----------------------------
-BEGIN;
-INSERT INTO `user_role_rel` VALUES ('1', '1', '1', '0', '2017-10-19 10:57:25', '2017-10-19 10:57:28'), ('2', '2', '2', '0', '2017-10-19 10:57:37', '2017-10-19 10:57:39'), ('3', '5', '2', '0', '2017-10-26 11:08:31', '2017-10-26 11:08:31'), ('4', '6', '2', '0', '2017-10-26 14:30:03', '2017-10-26 14:30:03');
-COMMIT;
-
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `user_role_rel` VALUES ('1', '1', '1', '0', '2017-10-19 10:57:25', '2017-10-19 10:57:28');
+INSERT INTO `user_role_rel` VALUES ('2', '2', '2', '0', '2017-10-19 10:57:37', '2017-10-19 10:57:39');
+INSERT INTO `user_role_rel` VALUES ('3', '5', '2', '0', '2017-10-26 11:08:31', '2017-10-26 11:08:31');
+INSERT INTO `user_role_rel` VALUES ('4', '6', '2', '0', '2017-10-26 14:30:03', '2017-10-26 14:30:03');

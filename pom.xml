@@ -48,6 +48,7 @@
         <commons-codec.version>1.8</commons-codec.version>
         <jedis.version>2.9.0</jedis.version>
         <spring-data-redis.version>2.0.5.RELEASE</spring-data-redis.version>
+        <hutool-all.version>4.0.8</hutool-all.version>
     </properties>
 
     <dependencyManagement>
@@ -253,6 +254,12 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
             </dependency>
 
 
