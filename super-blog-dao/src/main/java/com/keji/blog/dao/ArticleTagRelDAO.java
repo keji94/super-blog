@@ -1,30 +1,29 @@
 package com.keji.blog.dao;
 
-import com.keji.blog.dataobject.ArticleTagRelDO;
-
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+
+import com.keji.blog.dataobject.ArticleTagRelDO;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author wb-ny291824
- * @version $Id: ArticleTagRelDAO.java, v 0.1 2018/3/26 13:08 wb-ny291824 Exp $
+ * @version $Id: ArticleTagRelDAO.java, v 0.1 2018/3/26 14:34 wb-ny291824 Exp $
  */
-@Mapper
+@Repository
 public interface ArticleTagRelDAO {
 
     /**
      * 删除
      * @param id id
-     * @return int
+     * @return i
      */
     int deleteByPrimaryKey(Long id);
 
     /**
      * 新增
      * @param record record
-     * @return int
+     * @return i
      */
     int insert(ArticleTagRelDO record);
 
@@ -36,9 +35,16 @@ public interface ArticleTagRelDAO {
     ArticleTagRelDO selectByPrimaryKey(Long id);
 
     /**
+     * 条件查询
+     * @param record record
+     * @return List<ArticleTagRelDO>
+     */
+    List<ArticleTagRelDO> selectByCondition(ArticleTagRelDO record);
+
+    /**
      * 更新
      * @param record record
-     * @return int
+     * @return i
      */
     int updateByPrimaryKeySelective(ArticleTagRelDO record);
 

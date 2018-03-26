@@ -1,4 +1,4 @@
-package com.keji.blog.service.home.impl;
+package com.keji.blog.service.admin.impl;
 
 import javax.annotation.Resource;
 
@@ -7,7 +7,7 @@ import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.TextSettingsDAO;
 import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.redis.RedisClient;
-import com.keji.blog.service.home.TextSettingsService;
+import com.keji.blog.service.admin.TextSettingsService;
 import com.keji.blog.util.JsonUtil;
 import com.keji.blog.util.cache.CacheLoader;
 import com.keji.blog.util.cache.CacheTemplate;

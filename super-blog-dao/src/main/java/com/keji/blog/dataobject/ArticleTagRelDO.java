@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
+ *
  * @author wb-ny291824
- * @version $Id: ArticleTagRelDO.java, v 0.1 2018/3/26 14:06 wb-ny291824 Exp $
+ * @version $Id: ArticleTagRelDO.java, v 0.1 2018/3/26 14:34 wb-ny291824 Exp $
  */
 public class ArticleTagRelDO implements Serializable {
     /**
@@ -27,6 +27,11 @@ public class ArticleTagRelDO implements Serializable {
     private Long articleId;
 
     private Long tagId;
+
+    /**
+    * 标签名称
+    **/
+    private String tagName;
 
     private static final long serialVersionUID = 1L;
 
@@ -70,6 +75,14 @@ public class ArticleTagRelDO implements Serializable {
         this.tagId = tagId;
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName == null ? null : tagName.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -81,6 +94,7 @@ public class ArticleTagRelDO implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", articleId=").append(articleId);
         sb.append(", tagId=").append(tagId);
+        sb.append(", tagName=").append(tagName);
         sb.append("]");
         return sb.toString();
     }

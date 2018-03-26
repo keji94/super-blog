@@ -1,10 +1,15 @@
 package com.keji.blog.codelibrary.java8.stream;
 
+import com.google.common.collect.Maps;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -253,6 +258,26 @@ public class StreamDemoTest {
         //内置的count
         long count1 = MENU.stream().count();
         System.out.println(count1);
+    }
+
+    /**
+     * 集合比较大小
+     */
+    public void compareList() {
+
+        Map<String, String> map = Maps.newHashMap();
+
+        ArrayList<Entry<String, String>> entryList = new ArrayList<>(map.entrySet());
+        //java8
+        entryList.sort(Comparator.comparing(Entry::getValue));
+
+        //普通
+        Collections.sort(entryList, new Comparator<Entry<String, String>>() {
+            @Override
+            public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
     }
 
     /**

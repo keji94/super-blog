@@ -26,6 +26,10 @@ public class BlogConstants {
      */
     public static final String NAV_KEY = "navDO";
     /**
+     * 标签缓存key
+     */
+    public static final String TAG_KEY = "tagDO";
+    /**
      * 信息板缓存key
      */
     public static final String INFO_BOARD_KEY = "infoBoard";

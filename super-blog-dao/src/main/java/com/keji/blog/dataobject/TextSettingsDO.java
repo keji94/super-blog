@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @author wb-ny291824
@@ -59,6 +57,16 @@ public class TextSettingsDO implements Serializable {
      * 搜索 icon
      */
     private String searchIcon;
+
+    /**
+     * 创建时间icon
+     */
+    private String createTimeIcon;
+
+    /**
+     * 文章热度icon
+     */
+    private String hotIcon;
 
     /**
      * 评论功能开启

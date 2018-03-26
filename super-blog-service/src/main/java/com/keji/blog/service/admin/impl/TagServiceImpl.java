@@ -42,7 +42,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<TagDO> listAll(TagDO tagDO) {
-        return cacheTemplate.findList(BlogConstants.NAV_KEY, TagDO.class, tagCacheLoader, tagDO);
+        return cacheTemplate.findList(BlogConstants.TAG_KEY, TagDO.class, tagCacheLoader, tagDO);
     }
 
     @Override

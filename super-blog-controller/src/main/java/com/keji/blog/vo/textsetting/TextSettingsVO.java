@@ -42,6 +42,16 @@ public class TextSettingsVO{
     private String pageHeader;
 
     /**
+     * 创建时间icon
+     */
+    private String createTimeIcon;
+
+    /**
+     * 文章热度icon
+     */
+    private String hotIcon;
+
+    /**
      * 页尾文案
      */
     private String pageRooting;

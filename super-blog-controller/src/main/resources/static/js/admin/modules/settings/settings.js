@@ -29,6 +29,8 @@ layui.use(['form', 'element'], function () {
         var pageRooting = $("#pageRooting").val();
         var home = $("#home").val();
         var homeIcon = $("#homeIcon").val();
+        var hotIcon = $("#hotIcon").val();
+        var createTimeIcon = $("#createTimeIcon").val();
         var note = $("#note").val();
         var noteIcon = $("#noteIcon").val();
         var about = $("#about").val();
@@ -54,6 +56,8 @@ layui.use(['form', 'element'], function () {
                 "pageRooting": pageRooting,
                 "home": home,
                 "homeIcon": homeIcon,
+                "hotIcon": hotIcon,
+                "createTimeIcon": createTimeIcon,
                 "note": note,
                 "noteIcon": noteIcon,
                 "about": about,
@@ -86,6 +90,8 @@ layui.use(['form', 'element'], function () {
             $("#pageHeader").val(data.data.pageHeader);
             $("#pageRooting").val(data.data.pageRooting);
             $("#home").val(data.data.home);
+            $("#hotIcon").val(data.data.hotIcon);
+            $("#createTimeIcon").val(data.data.createTimeIcon);
             $("#homeIcon").val(data.data.homeIcon);
             $("#note").val(data.data.note);
             $("#noteIcon").val(data.data.noteIcon);

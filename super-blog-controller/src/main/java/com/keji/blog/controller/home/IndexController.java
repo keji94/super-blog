@@ -1,18 +1,18 @@
 package com.keji.blog.controller.home;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
 import com.keji.blog.dataobject.InfoBoardDO;
 import com.keji.blog.dataobject.NavDO;
-import com.keji.blog.dataobject.TagDO;
 import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.service.admin.NavService;
-import com.keji.blog.service.admin.TagService;
-import com.keji.blog.service.home.TextSettingsService;
+import com.keji.blog.service.admin.TextSettingsService;
+import com.keji.blog.service.home.ArticleTagRel;
 import com.keji.blog.util.LogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class IndexController {
     @Resource
     private InfoBoardService boardService;
     @Resource
-    private TagService tagService;
+    private ArticleTagRel articleTagRel;
 
     @RequestMapping(value = {"", "/index"})
     public String index(Model model) {
@@ -48,7 +48,7 @@ public class IndexController {
             List<NavDO> navDOS = navService.listAll(initNavDO());
             List<InfoBoardDO> list = boardService.listAll(new InfoBoardDO());
             List<String> titleList = list.stream().map(InfoBoardDO::getTitle).collect(Collectors.toList());
-            List<TagDO> tagDOS = tagService.queryHotTag();
+            Map<String, Integer> hotTag = articleTagRel.queryHotTag();
 
             //网站文案设置
             model.addAttribute("settings", textSettingsDO);
@@ -58,7 +58,7 @@ public class IndexController {
             model.addAttribute("titleList", titleList);
             model.addAttribute("contentList", list);
             //热门标签
-
+            model.addAttribute("hotTag", hotTag);
         } catch (Exception e) {
             LogUtil.error(logger, e, "查询文本设置发生异常");
         }

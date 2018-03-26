@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
-import com.keji.blog.service.home.TextSettingsService;
+import com.keji.blog.service.admin.TextSettingsService;
 import com.keji.blog.util.LogUtil;
 import com.keji.blog.vo.textsetting.TextSettingsVO;
 import org.slf4j.Logger;
@@ -63,6 +63,8 @@ public class TextSettingsController {
         textSettingsDO.setSearchIcon(settingsVO.getSearchIcon());
         textSettingsDO.setTitle(settingsVO.getTitle());
         textSettingsDO.setId(settingsVO.getId());
+        textSettingsDO.setCreateTimeIcon(settingsVO.getCreateTimeIcon());
+        textSettingsDO.setHotIcon(settingsVO.getHotIcon());
         textSettingsDO.setCommentOpen(settingsVO.getCommentOpen());
         textSettingsDO.setLeaveWordOpen(settingsVO.getLeaveWordOpen());
         textSettingsDO.setAnnouncement(settingsVO.getAnnouncement());

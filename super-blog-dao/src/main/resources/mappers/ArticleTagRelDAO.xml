@@ -7,10 +7,10 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="article_id" jdbcType="BIGINT" property="articleId" />
     <result column="tag_id" jdbcType="BIGINT" property="tagId" />
+    <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
   </resultMap>
-
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, article_id, tag_id
+    id, gmt_create, gmt_modified, article_id, tag_id, tag_name
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -19,16 +19,29 @@
     from article_tag_rel
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.ArticleTagRelDO">
+    select
+    <include refid="Base_Column_List" />
+    from article_tag_rel
+    <where>
+      <if test="tagName != null">
+        AND tag_name = #{tagName,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from article_tag_rel
     where id = #{id,jdbcType=BIGINT}
   </delete>
-
   <insert id="insert" parameterType="com.keji.blog.dataobject.ArticleTagRelDO">
     insert into article_tag_rel (id, gmt_create, gmt_modified, 
-      article_id, tag_id)
+      article_id, tag_id, tag_name
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{articleId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT})
+      #{articleId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, #{tagName,jdbcType=VARCHAR}
+      )
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ArticleTagRelDO">
@@ -46,15 +59,21 @@
       <if test="tagId != null">
         tag_id = #{tagId,jdbcType=BIGINT},
       </if>
+      <if test="tagName != null">
+        tag_name = #{tagName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.ArticleTagRelDO">
     update article_tag_rel
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       article_id = #{articleId,jdbcType=BIGINT},
-      tag_id = #{tagId,jdbcType=BIGINT}
+      tag_id = #{tagId,jdbcType=BIGINT},
+      tag_name = #{tagName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

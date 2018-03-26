@@ -1,4 +1,4 @@
-package com.keji.blog.service.home;
+package com.keji.blog.service.admin;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.keji.blog.dataobject.TextSettingsDO;
@@ -21,6 +21,7 @@ public interface TextSettingsService {
     /**
      * 更新文案
      * @param textSettingsDO 文案对象
+     * @throws JsonProcessingException
      */
     void update(TextSettingsDO textSettingsDO) throws JsonProcessingException;
 }
