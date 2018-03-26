@@ -25,13 +25,13 @@
     from tag
     <where>
       <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        AND gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
       <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+        AND gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+        AND name like "%"#{name,jdbcType=VARCHAR}"%"
       </if>
     </where>
   </select>

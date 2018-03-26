@@ -29,10 +29,13 @@ var vm = new Vue({
         getMenu: function(id){
             //加载菜单树
             $.get(baseURL + "resource/queryNoButtonResource", function(r){
-                ztree = $.fn.zTree.init($("#menuTree"), setting, r);
+                ztree = $.fn.zTree.init($("#menuTree"), setting, r.data);
                 var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
                 ztree.selectNode(node);
-                vm.menu.parentName = node.name;
+                if( null != node){
+                    vm.menu.parentName = node.name;
+                }
+
             })
         },
         add: function(){
