@@ -7,12 +7,15 @@ import java.util.Date;
 /**
  * 
  * @author wb-ny291824
- * @version $Id: UserRoleRelDO.java, v 0.1 2018/3/26 11:24 wb-ny291824 Exp $
+ * @version $Id: UserRoleRelDO.java, v 0.1 2018/3/26 11:25 wb-ny291824 Exp $
  */
 @Data
 public class UserRoleRelDO {
     /**
      * 主键
+     */
+    /**
+     * 
      */
     private Long id;
 

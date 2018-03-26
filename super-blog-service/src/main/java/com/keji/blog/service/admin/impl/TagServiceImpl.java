@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class TagServiceImpl implements TagService {
-
     @Resource
     private TagDAO tagDAO;
     @Resource

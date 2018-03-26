@@ -42,6 +42,11 @@ public interface TagService {
      * @param tagDO record
      * @throws JsonProcessingException json缓存异常
      */
+    /**
+     * @params
+     * @return
+     * @throws
+     */
     void insert(TagDO tagDO) throws JsonProcessingException;
 
     /**
@@ -55,6 +60,11 @@ public interface TagService {
     /**
      * 查询热门标签
      * @return return
+     */
+    /**
+     * @params 
+     * @return 
+     * @throws
      */
     List<TagDO> queryHotTag();
 }
