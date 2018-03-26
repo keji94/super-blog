@@ -5,10 +5,9 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/9/18
- * @modified: By:
+ *
+ * @author wb-ny291824
+ * @version $Id: RoleDO.java, v 0.1 2018/3/26 11:24 wb-ny291824 Exp $
  */
 @Data
 public class RoleDO {

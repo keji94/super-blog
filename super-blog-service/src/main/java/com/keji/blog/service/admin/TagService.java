@@ -51,4 +51,10 @@ public interface TagService {
      * @throws JsonProcessingException json缓存异常
      */
     void delete(Long[] ids) throws JsonProcessingException;
+
+    /**
+     * 查询热门标签
+     * @return return
+     */
+    List<TagDO> queryHotTag();
 }

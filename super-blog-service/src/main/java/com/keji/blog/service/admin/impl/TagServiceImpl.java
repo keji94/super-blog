@@ -76,4 +76,10 @@ public class TagServiceImpl implements TagService {
         List<TagDO> value = tagDAO.selectByCondition(new TagDO());
         redisClient.set(BlogConstants.NAV_KEY, JsonUtil.object2Json(value));
     }
+
+    @Override
+    public List<TagDO> queryHotTag() {
+        //TODO 查询标签文章关联表
+        return tagDAO.selectByCondition(new TagDO());
+    }
 }

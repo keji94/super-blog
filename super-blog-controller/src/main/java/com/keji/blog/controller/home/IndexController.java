@@ -7,9 +7,11 @@ import javax.annotation.Resource;
 
 import com.keji.blog.dataobject.InfoBoardDO;
 import com.keji.blog.dataobject.NavDO;
+import com.keji.blog.dataobject.TagDO;
 import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.service.admin.NavService;
+import com.keji.blog.service.admin.TagService;
 import com.keji.blog.service.home.TextSettingsService;
 import com.keji.blog.util.LogUtil;
 import org.slf4j.Logger;
@@ -36,6 +38,8 @@ public class IndexController {
     private NavService navService;
     @Resource
     private InfoBoardService boardService;
+    @Resource
+    private TagService tagService;
 
     @RequestMapping(value = {"", "/index"})
     public String index(Model model) {
@@ -44,11 +48,17 @@ public class IndexController {
             List<NavDO> navDOS = navService.listAll(initNavDO());
             List<InfoBoardDO> list = boardService.listAll(new InfoBoardDO());
             List<String> titleList = list.stream().map(InfoBoardDO::getTitle).collect(Collectors.toList());
+            List<TagDO> tagDOS = tagService.queryHotTag();
 
+            //网站文案设置
             model.addAttribute("settings", textSettingsDO);
+            //顶部右侧导航
             model.addAttribute("navDOS", navDOS);
+            //网站信息板
             model.addAttribute("titleList", titleList);
             model.addAttribute("contentList", list);
+            //热门标签
+
         } catch (Exception e) {
             LogUtil.error(logger, e, "查询文本设置发生异常");
         }
