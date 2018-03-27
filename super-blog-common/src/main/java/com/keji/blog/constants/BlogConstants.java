@@ -29,6 +29,12 @@ public class BlogConstants {
      * 标签缓存key
      */
     public static final String TAG_KEY = "tagDO";
+
+    /**
+     * 文章缓存
+     */
+    public static final String ARTICLE_KEY = "articleDO";
+
     /**
      * 信息板缓存key
      */

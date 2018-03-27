@@ -1,4 +1,4 @@
-package com.keji.blog.dataobject;
+package com.keji.blog.vo.article;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.Date;
  * @author wb-ny291824
  * @version $Id: ArticleDO.java, v 0.1 2018/3/27 11:55 wb-ny291824 Exp $
  */
-public class ArticleDO implements Serializable {
+public class ArticleVO implements Serializable {
     /**
     * 文章id
     **/

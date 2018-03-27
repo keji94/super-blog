@@ -29,7 +29,7 @@ $(function () {
             }
         ],
         viewrecords: true,
-        height: 385,
+        height: "100%",
         rowNum: 20,
         rowList: [20, 30, 50],
         rownumbers: false,

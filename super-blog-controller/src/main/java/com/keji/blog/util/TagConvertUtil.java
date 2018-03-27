@@ -17,11 +17,11 @@ public class TagConvertUtil {
     }
 
     public static TagDO convertVO2DO(TagVO tagVO) {
-        TagDO navDO = new TagDO();
-        navDO.setName(tagVO.getName());
-        navDO.setId(tagVO.getId());
-        navDO.setGmtCreate(tagVO.getGmtCreate());
-        navDO.setGmtModified(tagVO.getGmtModified());
-        return navDO;
+        TagDO tagDO = new TagDO();
+        tagDO.setName(tagVO.getName());
+        tagDO.setId(tagVO.getId());
+        tagDO.setGmtCreate(tagVO.getGmtCreate());
+        tagDO.setGmtModified(tagVO.getGmtModified());
+        return tagDO;
     }
 }

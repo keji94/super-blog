@@ -1,7 +1,8 @@
 package com.keji.blog.dao;
 
+import java.util.List;
+
 import com.keji.blog.dataobject.ArticleDO;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,6 +20,12 @@ public interface ArticleDAO {
     int deleteByPrimaryKey(Long id);
 
     /**
+     * 批量删除
+     * @param ids ids
+     */
+    void deleteBatch(Long[] ids);
+
+    /**
      * 新增
      * @param record record
      * @return i
@@ -31,6 +38,13 @@ public interface ArticleDAO {
      * @return ArticleDO
      */
     ArticleDO selectByPrimaryKey(Long id);
+
+    /**
+     * 条件查找
+     * @param record record
+     * @return List<TagDO>
+     */
+    List<ArticleDO> selectByCondition(ArticleDO record);
 
     /**
      * 主键诚信
