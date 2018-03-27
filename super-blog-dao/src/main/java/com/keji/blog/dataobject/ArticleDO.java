@@ -6,29 +6,54 @@ import java.util.Date;
 /**
  *
  * @author wb-ny291824
- * @version $Id: CommentsDO.java, v 0.1 2018/3/27 11:56 wb-ny291824 Exp $
+ * @version $Id: ArticleDO.java, v 0.1 2018/3/27 11:55 wb-ny291824 Exp $
  */
-public class CommentsDO implements Serializable {
+public class ArticleDO implements Serializable {
+    /**
+    * 文章id
+    **/
     private Long id;
 
     /**
-    * 预留字段
+    * 文章标题
     **/
-    private Integer post;
-
-    private Long articleId;
-
-    private Long userId;
+    private String title;
 
     /**
-    * 评论状态 0：正常，1：删除
+    * 文章状态，0：正常；1：删除
     **/
-    private Boolean status;
+    private Byte status;
 
+    /**
+    * 是否置顶，1：置顶；0：不置顶
+    **/
+    private Byte top;
+
+    /**
+    * 是否可以评论 1：可以；0：不可以
+    **/
+    private Byte commentable;
+
+    /**
+    * 发表用户
+    **/
+    private Long userId;
+
+    private Long categoryId;
+
+    /**
+    * 创建时间
+    **/
     private Date gmtCreated;
 
+    /**
+    * 修改时间
+    **/
     private Date gmtModified;
 
+    /**
+    * 文章内容
+    **/
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -41,20 +66,36 @@ public class CommentsDO implements Serializable {
         this.id = id;
     }
 
-    public Integer getPost() {
-        return post;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPost(Integer post) {
-        this.post = post;
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
-    public Long getArticleId() {
-        return articleId;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Byte getTop() {
+        return top;
+    }
+
+    public void setTop(Byte top) {
+        this.top = top;
+    }
+
+    public Byte getCommentable() {
+        return commentable;
+    }
+
+    public void setCommentable(Byte commentable) {
+        this.commentable = commentable;
     }
 
     public Long getUserId() {
@@ -65,12 +106,12 @@ public class CommentsDO implements Serializable {
         this.userId = userId;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Date getGmtCreated() {
@@ -104,10 +145,12 @@ public class CommentsDO implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", post=").append(post);
-        sb.append(", articleId=").append(articleId);
-        sb.append(", userId=").append(userId);
+        sb.append(", title=").append(title);
         sb.append(", status=").append(status);
+        sb.append(", top=").append(top);
+        sb.append(", commentable=").append(commentable);
+        sb.append(", userId=").append(userId);
+        sb.append(", categoryId=").append(categoryId);
         sb.append(", gmtCreated=").append(gmtCreated);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", content=").append(content);

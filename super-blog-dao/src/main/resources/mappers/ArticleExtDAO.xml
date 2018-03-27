@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keji.blog.dao.ArticleExtDAO">
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.ArticleExtDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="good" jdbcType="INTEGER" property="good" />
+    <result column="bad" jdbcType="INTEGER" property="bad" />
+    <result column="pageviews" jdbcType="INTEGER" property="pageviews" />
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, good, bad, pageviews, article_id, gmt_create, gmt_modified
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article_ext
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_ext
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.keji.blog.dataobject.ArticleExtDO">
+    insert into article_ext (id, good, bad, 
+      pageviews, article_id, gmt_create, 
+      gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{good,jdbcType=INTEGER}, #{bad,jdbcType=INTEGER}, 
+      #{pageviews,jdbcType=INTEGER}, #{articleId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ArticleExtDO">
+    update article_ext
+    <set>
+      <if test="good != null">
+        good = #{good,jdbcType=INTEGER},
+      </if>
+      <if test="bad != null">
+        bad = #{bad,jdbcType=INTEGER},
+      </if>
+      <if test="pageviews != null">
+        pageviews = #{pageviews,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.ArticleExtDO">
+    update article_ext
+    set good = #{good,jdbcType=INTEGER},
+      bad = #{bad,jdbcType=INTEGER},
+      pageviews = #{pageviews,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
