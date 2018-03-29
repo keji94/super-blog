@@ -27,7 +27,7 @@ function pageInit(){
             { label: '总结', name: 'summary', index: "summary", width: 85,align : "center"}
         ],
         viewrecords: true,
-        height: 385,
+        height: '100%',
         rowNum: 10,
         rowList : [10,30,50],
         rownumbers: true,
