@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-26 17:15:39
+Date: 2018-03-29 09:31:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,9 +22,10 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文章id',
   `title` varchar(255) NOT NULL COMMENT '文章标题',
-  `content` text COMMENT '文章内容',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '文章状态，0：正常；1：删除',
-  `is_top` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否置顶，0：置顶；1：不置顶',
+  `content` longtext NOT NULL COMMENT '文章内容',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '文章状态，0：正常；1：删除',
+  `top` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否置顶，1：置顶；0：不置顶',
+  `commentable` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否可以评论 1：可以；0：不可以',
   `user_id` bigint(20) NOT NULL COMMENT '发表用户',
   `category_id` bigint(20) NOT NULL,
   `gmt_created` datetime NOT NULL COMMENT '创建时间',
@@ -39,8 +40,8 @@ CREATE TABLE `article` (
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '1', '1', '0', '1', '1', '4', '2018-03-26 16:26:41', '2018-03-26 16:26:43');
-INSERT INTO `article` VALUES ('2', '2', '2', '0', '1', '1', '4', '2018-03-26 16:28:30', '2018-03-26 16:28:33');
+INSERT INTO `article` VALUES ('1', '1', '1', '0', '1', '1', '1', '4', '2018-03-26 16:26:41', '2018-03-26 16:26:43');
+INSERT INTO `article` VALUES ('2', '2', '2', '0', '1', '1', '1', '4', '2018-03-26 16:28:30', '2018-03-26 16:28:33');
 
 -- ----------------------------
 -- Table structure for article_ext
@@ -48,8 +49,9 @@ INSERT INTO `article` VALUES ('2', '2', '2', '0', '1', '1', '4', '2018-03-26 16:
 DROP TABLE IF EXISTS `article_ext`;
 CREATE TABLE `article_ext` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `good` int(11) DEFAULT NULL COMMENT '文章顶数量',
-  `bad` int(11) DEFAULT NULL COMMENT '文章踩数量',
+  `good` int(11) DEFAULT '0' COMMENT '文章顶数量',
+  `bad` int(11) DEFAULT '0' COMMENT '文章踩数量',
+  `pageviews` int(20) DEFAULT '0' COMMENT '浏览数',
   `article_id` bigint(20) NOT NULL,
   `gmt_create` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
@@ -126,6 +128,7 @@ INSERT INTO `category` VALUES ('8', 'java基础', 'java', '1', '7', '2018-03-25 
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `post` int(20) DEFAULT NULL COMMENT '预留字段',
   `content` text,
   `article_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
@@ -382,7 +385,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- Records of qrtz_scheduler_state
 -- ----------------------------
 INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000');
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31522053239995', '1522055725965', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31522135225477', '1522287105193', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -512,12 +515,12 @@ CREATE TABLE `resource` (
   `gmt_created` datetime NOT NULL,
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-26 11:03:02');
+INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-27 15:25:06');
 INSERT INTO `resource` VALUES ('2', '59', '系统管理', '用户管理', 'modules/authority/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2018-03-19 17:29:31');
 INSERT INTO `resource` VALUES ('3', '59', '系统管理', '菜单管理', 'modules/authority/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2018-03-19 17:29:37');
 INSERT INTO `resource` VALUES ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38');
@@ -552,6 +555,7 @@ INSERT INTO `resource` VALUES ('61', '1', '系统管理', '导航管理', 'modul
 INSERT INTO `resource` VALUES ('62', '1', '系统管理', '信息板管理', '/admin/modules/sys/infoBoard.html', 'sys:infoBoard', '1', 'fa fa-info', '3', '0', '2018-03-23 22:46:15', '2018-03-23 22:46:15');
 INSERT INTO `resource` VALUES ('64', '1', '系统管理', '分类管理', 'modules/sys/category.html', 'sys:category', '1', 'fa fa-coffee', '5', '0', '2018-03-25 14:58:31', '2018-03-25 16:32:20');
 INSERT INTO `resource` VALUES ('65', '1', '系统管理', '标签管理', 'modules/sys/tag.html', 'sys:tag', '1', 'fa fa-tags', '5', '0', '2018-03-26 11:03:02', '2018-03-26 11:03:32');
+INSERT INTO `resource` VALUES ('66', '1', '系统管理', '文章管理', 'modules/sys/article.html', 'admin:article', '1', 'fa fa-book', '6', '0', '2018-03-27 15:25:06', '2018-03-27 15:25:41');
 
 -- ----------------------------
 -- Table structure for role
