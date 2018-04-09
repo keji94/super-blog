@@ -9,6 +9,7 @@
     <result column="commentable" jdbcType="TINYINT" property="commentable" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
     <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
@@ -16,7 +17,7 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, status, top, commentable, user_id, category_id, gmt_created, gmt_modified
+    id, title, status, top, commentable, user_id, category_id,category_name, gmt_created, gmt_modified
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -57,79 +58,12 @@
   <insert id="insert" parameterType="com.keji.blog.dataobject.ArticleDO">
     insert into article (id, title, status, 
       top, commentable, user_id,
-      category_id, gmt_created, gmt_modified, 
+      category_id,category_name, gmt_created, gmt_modified,
       content)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
       #{top,jdbcType=TINYINT}, #{commentable,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT},
-      #{categoryId,jdbcType=BIGINT}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{categoryId,jdbcType=BIGINT},#{categoryName,jdbcType=VARCHAR}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
       #{content,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.ArticleDO">
-    insert into article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="top != null">
-        top,
-      </if>
-      <if test="commentable != null">
-        commentable,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="categoryId != null">
-        category_id,
-      </if>
-      <if test="gmtCreated != null">
-        gmt_created,
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="top != null">
-        #{top,jdbcType=TINYINT},
-      </if>
-      <if test="commentable != null">
-        #{commentable,jdbcType=TINYINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreated != null">
-        #{gmtCreated,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ArticleDO">
     update article
@@ -152,6 +86,9 @@
       <if test="categoryId != null">
         category_id = #{categoryId,jdbcType=BIGINT},
       </if>
+      <if test="categoryName != null">
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
       <if test="gmtCreated != null">
         gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
       </if>
@@ -172,6 +109,7 @@
       commentable = #{commentable,jdbcType=TINYINT},
       user_id = #{userId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
+      category_name = #{categoryName,jdbcType=VARCHAR},
       gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -185,6 +123,7 @@
       commentable = #{commentable,jdbcType=TINYINT},
       user_id = #{userId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
+      category_name = #{categoryName,jdbcType=VARCHAR},
       gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

@@ -21,121 +21,91 @@ public class RedisClientImpl implements RedisClient {
 
     @Override
     public String set(String key, String value) {
-
-        Jedis jedis = jedisPool.getResource();
         String result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()){
             result = jedis.set(key, value);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public String set(String key, String value, int seconds) {
-        Jedis jedis = jedisPool.getResource();
+
         String result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.setex(key, seconds, value);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public String get(String key) {
-        Jedis jedis = jedisPool.getResource();
         String result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.get(key);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public Boolean exists(String key) {
-        Jedis jedis = jedisPool.getResource();
         Boolean result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.exists(key);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public Long expire(String key, int seconds) {
-        Jedis jedis = jedisPool.getResource();
         Long result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.expire(key, seconds);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public Long ttl(String key) {
-        Jedis jedis = jedisPool.getResource();
         Long result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.ttl(key);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public Long incr(String key) {
-        Jedis jedis = jedisPool.getResource();
         Long result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.incr(key);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public Long hset(String key, String field, String value) {
-        Jedis jedis = jedisPool.getResource();
         Long result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.incr(key);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public String hget(String key, String field) {
-        Jedis jedis = jedisPool.getResource();
         String result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.hget(key,field);
-        } finally {
-            jedis.close();
         }
         return result;
     }
 
     @Override
     public Long hdel(String key, String... field) {
-        Jedis jedis = jedisPool.getResource();
         Long result;
-        try {
+        try(Jedis jedis = jedisPool.getResource()) {
             result = jedis.hdel(key);
-        } finally {
-            jedis.close();
         }
         return result;
     }

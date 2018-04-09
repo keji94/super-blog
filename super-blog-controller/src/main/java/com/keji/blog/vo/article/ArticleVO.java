@@ -3,6 +3,9 @@ package com.keji.blog.vo.article;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  *
  * @author wb-ny291824
@@ -45,13 +48,22 @@ public class ArticleVO implements Serializable {
     private Long categoryId;
 
     /**
+     * 分类名称
+     */
+    private String categoryName;
+
+    /**
     * 创建时间
     **/
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtCreated;
 
     /**
     * 修改时间
     **/
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
 
     /**

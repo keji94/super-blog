@@ -32,4 +32,18 @@ public class ArticleConvertUtil {
         articleDO.setGmtModified(articleVO.getGmtModified());
         return articleDO;
     }
+
+    public static ArticleVO convertDO2VO(ArticleDO articleDO) {
+        ArticleVO articleVO = new ArticleVO();
+        articleVO.setTitle(articleDO.getTitle());
+        articleVO.setId(articleDO.getId());
+        articleVO.setCategoryId(articleDO.getCategoryId());
+        articleVO.setCommentable(articleDO.getCommentable());
+        articleVO.setContent(articleDO.getContent());
+        articleVO.setStatus(articleDO.getStatus());
+        articleVO.setTop(articleDO.getTop());
+        articleVO.setUserId(articleDO.getUserId());
+        articleVO.setGmtModified(articleDO.getGmtModified());
+        return articleVO;
+    }
 }

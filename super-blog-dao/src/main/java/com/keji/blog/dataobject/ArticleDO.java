@@ -3,6 +3,10 @@ package com.keji.blog.dataobject;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  *
  * @author wb-ny291824
@@ -43,6 +47,11 @@ public class ArticleDO implements Serializable {
      * 分类ID
      */
     private Long categoryId;
+
+    /**
+     * 分类名称
+     */
+    private String categoryName;
 
     /**
     * 创建时间
@@ -141,23 +150,20 @@ public class ArticleDO implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", title=").append(title);
-        sb.append(", status=").append(status);
-        sb.append(", top=").append(top);
-        sb.append(", commentable=").append(commentable);
-        sb.append(", userId=").append(userId);
-        sb.append(", categoryId=").append(categoryId);
-        sb.append(", gmtCreated=").append(gmtCreated);
-        sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", content=").append(content);
-        sb.append("]");
-        return sb.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

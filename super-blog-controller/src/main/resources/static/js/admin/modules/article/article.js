@@ -17,12 +17,12 @@ $(function () {
         colModel: [
             {label: 'id', name: 'id', hidden: true, classes: "id", width: 100},
             {label: '文章标题', name: 'title', classes: "title", width: 75},
-            {label: '文章分类', name: 'category', classes: "category", width: 75},
-            {label: '发布时间', name: 'gmtCreate', classes: "gmtCreate", width: 75},
+            {label: '文章分类', name: 'categoryName', classes: "categoryName", width: 75},
+            {label: '发布时间', name: 'gmtCreated', classes: "gmtCreated", width: 75,formatter:'date'},
             {label: '浏览数', name: 'pageviews', classes: "pageviews", width: 75},
             {
-                label: '评论', width: 60, formatter: function () {
-                return '<form class="layui-form"><input type="checkbox" name="commentable" value="1" id="commentable" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"></form>'
+                label: '评论功能', width: 60, formatter: function () {
+                return '<input type="checkbox" name="commentable" value="1" id="commentable" lay-skin="switch" lay-filter="switchTest" lay-text="ON|关">'
             }
             },
             {
