@@ -22,6 +22,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public String set(String key, String value) {
         String result;
+        //1.7引入的try-with-resource 它会自动关闭实现了Closable接口的类中的close()方法。jedis的close()会将jedis放回池中
         try(Jedis jedis = jedisPool.getResource()){
             result = jedis.set(key, value);
         }

@@ -53,7 +53,7 @@ public class RedisLockServiceImpl implements RedisLockService{
     @Override
     public Boolean releaseLock(String key) {
 
-        //首先获取锁对应的value值，检查是否与requestId相等，如果相等则删除锁（解锁）。确保上述操作是原子性的
+        //lua语言：首先获取锁对应的value值，检查是否与requestId相等，如果相等则删除锁（解锁）。确保上述操作是原子性的
         String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
 
         Object result;
