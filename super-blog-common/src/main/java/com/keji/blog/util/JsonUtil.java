@@ -15,19 +15,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JsonUtil {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static String object2Json(Object object) throws JsonProcessingException {
-        return mapper.writeValueAsString(object);
+        return MAPPER.writeValueAsString(object);
     }
 
     public static <T> T json2Object(String json,Class<T> clazz) throws IOException {
-        return mapper.readValue(json, clazz);
+        return MAPPER.readValue(json, clazz);
     }
 
     public static <T> List<T> json2List(String json,Class<T> clazz) throws IOException {
-        JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, clazz);
-        return mapper.readValue(json, javaType);
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, clazz);
+        return MAPPER.readValue(json, javaType);
 
     }
 
