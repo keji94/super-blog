@@ -10,11 +10,11 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.NavDAO;
 import com.keji.blog.dataobject.NavDO;
+import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.NavService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.util.cache.CacheTemplate;
-import com.keji.blog.util.cache.NavCacheLoader;
+import com.keji.blog.redis.loader.NavCacheLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +28,7 @@ public class NavServiceImpl implements NavService {
     @Resource
     private NavDAO navDAO;
     @Resource
-    private CacheTemplate cacheTemplate;
+    private CacheService cacheService;
     @Resource
     private NavCacheLoader navCacheLoader;
     @Resource
@@ -43,7 +43,7 @@ public class NavServiceImpl implements NavService {
 
     @Override
     public List<NavDO> listAll(NavDO navDO) {
-        return cacheTemplate.findList(BlogConstants.NAV_KEY, NavDO.class, navCacheLoader, navDO);
+        return cacheService.findListSafety(BlogConstants.NAV_KEY, NavDO.class, navCacheLoader, navDO);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class NavServiceImpl implements NavService {
 
     /**
      * 更新缓存
-     * @throws JsonProcessingException
+     * @throws JsonProcessingException ex
      */
     private void updateCache() throws JsonProcessingException {
         //更新缓存

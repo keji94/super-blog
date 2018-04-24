@@ -9,8 +9,6 @@ import com.keji.blog.dataobject.CategoryDO;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.CategoryService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.util.cache.CacheTemplate;
-import com.keji.blog.util.cache.CategoryCacheLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +23,6 @@ public class CategoryServiceImpl implements CategoryService{
     @Autowired
     private CategoryDAO categoryDAO;
     @Autowired
-    private CacheTemplate cacheTemplate;
-    @Autowired
-    private CategoryCacheLoader categoryCacheLoader;
-    @Autowired
     private RedisClient redisClient;
 
     @Override
@@ -42,21 +36,21 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void update(CategoryDO record) throws JsonProcessingException {
         categoryDAO.updateByPrimaryKeySelective(record);
         updateCache();
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void insert(CategoryDO record) throws JsonProcessingException {
         categoryDAO.insert(record);
         updateCache();
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) throws JsonProcessingException {
         categoryDAO.deleteByPrimaryKey(id);
         updateCache();
@@ -64,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     /**
      * 更新缓存
-     * @throws JsonProcessingException
+     * @throws JsonProcessingException ex
      */
     private void updateCache() throws JsonProcessingException {
         //更新缓存

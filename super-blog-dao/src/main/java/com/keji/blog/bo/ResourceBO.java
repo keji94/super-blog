@@ -5,10 +5,9 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/24
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: ResourceBO.java, v 0.1 2018/4/17 下午8:03 keji Exp $
  */
 @Data
 public class ResourceBO {

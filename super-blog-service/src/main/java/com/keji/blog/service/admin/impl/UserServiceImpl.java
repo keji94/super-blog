@@ -19,10 +19,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/19
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: UserServiceImpl.java, v 0.1 2018/4/24 下午6:51 keji Exp $
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -53,8 +52,7 @@ public class UserServiceImpl implements UserService {
     public PageInfo<UserDO> queryUserByPage(UserDO userDO, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         List<UserDO> userDOS = userDAO.selectByCondition(userDO);
-        PageInfo<UserDO> pageInfo = new PageInfo<>(userDOS);
-        return pageInfo;
+        return new PageInfo<>(userDOS);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
         return transactionTemplate.execute(status -> {
 
-            int count = 0;
+            int count;
             try {
 
                 count = userDAO.insert(userDO);
@@ -98,7 +96,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int inValidateUser(Long[] ids) {
-       return transactionTemplate.execute(status -> {
+        return transactionTemplate.execute(status -> {
             try {
                 for (Long id : ids) {
                     UserDO userDO = new UserDO();
@@ -110,7 +108,7 @@ public class UserServiceImpl implements UserService {
                 status.setRollbackOnly();
                 return 0;
             }
-           return ids.length;
+            return ids.length;
         });
     }
 }

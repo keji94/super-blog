@@ -10,11 +10,11 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.ArticleDAO;
 import com.keji.blog.dataobject.ArticleDO;
+import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.util.cache.ArticleCacheLoader;
-import com.keji.blog.util.cache.CacheTemplate;
+import com.keji.blog.redis.loader.ArticleCacheLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +27,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     @Resource
     private ArticleDAO articleDAO;
     @Resource
-    private CacheTemplate cacheTemplate;
+    private CacheService cacheService;
     @Resource
     private ArticleCacheLoader articleCacheLoader;
     @Resource
@@ -42,7 +42,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
 
     @Override
     public List<ArticleDO> listAll(ArticleDO articleDO) {
-        return cacheTemplate.findList(BlogConstants.ARTICLE_KEY, ArticleDO.class, articleCacheLoader, articleDO);
+        return cacheService.findListSafety(BlogConstants.ARTICLE_KEY, ArticleDO.class, articleCacheLoader, articleDO);
     }
 
     @Override

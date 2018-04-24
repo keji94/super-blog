@@ -8,11 +8,11 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.InfoBoardDAO;
 import com.keji.blog.dataobject.InfoBoardDO;
+import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.util.cache.CacheTemplate;
-import com.keji.blog.util.cache.InfoBoardCacheLoader;
+import com.keji.blog.redis.loader.InfoBoardCacheLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,7 @@ public class InfoBoardServiceImpl implements InfoBoardService {
     @Autowired
     private InfoBoardDAO boardDAO;
     @Autowired
-    private CacheTemplate cacheTemplate;
+    private CacheService cacheService;
     @Autowired
     private InfoBoardCacheLoader cacheLoader;
     @Autowired
@@ -42,25 +42,25 @@ public class InfoBoardServiceImpl implements InfoBoardService {
 
     @Override
     public List<InfoBoardDO> listAll(InfoBoardDO record) {
-        return cacheTemplate.findList(BlogConstants.INFO_BOARD_KEY,InfoBoardDO.class,cacheLoader,record);
+        return cacheService.findListSafety(BlogConstants.INFO_BOARD_KEY,InfoBoardDO.class,cacheLoader,record);
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void update(InfoBoardDO record) throws JsonProcessingException {
         boardDAO.updateByPrimaryKeySelective(record);
         updateCache();
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void insert(InfoBoardDO record) throws JsonProcessingException {
         boardDAO.insert(record);
         updateCache();
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long[] ids) throws JsonProcessingException {
         boardDAO.deleteBatch(ids);
         updateCache();
@@ -68,7 +68,7 @@ public class InfoBoardServiceImpl implements InfoBoardService {
 
     /**
      * 更新缓存
-     * @throws JsonProcessingException
+     * @throws JsonProcessingException ex
      */
     private void updateCache() throws JsonProcessingException {
         //更新缓存

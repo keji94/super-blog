@@ -6,11 +6,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.TextSettingsDAO;
 import com.keji.blog.dataobject.TextSettingsDO;
+import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.TextSettingsService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.util.cache.CacheLoader;
-import com.keji.blog.util.cache.CacheTemplate;
+import com.keji.blog.redis.loader.TextSettingsCacheLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,18 +22,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class TextSettingsServiceImpl implements TextSettingsService {
 
     @Resource
-    private CacheTemplate cacheTemplate;
+    private CacheService cacheService;
     @Resource
     private TextSettingsDAO textSettingsDAO;
     @Resource
-    private CacheLoader<TextSettingsDO> textSettingsCacheLoader;
+    private TextSettingsCacheLoader textSettingsCacheLoader;
     @Resource
     private RedisClient redisClient;
 
     @Override
     public TextSettingsDO query(){
-        return cacheTemplate.findObject(BlogConstants.TEXT_SETTINGS_KEY,
-                TextSettingsDO.class, textSettingsCacheLoader, new TextSettingsDO());
+        return cacheService.findObjectSafety(BlogConstants.TEXT_SETTINGS_KEY, TextSettingsDO.class, textSettingsCacheLoader,new TextSettingsDO());
     }
 
     @Override

@@ -10,11 +10,11 @@ import com.github.pagehelper.PageInfo;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.TagDAO;
 import com.keji.blog.dataobject.TagDO;
+import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.TagService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.util.cache.CacheTemplate;
-import com.keji.blog.util.cache.TagCacheLoader;
+import com.keji.blog.redis.loader.TagCacheLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +27,7 @@ public class TagServiceImpl implements TagService {
     @Resource
     private TagDAO tagDAO;
     @Resource
-    private CacheTemplate cacheTemplate;
+    private CacheService cacheService;
     @Resource
     private TagCacheLoader tagCacheLoader;
     @Resource
@@ -42,7 +42,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<TagDO> listAll(TagDO tagDO) {
-        return cacheTemplate.findList(BlogConstants.TAG_KEY, TagDO.class, tagCacheLoader, tagDO);
+        return cacheService.findListSafety(BlogConstants.TAG_KEY, TagDO.class, tagCacheLoader, tagDO);
     }
 
     @Override

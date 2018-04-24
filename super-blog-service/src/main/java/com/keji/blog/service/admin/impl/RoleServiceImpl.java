@@ -15,10 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/19
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: RoleServiceImpl.java, v 0.1 2018/4/24 下午6:45 keji Exp $
  */
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -40,9 +39,7 @@ public class RoleServiceImpl implements RoleService {
 
         List<RoleDO> roleDOS = roleDAO.selectByCondition(roleDO);
 
-        PageInfo<RoleDO> pageInfo = new PageInfo<>(roleDOS);
-
-        return pageInfo;
+        return new PageInfo<>(roleDOS);
     }
 
     @Override
@@ -75,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
         return count;
     }
 
-    public void saveRoleResourceRel(Long roleId, List<Long> resourceIds) {
+    private void saveRoleResourceRel(Long roleId, List<Long> resourceIds) {
         if (CollectionUtils.isNotEmpty(resourceIds)) {
             resourceIds.forEach(id->{
                 RoleResourceRelDO roleResourceRelDO = new RoleResourceRelDO();

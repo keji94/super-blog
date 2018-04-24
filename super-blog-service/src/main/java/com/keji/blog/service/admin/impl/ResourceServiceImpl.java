@@ -17,10 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/24
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: ResourceServiceImpl.java, v 0.1 2018/4/24 下午6:44 keji Exp $
  */
 @Service
 public class ResourceServiceImpl implements ResourceService {
@@ -29,8 +28,8 @@ public class ResourceServiceImpl implements ResourceService {
     private ResourceDAO resourceDAO;
 
     public List<ResourceBO> getUserResource(UserDO userDO, Boolean admin) {
-
-        if (Boolean.TRUE) {
+        //TODO 这个地方有点问题，已经在餐饮修复过一遍
+        if (admin) {
             //管理员，查询所有的资源
             return getAllResource();
         }

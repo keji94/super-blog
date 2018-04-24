@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/23
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: RequirementServiceImpl.java, v 0.1 2018/4/24 下午6:44 keji Exp $
  */
 @Service
 public class RequirementServiceImpl implements RequirementService {
@@ -27,8 +26,7 @@ public class RequirementServiceImpl implements RequirementService {
     public PageInfo<RequirementDO> query(RequirementDO requirementDO, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         List<RequirementDO> requirementDOS = requirementDAO.selectByCondition(requirementDO);
-        PageInfo<RequirementDO> pageInfo = new PageInfo<>(requirementDOS);
-        return new PageInfo<RequirementDO>(requirementDOS);
+        return new PageInfo<>(requirementDOS);
     }
 
     @Override
