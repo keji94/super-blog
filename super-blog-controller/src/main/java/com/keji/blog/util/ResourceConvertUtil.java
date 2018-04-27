@@ -9,10 +9,9 @@ import com.keji.blog.vo.resource.ResourceQueryVO;
 import com.keji.blog.vo.resource.ResourceVO;
 
 /**
- * @author: wb-ny291824
- * @description
- * @date: Created in 2017/10/24
- * @modified: By:
+ *
+ * @author keji
+ * @version $Id: ResourceConvertUtil.java, v 0.1 2018/4/27 下午3:00 keji Exp $
  */
 public class ResourceConvertUtil {
 

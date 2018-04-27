@@ -2,6 +2,7 @@ package com.keji.blog.dao;
 
 import java.util.List;
 
+import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.dataobject.ArticleDO;
 import org.springframework.stereotype.Repository;
 
@@ -42,9 +43,9 @@ public interface ArticleDAO {
     /**
      * 条件查找
      * @param record record
-     * @return List<TagDO>
+     * @return List<ArticleBO>
      */
-    List<ArticleDO> selectByCondition(ArticleDO record);
+    List<ArticleBO> selectByCondition(ArticleBO record);
 
     /**
      * 主键诚信
@@ -55,8 +56,8 @@ public interface ArticleDAO {
 
     /**
      * 更新
-     * @param record
-     * @return
+     * @param record record
+     * @return i
      */
     int updateByPrimaryKeyWithBLOBs(ArticleDO record);
 

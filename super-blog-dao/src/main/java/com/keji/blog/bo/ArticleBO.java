@@ -1,13 +1,11 @@
-package com.keji.blog.vo.article;
+package com.keji.blog.bo;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.keji.blog.dataobject.TagDO;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -15,7 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @version $Id: ArticleDO.java, v 0.1 2018/3/27 11:55 wb-ny291824 Exp $
  */
 @Data
-public class ArticleVO implements Serializable {
+public class ArticleBO implements Serializable {
+    private static final long serialVersionUID = 1936411868879163818L;
     /**
     * 文章id
     **/
@@ -59,15 +58,11 @@ public class ArticleVO implements Serializable {
     /**
     * 创建时间
     **/
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtCreated;
 
     /**
     * 修改时间
     **/
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
 
     /**

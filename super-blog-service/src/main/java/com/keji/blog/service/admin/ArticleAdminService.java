@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
+import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.dataobject.ArticleDO;
 
 /**
@@ -14,19 +15,19 @@ public interface ArticleAdminService {
 
     /**
      * 查询导航信息
-     * @param articleDO 查询条件
+     * @param articleBO 查询条件
      * @param pageIndex 开始页
      * @param pageSize 结束页
-     * @return PageInfo<TagDO>
+     * @return PageInfo<ArticleBO>
      */
-    PageInfo<ArticleDO> list(ArticleDO articleDO, Integer pageIndex, Integer pageSize);
+    PageInfo<ArticleBO> list(ArticleBO articleBO, Integer pageIndex, Integer pageSize);
 
     /**
      * 查询所有
-     * @param articleDO 条件
-     * @return List<TagDO>
+     * @param articleBO 条件
+     * @return List<ArticleBO>
      */
-    List<ArticleDO> listAll(ArticleDO articleDO);
+    List<ArticleBO> listAll(ArticleBO articleBO);
 
     /**
      * 更新

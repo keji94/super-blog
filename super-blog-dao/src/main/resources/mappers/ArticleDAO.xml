@@ -1,61 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keji.blog.dao.ArticleDAO">
-  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.ArticleDO">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="top" jdbcType="TINYINT" property="top" />
-    <result column="commentable" jdbcType="TINYINT" property="commentable" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
-    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
-    <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.keji.blog.dataobject.ArticleDO">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, title, status, top, commentable, user_id, category_id,category_name, gmt_created, gmt_modified
-  </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.ArticleDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="top" jdbcType="TINYINT" property="top"/>
+        <result column="commentable" jdbcType="TINYINT" property="commentable"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
 
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.ArticleDO">
-    select
-    <include refid="Base_Column_List" />
-    from article
-    <where>
-      <if test="title != null" >
-        AND title like "%"#{title,jdbcType=VARCHAR}"%"
-      </if>
-    </where>
-  </select>
+    <resultMap id="BoResultMap" type="com.keji.blog.bo.ArticleBO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="top" jdbcType="TINYINT" property="top"/>
+        <result column="commentable" jdbcType="TINYINT" property="commentable"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="pageviews" jdbcType="INTEGER" property="pageviews" />
+        <result column="good" jdbcType="INTEGER" property="good" />
+        <result column="bad" jdbcType="INTEGER" property="bad" />
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <collection property="tagDOS" resultMap="tag"/>
+    </resultMap>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <resultMap id="tag" type="com.keji.blog.dataobject.TagDO">
+        <id column="tagId" jdbcType="BIGINT" property="id"/>
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, title, status, top, commentable,content, user_id, category_id, category_name,gmt_created, gmt_modified
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>,
+        from article
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCondition" resultMap="BoResultMap" parameterType="com.keji.blog.bo.ArticleBO">
+        select
+        a.id,a.title,a.content,a.status,a.top,a.category_name,a.commentable,a.gmt_created,
+        ae.good,ae.bad,ae.pageviews,atr.article_id,atr.tag_id,t.id as tagId,t.name
+        from article a
+        left join article_ext ae on a.id = ae.article_id
+        left join article_tag_rel atr on a.id = atr.article_id
+        left join tag t on t.id = atr.tag_id
+        <where>
+            <if test="title != null">
+                AND title like "%"#{title,jdbcType=VARCHAR}"%"
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <delete id="deleteBatch">
-    delete from article
-    where id in
-    <foreach collection="array" item="id" open="(" separator="," close=")">
-      #{id}
-    </foreach>
-  </delete>
+    <delete id="deleteBatch">
+        delete from article
+        where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
-  <insert id="insert" parameterType="com.keji.blog.dataobject.ArticleDO">
+    <insert id="insert" parameterType="com.keji.blog.dataobject.ArticleDO">
     insert into article (id, title, status, 
       top, commentable, user_id,
       category_id,category_name, gmt_created, gmt_modified,
@@ -65,43 +88,43 @@
       #{categoryId,jdbcType=BIGINT},#{categoryName,jdbcType=VARCHAR}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ArticleDO">
-    update article
-    <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="top != null">
-        top = #{top,jdbcType=TINYINT},
-      </if>
-      <if test="commentable != null">
-        commentable = #{commentable,jdbcType=TINYINT},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=BIGINT},
-      </if>
-      <if test="categoryName != null">
-        category_name = #{categoryName,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreated != null">
-        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.keji.blog.dataobject.ArticleDO">
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ArticleDO">
+        update article
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="top != null">
+                top = #{top,jdbcType=TINYINT},
+            </if>
+            <if test="commentable != null">
+                commentable = #{commentable,jdbcType=TINYINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreated != null">
+                gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.keji.blog.dataobject.ArticleDO">
     update article
     set title = #{title,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
@@ -115,7 +138,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.ArticleDO">
+    <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.ArticleDO">
     update article
     set title = #{title,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},

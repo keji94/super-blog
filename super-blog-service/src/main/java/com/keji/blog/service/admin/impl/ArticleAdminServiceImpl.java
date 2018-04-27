@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.ArticleDAO;
 import com.keji.blog.dataobject.ArticleDO;
@@ -34,15 +35,15 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     private RedisClient redisClient;
 
     @Override
-    public PageInfo<ArticleDO> list(ArticleDO articleDO, Integer pageIndex, Integer pageSize) {
+    public PageInfo<ArticleBO> list(ArticleBO articleBO, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
-        List<ArticleDO> articleDOS = articleDAO.selectByCondition(articleDO);
-        return new PageInfo<>(articleDOS);
+        List<ArticleBO> articleBOS = articleDAO.selectByCondition(articleBO);
+        return new PageInfo<>(articleBOS);
     }
 
     @Override
-    public List<ArticleDO> listAll(ArticleDO articleDO) {
-        return cacheService.findListSafety(BlogConstants.ARTICLE_KEY, ArticleDO.class, articleCacheLoader, articleDO);
+    public List<ArticleBO> listAll(ArticleBO articleBO) {
+        return cacheService.findListSafety(BlogConstants.ARTICLE_KEY, ArticleBO.class, articleCacheLoader, articleBO);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
      */
     private void updateCache() throws JsonProcessingException {
         //更新缓存
-        List<ArticleDO> value = articleDAO.selectByCondition(new ArticleDO());
+        List<ArticleBO> value = articleDAO.selectByCondition(new ArticleBO());
         redisClient.set(BlogConstants.ARTICLE_KEY, JsonUtil.object2Json(value));
     }
 }

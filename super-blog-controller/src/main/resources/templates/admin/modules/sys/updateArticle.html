@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章管理</title>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css" media="all">
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/plugins/jqgrid/ui.jqgrid-bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/tagsinput/jquery.tagsinput.min.css">
+
+
+</head>
+<body>
+
+<div class="layui-row layui-col-space15">
+    <div id="article-post" class="layui-col-md12">
+        <div class="layui-tab layui-tab-card">
+            <div class="layui-tab-content start">
+
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>发布文章</legend>
+                </fieldset>
+                <div class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-col-md6">
+                        <label class="layui-form-label">文章分类</label>
+                        <div class="layui-input-block">
+                            <select name="city" lay-verify="required">
+                                <option value=""></option>
+                                <option value="0">北京</option>
+                                <option value="1">上海</option>
+                                <option value="2">广州</option>
+                                <option value="3">深圳</option>
+                                <option value="4">杭州</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block" style="max-width: 1080px;">
+                            <textarea id="editor" placeholder="输入博文内容" autofocus style="visibility: hidden;"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">文章摘要</label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" placeholder="如果不填，则取文章内容的开头小部分（不包含图片以及文字格式）" class="layui-textarea"
+                                      style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item tags">
+                        <label class="layui-form-label">文章标签test</label>
+                        <div class="layui-input-block">
+                            <input name="tags" id="tags" value="foo,bar,baz" title="文章标签"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item tags">
+                        <label class="layui-form-label">文章标签</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required lay-verify="required"
+                                   placeholder="请输入标签，键入Enter回车键以完成标签" class="layui-input" data-toggle="tags">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="min-height:max-content;">最多展示 <span
+                                style="color: red;">4</span> 个（最开始的4个），但文章可以关联无限个以供搜索匹配
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">评论功能</label>
+                            <div class="layui-inline">
+                                <input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" title="评论">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">赞赏功能</label>
+                            <div class="layui-inline">
+                                <input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" title="赞赏">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即发布</button>
+                            <!--弹框提醒用户草稿只会保存标题和正文内容，其余的不会-->
+                            <button type="reset" class="layui-btn layui-btn-primary">保存草稿</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/plugins/layui/layui.js"></script>
+<script src="/static/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="/static/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="/static/js/admin/common.js"></script>
+<script src="/static/js/admin/modules/article/article.js"></script>
+<script src="/static/plugins/nkeditor/NKeditor-all-min.js"></script>
+<script src="/static/plugins/tags/jquery.tags.min.js"></script>
+<script src="/static/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+
+</body>
+
+</html>

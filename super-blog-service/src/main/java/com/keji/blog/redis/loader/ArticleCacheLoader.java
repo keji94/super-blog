@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.dao.ArticleDAO;
-import com.keji.blog.dataobject.ArticleDO;
 import com.keji.blog.redis.CacheLoader;
 import org.springframework.stereotype.Component;
 
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
  * @version $Id: ArticleCacheLoader.java, v 0.1 2018-03-22 17:06 wb-ny291824 Exp $$
  */
 @Component
-public class ArticleCacheLoader implements CacheLoader<ArticleDO> {
+public class ArticleCacheLoader implements CacheLoader<ArticleBO> {
 
     @Resource
     private ArticleDAO articleDAO;
 
     @Override
-    public List<ArticleDO> load(ArticleDO articleDO) {
-        return articleDAO.selectByCondition(articleDO);
+    public List<ArticleBO> load(ArticleBO articleBO) {
+        return articleDAO.selectByCondition(articleBO);
     }
 }

@@ -150,16 +150,16 @@ public class ArticleDO implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     @Override

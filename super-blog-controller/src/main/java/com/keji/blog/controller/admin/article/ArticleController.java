@@ -1,4 +1,3 @@
-
 package com.keji.blog.controller.admin.article;
 
 import java.util.Arrays;
@@ -7,7 +6,7 @@ import javax.annotation.Resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
-import com.keji.blog.dataobject.ArticleDO;
+import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
@@ -50,14 +49,15 @@ public class ArticleController {
             return PageResult.makeFail(BaseErrorEnum.PARAM_ERROR);
         }
 
-        PageInfo<ArticleDO> pageInfo;
+        PageInfo<ArticleBO> pageInfo;
         try {
-            pageInfo = articleAdminService.list(ArticleConvertUtil.convertQueryVO2DO(queryVO), queryVO.getPageIndex(),
+            pageInfo = articleAdminService.list(ArticleConvertUtil.convertQueryVO2BO(queryVO), queryVO.getPageIndex(),
                     queryVO.getPageSize());
-            return PageResult.makeSuccess(pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPages());
+            return PageResult.makeSuccess(ArticleConvertUtil.convertBOS2VOS(pageInfo.getList()), pageInfo.getTotal(),
+                    pageInfo.getPages());
 
         } catch (Exception e) {
-            LogUtil.error(logger,e,"[ArticleController#list]查询文章发生异常，queryVO=%s",queryVO);
+            LogUtil.error(logger, e, "[ArticleController#list]查询文章发生异常，queryVO=%s", queryVO);
             return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
     }
@@ -75,10 +75,10 @@ public class ArticleController {
             articleAdminService.insert(ArticleConvertUtil.convertVO2DO(articleVO));
             return BaseResult.makeSuccess();
         } catch (JsonProcessingException e) {
-            LogUtil.error(logger,e,"[ArticleController#add]更新缓存时，json转换发生异常,articleVO=%s",articleVO);
+            LogUtil.error(logger, e, "[ArticleController#add]更新缓存时，json转换发生异常,articleVO=%s", articleVO);
             return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
-        }catch (Exception e){
-            LogUtil.error(logger,e,"[ArticleController#add]新增菜单发生异常,articleVO=%s",articleVO);
+        } catch (Exception e) {
+            LogUtil.error(logger, e, "[ArticleController#add]新增菜单发生异常,articleVO=%s", articleVO);
             return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
     }
@@ -96,10 +96,10 @@ public class ArticleController {
             articleAdminService.update(ArticleConvertUtil.convertVO2DO(articleVO));
             return BaseResult.makeSuccess();
         } catch (JsonProcessingException e) {
-            LogUtil.error(logger,e,"[ArticleController#update]更新缓存时，json转换发生异常,articleVO=%s",articleVO);
+            LogUtil.error(logger, e, "[ArticleController#update]更新缓存时，json转换发生异常,articleVO=%s", articleVO);
             return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
-        }catch (Exception e){
-            LogUtil.error(logger,e,"[ArticleController#update]更新文章发生异常,articleVO=%s",articleVO);
+        } catch (Exception e) {
+            LogUtil.error(logger, e, "[ArticleController#update]更新文章发生异常,articleVO=%s", articleVO);
             return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
     }
@@ -111,7 +111,7 @@ public class ArticleController {
             articleAdminService.delete(ids);
             return BaseResult.makeSuccess();
         } catch (Exception e) {
-            LogUtil.error(logger,e,"[ArticleController#delete]批量删除时发生异常,ids", Arrays.toString(ids));
+            LogUtil.error(logger, e, "[ArticleController#delete]批量删除时发生异常,ids", Arrays.toString(ids));
             return BaseResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
         }
     }
