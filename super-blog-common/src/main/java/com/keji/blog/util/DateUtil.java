@@ -54,8 +54,8 @@ public class DateUtil {
     /**
      * 将time 类型转换为Date，年月日为当天
      *
-     * @param time
-     * @return
+     * @param time time
+     * @return date
      */
     public static Date convertTimeToDate(Time time) {
         LocalTime localTime = time.toLocalTime();
@@ -70,8 +70,8 @@ public class DateUtil {
     /**
      * 获取time中的小时
      *
-     * @param time
-     * @return
+     * @param time time
+     * @return hour
      */
     public static int getHourOfTime(Time time) {
         LocalTime localTime = time.toLocalTime();
@@ -81,8 +81,8 @@ public class DateUtil {
     /**
      * 获取time中的分钟
      *
-     * @param time
-     * @return
+     * @param time time
+     * @return minute
      */
     public static int getMinuteOfTime(Time time) {
         LocalTime localTime = time.toLocalTime();
@@ -92,8 +92,8 @@ public class DateUtil {
     /**
      * 获取time中的秒
      *
-     * @param time
-     * @return
+     * @param time time
+     * @return second
      */
     public static int getSecondOfTime(Time time) {
         LocalTime localTime = time.toLocalTime();
@@ -126,46 +126,43 @@ public class DateUtil {
 
     /**
      * 获得指定日期的后一天
-     * @param specifiedDay
-     * @return
+     *
+     * @param specifiedDay 指定日期
+     * @return 后一天
      */
-    public static String getSpecifiedDayAfter(String specifiedDay){
+    public static String getSpecifiedDayAfter(String specifiedDay) {
         Calendar c = Calendar.getInstance();
-        Date date=null;
+        Date date = null;
         try {
             date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         c.setTime(date);
-        int day=c.get(Calendar.DATE);
-        c.set(Calendar.DATE,day+1);
+        int day = c.get(Calendar.DATE);
+        c.set(Calendar.DATE, day + 1);
 
-        String dayAfter=new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+        String dayAfter = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
         return dayAfter;
     }
 
     /**
      * 获得指定日期的前一天
-     * @param specifiedDay
-     * @return
-     * @throws Exception
+     *
+     * @param specifiedDay 指定日期
+     * @return 前一天
      */
-    public static String getSpecifiedDayBefore(String specifiedDay){
-        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static String getSpecifiedDayBefore(String specifiedDay) {
         Calendar c = Calendar.getInstance();
-        Date date=null;
         try {
-            date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);
+            c.setTime(new SimpleDateFormat("yy-MM-dd").parse(specifiedDay));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        c.setTime(date);
-        int day=c.get(Calendar.DATE);
-        c.set(Calendar.DATE,day-1);
+        int day = c.get(Calendar.DATE);
+        c.set(Calendar.DATE, day - 1);
 
-        String dayBefore=new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
-        return dayBefore;
+        return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
     }
 
 }
