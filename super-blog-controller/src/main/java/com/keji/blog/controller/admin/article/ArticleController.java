@@ -63,6 +63,26 @@ public class ArticleController {
     }
 
     @ResponseBody
+    @RequestMapping("/queryById")
+    public PageResult queryById(Long id) {
+        if (null == id) {
+            return PageResult.makeFail(BaseErrorEnum.PARAM_ERROR);
+        }
+
+        ArticleBO articleBO;
+        try {
+            articleBO = articleAdminService.queryById(id);
+            return PageResult.makeSuccess(ArticleConvertUtil.convertBO2VO(articleBO));
+
+        } catch (Exception e) {
+            LogUtil.error(logger, e, "[ArticleController#queryById]根据Id查询文章异常，id=%s", id);
+            return PageResult.makeFail(BaseErrorEnum.SYSTEM_ERROR);
+        }
+    }
+
+
+
+    @ResponseBody
     @RequestMapping("/add")
     public BaseResult add(ArticleVO articleVO) {
         try {

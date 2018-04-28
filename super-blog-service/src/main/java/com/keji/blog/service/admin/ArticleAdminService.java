@@ -15,15 +15,17 @@ public interface ArticleAdminService {
 
     /**
      * 查询导航信息
+     *
      * @param articleBO 查询条件
      * @param pageIndex 开始页
-     * @param pageSize 结束页
+     * @param pageSize  结束页
      * @return PageInfo<ArticleBO>
      */
     PageInfo<ArticleBO> list(ArticleBO articleBO, Integer pageIndex, Integer pageSize);
 
     /**
      * 查询所有
+     *
      * @param articleBO 条件
      * @return List<ArticleBO>
      */
@@ -52,4 +54,12 @@ public interface ArticleAdminService {
      * @throws JsonProcessingException json缓存异常
      */
     void delete(Long[] ids) throws JsonProcessingException;
+
+    /**
+     * 根据Id查询文章
+     *
+     * @param id id
+     * @return ArticleBO
+     */
+    ArticleBO queryById(Long id);
 }

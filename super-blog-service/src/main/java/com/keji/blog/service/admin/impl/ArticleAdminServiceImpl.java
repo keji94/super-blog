@@ -16,6 +16,7 @@ import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.util.JsonUtil;
 import com.keji.blog.redis.loader.ArticleCacheLoader;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,6 +66,17 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     public void delete(Long[] ids) throws JsonProcessingException {
         articleDAO.deleteBatch(ids);
         updateCache();
+    }
+
+    @Override
+    public ArticleBO queryById(Long id) {
+        ArticleBO articleBO = new ArticleBO();
+        articleBO.setId(id);
+        List<ArticleBO> list = articleDAO.selectByCondition(articleBO);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+        return list.get(0);
     }
 
     /**

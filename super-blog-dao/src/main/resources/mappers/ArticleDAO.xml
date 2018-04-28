@@ -51,15 +51,19 @@
 
     <select id="selectByCondition" resultMap="BoResultMap" parameterType="com.keji.blog.bo.ArticleBO">
         select
-        a.id,a.title,a.content,a.status,a.top,a.category_name,a.commentable,a.gmt_created,
+        a.id,a.title,a.content,a.status,a.top,a.category_id,a.category_name,a.commentable,a.gmt_created,
         ae.good,ae.bad,ae.pageviews,atr.article_id,atr.tag_id,t.id as tagId,t.name
         from article a
         left join article_ext ae on a.id = ae.article_id
         left join article_tag_rel atr on a.id = atr.article_id
         left join tag t on t.id = atr.tag_id
         <where>
+
             <if test="title != null">
                 AND title like "%"#{title,jdbcType=VARCHAR}"%"
+            </if>
+            <if test="id != null">
+                AND a.id = #{id,jdbcType=VARCHAR}
             </if>
         </where>
 

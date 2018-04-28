@@ -8,6 +8,7 @@ var layer, form;
 layui.use(["layer", "form"], function () {
     layer = layui.layer;
     form = layui.form;
+
 });
 
 $(function () {
@@ -23,18 +24,18 @@ $(function () {
             {
                 label: '评论功能', width: 60, name: "commentable", formatter: function (value) {
                     if (value === 1) {
-                        return '<input type="checkbox" name="top" checked >'
+                        return '<input class="commentable" type="checkbox" name="commentable"  checked >'
                     } else {
-                        return '<input type="checkbox" name="commentable">'
+                        return '<input class="commentable" type="checkbox" name="commentable">'
                     }
                 }
             },
             {
-                label: '置顶', width: 60, name: "top",formatter: function (value) {
+                label: '置顶', width: 60, name: "top", formatter: function (value) {
                     if (value === 1) {
-                        return '<input type="checkbox" name="top" checked  id="top">'
+                        return '<input type="checkbox" class="top" name="top" checked  >'
                     } else {
-                        return '<input type="checkbox" name="top"  id="top">'
+                        return '<input type="checkbox" class="top" name="top" >'
                     }
                 }
             },
@@ -73,7 +74,7 @@ $(function () {
 
     $(function () {
         $('#tags').tagsInput({
-            defaultText: "点我新增标签",
+            defaultText: "点我新增",
             width: "auto",
             minChars: 1,
             onChange: function (a) {
@@ -120,16 +121,57 @@ $(function () {
 
 });
 
-function alertUpdateWindow() {
-    layer.open({
-        type: 2,
-        title: '修改文章',
-        shadeClose: true,
-        shade: 0.8,
-        area: ['100%', '100%'],
-        content: '/templates/admin/modules/sys/updateArticle.html'
+function alertUpdateWindow(e) {
+
+    var tr = $(e).closest("tr");
+    var id = tr.find(".id").html();
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/category/list",
+        dataType: "json",
+        success: function (r) {
+            var html = '';
+            for (var i = 0; i < r.length; i++) {
+                html += '<option value='+r[i].id+'>'+r[i].name+'</option>';
+            }
+            $("#category").append(html);
+            form.render();
+        }
     });
 
+    $.ajax({
+        type: "POST",
+        url: "/adminArticle/queryById",
+        dataType: "json",
+        data: {"id": id},
+        success: function (r) {
+            if (r.success) {
+                //赋值
+                $("#updteTitle").val(r.data.title);
+                var categoryId = r.data.categoryId;
+                $("#category").val(categoryId);
+                $("editor").val(r.data.content);
+
+                var tags = r.data.tagDOS;
+                for (var i = 0;i<tags.length;i++) {
+                    $("#tags").addTag(tags[i].name);
+                }
+                form.render();
+            } else {
+                alertFail("查询文章信息失败");
+            }
+        }
+    });
+
+
+    layer.open({
+        type: 1,
+        title: false,
+        shade: false,
+        area: ['100%', '98%'],
+        content: $("#update")
+    });
 }
 
 

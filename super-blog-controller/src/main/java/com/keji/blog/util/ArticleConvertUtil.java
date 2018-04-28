@@ -56,6 +56,9 @@ public class ArticleConvertUtil {
     }
 
     public static ArticleVO convertBO2VO(ArticleBO articleBO) {
+        if (null == articleBO) {
+            return null;
+        }
         ArticleVO articleVO = new ArticleVO();
         articleVO.setTitle(articleBO.getTitle());
         articleVO.setId(articleBO.getId());
