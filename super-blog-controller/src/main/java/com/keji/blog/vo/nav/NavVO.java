@@ -34,7 +34,7 @@ public class NavVO {
     /**
      * 状态
      */
-    @NotBlank(message = "状态为空",groups = {UpdateGroup.class})
+    @NotNull(message = "状态为空",groups = {UpdateGroup.class})
     private Integer status;
 
 }

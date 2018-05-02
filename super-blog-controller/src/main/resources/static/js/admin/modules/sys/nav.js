@@ -119,6 +119,7 @@ function alertAddWindow() {
 }
 
 function alertUpdateWindow(e) {
+
     var tr = $(e).closest("tr");
     var id = tr.find(".id").html();
     var name = tr.find(".name").html();
@@ -131,7 +132,7 @@ function alertUpdateWindow(e) {
     $("#updateName").val(name);
     $("#updateUrl").val(url);
 
-    if (1 === status) {
+    if (1 == status) {
         $("#normal").prop('checked', 'true');
         form.render();
     } else {
