@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>发布博客</title>
+    <link rel="stylesheet" href="/static/css/home/style.css">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
 </head>
 <body>
+<textarea id="text"></textarea>
+<div id="preview"> </div>
 
+<script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+    var simplemde = new SimpleMDE({ element: $("#test")[0] });
+
+</script>
+<script src="/static/js/home/publishBlog.js"></script>
 </body>
 </html>

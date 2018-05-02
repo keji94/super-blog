@@ -65,6 +65,11 @@ public class IndexController {
         return "/home/index";
     }
 
+    @RequestMapping(value = {"/home/createBlog"})
+    public String publishBlog() {
+        return "/home/createBlog";
+    }
+
     private NavDO initNavDO() {
         NavDO navDO = new NavDO();
         navDO.setStatus(1);

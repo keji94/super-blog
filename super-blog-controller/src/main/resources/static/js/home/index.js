@@ -8,21 +8,21 @@ var setting = {
         }
     },
 
-    callback:{
-        beforeClick:getCurrentNode,
-        onclick:zTreeOnclick
+    callback: {
+        beforeClick: getCurrentNode,
+        onclick: zTreeOnclick
     }
 };
 var ztree;
 
 function getCurrentNode(treeId, treeNode) {
-     var curNode = treeNode;
+    var curNode = treeNode;
     zTreeOnclick(curNode);
 }
 
 function getCategory() {
     //加载菜单树
-    $.get("admin/category/list", function(r){
+    $.get("admin/category/list", function (r) {
         ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
     })
 }
@@ -31,7 +31,6 @@ function zTreeOnclick(treeNode) {
     var name = treeNode.name;
     //todo   根据name查询文章
 }
-
 
 
 layui.config({
