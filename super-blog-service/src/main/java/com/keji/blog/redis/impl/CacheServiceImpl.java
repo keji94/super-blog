@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 
 /**
  * Copyright (c) 2018 Choice, Inc.
@@ -51,6 +52,13 @@ public class CacheServiceImpl implements CacheService {
         } catch (IOException e) {
             LogUtil.error(LOGGER, e, "Json数据转换出现异常。key=%s,json=%s", key, json);
             return null;
+        } catch (JedisConnectionException e) {
+            LogUtil.error(LOGGER, e, "Redis连接异常。");
+            List<T> list = cacheLoader.load(condition);
+            if (CollectionUtils.isEmpty(list)) {
+                return null;
+            }
+            return list.get(0);
         }
     }
 
@@ -79,6 +87,13 @@ public class CacheServiceImpl implements CacheService {
         } catch (IOException e) {
             LogUtil.error(LOGGER, e, "Json数据转换出现异常。key=%s,json=%s", key, json);
             return null;
+        } catch (JedisConnectionException e) {
+            LogUtil.error(LOGGER, e, "Redis连接异常。");
+            List<T> list = cacheLoader.load(condition);
+            if (CollectionUtils.isEmpty(list)) {
+                return null;
+            }
+            return list.get(0);
         }
     }
 
@@ -101,6 +116,13 @@ public class CacheServiceImpl implements CacheService {
         } catch (IOException e) {
             LogUtil.error(LOGGER, "Json数据转换出现异常。key=%s,json=%s", key, json);
             return null;
+        } catch (JedisConnectionException e) {
+            LogUtil.error(LOGGER, e, "Redis连接异常。");
+            List<T> list = cacheLoader.load(condition);
+            if (CollectionUtils.isEmpty(list)) {
+                return null;
+            }
+            return list;
         }
     }
 
@@ -125,6 +147,13 @@ public class CacheServiceImpl implements CacheService {
         } catch (IOException e) {
             LogUtil.error(LOGGER, "Json数据转换出现异常。key=%s,json=%s", key, json);
             return null;
+        } catch (JedisConnectionException e) {
+            LogUtil.error(LOGGER, e, "Redis连接异常。");
+            List<T> list = cacheLoader.load(condition);
+            if (CollectionUtils.isEmpty(list)) {
+                return null;
+            }
+            return list;
         }
     }
 
