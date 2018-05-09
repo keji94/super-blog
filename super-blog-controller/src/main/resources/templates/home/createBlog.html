@@ -19,14 +19,17 @@
 
 <form class="layui-form" action="">
     <div class="layui-form-item">
-        <div class="layui-input-block" style="margin-left: 5px">
+        <div class="layui-input-inline" style="margin-left: 5px;width: 83%;">
             <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <button class="layui-btn layui-btn-normal">发布</button>
         </div>
     </div>
 
     <div class="layui-form-item" style="margin-left: 5px">
         <!--markdown区域-->
-        <textarea id="text"></textarea>
+        <textarea id="content" title="内容" name="content"></textarea>
         <div id="preview"> </div>
     </div>
 
