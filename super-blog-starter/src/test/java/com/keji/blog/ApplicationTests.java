@@ -1,5 +1,6 @@
 package com.keji.blog;
 
+import java.util.HashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.junit.Test;
@@ -34,6 +35,16 @@ public class ApplicationTests {
 		String regx = "^1[0-9]{10}$";
 		String phone = "15271888457";
 		System.out.println(phone.matches(regx));
+	}
+
+	@Test
+	public void testMap() {
+		HashMap<String ,String > map = new HashMap<>();
+		map.put("test", "1");
+		map.put("test2", "2");
+
+		String test3 = map.get("test3");
+		System.out.println(test3);
 	}
 
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +6,10 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.min.css" media="all">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/tagsinput/bootstrap-tagsinput.css">
 
 </head>
 <body>
@@ -20,44 +21,53 @@
 <form class="layui-form" action="">
     <div class="layui-form-item">
         <div class="layui-input-inline" style="margin-left: 5px;width: 83%;">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="请输入标题"
+                   class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <button class="layui-btn layui-btn-normal">发布</button>
+            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="publish">发布</button>
         </div>
     </div>
 
     <div class="layui-form-item" style="margin-left: 5px">
         <!--markdown区域-->
-        <textarea id="content" title="内容" name="content"></textarea>
-        <div id="preview"> </div>
+        <textarea id="content" title="内容"></textarea>
+        <div id="preview"></div>
     </div>
 
+</form>
+
+<form class="layui-form" action="">
+
+    <div hidden id="publish" style="padding-top: 20px">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">标签</label>
+                <div class="layui-input-inline">
+                    <input name="tags" id="tags" data-role="tagsinput" title="标签"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类</label>
+            <div class="layui-input-block" id="categoryDiv">
+            </div>
+        </div>
+
+    </div>
 </form>
 
 
 <script src="/static/plugins/layui/layui.js" charset="utf-8"></script>
 <script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
+<script src="/static/plugins/tagsinput/bootstrap-tagsinput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/static/js/home/publishBlog.js"></script>
 <script>
-
-    var simplemde = new SimpleMDE({ element: $("#test")[0] });
-
-    layui.use(['form', 'layedit', 'laydate'], function(){
-        var form = layui.form;
-
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-
+    $('#tags').tagsinput({
+        maxTags: 5
     });
+
 </script>
 
 </body>
