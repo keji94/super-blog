@@ -1,4 +1,20 @@
 var simplemde;
+var ztree;
+
+var setting = {
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "id",
+            pIdKey: "parentId",
+            rootPId: -1
+        }
+    },
+    check :{
+        chkboxType:{"Y" : "", "N" : "" },
+        enable:true
+    }
+};
 
 $(function () {
 
@@ -9,23 +25,12 @@ layui.use(['form', 'layedit', 'laydate'], function(){
     var form = layui.form;
 
     //监听提交
-    form.on('submit(publish)', function(){
+    form.on('submit(publish)', function(data){
 
-        //查询分类列表
-        $.ajax({
-            type: "POST",
-            url: "/admin/category/list",
-            dataType: "json",
-            success: function (r) {
-                var html = '';
-                for(var i = 0 ;i<r.length;i++){
-                    html += "<input type='checkbox' name=" + r[i].id + "lay-skin='primary' title=" + r[i].name + ">";
-                }
-                $("#categoryDiv").append(html);
-                form.render();
-            }
+        //加载菜单树
+        $.get("/admin/category/list", function (r) {
+            ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
         });
-
 
         //捕获页
         layer.open({
@@ -36,44 +41,51 @@ layui.use(['form', 'layedit', 'laydate'], function(){
             content: $('#publish'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
             btn: ['确定', '取消'],
             yes: function (index, layero) {
-                //TODO 提交数据
-                var name = $("#name").val();
 
-                if ('' === name) {
-                    layer.msg("名称不能为空");
-                    return;
+                //标题
+                var title = $("#title").val();
+                //内容
+                var content = simplemde.value();
+                //标签
+                var tags = $("#tags").val();
+                //分类
+                var nodes = ztree.getCheckedNodes(true);
+
+                var ids = '';
+                for(var i=0;i<nodes.length;i++) {
+                    if (i !== nodes.length-1) {
+                        ids += nodes[i].id + ",";
+                    }else {
+                        ids += nodes[i].id;
+
+                    }
                 }
-                layer.close(index);
+                alert(ids);
+
                 $.ajax({
                     type: "POST",
-                    url: "/adminTag/add",
+                    url: "/adminArticle/add",
                     dataType: "json",
                     data: {
-                        "name": name
+                        "title": title,
+                        "content":content,
+                        "tagNameS":tags,
+                        "categoryIdS":idsNew
                     },
                     success: function (r) {
                         if (r.success) {
                             alertSuccess("新增成功");
-                            reload();
                         } else {
                             alertFail("新增成功");
                         }
                     }
                 });
-
-                $("#name").val('');
-
             },
             btn2: function (index) {
                 layer.close(index);
             }
         });
 
-
-        console.log(simplemde.value());
-        // layer.alert(JSON.stringify(data.field), {
-        //     title: '最终的提交信息'
-        // });
         return false;
     });
 

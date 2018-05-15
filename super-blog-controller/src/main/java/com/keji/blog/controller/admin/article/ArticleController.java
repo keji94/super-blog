@@ -18,6 +18,7 @@ import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.QueryGroup;
 import com.keji.blog.validator.group.UpdateGroup;
+import com.keji.blog.vo.article.ArticleInsertVO;
 import com.keji.blog.vo.article.ArticleQueryVO;
 import com.keji.blog.vo.article.ArticleVO;
 import org.slf4j.Logger;
@@ -84,7 +85,7 @@ public class ArticleController {
 
     @ResponseBody
     @RequestMapping("/add")
-    public BaseResult add(ArticleVO articleVO) {
+    public BaseResult add(ArticleInsertVO articleVO) {
         try {
             ValidatorUtils.validateEntity(articleVO, AddGroup.class);
         } catch (BlogException e) {
@@ -92,7 +93,7 @@ public class ArticleController {
         }
 
         try {
-            articleAdminService.insert(ArticleConvertUtil.convertVO2DO(articleVO));
+            articleAdminService.insert(ArticleConvertUtil.convertInsertVO2DO(articleVO));
             return BaseResult.makeSuccess();
         } catch (JsonProcessingException e) {
             LogUtil.error(logger, e, "[ArticleController#add]更新缓存时，json转换发生异常,articleVO=%s", articleVO);

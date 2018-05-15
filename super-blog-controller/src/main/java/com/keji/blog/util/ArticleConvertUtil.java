@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.dataobject.ArticleDO;
+import com.keji.blog.vo.article.ArticleInsertVO;
 import com.keji.blog.vo.article.ArticleQueryVO;
 import com.keji.blog.vo.article.ArticleVO;
 
@@ -49,6 +50,19 @@ public class ArticleConvertUtil {
         return articleDO;
     }
 
+    public static ArticleDO convertInsertVO2DO(ArticleInsertVO articleVO) {
+        ArticleDO articleDO = new ArticleDO();
+        articleDO.setTitle(articleVO.getTitle());
+        articleDO.setId(articleVO.getId());
+        articleDO.setCommentable(articleVO.getCommentable());
+        articleDO.setContent(articleVO.getContent());
+        articleDO.setStatus(articleVO.getStatus());
+        articleDO.setTop(articleVO.getTop());
+        articleDO.setUserId(articleVO.getUserId());
+        articleDO.setGmtModified(articleVO.getGmtModified());
+        return articleDO;
+    }
+
     public static List<ArticleVO> convertBOS2VOS(List<ArticleBO> articleBOS) {
         ArrayList<ArticleVO> list = Lists.newArrayList();
         articleBOS.forEach(e->list.add(convertBO2VO(e)));
@@ -74,7 +88,6 @@ public class ArticleConvertUtil {
         articleVO.setPageviews(articleBO.getPageviews());
         articleVO.setGood(articleBO.getGood());
         articleVO.setBad(articleBO.getBad());
-        articleVO.setTagDOS(articleBO.getTagDOS());
         return articleVO;
     }
 }
