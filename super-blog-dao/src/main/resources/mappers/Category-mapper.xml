@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.keji.blog.dao.CategoryDAO" >
-    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.CategoryDO" >
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <id column="parent_id" property="parentId" jdbcType="BIGINT" />
-        <result column="parent_name" property="parentName" jdbcType="VARCHAR" />
-        <result column="type" property="type" jdbcType="TINYINT" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+<mapper namespace="com.keji.blog.dao.CategoryDAO">
+    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.CategoryDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
         id,parent_id,parent_name,name,type,gmt_created,gmt_modified
     </sql>
 
-    <insert id="insert" parameterType="com.keji.blog.dataobject.CategoryDO" >
+    <insert id="insert" parameterType="com.keji.blog.dataobject.CategoryDO">
         insert into category (
             id,parent_id,parent_name,name,type,gmt_created,gmt_modified)
         values (
@@ -23,21 +23,31 @@
             #{type,jdbcType=TINYINT},now(),now())
     </insert>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into category (
+        id,parent_id,parent_name,name,type,gmt_created,gmt_modified)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{id,jdbcType=BIGINT},#{parentId,jdbcType=BIGINT},#{parentName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+            #{type,jdbcType=TINYINT},now(),now())
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from category
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.CategoryDO" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.CategoryDO">
         update category
-        <set >
-            <if test="name != null" >
+        <set>
+            <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="type != null" >
+            <if test="type != null">
                 type = #{type,jdbcType=TINYINT},
             </if>
-            <if test="parentId != null" >
+            <if test="parentId != null">
                 parent_id = #{parentId,jdbcType=TINYINT},
             </if>
             gmt_modified = now()
@@ -45,16 +55,16 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from category
         where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.CategoryDO" >
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.CategoryDO">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from resource
         <where>
             <if test="name != null">
@@ -63,9 +73,9 @@
         </where>
     </select>
 
-    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.CategoryDO" >
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.CategoryDO">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from category
         <where>
             <if test="parentId != null">
@@ -75,5 +85,15 @@
                 AND name = #{name,jdbcType=VARCHAR}
             </if>
         </where>
+    </select>
+
+    <select id="selectByNameS" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE name in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

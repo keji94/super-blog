@@ -12,7 +12,7 @@ import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.service.admin.NavService;
 import com.keji.blog.service.admin.TextSettingsService;
-import com.keji.blog.service.home.ArticleTagRel;
+import com.keji.blog.service.home.ArticleTagRelService;
 import com.keji.blog.util.LogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class IndexController {
     @Resource
     private InfoBoardService boardService;
     @Resource
-    private ArticleTagRel articleTagRel;
+    private ArticleTagRelService articleTagRelService;
 
     @RequestMapping(value = {"", "/index"})
     public String index(Model model) {
@@ -48,7 +48,7 @@ public class IndexController {
             List<NavDO> navDOS = navService.listAll(initNavDO());
             List<InfoBoardDO> list = boardService.listAll(new InfoBoardDO());
             List<String> titleList = list.stream().map(InfoBoardDO::getTitle).collect(Collectors.toList());
-            Map<String, Integer> hotTag = articleTagRel.queryHotTag();
+            Map<String, Integer> hotTag = articleTagRelService.queryHotTag();
 
             //网站文案设置
             model.addAttribute("settings", textSettingsDO);

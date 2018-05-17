@@ -39,20 +39,27 @@
     insert into article_tag_rel (id, gmt_create, gmt_modified, 
       article_id, tag_id, tag_name
       )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, now(), now(),
       #{articleId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, #{tagName,jdbcType=VARCHAR}
       )
+  </insert>
+
+  <insert id="insertBatch">
+    insert into article_tag_rel (id, gmt_create, gmt_modified,
+    article_id, tag_id, tag_name
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, now(), now(),
+      #{item.articleId,jdbcType=BIGINT}, #{item.tagId,jdbcType=BIGINT}, #{item.tagName,jdbcType=VARCHAR}
+      )
+    </foreach>
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.ArticleTagRelDO">
     update article_tag_rel
     <set>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modified = now(),
       <if test="articleId != null">
         article_id = #{articleId,jdbcType=BIGINT},
       </if>
@@ -68,8 +75,7 @@
 
   <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.ArticleTagRelDO">
     update article_tag_rel
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+    set
       article_id = #{articleId,jdbcType=BIGINT},
       tag_id = #{tagId,jdbcType=BIGINT},
       tag_name = #{tagName,jdbcType=VARCHAR}

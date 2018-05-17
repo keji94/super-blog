@@ -7,10 +7,16 @@ import javax.annotation.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.ArticleDAO;
+import com.keji.blog.dao.ArticleTagRelDAO;
+import com.keji.blog.dao.CategoryDAO;
+import com.keji.blog.dao.TagDAO;
 import com.keji.blog.dataobject.ArticleDO;
+import com.keji.blog.dataobject.ArticleTagRelDO;
+import com.keji.blog.dataobject.TagDO;
 import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.ArticleAdminService;
@@ -34,6 +40,12 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     private ArticleCacheLoader articleCacheLoader;
     @Resource
     private RedisClient redisClient;
+    @Resource
+    private CategoryDAO categoryDAO;
+    @Resource
+    private ArticleTagRelDAO articleTagRelDAO;
+    @Resource
+    private TagDAO tagDAO;
 
     @Override
     public PageInfo<ArticleBO> list(ArticleBO articleBO, Integer pageIndex, Integer pageSize) {
@@ -56,8 +68,13 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insert(ArticleDO articleDO) throws JsonProcessingException {
+    public void insert(String[] tagNameS,ArticleDO articleDO) throws JsonProcessingException {
+        List<TagDO> tagDOS = assembleTagDOS(tagNameS);
+        tagDAO.insertBatch(tagDOS);
+        articleDO.setTop(0);
+        articleDO.setCommentable(1);
         articleDAO.insert(articleDO);
+        articleTagRelDAO.insertBatch(assembleArticleTagRelDOS(tagDOS, articleDO));
         updateCache();
     }
 
@@ -87,5 +104,28 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
         //更新缓存
         List<ArticleBO> value = articleDAO.selectByCondition(new ArticleBO());
         redisClient.set(BlogConstants.ARTICLE_KEY, JsonUtil.object2Json(value));
+    }
+
+
+    private List<TagDO> assembleTagDOS(String[] tagNameS) {
+        List<TagDO> tagDOS = Lists.newArrayList();
+        for (String tagName : tagNameS) {
+            TagDO tagDO = new TagDO();
+            tagDO.setName(tagName);
+            tagDOS.add(tagDO);
+        }
+        return tagDOS;
+    }
+
+    private List<ArticleTagRelDO> assembleArticleTagRelDOS(List<TagDO> tagDOS, ArticleDO articleDO) {
+        List<ArticleTagRelDO> result = Lists.newArrayList();
+        tagDOS.forEach(e->{
+            ArticleTagRelDO articleTagRelDO = new ArticleTagRelDO();
+            articleTagRelDO.setArticleId(articleDO.getId());
+            articleTagRelDO.setTagId(e.getId());
+            articleTagRelDO.setTagName(e.getName());
+            result.add(articleTagRelDO);
+        });
+        return result;
     }
 }

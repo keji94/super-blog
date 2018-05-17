@@ -11,8 +11,9 @@ var setting = {
         }
     },
     check :{
-        chkboxType:{"Y" : "", "N" : "" },
-        enable:true
+        enable:true,
+        chkStyle: "radio",
+        radioType:"all"
     }
 };
 
@@ -51,16 +52,6 @@ layui.use(['form', 'layedit', 'laydate'], function(){
                 //分类
                 var nodes = ztree.getCheckedNodes(true);
 
-                var ids = '';
-                for(var i=0;i<nodes.length;i++) {
-                    if (i !== nodes.length-1) {
-                        ids += nodes[i].id + ",";
-                    }else {
-                        ids += nodes[i].id;
-
-                    }
-                }
-                alert(ids);
 
                 $.ajax({
                     type: "POST",
@@ -70,13 +61,19 @@ layui.use(['form', 'layedit', 'laydate'], function(){
                         "title": title,
                         "content":content,
                         "tagNameS":tags,
-                        "categoryIdS":idsNew
+                        "categoryId":nodes[0].id,
+                        "categoryName":nodes[0].name
                     },
                     success: function (r) {
                         if (r.success) {
+                            layer.close(index);
                             alertSuccess("新增成功");
+                            setTimeout(function(){
+                                location.href="/index";
+                            },2000);
                         } else {
-                            alertFail("新增成功");
+                            layer.close(index);
+                            alertFail("新增失败");
                         }
                     }
                 });

@@ -1,73 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.keji.blog.dao.TagDAO" >
-  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.TagDO" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.keji.blog.dao.TagDAO">
+    <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.TagDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, name
-  </sql>
+    <sql id="Base_Column_List">
+        id, gmt_create, gmt_modified, name
+    </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from tag
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tag
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.TagDO">
-    select
-    <include refid="Base_Column_List" />
-    from tag
-    <where>
-      <if test="gmtCreate != null" >
-        AND gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        AND gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="name != null" >
-        AND name like "%"#{name,jdbcType=VARCHAR}"%"
-      </if>
-    </where>
-  </select>
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.keji.blog.dataobject.TagDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tag
+        <where>
+            <if test="gmtCreate != null">
+                AND gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                AND gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                AND name like "%"#{name,jdbcType=VARCHAR}"%"
+            </if>
+        </where>
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tag
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM tag
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
 
-  <delete id="deleteBatch">
-    delete from tag
-    where id in
-    <foreach collection="array" item="id" open="(" separator="," close=")">
-      #{id}
-    </foreach>
-  </delete>
+    <delete id="deleteBatch">
+        delete from tag
+        where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
-  <insert id="insert" parameterType="com.keji.blog.dataobject.TagDO" >
-    insert into tag (id, gmt_create, gmt_modified, 
-      name)
-    values (#{id,jdbcType=BIGINT}, now(), now(),
-      #{name,jdbcType=VARCHAR})
-  </insert>
+    <insert id="insert" parameterType="com.keji.blog.dataobject.TagDO">
+        INSERT INTO tag (id, gmt_create, gmt_modified,
+                         name)
+        VALUES (#{id,jdbcType=BIGINT}, now(), now(),
+                #{name,jdbcType=VARCHAR})
+    </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.TagDO" >
-    update tag
-    <set >
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      gmt_modified = now()
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <insert id="insertBatch" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into tag
+        (id, gmt_create, gmt_modified,name)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, now(), now(),
+            #{item.name,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.TagDO">
+        update tag
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            gmt_modified = now()
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
 </mapper>

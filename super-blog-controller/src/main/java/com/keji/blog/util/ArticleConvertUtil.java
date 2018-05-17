@@ -57,6 +57,8 @@ public class ArticleConvertUtil {
         articleDO.setCommentable(articleVO.getCommentable());
         articleDO.setContent(articleVO.getContent());
         articleDO.setStatus(articleVO.getStatus());
+        articleDO.setCategoryId(articleVO.getCategoryId());
+        articleDO.setCategoryName(articleVO.getCategoryName());
         articleDO.setTop(articleVO.getTop());
         articleDO.setUserId(articleVO.getUserId());
         articleDO.setGmtModified(articleVO.getGmtModified());

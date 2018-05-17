@@ -43,9 +43,10 @@ public interface ArticleAdminService {
      * 新增
      *
      * @param articleDO record
+     * @param tagNameS 标签名数组
      * @throws JsonProcessingException json缓存异常
      */
-    void insert(ArticleDO articleDO) throws JsonProcessingException;
+    void insert(String[] tagNameS,ArticleDO articleDO) throws JsonProcessingException;
 
     /**
      * 删除

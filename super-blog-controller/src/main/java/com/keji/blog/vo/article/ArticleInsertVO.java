@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @version $Id: ArticleDO.java, v 0.1 2018/3/27 11:55 wb-ny291824 Exp $
  */
 @Data
-public class ArticleInsertVO implements Serializable {
+public class ArticleInsertVO{
     /**
     * 文章id
     **/
@@ -47,7 +47,7 @@ public class ArticleInsertVO implements Serializable {
     /**
      * 分类ID
      */
-    private String categoryIdS;
+    private Long categoryId;
 
     /**
      * 分类名称
@@ -91,5 +91,5 @@ public class ArticleInsertVO implements Serializable {
     /**
      * 文章标签数
      */
-    private String tagNames;
+    private String tagNameS;
 }

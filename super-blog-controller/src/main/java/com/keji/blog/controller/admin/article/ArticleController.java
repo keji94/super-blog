@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.keji.blog.bo.ArticleBO;
+import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
@@ -21,6 +22,9 @@ import com.keji.blog.validator.group.UpdateGroup;
 import com.keji.blog.vo.article.ArticleInsertVO;
 import com.keji.blog.vo.article.ArticleQueryVO;
 import com.keji.blog.vo.article.ArticleVO;
+import com.keji.blog.vo.user.UserVO;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -92,8 +96,13 @@ public class ArticleController {
             return PageResult.makeFail(BaseErrorEnum.PARAM_ERROR);
         }
 
+        String[] tagArr = articleVO.getTagNameS().split(",");
+
         try {
-            articleAdminService.insert(ArticleConvertUtil.convertInsertVO2DO(articleVO));
+            Subject subject = SecurityUtils.getSubject();
+            UserDO user = (UserDO)subject.getPrincipal();
+            articleVO.setUserId(user.getId());
+            articleAdminService.insert(tagArr,ArticleConvertUtil.convertInsertVO2DO(articleVO));
             return BaseResult.makeSuccess();
         } catch (JsonProcessingException e) {
             LogUtil.error(logger, e, "[ArticleController#add]更新缓存时，json转换发生异常,articleVO=%s", articleVO);

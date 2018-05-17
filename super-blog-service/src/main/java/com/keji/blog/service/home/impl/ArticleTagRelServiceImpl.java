@@ -8,16 +8,16 @@ import javax.annotation.Resource;
 import com.google.common.collect.Maps;
 import com.keji.blog.dao.ArticleTagRelDAO;
 import com.keji.blog.dataobject.ArticleTagRelDO;
-import com.keji.blog.service.home.ArticleTagRel;
+import com.keji.blog.service.home.ArticleTagRelService;
 import com.keji.blog.util.MapUtil;
 import org.springframework.stereotype.Service;
 
 /**
  * @author wb-ny291824
- * @version $Id: ArticleTagRelImpl.java, v 0.1 2018-03-26 14:28 wb-ny291824 Exp $$
+ * @version $Id: ArticleTagRelServiceImpl.java, v 0.1 2018-03-26 14:28 wb-ny291824 Exp $$
  */
 @Service
-public class ArticleTagRelImpl implements ArticleTagRel{
+public class ArticleTagRelServiceImpl implements ArticleTagRelService {
 
     @Resource
     private ArticleTagRelDAO articleTagRelDAO;

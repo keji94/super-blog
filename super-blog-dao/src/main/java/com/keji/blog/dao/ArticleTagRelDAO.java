@@ -28,6 +28,12 @@ public interface ArticleTagRelDAO {
     int insert(ArticleTagRelDO record);
 
     /**
+     * 批量新增
+     * @param list list
+     */
+    void insertBatch(List<ArticleTagRelDO> list);
+
+    /**
      * 根据主键查询
      * @param id id
      * @return ArticleTagRelDO

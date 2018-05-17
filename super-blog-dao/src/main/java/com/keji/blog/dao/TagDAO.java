@@ -54,4 +54,11 @@ public interface TagDAO {
      * @return List<TagDO>
      */
     List<TagDO> selectByCondition(TagDO record);
+
+    /**
+     * 批量新增
+     * @param tagDOS records
+     * @return 影响条数
+     */
+    int insertBatch(List<TagDO> tagDOS);
 }
