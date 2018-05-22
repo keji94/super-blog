@@ -90,6 +90,7 @@ public class ArticleConvertUtil {
         articleVO.setPageviews(articleBO.getPageviews());
         articleVO.setGood(articleBO.getGood());
         articleVO.setBad(articleBO.getBad());
+        articleVO.setTagDOS(articleBO.getTagDOS());
         return articleVO;
     }
 }

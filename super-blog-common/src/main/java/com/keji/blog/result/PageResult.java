@@ -5,15 +5,15 @@ import lombok.EqualsAndHashCode;
 import org.springframework.validation.BindingResult;
 
 /**
- * @author: wb-ny291824
- * @description EqualsAndHashCode 这个注解不知道啥意思，但是ide报警告，加上为了不报警告
- * @date: Created in 2017/10/22
- * @modified: By:
+ * 
+ * @author keji
+ * @version $Id: PageResult.java, v 0.1 2018/5/20 下午12:41 keji Exp $
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class PageResult<T> extends BaseResult<T> {
 
+    private static final long serialVersionUID = -6894417970085071327L;
     /**
      * 总个数
      */

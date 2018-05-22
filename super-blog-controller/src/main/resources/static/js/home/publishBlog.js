@@ -10,23 +10,27 @@ var setting = {
             rootPId: -1
         }
     },
-    check :{
-        enable:true,
+    check: {
+        enable: true,
         chkStyle: "radio",
-        radioType:"all"
+        radioType: "all"
     }
 };
 
 $(function () {
-
-    simplemde = new SimpleMDE({ element: $("#test")[0] });
+    simplemde = new SimpleMDE({
+        element: $("#test")[0],
+        toolbar: ["bold", "italic", "strikethrough", "heading", "heading-smaller", "heading-bigger",
+            "heading-1", "heading-2", "heading-3", "code", "quote","unordered-list","ordered-list","clean-block",
+            "link","image","table","horizontal-rule","preview","side-by-side","fullscreen","guide"]
+    });
 });
 
-layui.use(['form', 'layedit', 'laydate'], function(){
+layui.use(['form', 'layedit', 'laydate'], function () {
     var form = layui.form;
 
     //监听提交
-    form.on('submit(publish)', function(data){
+    form.on('submit(publish)', function (data) {
 
         //加载菜单树
         $.get("/admin/category/list", function (r) {
@@ -59,21 +63,22 @@ layui.use(['form', 'layedit', 'laydate'], function(){
                     dataType: "json",
                     data: {
                         "title": title,
-                        "content":content,
-                        "tagNameS":tags,
-                        "categoryId":nodes[0].id,
-                        "categoryName":nodes[0].name
+                        "content": content,
+                        "tagNameS": tags,
+                        "categoryId": nodes[0].id,
+                        "categoryName": nodes[0].name
                     },
                     success: function (r) {
                         if (r.success) {
                             layer.close(index);
                             alertSuccess("新增成功");
-                            setTimeout(function(){
-                                location.href="/index";
-                            },2000);
+                            setTimeout(function () {
+                                location.href = "/index";
+                            }, 2000);
                         } else {
                             layer.close(index);
                             alertFail("新增失败");
+                            X
                         }
                     }
                 });

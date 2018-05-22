@@ -60,4 +60,12 @@ public interface ArticleTagRelDAO {
      * @return i
      */
     int updateByPrimaryKey(ArticleTagRelDO record);
+
+    /**
+     * 根据文章ID批量查询
+     *
+     * @param articleIds
+     * @return
+     */
+    List<ArticleTagRelDO> selectByArticleIds(List<Long> articleIds);
 }

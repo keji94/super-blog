@@ -1,4 +1,4 @@
-var setting = {
+var ztreeSetting = {
     data: {
         simpleData: {
             enable: true,
@@ -23,7 +23,7 @@ function getCurrentNode(treeId, treeNode) {
 function getCategory() {
     //加载菜单树
     $.get("admin/category/list", function (r) {
-        ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
+        ztree = $.fn.zTree.init($("#categoryTree"), ztreeSetting, r);
     })
 }
 

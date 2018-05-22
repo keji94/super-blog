@@ -3,3 +3,6 @@
     但是：
         在加了拦截器之后，首先发现默认的静态资源配置不好用了，于是在MyWebAppConfigurer里面重新定义了资源位置。
         然后需要在原来的link上面加上/static：<link rel="stylesheet" href="/static/layui/css/layui.css"/>
+
+2.存在一对多关联查询的，最好不要分页。反之，如果要分页，最好不要将一对多，多的一方关联查询出来。在文章和标签这里踩坑了，
+

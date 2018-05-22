@@ -22,7 +22,6 @@ import com.keji.blog.validator.group.UpdateGroup;
 import com.keji.blog.vo.article.ArticleInsertVO;
 import com.keji.blog.vo.article.ArticleQueryVO;
 import com.keji.blog.vo.article.ArticleVO;
-import com.keji.blog.vo.user.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;

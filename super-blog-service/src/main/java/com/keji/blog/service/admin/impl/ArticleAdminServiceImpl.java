@@ -1,6 +1,7 @@
 package com.keji.blog.service.admin.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -19,9 +20,9 @@ import com.keji.blog.dataobject.ArticleTagRelDO;
 import com.keji.blog.dataobject.TagDO;
 import com.keji.blog.redis.CacheService;
 import com.keji.blog.redis.RedisClient;
+import com.keji.blog.redis.loader.ArticleCacheLoader;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.util.JsonUtil;
-import com.keji.blog.redis.loader.ArticleCacheLoader;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     public PageInfo<ArticleBO> list(ArticleBO articleBO, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         List<ArticleBO> articleBOS = articleDAO.selectByCondition(articleBO);
+        setArticleTag(articleBOS);
         return new PageInfo<>(articleBOS);
     }
 
@@ -68,7 +70,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insert(String[] tagNameS,ArticleDO articleDO) throws JsonProcessingException {
+    public void insert(String[] tagNameS, ArticleDO articleDO) throws JsonProcessingException {
         List<TagDO> tagDOS = assembleTagDOS(tagNameS);
         tagDAO.insertBatch(tagDOS);
         articleDO.setTop(0);
@@ -97,7 +99,30 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     }
 
     /**
+     * 设置文章的标签
+     *
+     * @param articleBOS
+     */
+    private void setArticleTag(List<ArticleBO> articleBOS) {
+        List<ArticleTagRelDO> articleTagRelDOS = articleTagRelDAO.selectByArticleIds(
+                articleBOS.stream().map(ArticleBO::getId).collect(Collectors.toList()));
+        articleBOS.forEach(articleBO -> {
+            List<ArticleTagRelDO> collect = articleTagRelDOS.stream().filter(
+                    e -> e.getArticleId().equals(articleBO.getCategoryId())).collect(Collectors.toList());
+            List<TagDO> tagDOS = Lists.newArrayList();
+            collect.forEach(e->{
+                TagDO tagDO = new TagDO();
+                tagDO.setId(e.getId());
+                tagDO.setName(e.getTagName());
+                tagDOS.add(tagDO);
+            });
+            articleBO.setTagDOS(tagDOS);
+        });
+    }
+
+    /**
      * 更新缓存
+     *
      * @throws JsonProcessingException json转换异常
      */
     private void updateCache() throws JsonProcessingException {
@@ -105,7 +130,6 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
         List<ArticleBO> value = articleDAO.selectByCondition(new ArticleBO());
         redisClient.set(BlogConstants.ARTICLE_KEY, JsonUtil.object2Json(value));
     }
-
 
     private List<TagDO> assembleTagDOS(String[] tagNameS) {
         List<TagDO> tagDOS = Lists.newArrayList();
@@ -119,7 +143,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
 
     private List<ArticleTagRelDO> assembleArticleTagRelDOS(List<TagDO> tagDOS, ArticleDO articleDO) {
         List<ArticleTagRelDO> result = Lists.newArrayList();
-        tagDOS.forEach(e->{
+        tagDOS.forEach(e -> {
             ArticleTagRelDO articleTagRelDO = new ArticleTagRelDO();
             articleTagRelDO.setArticleId(articleDO.getId());
             articleTagRelDO.setTagId(e.getId());

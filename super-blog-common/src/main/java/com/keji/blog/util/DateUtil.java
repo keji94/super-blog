@@ -165,4 +165,22 @@ public class DateUtil {
         return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
     }
 
+    /**
+     * 为Date增加分钟 减传负数
+     *
+     * @param date        日期
+     * @param plusMinutes 要增加的分钟数
+     * @return 新的日期
+     */
+    public static Date addMinutes(Date date, Long plusMinutes) {
+        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime newDateTime = dateTime.plusMinutes(plusMinutes);
+        return Date.from(newDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static void main(String[] args) {
+        Date date = addMinutes(new Date(), -30L);
+        System.out.println(date);
+    }
+
 }

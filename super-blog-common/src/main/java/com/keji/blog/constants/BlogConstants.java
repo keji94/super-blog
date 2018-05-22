@@ -59,4 +59,9 @@ public class BlogConstants {
      */
     public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
 
+    /**
+     * 文章预览长度
+     */
+    public static final int ARTICLE_SUMMARY_LENGTH = 150;
+
 }

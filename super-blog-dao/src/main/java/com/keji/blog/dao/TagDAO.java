@@ -16,6 +16,7 @@ public interface TagDAO {
 
     /**
      * 根据主键删除
+     *
      * @param id id
      * @return int
      */
@@ -23,12 +24,14 @@ public interface TagDAO {
 
     /**
      * 批量删除
+     *
      * @param ids ids
      */
     void deleteBatch(Long[] ids);
 
     /**
      * 新增
+     *
      * @param record record
      * @return int
      */
@@ -36,6 +39,7 @@ public interface TagDAO {
 
     /**
      * 根据主键查找
+     *
      * @param id id
      * @return TagDO
      */
@@ -43,6 +47,7 @@ public interface TagDAO {
 
     /**
      * 根据属性更新
+     *
      * @param record record
      * @return int
      */
@@ -50,6 +55,7 @@ public interface TagDAO {
 
     /**
      * 条件查找
+     *
      * @param record record
      * @return List<TagDO>
      */
@@ -57,6 +63,7 @@ public interface TagDAO {
 
     /**
      * 批量新增
+     *
      * @param tagDOS records
      * @return 影响条数
      */
