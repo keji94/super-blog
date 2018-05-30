@@ -1,8 +1,14 @@
 package com.keji.blog;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.keji.blog.util.JsonUtil;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +53,79 @@ public class ApplicationTests {
 		System.out.println(test3);
 	}
 
+	@Test
+	public void testJson() throws IOException {
+		String json
+				= "{\"policyNo\":\"\",\"operateMessage\":\"该订单号已经存在!\",\"importSN\":\"\",\"OrderNumber\":\"ghzf2016061213025898334226745\"}";
+
+		PolicyRemoteResponseDTO policyRemoteResponseDTO = JsonUtil.json2Object(json, PolicyRemoteResponseDTO.class);
+		System.out.println(policyRemoteResponseDTO);
+
+	}
+
 
 
 }
+
+class PolicyRemoteResponseDTO {
+
+	/**
+	 * 保险单号
+	 */
+	private String policyNo;
+
+	/**
+	 * 结果
+	 */
+	private String operateMessage;
+
+	/**
+	 * 君远投保单号
+	 */
+	private String importSN;
+
+	/**
+	 * 微脉投保单号
+	 */
+	@JsonFormat()
+	public String orderNumber;
+
+	public String getPolicyNo() {
+		return policyNo;
+	}
+
+	public void setPolicyNo(String policyNo) {
+		this.policyNo = policyNo;
+	}
+
+	public String getOperateMessage() {
+		return operateMessage;
+	}
+
+	public void setOperateMessage(String operateMessage) {
+		this.operateMessage = operateMessage;
+	}
+
+	public String getImportSN() {
+		return importSN;
+	}
+
+	public void setImportSN(String importSN) {
+		this.importSN = importSN;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	@JsonProperty(value = "OrderNumber")
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+}
+

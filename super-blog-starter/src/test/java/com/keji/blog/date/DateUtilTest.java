@@ -18,4 +18,10 @@ public class DateUtilTest {
 
     }
 
+    @Test
+    public void test() {
+        int date = DateUtil.getDate();
+        System.out.println(date);
+    }
+
 }

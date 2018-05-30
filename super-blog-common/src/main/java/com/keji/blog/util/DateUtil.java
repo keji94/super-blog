@@ -52,6 +52,17 @@ public class DateUtil {
     }
 
     /**
+     * 获取当前年月日，格式20180428
+     * @return int
+     */
+    public static int getDate() {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String date = format.format(new Date());
+        return Integer.parseInt(date);
+    }
+
+    /**
      * 将time 类型转换为Date，年月日为当天
      *
      * @param time time
