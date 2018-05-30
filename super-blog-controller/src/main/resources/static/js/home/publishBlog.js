@@ -51,6 +51,8 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                 var title = $("#title").val();
                 //内容
                 var content = simplemde.value();
+                content = simplemde.markdown(content);
+
                 //标签
                 var tags = $("#tags").val();
                 //分类

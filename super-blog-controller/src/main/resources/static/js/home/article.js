@@ -45,7 +45,7 @@ function generatorContent(data) {
         "                        <fieldset class=\"layui-elem-field layui-field-title\">\n" +
         "                            <legend class=\"center-to-head \"><a href='blog.html'>"+data.title+"</a></legend>\n" +
         "                            <div class=\"layui-field-box\">\n"+data.content+
-        "<a class=\"loading\" href=\"blog.html\"> 阅读全文<i\n" + "class=\"fa fa-angle-double-right\"></i> </a>\n" +
+        "<a class=\"loading\" href=\"blog.html?id="+data.id+"\"> 阅读全文<i\n" + "class=\"fa fa-angle-double-right\"></i> </a>\n" +
         "                            </div>\n" +
         "                            <div class=\"operation\">\n" +
         "                                <div class=\"tags\">\n" +

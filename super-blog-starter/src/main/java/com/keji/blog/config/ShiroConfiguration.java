@@ -76,6 +76,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/vue", "anon");
         filterChainDefinitionMap.put("/home/createBlog.html", "anon");
         filterChainDefinitionMap.put("/adminArticle/list", "anon");
+        filterChainDefinitionMap.put("/blog.html", "anon");
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置记住我或认证通过可以访问的地址

@@ -80,4 +80,11 @@ public class IndexController {
         navDO.setStatus(1);
         return navDO;
     }
+
+    @RequestMapping("/blog")
+    public String showBlogDetail(Long id,Model model) {
+        ArticleBO articleBO = articleAdminService.queryById(id);
+        model.addAttribute("article", articleBO);
+        return "/home/blogDetail";
+    }
 }
