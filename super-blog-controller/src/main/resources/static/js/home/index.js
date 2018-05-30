@@ -16,8 +16,7 @@ var ztreeSetting = {
 var ztree;
 
 function getCurrentNode(treeId, treeNode) {
-    var curNode = treeNode;
-    zTreeOnclick(curNode);
+    zTreeOnclick(treeNode);
 }
 
 function getCategory() {

@@ -79,7 +79,7 @@ function nextPage(page, next) { //执行下一页的回调
                 for (var i = 0; i < r.data.length; i++) {
                     lis.push(generatorContent(r.data[i]));
                 }
-                next(lis.join(''), page < r.totalPages);
+                next(lis.join(''), page < r.totalPage);
             } else {
                 alertFail("获取文章信息失败");
             }

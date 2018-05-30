@@ -54,8 +54,6 @@ public class IndexController {
             List<InfoBoardDO> list = boardService.listAll(new InfoBoardDO());
             List<String> titleList = list.stream().map(InfoBoardDO::getTitle).collect(Collectors.toList());
             Map<String, Integer> hotTag = articleTagRelService.queryHotTag();
-            List<ArticleBO> articleBOS = articleAdminService.list(new ArticleBO(),1,10).getList();
-            getSummary(articleBOS);
             //网站文案设置
             model.addAttribute("settings", textSettingsDO);
             //顶部右侧导航
@@ -66,25 +64,10 @@ public class IndexController {
             //热门标签
             model.addAttribute("hotTag", hotTag);
             //文章列表
-            model.addAttribute("articleList", articleBOS);
         } catch (Exception e) {
             LogUtil.error(logger, e, "查询文本设置发生异常");
         }
         return "/home/index";
-    }
-
-    /**
-     * 替换文章内容中的特俗字符，用于预览
-     *
-     * @param articleBOS articleBOS
-     */
-    private void getSummary(List<ArticleBO> articleBOS) {
-        articleBOS.forEach(articleBO -> {
-            String content = articleBO.getContent();
-            if (null != content && content.length() >= BlogConstants.ARTICLE_SUMMARY_LENGTH) {
-                articleBO.setContent(content.substring(0, 150));
-            }
-        });
     }
 
     @RequestMapping(value = {"/home/createBlog"})

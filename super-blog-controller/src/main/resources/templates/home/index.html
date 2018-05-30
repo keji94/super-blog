@@ -70,33 +70,6 @@
         <div id="article-list" class="layui-col-md9">
             <div class="layui-collapse layui-panel layui-article">
                 <div class="layui-colla-item">
-                <#list articleList as article>
-                    <div class="layui-colla-content layui-show layui-article">
-                        <fieldset class="layui-elem-field layui-field-title">
-                            <legend class="center-to-head">
-                                <#if article.top = 1>
-                                <span class="layui-badge layui-bg-cyan">置顶</span>
-                                </#if>
-                                <a href="blog.html">${article.title}</a>
-                            </legend>
-                            <div class="layui-field-box">
-                                &nbsp;&nbsp;&nbsp;&nbsp;${article.content}
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="loading select-none" href="blog.html"> 阅读全文<i class="fa fa-angle-double-right"></i> </a>
-                            </div>
-                            <div class="operation">
-                                <div class="tags">
-                                <#list article.tagDOS as tag>
-                                    <span class="layui-badge-rim"><i class="fa fa-tag"></i> <span>${tag.name}</span></span>
-                                </#list>
-                                </div>
-                                <div class="info">
-                                    <span class="views select-none"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.hotIcon}"></use></svg> ${article.pageviews!'无'}</span>
-                                    <span class="datetime select-none"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.createTimeIcon}"></use></svg> ${article.gmtCreated?string('yyyy.MM.dd')}</span>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </#list>
                 </div>
             </div>
         </div>
