@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version $Id: NavController.java, v 0.1 2018-03-22 17:25 wb-ny291824 Exp $$
  */
 @Controller
-@RequestMapping("/adminNav")
+@RequestMapping("/nav")
 public class NavController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

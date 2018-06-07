@@ -1,5 +1,8 @@
 package com.keji.blog.config;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.keji.blog.shiro.MyShiroRealm;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -13,9 +16,6 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @author: wb-ny291824
@@ -75,9 +75,10 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/vue", "anon");
         filterChainDefinitionMap.put("/home/createBlog.html", "anon");
-        filterChainDefinitionMap.put("/adminArticle/list", "anon");
+        filterChainDefinitionMap.put("/article/list", "anon");
         filterChainDefinitionMap.put("/blog.html", "anon");
         filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/category/list", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置记住我或认证通过可以访问的地址
 

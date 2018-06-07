@@ -13,7 +13,7 @@ layui.use(["layer", "form"], function () {
 
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/adminArticle/list',
+        url: '/article/list',
         datatype: "json",
         colModel: [
             {label: 'id', name: 'id', hidden: true, classes: "id", width: 100},
@@ -128,7 +128,7 @@ function alertUpdateWindow(e) {
 
     $.ajax({
         type: "POST",
-        url: "/admin/category/list",
+        url: "/category/list",
         dataType: "json",
         success: function (r) {
             var html = '';
@@ -142,7 +142,7 @@ function alertUpdateWindow(e) {
 
     $.ajax({
         type: "POST",
-        url: "/adminArticle/queryById",
+        url: "/article/queryById",
         dataType: "json",
         data: {"id": id},
         success: function (r) {
@@ -186,7 +186,7 @@ function del() {
     }, function (index) {
         $.ajax({
             type: "POST",
-            url: "/adminTag/delete",
+            url: "/tag/delete",
             contentType: "application/json",
             data: JSON.stringify(ids),
             success: function (r) {

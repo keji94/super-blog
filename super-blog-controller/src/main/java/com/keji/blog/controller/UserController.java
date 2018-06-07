@@ -1,23 +1,30 @@
-package com.keji.blog.controller.admin.user;
+package com.keji.blog.controller;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.RoleDO;
+import com.keji.blog.dataobject.UserDO;
 import com.keji.blog.exception.BlogException;
+import com.keji.blog.result.BaseErrorEnum;
+import com.keji.blog.result.BaseResult;
+import com.keji.blog.result.PageResult;
 import com.keji.blog.service.admin.RoleService;
+import com.keji.blog.service.admin.UserService;
 import com.keji.blog.util.StringUtil;
 import com.keji.blog.util.UserConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
-import com.keji.blog.vo.user.UserVO;
 import com.keji.blog.vo.user.UserQueryVO;
-import com.keji.blog.dataobject.UserDO;
-import com.keji.blog.result.BaseErrorEnum;
-import com.keji.blog.result.BaseResult;
-import com.keji.blog.result.PageResult;
-import com.keji.blog.service.admin.UserService;
+import com.keji.blog.vo.user.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -33,21 +40,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
 /**
  *
  * @author keji
- * @version $Id: AdminUserController.java, v 0.1 2018/3/18 下午2:48 keji Exp $
+ * @version $Id: UserController.java, v 0.1 2018/3/18 下午2:48 keji Exp $
  */
 @Controller
 @RequestMapping("/adminuser")
-public class AdminUserController {
+public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -1,4 +1,4 @@
-package com.keji.blog.controller.home;
+package com.keji.blog.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import com.keji.blog.bo.ArticleBO;
-import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.InfoBoardDO;
 import com.keji.blog.dataobject.NavDO;
 import com.keji.blog.dataobject.TextSettingsDO;

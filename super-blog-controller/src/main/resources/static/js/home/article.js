@@ -67,7 +67,7 @@ function nextPage(page, next) { //执行下一页的回调
 
     $.ajax({
         type: "POST",
-        url: "/adminArticle/list",
+        url: "/article/list",
         dataType: "json",
         data: {
             "pageIndex": page,

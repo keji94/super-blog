@@ -33,7 +33,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     form.on('submit(publish)', function (data) {
 
         //加载菜单树
-        $.get("/admin/category/list", function (r) {
+        $.get("/category/list", function (r) {
             ztree = $.fn.zTree.init($("#categoryTree"), setting, r);
         });
 
@@ -61,7 +61,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
 
                 $.ajax({
                     type: "POST",
-                    url: "/adminArticle/add",
+                    url: "/article/add",
                     dataType: "json",
                     data: {
                         "title": title,

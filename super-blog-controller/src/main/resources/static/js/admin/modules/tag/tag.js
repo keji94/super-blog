@@ -7,7 +7,7 @@ var layer, form;
 
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/adminTag/list',
+        url: '/tag/list',
         datatype: "json",
         colModel: [
             {label: 'id', name: 'id', classes: "id", width: 100},
@@ -69,7 +69,7 @@ function alertAddWindow() {
             layer.close(index);
             $.ajax({
                 type: "POST",
-                url: "/adminTag/add",
+                url: "/tag/add",
                 dataType: "json",
                 data: {
                     "name": name
@@ -121,7 +121,7 @@ function alertUpdateWindow(e) {
             layer.close(index);
             $.ajax({
                 type: "POST",
-                url: "/adminTag/update",
+                url: "/tag/update",
                 dataType: "json",
                 data: {
                     "name": name,
@@ -155,7 +155,7 @@ function del() {
     }, function (index) {
         $.ajax({
             type: "POST",
-            url: "/adminTag/delete",
+            url: "/tag/delete",
             contentType: "application/json",
             data: JSON.stringify(ids),
             success: function (r) {

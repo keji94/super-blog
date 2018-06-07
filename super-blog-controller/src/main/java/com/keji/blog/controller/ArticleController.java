@@ -1,4 +1,4 @@
-package com.keji.blog.controller.admin.article;
+package com.keji.blog.controller;
 
 import java.util.Arrays;
 
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version $Id: NavController.java, v 0.1 2018-03-22 17:25 wb-ny291824 Exp $$
  */
 @Controller
-@RequestMapping("/adminArticle")
+@RequestMapping("/article")
 public class ArticleController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

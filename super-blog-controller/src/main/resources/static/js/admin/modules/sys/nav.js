@@ -7,7 +7,7 @@ var layer, form;
 
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/adminNav/list',
+        url: '/nav/list',
         datatype: "json",
         colModel: [
             {label: '名称', name: 'name', classes: "name", width: 75},
@@ -90,7 +90,7 @@ function alertAddWindow() {
             layer.close(index);
             $.ajax({
                 type: "POST",
-                url: "/adminNav/add",
+                url: "/nav/add",
                 dataType: "json",
                 data: {
                     "name": name,
@@ -172,7 +172,7 @@ function alertUpdateWindow(e) {
             if ('' === id) {
                 $.ajax({
                     type: "POST",
-                    url: "/adminNav/add",
+                    url: "/nav/add",
                     dataType: "json",
                     data: {
                         "name": name,
@@ -191,7 +191,7 @@ function alertUpdateWindow(e) {
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "/adminNav/update",
+                    url: "/nav/update",
                     dataType: "json",
                     data: {
                         "name": name,
@@ -228,7 +228,7 @@ function del() {
     }, function (index) {
         $.ajax({
             type: "POST",
-            url: "/adminNav/delete",
+            url: "/nav/delete",
             contentType: "application/json",
             data: JSON.stringify(ids),
             success: function (r) {

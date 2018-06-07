@@ -1,4 +1,4 @@
-package com.keji.blog.controller.home.textsettings;
+package com.keji.blog.controller;
 
 import javax.annotation.Resource;
 

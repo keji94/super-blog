@@ -1,20 +1,16 @@
-package com.keji.blog.controller.admin.category;
+package com.keji.blog.controller;
 
 import java.util.List;
 
 import com.keji.blog.dataobject.CategoryDO;
-import com.keji.blog.dataobject.ResourceDO;
 import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
 import com.keji.blog.service.admin.CategoryService;
-import com.keji.blog.service.admin.ResourceService;
-import com.keji.blog.util.ResourceConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
 import com.keji.blog.vo.category.CategoryVO;
-import com.keji.blog.vo.resource.ResourceVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version $Id: CategoryController.java, v 0.1 2017-10-26 19:21 wb-ny291824 Exp $$
  */
 @Controller
-@RequestMapping("/admin/category")
+@RequestMapping("/category")
 public class CategoryController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
