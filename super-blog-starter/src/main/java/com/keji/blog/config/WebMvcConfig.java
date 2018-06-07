@@ -2,8 +2,8 @@ package com.keji.blog.config;
 
 import java.util.List;
 
-import com.keji.blog.config.requestparambinder.FormParamRequestParamMethodArgumentResolver;
-import com.keji.blog.config.requestparambinder.QueryParamRequestParamMethodArgumentResolver;
+import com.keji.blog.config.requestparambinder.FieldParamProcessor;
+import com.keji.blog.config.requestparambinder.MyRequestParamMethodArgumentResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @version $Id: WebMvcConfig.java, v 0.1 2018/6/1 上午10:11 keji Exp $
  */
 @Configuration
-@EnableWebMvc
-@ComponentScan
 public class WebMvcConfig extends WebMvcConfigurerAdapter  {
 
     /**
@@ -59,19 +57,19 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
 
     /**
      * 对象参数绑定
-     * @return FormParamRequestParamMethodArgumentResolver
+     * @return FieldParamProcessor
      */
     @Bean
-    public FormParamRequestParamMethodArgumentResolver getFormParamRequestParamMethodArgumentResolver(){
-        return new FormParamRequestParamMethodArgumentResolver(true);
+    public FieldParamProcessor getFormParamRequestParamMethodArgumentResolver(){
+        return new FieldParamProcessor(true);
     }
 
     /**
      * 查询参数绑定
-     * @return QueryParamRequestParamMethodArgumentResolver
+     * @return MyRequestParamMethodArgumentResolver
      */
     @Bean
-    public QueryParamRequestParamMethodArgumentResolver getQueryParamRequestParamMethodArgumentResolver(){
-        return new QueryParamRequestParamMethodArgumentResolver(true);
+    public MyRequestParamMethodArgumentResolver getQueryParamRequestParamMethodArgumentResolver(){
+        return new MyRequestParamMethodArgumentResolver(true);
     }
 }

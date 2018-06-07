@@ -8,17 +8,14 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
 
 /**
- * Copyright (c) 2018 Choice, Inc.
- * All Rights Reserved.
- * Choice Proprietary and Confidential.
- * 简单类型自定义参数绑定
+ * 普通方法签名上参数别名绑定
  *
- * @author mugua
- * @since 2018/6/4
+ * @author keji
+ * @version $Id: MyRequestParamMethodArgumentResolver.java, v 0.1 2018/6/7 上午10:49 keji Exp $
  */
-public class QueryParamRequestParamMethodArgumentResolver extends RequestParamMethodArgumentResolver {
+public class MyRequestParamMethodArgumentResolver extends RequestParamMethodArgumentResolver {
 
-    public QueryParamRequestParamMethodArgumentResolver(boolean useDefaultResolution) {
+    public MyRequestParamMethodArgumentResolver(boolean useDefaultResolution) {
         super(useDefaultResolution);
     }
 
@@ -29,7 +26,6 @@ public class QueryParamRequestParamMethodArgumentResolver extends RequestParamMe
      * @param parameter 参数上下文信息
      * @param request   request
      * @return 参数值
-     * @throws Exception
      */
     @Override
     protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {

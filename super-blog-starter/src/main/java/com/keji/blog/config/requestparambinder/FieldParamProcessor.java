@@ -6,26 +6,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.keji.blog.annotion.ParamName;
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ExtendedServletRequestDataBinder;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.ServletModelAttributeMethodProcessor;
 
 /**
- * Copyright (c) 2018 Choice, Inc.
- * All Rights Reserved.
- * Choice Proprietary and Confidential.
  *
  * Method processor supports {@link ParamName} parameters renaming
+ * 对象参数别名绑定
  *
- * @author qinjiao
- * @since 2018/6/1
+ * @author keji
+ * @version $Id: FieldParamProcessor.java, v 0.1 2018/6/7 上午10:49 keji Exp $
  */
-public class FormParamRequestParamMethodArgumentResolver extends ServletModelAttributeMethodProcessor {
+public class FieldParamProcessor extends ServletModelAttributeMethodProcessor {
 
     @Autowired
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
@@ -33,10 +34,10 @@ public class FormParamRequestParamMethodArgumentResolver extends ServletModelAtt
     /**
      * Rename cache
      */
-    private final Map<Class<?>, Map<String, String>> replaceMap = new ConcurrentHashMap<Class<?>, Map<String, String>>();
+    private final Map<Class<?>, Map<String, String>> replaceMap = new ConcurrentHashMap<>();
 
 
-    public FormParamRequestParamMethodArgumentResolver(boolean annotationNotRequired) {
+    public FieldParamProcessor(boolean annotationNotRequired) {
         super(annotationNotRequired);
     }
 
@@ -83,5 +84,33 @@ public class FormParamRequestParamMethodArgumentResolver extends ServletModelAtt
             return Collections.emptyMap();
         }
         return renameMap;
+    }
+}
+
+/**
+ * ServletRequestDataBinder which supports fields renaming using {@link com.keji.blog.annotion.ParamName}
+ *
+ * @author keji
+ * @version $Id: ParamNameDataBinder.java, v 0.1 2018/6/1 上午10:09 keji Exp $
+ */
+class ParamNameDataBinder extends ExtendedServletRequestDataBinder {
+
+    private final Map<String, String> renameMapping;
+
+    ParamNameDataBinder(Object target, String objectName, Map<String, String> renameMapping) {
+        super(target, objectName);
+        this.renameMapping = renameMapping;
+    }
+
+    @Override
+    protected void addBindValues(MutablePropertyValues mpvs, ServletRequest request) {
+        super.addBindValues(mpvs, request);
+        for (Map.Entry<String, String> entry : renameMapping.entrySet()) {
+            String from = entry.getKey();
+            String to = entry.getValue();
+            if (mpvs.contains(from)) {
+                mpvs.add(to, mpvs.getPropertyValue(from).getValue());
+            }
+        }
     }
 }
