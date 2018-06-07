@@ -6,12 +6,14 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.keji.blog.annotion.ParamName;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -38,6 +40,7 @@ public class UserVO {
      */
     @NotBlank(message = "*邮箱不能为空!", groups = {AddGroup.class, UpdateGroup.class})
     @Email(message = "*邮箱格式不正确", groups = {AddGroup.class, UpdateGroup.class})
+    @ParamName("email2")
     private String email;
 
     /**
@@ -69,6 +72,7 @@ public class UserVO {
      * 密码
      */
     @NotBlank(message = "*密码不能为空!", groups = AddGroup.class)
+    @ParamName(value = "password2")
     private String password;
 
     /**

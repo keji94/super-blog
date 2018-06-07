@@ -2,10 +2,12 @@ package com.keji.blog;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Sets;
 import com.keji.blog.util.JsonUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -63,7 +65,18 @@ public class ApplicationTests {
 
 	}
 
+	public static void main(String[] args) {
+		Set<String> set = Sets.newHashSet();
+		set.add("test");
 
+		for (String s : set) {
+			String s1 = s.toLowerCase();
+		}
+
+
+		boolean b = set.contains("Test");
+		System.out.println(b);
+	}
 
 }
 

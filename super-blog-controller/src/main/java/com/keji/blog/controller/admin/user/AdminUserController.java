@@ -6,6 +6,7 @@ import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dataobject.RoleDO;
 import com.keji.blog.exception.BlogException;
 import com.keji.blog.service.admin.RoleService;
+import com.keji.blog.util.StringUtil;
 import com.keji.blog.util.UserConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;
@@ -63,13 +64,13 @@ public class AdminUserController {
 
     @ResponseBody
     @RequestMapping("/login")
-    public BaseResult login(UserVO userVO, BindingResult bindingResult) {
+    public BaseResult login(UserVO userVO) {
 
-        if (bindingResult.hasErrors()) {
-            return BaseResult.makeFail(bindingResult);
+        if (StringUtil.isEmpty(userVO.getEmail()) || StringUtil.isEmpty(userVO.getPassword())) {
+            return BaseResult.makeFail(BaseErrorEnum.PARAM_ERROR);
         }
-
         Subject subject = SecurityUtils.getSubject();
+
         UsernamePasswordToken token = new UsernamePasswordToken(userVO.getEmail(), userVO.getPassword(),
                 userVO.getRememberMe());
 
