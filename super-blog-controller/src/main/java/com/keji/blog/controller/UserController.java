@@ -18,13 +18,13 @@ import com.keji.blog.result.BaseResult;
 import com.keji.blog.result.PageResult;
 import com.keji.blog.service.admin.RoleService;
 import com.keji.blog.service.admin.UserService;
-import com.keji.blog.util.StringUtil;
 import com.keji.blog.util.UserConvertUtil;
 import com.keji.blog.util.ValidatorUtils;
 import com.keji.blog.validator.group.AddGroup;
 import com.keji.blog.validator.group.UpdateGroup;
 import com.keji.blog.vo.user.UserQueryVO;
 import com.keji.blog.vo.user.UserVO;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -66,7 +66,7 @@ public class UserController {
     @RequestMapping("/login")
     public BaseResult login(UserVO userVO) {
 
-        if (StringUtil.isEmpty(userVO.getEmail()) || StringUtil.isEmpty(userVO.getPassword())) {
+        if (StringUtils.isEmpty(userVO.getEmail()) || StringUtils.isEmpty(userVO.getPassword())) {
             return BaseResult.makeFail(BaseErrorEnum.PARAM_ERROR);
         }
         Subject subject = SecurityUtils.getSubject();

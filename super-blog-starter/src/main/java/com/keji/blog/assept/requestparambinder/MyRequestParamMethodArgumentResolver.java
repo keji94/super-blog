@@ -1,4 +1,4 @@
-package com.keji.blog.config.requestparambinder;
+package com.keji.blog.assept.requestparambinder;
 
 import java.util.Map;
 

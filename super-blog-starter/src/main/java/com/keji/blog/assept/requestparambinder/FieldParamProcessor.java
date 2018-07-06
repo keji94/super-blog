@@ -1,4 +1,4 @@
-package com.keji.blog.config.requestparambinder;
+package com.keji.blog.assept.requestparambinder;
 
 import java.lang.reflect.Field;
 import java.util.Collections;

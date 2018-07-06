@@ -13,7 +13,6 @@ import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.constants.BlogConstants;
 import com.keji.blog.dao.ArticleDAO;
 import com.keji.blog.dao.ArticleTagRelDAO;
-import com.keji.blog.dao.CategoryDAO;
 import com.keji.blog.dao.TagDAO;
 import com.keji.blog.dataobject.ArticleDO;
 import com.keji.blog.dataobject.ArticleTagRelDO;
@@ -41,8 +40,6 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     private ArticleCacheLoader articleCacheLoader;
     @Resource
     private RedisClient redisClient;
-    @Resource
-    private CategoryDAO categoryDAO;
     @Resource
     private ArticleTagRelDAO articleTagRelDAO;
     @Resource
@@ -98,11 +95,6 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
         return list.get(0);
     }
 
-    /**
-     * 设置文章的标签
-     *
-     * @param articleBOS
-     */
     private void setArticleTag(List<ArticleBO> articleBOS) {
         List<ArticleTagRelDO> articleTagRelDOS = articleTagRelDAO.selectByArticleIds(
                 articleBOS.stream().map(ArticleBO::getId).collect(Collectors.toList()));

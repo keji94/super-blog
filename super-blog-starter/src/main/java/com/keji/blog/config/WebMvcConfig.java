@@ -2,8 +2,8 @@ package com.keji.blog.config;
 
 import java.util.List;
 
-import com.keji.blog.config.requestparambinder.FieldParamProcessor;
-import com.keji.blog.config.requestparambinder.MyRequestParamMethodArgumentResolver;
+import com.keji.blog.assept.requestparambinder.FieldParamProcessor;
+import com.keji.blog.assept.requestparambinder.MyRequestParamMethodArgumentResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;

@@ -1,6 +1,7 @@
 package com.keji.blog;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -62,7 +63,13 @@ public class ApplicationTests {
 
 		PolicyRemoteResponseDTO policyRemoteResponseDTO = JsonUtil.json2Object(json, PolicyRemoteResponseDTO.class);
 		System.out.println(policyRemoteResponseDTO);
+	}
 
+	@Test
+	public void testBigdecimal() {
+		BigDecimal bigDecimal = new BigDecimal(123);
+		BigDecimal subtract = bigDecimal.subtract(null);
+		System.out.println(subtract);
 	}
 
 	public static void main(String[] args) {

@@ -21,7 +21,7 @@ function getCurrentNode(treeId, treeNode) {
 
 function getCategory() {
     //加载菜单树
-    $.get("admin/category/list", function (r) {
+    $.get("/category/list", function (r) {
         ztree = $.fn.zTree.init($("#categoryTree"), ztreeSetting, r);
     })
 }
