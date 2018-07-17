@@ -73,6 +73,7 @@ public class ApplicationTests {
 	}
 
 	public static void main(String[] args) {
+		System.out.println(1<<4);
 		Set<String> set = Sets.newHashSet();
 		set.add("test");
 

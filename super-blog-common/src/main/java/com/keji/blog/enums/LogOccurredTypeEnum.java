@@ -15,4 +15,5 @@ public enum LogOccurredTypeEnum {
      * 异常发生
      */
     EXCEPTION
+
 }
