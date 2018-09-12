@@ -127,12 +127,6 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${javax.version}</version>
             </dependency>
-            <!--thymeleaf-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-thymeleaf</artifactId>
-                <version>${thymeleaf.version}</version>
-            </dependency>
             <!--freemarker-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -269,13 +263,6 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool-all.version}</version>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
-            <dependency>
-                <groupId>org.apache.zookeeper</groupId>
-                <artifactId>zookeeper</artifactId>
-                <version>${zookeeper.version}</version>
             </dependency>
 
             <dependency>
