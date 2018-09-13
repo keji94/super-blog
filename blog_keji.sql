@@ -1,24 +1,27 @@
-/*
-Navicat MySQL Data Transfer
+-- MySQL dump 10.13  Distrib 5.7.18, for macos10.12 (x86_64)
+--
+-- Host: 127.0.0.1    Database: blog_keji
+-- ------------------------------------------------------
+-- Server version	5.7.18
 
-Source Server         : blog-keji
-Source Server Version : 50717
-Source Host           : localhost:3306
-Source Database       : blog_keji
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50717
-File Encoding         : 65001
+--
+-- Table structure for table `article`
+--
 
-Date: 2018-03-29 09:31:53
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for article
--- ----------------------------
 DROP TABLE IF EXISTS `article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文章id',
   `title` varchar(255) NOT NULL COMMENT '文章标题',
@@ -28,6 +31,7 @@ CREATE TABLE `article` (
   `commentable` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否可以评论 1：可以；0：不可以',
   `user_id` bigint(20) NOT NULL COMMENT '发表用户',
   `category_id` bigint(20) NOT NULL,
+  `category_name` varchar(20) NOT NULL,
   `gmt_created` datetime NOT NULL COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
@@ -35,18 +39,26 @@ CREATE TABLE `article` (
   KEY `FK_Reference_7` (`category_id`),
   CONSTRAINT `FK_Reference_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_Reference_7` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='文章表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of article
--- ----------------------------
-INSERT INTO `article` VALUES ('1', '1', '1', '0', '1', '1', '1', '4', '2018-03-26 16:26:41', '2018-03-26 16:26:43');
-INSERT INTO `article` VALUES ('2', '2', '2', '0', '1', '1', '1', '4', '2018-03-26 16:28:30', '2018-03-26 16:28:33');
+--
+-- Dumping data for table `article`
+--
 
--- ----------------------------
--- Table structure for article_ext
--- ----------------------------
+LOCK TABLES `article` WRITE;
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+INSERT INTO `article` VALUES (1,'1','1',0,1,1,1,7,'java','2018-03-26 16:26:41','2018-03-26 16:26:43'),(2,'2','2',0,1,1,1,4,'redis','2018-03-26 16:28:30','2018-03-26 16:28:33'),(5,'1','',0,0,1,1,4,'redis','2018-05-17 18:56:53','2018-05-17 18:56:53'),(6,'1','',0,0,1,1,4,'redis','2018-05-17 18:58:32','2018-05-17 18:58:32'),(7,'1','123',0,0,1,1,4,'redis','2018-05-17 19:00:58','2018-05-17 19:00:58'),(8,'1','123',0,0,1,1,7,'java','2018-05-17 19:02:10','2018-05-17 19:02:10'),(9,'1','123',0,0,1,1,7,'java','2018-05-17 19:04:13','2018-05-17 19:04:13'),(10,'1','123',0,0,1,1,7,'java','2018-05-17 19:04:46','2018-05-17 19:04:46'),(11,'设计模式之策略模式','# 定义\n\n《Head First》中对策略模式定义如下:**策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的变化独立于使用算法的客户。**\n\nok,相信对于初学者而言，看到这个定义肯定一脸懵逼，没关系，往下看，我会用实际例子让你明白什么是策略模式。\n\n# 案例\n## 背景\n现在要编写一个不断生产鸭子的程序，这些鸭子其他地方都一样，只有飞行行为(flyBehavior)和叫的行为(quackBehavior)不同。\n## 方案一：继承\n思路：使用一个超类Duck统领全局，其他鸭子类继承Duck类\n```\n/**\n * 鸭子超类\n *\n * @author wb-ny291824\n * @version $Id: Duck.java, v 0.1 2018-03-16 16:56 wb-ny291824 Exp $$\n */\npublic abstract class Duck {\n\n    /**\n     * 腿的数量\n     */\n    protected int legs;\n\n    /**\n     * 飞行\n     */\n    public void fly() {\n        System.out.println(\"I can fly\");\n    }\n\n    /**\n     * 叫\n     */\n    public void quack() {\n        System.out.println(\"呱呱呱\");\n    }\n}\n```',0,0,1,1,8,'java基础','2018-05-17 19:40:53','2018-05-17 19:40:53'),(13,'1','<h1 id=\"-\">定义</h1>\n<p>《Head First》中对策略模式定义如下:<strong>策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的变化独立于使用算法的客户。</strong></p>\n<p>ok,相信对于初学者而言，看到这个定义肯定一脸懵逼，没关系，往下看，我会用实际例子让你明白什么是策略模式。</p>\n<h1 id=\"-\">案例</h1>\n<h2 id=\"-\">背景</h2>\n<p>现在要编写一个不断生产鸭子的程序，这些鸭子其他地方都一样，只有飞行行为(flyBehavior)和叫的行为(quackBehavior)不同。</p>\n<h2 id=\"-\">方案一：继承</h2>\n<p>思路：使用一个超类Duck统领全局，其他鸭子类继承Duck类</p>\n<pre><code>/**\n * 鸭子超类\n *\n * @author wb-ny291824\n * @version $Id: Duck.java, v 0.1 2018-03-16 16:56 wb-ny291824 Exp $$\n */\npublic abstract class Duck {\n\n    /**\n     * 腿的数量\n     */\n    protected int legs;\n\n    /**\n     * 飞行\n     */\n    public void fly() {\n        System.out.println(&quot;I can fly&quot;);\n    }\n\n    /**\n     * 叫\n     */\n    public void quack() {\n        System.out.println(&quot;呱呱呱&quot;);\n    }\n}\n</code></pre>',0,0,1,1,7,'java','2018-05-30 20:36:07','2018-05-30 20:36:07');
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `article_ext`
+--
+
 DROP TABLE IF EXISTS `article_ext`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article_ext` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `good` int(11) DEFAULT '0' COMMENT '文章顶数量',
@@ -58,16 +70,26 @@ CREATE TABLE `article_ext` (
   PRIMARY KEY (`id`),
   KEY `FK_Reference_2` (`article_id`),
   CONSTRAINT `FK_Reference_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章的扩展属性表：图片 点击量 顶 踩等';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章的扩展属性表：图片 点击量 顶 踩等';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of article_ext
--- ----------------------------
+--
+-- Dumping data for table `article_ext`
+--
 
--- ----------------------------
--- Table structure for article_tag_rel
--- ----------------------------
+LOCK TABLES `article_ext` WRITE;
+/*!40000 ALTER TABLE `article_ext` DISABLE KEYS */;
+INSERT INTO `article_ext` VALUES (1,1,1,100,1,'2018-04-27 08:08:01','2018-04-27 08:08:07');
+/*!40000 ALTER TABLE `article_ext` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `article_tag_rel`
+--
+
 DROP TABLE IF EXISTS `article_tag_rel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article_tag_rel` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
@@ -76,33 +98,47 @@ CREATE TABLE `article_tag_rel` (
   `tag_id` bigint(20) NOT NULL,
   `tag_name` varchar(20) NOT NULL COMMENT '标签名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of article_tag_rel
--- ----------------------------
-INSERT INTO `article_tag_rel` VALUES ('1', '2018-03-26 16:27:30', '2018-03-26 16:27:32', '1', '1', 'java');
-INSERT INTO `article_tag_rel` VALUES ('2', '2018-03-26 16:27:55', '2018-03-26 16:27:57', '1', '2', 'spring');
-INSERT INTO `article_tag_rel` VALUES ('3', '2018-03-26 16:28:43', '2018-03-26 16:28:44', '2', '1', 'java');
-INSERT INTO `article_tag_rel` VALUES ('4', '2018-03-26 16:42:45', '2018-03-26 16:42:47', '2', '2', 'spring');
-INSERT INTO `article_tag_rel` VALUES ('5', '2018-03-26 16:43:10', '2018-03-26 16:43:12', '1', '2', 'spring');
+--
+-- Dumping data for table `article_tag_rel`
+--
 
--- ----------------------------
--- Table structure for blog_keji
--- ----------------------------
+LOCK TABLES `article_tag_rel` WRITE;
+/*!40000 ALTER TABLE `article_tag_rel` DISABLE KEYS */;
+INSERT INTO `article_tag_rel` VALUES (1,'2018-03-26 16:27:30','2018-03-26 16:27:32',1,1,'java'),(2,'2018-03-26 16:27:55','2018-03-26 16:27:57',1,2,'spring'),(3,'2018-03-26 16:28:43','2018-03-26 16:28:44',2,1,'java'),(4,'2018-03-26 16:42:45','2018-03-26 16:42:47',2,2,'spring'),(5,'2018-03-26 16:43:10','2018-03-26 16:43:12',1,2,'spring'),(6,'2018-05-17 18:57:06','2018-05-17 18:57:06',5,26,'1'),(7,'2018-05-17 18:57:06','2018-05-17 18:57:06',5,27,'2'),(8,'2018-05-17 18:57:06','2018-05-17 18:57:06',5,28,'3'),(9,'2018-05-17 18:58:32','2018-05-17 18:58:32',6,29,'1'),(10,'2018-05-17 18:58:32','2018-05-17 18:58:32',6,30,'2'),(11,'2018-05-17 18:58:32','2018-05-17 18:58:32',6,31,'3'),(12,'2018-05-17 19:00:58','2018-05-17 19:00:58',7,32,'1'),(13,'2018-05-17 19:00:58','2018-05-17 19:00:58',7,33,'2'),(14,'2018-05-17 19:00:58','2018-05-17 19:00:58',7,34,'3'),(15,'2018-05-17 19:02:10','2018-05-17 19:02:10',8,35,'1'),(16,'2018-05-17 19:04:13','2018-05-17 19:04:13',9,36,'1'),(17,'2018-05-17 19:04:46','2018-05-17 19:04:46',10,37,'1'),(18,'2018-05-17 19:40:53','2018-05-17 19:40:53',11,38,'设计模式'),(20,'2018-05-30 20:36:07','2018-05-30 20:36:07',13,40,'测试');
+/*!40000 ALTER TABLE `article_tag_rel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_keji`
+--
+
 DROP TABLE IF EXISTS `blog_keji`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_keji` (
   `field1` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of blog_keji
--- ----------------------------
+--
+-- Dumping data for table `blog_keji`
+--
 
--- ----------------------------
--- Table structure for category
--- ----------------------------
+LOCK TABLES `blog_keji` WRITE;
+/*!40000 ALTER TABLE `blog_keji` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blog_keji` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `category`
+--
+
 DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
@@ -113,19 +149,25 @@ CREATE TABLE `category` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of category
--- ----------------------------
-INSERT INTO `category` VALUES ('4', 'redis', '一级菜单', '0', '0', '2018-03-25 16:51:03', '2018-03-25 17:57:15');
-INSERT INTO `category` VALUES ('6', 'redis入門', 'cashi22', '1', '4', '2018-03-25 17:27:38', '2018-03-25 17:57:33');
-INSERT INTO `category` VALUES ('7', 'java', '一级菜单', '0', '0', '2018-03-25 17:57:01', '2018-03-25 17:57:01');
-INSERT INTO `category` VALUES ('8', 'java基础', 'java', '1', '7', '2018-03-25 17:57:57', '2018-03-25 17:59:29');
+--
+-- Dumping data for table `category`
+--
 
--- ----------------------------
--- Table structure for comments
--- ----------------------------
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (4,'redis','一级菜单',0,0,'2018-03-25 16:51:03','2018-03-25 17:57:15'),(6,'redis入門','cashi22',1,4,'2018-03-25 17:27:38','2018-03-25 17:57:33'),(7,'java','一级菜单',0,0,'2018-03-25 17:57:01','2018-03-25 17:57:01'),(8,'java基础','java',1,7,'2018-03-25 17:57:57','2018-03-25 17:59:29');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comments`
+--
+
 DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comments` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `post` int(20) DEFAULT NULL COMMENT '预留字段',
@@ -141,15 +183,24 @@ CREATE TABLE `comments` (
   CONSTRAINT `FK_Reference_3` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
   CONSTRAINT `FK_Reference_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of comments
--- ----------------------------
+--
+-- Dumping data for table `comments`
+--
 
--- ----------------------------
--- Table structure for hits
--- ----------------------------
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hits`
+--
+
 DROP TABLE IF EXISTS `hits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hits` (
   `hits_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `article_id` bigint(20) DEFAULT NULL,
@@ -160,15 +211,24 @@ CREATE TABLE `hits` (
   KEY `FK_Reference_5` (`article_id`),
   CONSTRAINT `FK_Reference_5` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='点击量表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of hits
--- ----------------------------
+--
+-- Dumping data for table `hits`
+--
 
--- ----------------------------
--- Table structure for info_board
--- ----------------------------
+LOCK TABLES `hits` WRITE;
+/*!40000 ALTER TABLE `hits` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hits` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `info_board`
+--
+
 DROP TABLE IF EXISTS `info_board`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `info_board` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `gmt_create` datetime NOT NULL,
@@ -177,17 +237,25 @@ CREATE TABLE `info_board` (
   `content` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Xin xi ban ';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of info_board
--- ----------------------------
-INSERT INTO `info_board` VALUES ('2', '2018-03-24 10:19:50', '2018-03-24 11:02:12', '网站信息', '<ul><li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\" style=\"font-style: italic;\"><i class=\"layui-icon\"></i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.6.9 系列等</li></ul>');
-INSERT INTO `info_board` VALUES ('3', '2018-03-24 11:03:48', '2018-03-24 11:03:48', '用户登录', '请登录');
+--
+-- Dumping data for table `info_board`
+--
 
--- ----------------------------
--- Table structure for nav
--- ----------------------------
+LOCK TABLES `info_board` WRITE;
+/*!40000 ALTER TABLE `info_board` DISABLE KEYS */;
+INSERT INTO `info_board` VALUES (2,'2018-03-24 10:19:50','2018-03-24 11:02:12','网站信息','<ul><li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\" style=\"font-style: italic;\"><i class=\"layui-icon\"></i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.6.9 系列等</li></ul>'),(3,'2018-03-24 11:03:48','2018-03-24 11:03:48','用户登录','请登录');
+/*!40000 ALTER TABLE `info_board` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nav`
+--
+
 DROP TABLE IF EXISTS `nav`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `nav` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
@@ -197,20 +265,26 @@ CREATE TABLE `nav` (
   `url` varchar(255) NOT NULL COMMENT '跳转地址',
   `status` tinyint(4) NOT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='首页导航表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='首页导航表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of nav
--- ----------------------------
-INSERT INTO `nav` VALUES ('5', '2018-03-23 14:05:22', '2018-03-23 14:05:22', '主页', 'icon-home1', '/index', '1');
-INSERT INTO `nav` VALUES ('6', '2018-03-23 14:07:35', '2018-03-23 14:07:35', '笔记', 'icon-timeline', '/home/note.html', '1');
-INSERT INTO `nav` VALUES ('7', '2018-03-23 14:11:53', '2018-03-23 14:11:53', 'Github', 'icon-GitHub', 'https://github.com/', '1');
-INSERT INTO `nav` VALUES ('8', '2018-03-23 14:12:40', '2018-03-23 14:12:40', '关于', 'icon-about', '/home/about.html', '1');
+--
+-- Dumping data for table `nav`
+--
 
--- ----------------------------
--- Table structure for picture
--- ----------------------------
+LOCK TABLES `nav` WRITE;
+/*!40000 ALTER TABLE `nav` DISABLE KEYS */;
+INSERT INTO `nav` VALUES (5,'2018-03-23 14:05:22','2018-03-23 14:05:22','主页','icon-home1','/index',1),(6,'2018-03-23 14:07:35','2018-03-23 14:07:35','笔记','icon-timeline','/home/note.html',1),(7,'2018-03-23 14:11:53','2018-03-23 14:11:53','Github','icon-GitHub','https://github.com/',1),(8,'2018-03-23 14:12:40','2018-03-23 14:12:40','关于','icon-about','/home/about.html',1),(11,'2018-05-02 18:20:46','2018-05-02 18:27:00','写博客','icon-create','/home/createBlog.html',1);
+/*!40000 ALTER TABLE `nav` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `picture`
+--
+
 DROP TABLE IF EXISTS `picture`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `picture` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -223,16 +297,25 @@ CREATE TABLE `picture` (
   PRIMARY KEY (`id`),
   KEY `FK_Reference_6` (`article_id`),
   CONSTRAINT `FK_Reference_6` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='图片表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of picture
--- ----------------------------
+--
+-- Dumping data for table `picture`
+--
 
--- ----------------------------
--- Table structure for qrtz_blob_triggers
--- ----------------------------
+LOCK TABLES `picture` WRITE;
+/*!40000 ALTER TABLE `picture` DISABLE KEYS */;
+/*!40000 ALTER TABLE `picture` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_blob_triggers`
+--
+
 DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_blob_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
@@ -242,30 +325,48 @@ CREATE TABLE `qrtz_blob_triggers` (
   KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_blob_triggers
--- ----------------------------
+--
+-- Dumping data for table `qrtz_blob_triggers`
+--
 
--- ----------------------------
--- Table structure for qrtz_calendars
--- ----------------------------
+LOCK TABLES `qrtz_blob_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_blob_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_blob_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_calendars`
+--
+
 DROP TABLE IF EXISTS `qrtz_calendars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_calendars` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `CALENDAR_NAME` varchar(200) NOT NULL,
   `CALENDAR` blob NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_calendars
--- ----------------------------
+--
+-- Dumping data for table `qrtz_calendars`
+--
 
--- ----------------------------
--- Table structure for qrtz_cron_triggers
--- ----------------------------
+LOCK TABLES `qrtz_calendars` WRITE;
+/*!40000 ALTER TABLE `qrtz_calendars` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_calendars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_cron_triggers`
+--
+
 DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_cron_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
@@ -275,16 +376,25 @@ CREATE TABLE `qrtz_cron_triggers` (
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_cron_triggers
--- ----------------------------
-INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', '0/5 * * * * ? ', 'Asia/Shanghai');
+--
+-- Dumping data for table `qrtz_cron_triggers`
+--
 
--- ----------------------------
--- Table structure for qrtz_fired_triggers
--- ----------------------------
+LOCK TABLES `qrtz_cron_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_cron_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler','TASK_4','DEFAULT','0/5 * * * * ? ','Asia/Shanghai');
+/*!40000 ALTER TABLE `qrtz_cron_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_fired_triggers`
+--
+
 DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_fired_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `ENTRY_ID` varchar(95) NOT NULL,
@@ -307,15 +417,24 @@ CREATE TABLE `qrtz_fired_triggers` (
   KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_fired_triggers
--- ----------------------------
+--
+-- Dumping data for table `qrtz_fired_triggers`
+--
 
--- ----------------------------
--- Table structure for qrtz_job_details
--- ----------------------------
+LOCK TABLES `qrtz_fired_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_job_details`
+--
+
 DROP TABLE IF EXISTS `qrtz_job_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_job_details` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `JOB_NAME` varchar(200) NOT NULL,
@@ -331,48 +450,72 @@ CREATE TABLE `qrtz_job_details` (
   KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
   KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_job_details
--- ----------------------------
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', null, 'com.keji.blog.util.schedule.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720026636F6D2E6B656A692E626C6F672E646174616F626A6563742E5363686564756C654A6F62444F26F5E3308839E4500200094C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000A676D74437265617465647400104C6A6176612F7574696C2F446174653B4C000B676D744D6F64696669656471007E000A4C000269647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B74000E302F35202A202A202A202A203F2070707372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000004740004746573747070737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0011000000007800);
+--
+-- Dumping data for table `qrtz_job_details`
+--
 
--- ----------------------------
--- Table structure for qrtz_locks
--- ----------------------------
+LOCK TABLES `qrtz_job_details` WRITE;
+/*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
+INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler','TASK_4','DEFAULT',NULL,'com.keji.blog.util.schedule.ScheduleJob','0','0','0','0','�\�\0sr\0org.quartz.JobDataMap���迩�\�\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�\�\��\�](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap\�.�(v\n\�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap\��\�`\�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0&com.keji.blog.dataobject.ScheduleJobDO&�\�0�9\�P\0	L\0beanNamet\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0\ngmtCreatedt\0Ljava/util/Date;L\0gmtModifiedq\0~\0\nL\0idt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTaskt\00/5 * * * * ? ppsr\0java.lang.Long;�\�̏#\�\0J\0valuexr\0java.lang.Number����\��\0\0xp\0\0\0\0\0\0\0t\0testppsr\0java.lang.Integer⠤���8\0I\0valuexq\0~\0\0\0\0\0x\0');
+/*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_locks`
+--
+
 DROP TABLE IF EXISTS `qrtz_locks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_locks` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `LOCK_NAME` varchar(40) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_locks
--- ----------------------------
-INSERT INTO `qrtz_locks` VALUES ('BlogScheduler', 'STATE_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('BlogScheduler', 'TRIGGER_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'STATE_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'TRIGGER_ACCESS');
+--
+-- Dumping data for table `qrtz_locks`
+--
 
--- ----------------------------
--- Table structure for qrtz_paused_trigger_grps
--- ----------------------------
+LOCK TABLES `qrtz_locks` WRITE;
+/*!40000 ALTER TABLE `qrtz_locks` DISABLE KEYS */;
+INSERT INTO `qrtz_locks` VALUES ('BlogScheduler','STATE_ACCESS'),('BlogScheduler','TRIGGER_ACCESS'),('RenrenScheduler','STATE_ACCESS'),('RenrenScheduler','TRIGGER_ACCESS');
+/*!40000 ALTER TABLE `qrtz_locks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_paused_trigger_grps`
+--
+
 DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_paused_trigger_grps` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_paused_trigger_grps
--- ----------------------------
+--
+-- Dumping data for table `qrtz_paused_trigger_grps`
+--
 
--- ----------------------------
--- Table structure for qrtz_scheduler_state
--- ----------------------------
+LOCK TABLES `qrtz_paused_trigger_grps` WRITE;
+/*!40000 ALTER TABLE `qrtz_paused_trigger_grps` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_paused_trigger_grps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_scheduler_state`
+--
+
 DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_scheduler_state` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `INSTANCE_NAME` varchar(200) NOT NULL,
@@ -380,17 +523,25 @@ CREATE TABLE `qrtz_scheduler_state` (
   `CHECKIN_INTERVAL` bigint(13) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_scheduler_state
--- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler', 'MININT-LGP9OM31510018374057', '1510103956560', '15000');
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'MININT-LGP9OM31522135225477', '1522287105193', '15000');
+--
+-- Dumping data for table `qrtz_scheduler_state`
+--
 
--- ----------------------------
--- Table structure for qrtz_simple_triggers
--- ----------------------------
+LOCK TABLES `qrtz_scheduler_state` WRITE;
+/*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
+INSERT INTO `qrtz_scheduler_state` VALUES ('BlogScheduler','MININT-LGP9OM31510018374057',1510103956560,15000),('RenrenScheduler','localhost1536749119633',1536808855826,15000);
+/*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_simple_triggers`
+--
+
 DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_simple_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
@@ -401,15 +552,24 @@ CREATE TABLE `qrtz_simple_triggers` (
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_simple_triggers
--- ----------------------------
+--
+-- Dumping data for table `qrtz_simple_triggers`
+--
 
--- ----------------------------
--- Table structure for qrtz_simprop_triggers
--- ----------------------------
+LOCK TABLES `qrtz_simple_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_simple_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_simple_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_simprop_triggers`
+--
+
 DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_simprop_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
@@ -428,15 +588,24 @@ CREATE TABLE `qrtz_simprop_triggers` (
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_simprop_triggers
--- ----------------------------
+--
+-- Dumping data for table `qrtz_simprop_triggers`
+--
 
--- ----------------------------
--- Table structure for qrtz_triggers
--- ----------------------------
+LOCK TABLES `qrtz_simprop_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_simprop_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_simprop_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_triggers`
+--
+
 DROP TABLE IF EXISTS `qrtz_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qrtz_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
@@ -469,16 +638,25 @@ CREATE TABLE `qrtz_triggers` (
   KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
   CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of qrtz_triggers
--- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', 'TASK_4', 'DEFAULT', null, '1510105655000', '1510105650000', '5', 'PAUSED', 'CRON', '1509694754000', '0', null, '2', '');
+--
+-- Dumping data for table `qrtz_triggers`
+--
 
--- ----------------------------
--- Table structure for requirement
--- ----------------------------
+LOCK TABLES `qrtz_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler','TASK_4','DEFAULT','TASK_4','DEFAULT',NULL,1510105655000,1510105650000,5,'PAUSED','CRON',1509694754000,0,NULL,2,'');
+/*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `requirement`
+--
+
 DROP TABLE IF EXISTS `requirement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `requirement` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '需求表',
   `title` varchar(255) NOT NULL COMMENT '需求的标题',
@@ -489,18 +667,25 @@ CREATE TABLE `requirement` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of requirement
--- ----------------------------
-INSERT INTO `requirement` VALUES ('6', 'CodeReview', '前面完成了权限管理以及需求管理，可以先review一下代码', null, '2', '2017-10-31 10:20:43', '2017-11-03 16:08:11');
-INSERT INTO `requirement` VALUES ('10', '定时任务需求', '移植renren项目的定时任务', '定时任务的相关知识还需要学习', '2', '2017-11-01 14:43:38', '2017-11-03 16:09:49');
-INSERT INTO `requirement` VALUES ('11', '定时任务有一个线程池操作，灵狐警告了，改掉', '学习总结java线程池相关知识', null, '2', '2017-11-03 16:09:15', '2017-11-06 10:55:49');
+--
+-- Dumping data for table `requirement`
+--
 
--- ----------------------------
--- Table structure for resource
--- ----------------------------
+LOCK TABLES `requirement` WRITE;
+/*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
+INSERT INTO `requirement` VALUES (6,'CodeReview','前面完成了权限管理以及需求管理，可以先review一下代码',NULL,2,'2017-10-31 10:20:43','2017-11-03 16:08:11'),(10,'定时任务需求','移植renren项目的定时任务','定时任务的相关知识还需要学习',2,'2017-11-01 14:43:38','2017-11-03 16:09:49'),(11,'定时任务有一个线程池操作，灵狐警告了，改掉','学习总结java线程池相关知识',NULL,2,'2017-11-03 16:09:15','2017-11-06 10:55:49');
+/*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource`
+--
+
 DROP TABLE IF EXISTS `resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `resource` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '0：目录   1：菜单   2：按钮''资源id',
   `parent_id` bigint(20) DEFAULT NULL,
@@ -516,71 +701,53 @@ CREATE TABLE `resource` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of resource
--- ----------------------------
-INSERT INTO `resource` VALUES ('1', '0', null, '系统管理', '/**', '', '0', 'fa fa-cogs', '0', '0', '2017-10-19 14:54:31', '2018-03-27 15:25:06');
-INSERT INTO `resource` VALUES ('2', '59', '系统管理', '用户管理', 'modules/authority/user.html', '', '1', 'fa fa-user', '1', '0', '2017-10-20 09:49:06', '2018-03-19 17:29:31');
-INSERT INTO `resource` VALUES ('3', '59', '系统管理', '菜单管理', 'modules/authority/menu.html', null, '1', 'fa fa-th-list', '2', '0', '2017-10-24 15:44:07', '2018-03-19 17:29:37');
-INSERT INTO `resource` VALUES ('4', '3', '菜单管理', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '0', '2017-10-24 20:34:36', '2017-10-24 20:34:38');
-INSERT INTO `resource` VALUES ('5', '3', '菜单管理', '新增', null, 'sys:menu:save,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:18', '2017-10-24 20:35:21');
-INSERT INTO `resource` VALUES ('6', '3', '菜单管理', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0', '0', '2017-10-24 20:35:50', '2017-10-24 20:35:54');
-INSERT INTO `resource` VALUES ('7', '3', '菜单管理', '删除', null, 'sys:menu:delete', '2', null, '0', '0', '2017-10-24 20:36:27', '2017-10-24 20:36:30');
-INSERT INTO `resource` VALUES ('8', '2', '用户管理', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', '0', '2017-10-25 10:30:47', '2017-10-25 10:30:50');
-INSERT INTO `resource` VALUES ('9', '2', '用户管理', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:21', '2017-10-25 10:31:23');
-INSERT INTO `resource` VALUES ('10', '2', '用户管理', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', '0', '2017-10-25 10:31:53', '2017-10-25 10:31:55');
-INSERT INTO `resource` VALUES ('11', '2', '用户管理', '删除', null, 'sys:role:delete', '2', null, '0', '0', '2017-10-25 10:32:18', '2017-10-25 10:32:21');
-INSERT INTO `resource` VALUES ('12', '59', '系统管理', '角色管理', 'modules/authority/role.html', null, '1', 'fa fa-user-secret', '3', '0', '2017-10-25 10:34:56', '2018-03-19 17:29:44');
-INSERT INTO `resource` VALUES ('13', '12', '角色管理', '查看', null, 'sys:user:list,sys:user:info', '2', null, '0', '0', '2017-10-25 10:36:27', '2017-10-25 10:36:29');
-INSERT INTO `resource` VALUES ('14', '12', '角色管理', '新增', null, 'sys:user:save,sys:role:select', '2', null, '0', '0', '2017-10-25 10:36:50', '2017-10-25 10:36:52');
-INSERT INTO `resource` VALUES ('15', '12', '角色管理', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '0', '2017-10-25 10:37:10', '2017-10-25 10:37:12');
-INSERT INTO `resource` VALUES ('16', '12', '角色管理', '删除', null, 'sys:user:delete', '2', null, '0', '0', '2017-10-25 10:37:30', '2017-10-25 10:37:33');
-INSERT INTO `resource` VALUES ('46', '1', '系统管理', '需求管理', 'modules/sys/requirement.html', '', '1', 'fa fa-list', '0', '0', '2017-10-30 17:14:02', '2018-03-25 14:45:21');
-INSERT INTO `resource` VALUES ('47', '46', '需求管理', '新增', null, 'sys:requirement:save,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:48:48', '2017-10-30 17:50:03');
-INSERT INTO `resource` VALUES ('48', '46', '需求管理', '修改', null, 'sys:requirement:update,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:49:47', '2017-10-30 17:49:47');
-INSERT INTO `resource` VALUES ('49', '46', '需求管理', '删除', null, 'sys:requirement:delete,sys:requirement:select', '2', null, '0', '0', '2017-10-30 17:50:32', '2017-10-30 17:50:32');
-INSERT INTO `resource` VALUES ('50', '1', '系统管理', '定时任务', 'modules/sys/schedule.html', null, '1', 'fa fa-tasks', '5', '0', '2017-11-02 15:01:52', '2018-03-19 14:36:58');
-INSERT INTO `resource` VALUES ('51', '50', '定时任务', '查看', null, 'sys:schedule:list,sys:schedule:info', '2', null, '0', '0', '2017-11-02 15:41:32', '2017-11-02 15:41:32');
-INSERT INTO `resource` VALUES ('52', '50', '定时任务', '新增', null, 'sys:schedule:save', '2', null, '0', '0', '2017-11-02 15:41:51', '2017-11-02 15:41:51');
-INSERT INTO `resource` VALUES ('53', '50', '定时任务', '修改', null, 'sys:schedule:update', '2', null, '0', '0', '2017-11-02 15:42:07', '2017-11-02 15:42:07');
-INSERT INTO `resource` VALUES ('54', '50', '定时任务', '删除', null, 'sys:schedule:delete', '2', null, '0', '0', '2017-11-02 15:42:19', '2017-11-02 15:42:19');
-INSERT INTO `resource` VALUES ('55', '50', '定时任务', '暂停', null, 'sys:schedule:pause', '2', null, '0', '0', '2017-11-02 15:42:34', '2017-11-02 15:42:34');
-INSERT INTO `resource` VALUES ('56', '50', '定时任务', '恢复', null, 'sys:schedule:resume', '2', null, '0', '0', '2017-11-02 15:42:48', '2017-11-03 10:32:22');
-INSERT INTO `resource` VALUES ('57', '50', '定时任务', '日志列表', null, 'sys:schedule:log', '2', null, '0', '0', '2017-11-02 15:43:11', '2017-11-02 15:43:11');
-INSERT INTO `resource` VALUES ('58', '50', '定时任务', '立即执行', null, 'sys:schedule:run', '2', null, '0', '0', '2017-11-03 10:33:00', '2017-11-03 10:33:00');
-INSERT INTO `resource` VALUES ('59', '0', '一级菜单', '权限控制', null, null, '0', 'fa fa-user-circle', '2', '0', '2018-03-19 17:25:20', '2018-03-19 17:39:06');
-INSERT INTO `resource` VALUES ('60', '1', '系统管理', '博客设置', 'modules/sys/settings.html', 'admin_sys_setting', '1', 'fa fa-cog', '1', '0', '2018-03-19 17:32:17', '2018-03-19 17:44:06');
-INSERT INTO `resource` VALUES ('61', '1', '系统管理', '导航管理', 'modules/sys/nav', 'modules:sys:nav', '1', 'fa fa-bars', '3', '0', '2018-03-22 16:18:47', '2018-03-22 16:18:47');
-INSERT INTO `resource` VALUES ('62', '1', '系统管理', '信息板管理', '/admin/modules/sys/infoBoard.html', 'sys:infoBoard', '1', 'fa fa-info', '3', '0', '2018-03-23 22:46:15', '2018-03-23 22:46:15');
-INSERT INTO `resource` VALUES ('64', '1', '系统管理', '分类管理', 'modules/sys/category.html', 'sys:category', '1', 'fa fa-coffee', '5', '0', '2018-03-25 14:58:31', '2018-03-25 16:32:20');
-INSERT INTO `resource` VALUES ('65', '1', '系统管理', '标签管理', 'modules/sys/tag.html', 'sys:tag', '1', 'fa fa-tags', '5', '0', '2018-03-26 11:03:02', '2018-03-26 11:03:32');
-INSERT INTO `resource` VALUES ('66', '1', '系统管理', '文章管理', 'modules/sys/article.html', 'admin:article', '1', 'fa fa-book', '6', '0', '2018-03-27 15:25:06', '2018-03-27 15:25:41');
+--
+-- Dumping data for table `resource`
+--
 
--- ----------------------------
--- Table structure for role
--- ----------------------------
+LOCK TABLES `resource` WRITE;
+/*!40000 ALTER TABLE `resource` DISABLE KEYS */;
+INSERT INTO `resource` VALUES (1,0,NULL,'系统管理','/**','',0,'fa fa-cogs',0,0,'2017-10-19 14:54:31','2018-03-27 15:25:06'),(2,59,'系统管理','用户管理','modules/authority/user.html','',1,'fa fa-user',1,0,'2017-10-20 09:49:06','2018-03-19 17:29:31'),(3,59,'系统管理','菜单管理','modules/authority/menu.html',NULL,1,'fa fa-th-list',2,0,'2017-10-24 15:44:07','2018-03-19 17:29:37'),(4,3,'菜单管理','查看',NULL,'sys:menu:list,sys:menu:info',2,NULL,0,0,'2017-10-24 20:34:36','2017-10-24 20:34:38'),(5,3,'菜单管理','新增',NULL,'sys:menu:save,sys:menu:select',2,NULL,0,0,'2017-10-24 20:35:18','2017-10-24 20:35:21'),(6,3,'菜单管理','修改',NULL,'sys:menu:update,sys:menu:select',2,NULL,0,0,'2017-10-24 20:35:50','2017-10-24 20:35:54'),(7,3,'菜单管理','删除',NULL,'sys:menu:delete',2,NULL,0,0,'2017-10-24 20:36:27','2017-10-24 20:36:30'),(8,2,'用户管理','查看',NULL,'sys:role:list,sys:role:info',2,NULL,0,0,'2017-10-25 10:30:47','2017-10-25 10:30:50'),(9,2,'用户管理','新增',NULL,'sys:role:save,sys:menu:perms',2,NULL,0,0,'2017-10-25 10:31:21','2017-10-25 10:31:23'),(10,2,'用户管理','修改',NULL,'sys:role:update,sys:menu:perms',2,NULL,0,0,'2017-10-25 10:31:53','2017-10-25 10:31:55'),(11,2,'用户管理','删除',NULL,'sys:role:delete',2,NULL,0,0,'2017-10-25 10:32:18','2017-10-25 10:32:21'),(12,59,'系统管理','角色管理','modules/authority/role.html',NULL,1,'fa fa-user-secret',3,0,'2017-10-25 10:34:56','2018-03-19 17:29:44'),(13,12,'角色管理','查看',NULL,'sys:user:list,sys:user:info',2,NULL,0,0,'2017-10-25 10:36:27','2017-10-25 10:36:29'),(14,12,'角色管理','新增',NULL,'sys:user:save,sys:role:select',2,NULL,0,0,'2017-10-25 10:36:50','2017-10-25 10:36:52'),(15,12,'角色管理','修改',NULL,'sys:user:update,sys:role:select',2,NULL,0,0,'2017-10-25 10:37:10','2017-10-25 10:37:12'),(16,12,'角色管理','删除',NULL,'sys:user:delete',2,NULL,0,0,'2017-10-25 10:37:30','2017-10-25 10:37:33'),(46,1,'系统管理','需求管理','modules/sys/requirement.html','',1,'fa fa-list',0,0,'2017-10-30 17:14:02','2018-03-25 14:45:21'),(47,46,'需求管理','新增',NULL,'sys:requirement:save,sys:requirement:select',2,NULL,0,0,'2017-10-30 17:48:48','2017-10-30 17:50:03'),(48,46,'需求管理','修改',NULL,'sys:requirement:update,sys:requirement:select',2,NULL,0,0,'2017-10-30 17:49:47','2017-10-30 17:49:47'),(49,46,'需求管理','删除',NULL,'sys:requirement:delete,sys:requirement:select',2,NULL,0,0,'2017-10-30 17:50:32','2017-10-30 17:50:32'),(50,1,'系统管理','定时任务','modules/sys/schedule.html',NULL,1,'fa fa-tasks',5,0,'2017-11-02 15:01:52','2018-03-19 14:36:58'),(51,50,'定时任务','查看',NULL,'sys:schedule:list,sys:schedule:info',2,NULL,0,0,'2017-11-02 15:41:32','2017-11-02 15:41:32'),(52,50,'定时任务','新增',NULL,'sys:schedule:save',2,NULL,0,0,'2017-11-02 15:41:51','2017-11-02 15:41:51'),(53,50,'定时任务','修改',NULL,'sys:schedule:update',2,NULL,0,0,'2017-11-02 15:42:07','2017-11-02 15:42:07'),(54,50,'定时任务','删除',NULL,'sys:schedule:delete',2,NULL,0,0,'2017-11-02 15:42:19','2017-11-02 15:42:19'),(55,50,'定时任务','暂停',NULL,'sys:schedule:pause',2,NULL,0,0,'2017-11-02 15:42:34','2017-11-02 15:42:34'),(56,50,'定时任务','恢复',NULL,'sys:schedule:resume',2,NULL,0,0,'2017-11-02 15:42:48','2017-11-03 10:32:22'),(57,50,'定时任务','日志列表',NULL,'sys:schedule:log',2,NULL,0,0,'2017-11-02 15:43:11','2017-11-02 15:43:11'),(58,50,'定时任务','立即执行',NULL,'sys:schedule:run',2,NULL,0,0,'2017-11-03 10:33:00','2017-11-03 10:33:00'),(59,0,'一级菜单','权限控制',NULL,NULL,0,'fa fa-user-circle',2,0,'2018-03-19 17:25:20','2018-03-19 17:39:06'),(60,1,'系统管理','博客设置','modules/sys/settings.html','admin_sys_setting',1,'fa fa-cog',1,0,'2018-03-19 17:32:17','2018-03-19 17:44:06'),(61,1,'系统管理','导航管理','modules/sys/nav','modules:sys:nav',1,'fa fa-bars',3,0,'2018-03-22 16:18:47','2018-03-22 16:18:47'),(62,1,'系统管理','信息板管理','/admin/modules/sys/infoBoard.html','sys:infoBoard',1,'fa fa-info',3,0,'2018-03-23 22:46:15','2018-03-23 22:46:15'),(64,1,'系统管理','分类管理','modules/sys/category.html','sys:category',1,'fa fa-coffee',5,0,'2018-03-25 14:58:31','2018-03-25 16:32:20'),(65,1,'系统管理','标签管理','modules/sys/tag.html','sys:tag',1,'fa fa-tags',5,0,'2018-03-26 11:03:02','2018-03-26 11:03:32'),(66,1,'系统管理','文章管理','modules/sys/article.html','admin:article',1,'fa fa-book',6,0,'2018-03-27 15:25:06','2018-03-27 15:25:41');
+/*!40000 ALTER TABLE `resource` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role`
+--
+
 DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'roleId',
   `role_code` varchar(255) NOT NULL COMMENT '角色code',
   `role_name` varchar(255) DEFAULT NULL COMMENT '角色名称',
   `status` tinyint(11) NOT NULL DEFAULT '0' COMMENT '取值范围：{0:正常,1:停用}',
-  `gmt_created` datetime NOT NULL,
-  `gmt_modified` datetime NOT NULL,
+  `gmt_created` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of role
--- ----------------------------
-INSERT INTO `role` VALUES ('1', 'admin', '管理员', '0', '2017-10-19 10:55:39', '2017-10-19 10:55:43');
-INSERT INTO `role` VALUES ('2', 'common', '普通会员', '0', '2017-10-19 10:56:52', '2017-10-19 10:56:55');
+--
+-- Dumping data for table `role`
+--
 
--- ----------------------------
--- Table structure for role_resource_rel
--- ----------------------------
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'admin','管理员',0,'2017-10-19 10:55:39','2017-10-19 10:55:43'),(2,'common','普通会员',0,'2017-10-19 10:56:52','2017-10-19 10:56:55');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role_resource_rel`
+--
+
 DROP TABLE IF EXISTS `role_resource_rel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role_resource_rel` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `role_id` bigint(20) NOT NULL,
@@ -590,31 +757,25 @@ CREATE TABLE `role_resource_rel` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of role_resource_rel
--- ----------------------------
-INSERT INTO `role_resource_rel` VALUES ('1', '2', '2', '0', '2017-10-19 14:55:30', '2017-10-19 14:55:32');
-INSERT INTO `role_resource_rel` VALUES ('2', '1', '1', '0', '2017-10-19 14:55:40', '2017-10-19 14:55:43');
-INSERT INTO `role_resource_rel` VALUES ('3', '1', '2', '0', '2017-10-25 10:00:41', '2017-10-25 10:00:44');
-INSERT INTO `role_resource_rel` VALUES ('4', '1', '3', '0', '2017-10-25 10:01:16', '2017-10-25 10:01:19');
-INSERT INTO `role_resource_rel` VALUES ('5', '1', '4', '0', '2017-10-25 10:02:19', '2017-10-25 10:02:22');
-INSERT INTO `role_resource_rel` VALUES ('6', '1', '5', '0', '2017-10-25 10:02:29', '2017-10-25 10:02:31');
-INSERT INTO `role_resource_rel` VALUES ('7', '1', '6', '0', '2017-10-25 10:02:40', '2017-10-25 10:02:42');
-INSERT INTO `role_resource_rel` VALUES ('9', '1', '8', '0', '2017-10-25 10:32:42', '2017-10-25 10:32:45');
-INSERT INTO `role_resource_rel` VALUES ('10', '1', '9', '0', '2017-10-25 10:32:52', '2017-10-25 10:32:54');
-INSERT INTO `role_resource_rel` VALUES ('11', '1', '10', '0', '2017-10-25 10:33:02', '2017-10-25 10:33:04');
-INSERT INTO `role_resource_rel` VALUES ('12', '1', '11', '0', '2017-10-25 10:33:11', '2017-10-25 10:33:14');
-INSERT INTO `role_resource_rel` VALUES ('13', '1', '12', '0', '2017-10-25 10:37:54', '2017-10-25 10:37:56');
-INSERT INTO `role_resource_rel` VALUES ('14', '1', '13', '0', '2017-10-25 10:38:03', '2017-10-25 10:38:06');
-INSERT INTO `role_resource_rel` VALUES ('15', '1', '14', '0', '2017-10-25 10:38:16', '2017-10-25 10:38:18');
-INSERT INTO `role_resource_rel` VALUES ('16', '1', '15', '0', '2017-10-25 10:38:45', '2017-10-25 10:38:48');
-INSERT INTO `role_resource_rel` VALUES ('17', '1', '16', '0', '2017-10-25 10:38:55', '2017-10-25 10:38:58');
+--
+-- Dumping data for table `role_resource_rel`
+--
 
--- ----------------------------
--- Table structure for schedule_job
--- ----------------------------
+LOCK TABLES `role_resource_rel` WRITE;
+/*!40000 ALTER TABLE `role_resource_rel` DISABLE KEYS */;
+INSERT INTO `role_resource_rel` VALUES (1,2,2,0,'2017-10-19 14:55:30','2017-10-19 14:55:32'),(2,1,1,0,'2017-10-19 14:55:40','2017-10-19 14:55:43'),(3,1,2,0,'2017-10-25 10:00:41','2017-10-25 10:00:44'),(4,1,3,0,'2017-10-25 10:01:16','2017-10-25 10:01:19'),(5,1,4,0,'2017-10-25 10:02:19','2017-10-25 10:02:22'),(6,1,5,0,'2017-10-25 10:02:29','2017-10-25 10:02:31'),(7,1,6,0,'2017-10-25 10:02:40','2017-10-25 10:02:42'),(9,1,8,0,'2017-10-25 10:32:42','2017-10-25 10:32:45'),(10,1,9,0,'2017-10-25 10:32:52','2017-10-25 10:32:54'),(11,1,10,0,'2017-10-25 10:33:02','2017-10-25 10:33:04'),(12,1,11,0,'2017-10-25 10:33:11','2017-10-25 10:33:14'),(13,1,12,0,'2017-10-25 10:37:54','2017-10-25 10:37:56'),(14,1,13,0,'2017-10-25 10:38:03','2017-10-25 10:38:06'),(15,1,14,0,'2017-10-25 10:38:16','2017-10-25 10:38:18'),(16,1,15,0,'2017-10-25 10:38:45','2017-10-25 10:38:48'),(17,1,16,0,'2017-10-25 10:38:55','2017-10-25 10:38:58');
+/*!40000 ALTER TABLE `role_resource_rel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schedule_job`
+--
+
 DROP TABLE IF EXISTS `schedule_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `bean_name` varchar(255) DEFAULT NULL COMMENT 'spring bean名称',
@@ -627,16 +788,25 @@ CREATE TABLE `schedule_job` (
   `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of schedule_job
--- ----------------------------
-INSERT INTO `schedule_job` VALUES ('4', 'testTask', 'test', null, '0/5 * * * * ? ', null, '1', '2017-11-03 15:39:14', '2017-11-08 09:47:31');
+--
+-- Dumping data for table `schedule_job`
+--
 
--- ----------------------------
--- Table structure for schedule_job_log
--- ----------------------------
+LOCK TABLES `schedule_job` WRITE;
+/*!40000 ALTER TABLE `schedule_job` DISABLE KEYS */;
+INSERT INTO `schedule_job` VALUES (4,'testTask','test',NULL,'0/5 * * * * ? ',NULL,1,'2017-11-03 15:39:14','2017-11-08 09:47:31');
+/*!40000 ALTER TABLE `schedule_job` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schedule_job_log`
+--
+
 DROP TABLE IF EXISTS `schedule_job_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_job_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志id',
   `job_id` bigint(20) NOT NULL COMMENT '任务id',
@@ -650,35 +820,51 @@ CREATE TABLE `schedule_job_log` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `job_id` (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59365 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of schedule_job_log
--- ----------------------------
+--
+-- Dumping data for table `schedule_job_log`
+--
 
--- ----------------------------
--- Table structure for tag
--- ----------------------------
+LOCK TABLES `schedule_job_log` WRITE;
+/*!40000 ALTER TABLE `schedule_job_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `schedule_job_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tag`
+--
+
 DROP TABLE IF EXISTS `tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tag
--- ----------------------------
-INSERT INTO `tag` VALUES ('1', '2018-03-26 11:03:49', '2018-03-26 11:05:13', 'java');
-INSERT INTO `tag` VALUES ('2', '2018-03-26 11:05:18', '2018-03-26 11:05:18', 'spring');
-INSERT INTO `tag` VALUES ('4', '2018-03-26 11:05:29', '2018-03-26 11:05:29', 'redis');
+--
+-- Dumping data for table `tag`
+--
 
--- ----------------------------
--- Table structure for text_settings
--- ----------------------------
+LOCK TABLES `tag` WRITE;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` VALUES (1,'2018-03-26 11:03:49','2018-03-26 11:05:13','java'),(2,'2018-03-26 11:05:18','2018-03-26 11:05:18','spring'),(4,'2018-03-26 11:05:29','2018-03-26 11:05:29','redis'),(26,'2018-05-17 18:56:22','2018-05-17 18:56:22','1'),(27,'2018-05-17 18:56:22','2018-05-17 18:56:22','2'),(28,'2018-05-17 18:56:22','2018-05-17 18:56:22','3'),(29,'2018-05-17 18:58:32','2018-05-17 18:58:32','1'),(30,'2018-05-17 18:58:32','2018-05-17 18:58:32','2'),(31,'2018-05-17 18:58:32','2018-05-17 18:58:32','3'),(32,'2018-05-17 19:00:58','2018-05-17 19:00:58','1'),(33,'2018-05-17 19:00:58','2018-05-17 19:00:58','2'),(34,'2018-05-17 19:00:58','2018-05-17 19:00:58','3'),(35,'2018-05-17 19:02:10','2018-05-17 19:02:10','1'),(36,'2018-05-17 19:04:13','2018-05-17 19:04:13','1'),(37,'2018-05-17 19:04:46','2018-05-17 19:04:46','1'),(38,'2018-05-17 19:40:53','2018-05-17 19:40:53','设计模式'),(40,'2018-05-30 20:36:07','2018-05-30 20:36:07','测试');
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `text_settings`
+--
+
 DROP TABLE IF EXISTS `text_settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `text_settings` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
@@ -698,16 +884,25 @@ CREATE TABLE `text_settings` (
   `icon_url` varchar(100) NOT NULL COMMENT 'http://iconfont.cn/manage/index?spm=a313x.7781069.1998910419.11&manage_type=myprojects&projectId=601117 最新地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of text_settings
--- ----------------------------
-INSERT INTO `text_settings` VALUES ('1', '2018-03-21 11:31:30', '2018-03-21 11:31:32', '的博客', '克己的博客', '有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事', '克己的博客', '搜一搜', 'icon-search', '1', '1', 'icon-time', '<li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.5.9 系列等</li>', 'icon-temperature-', '1111', '//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
+--
+-- Dumping data for table `text_settings`
+--
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
+LOCK TABLES `text_settings` WRITE;
+/*!40000 ALTER TABLE `text_settings` DISABLE KEYS */;
+INSERT INTO `text_settings` VALUES (1,'2018-03-21 11:31:30','2018-03-21 11:31:32','的博客','克己的博客','有志，则不甘为下流；有识，则只学问之无尽;有恒，则断无不成之事','克己的博客','搜一搜','icon-search',1,1,'icon-time','<li>网站名称：克己的博客</li><li>博客系统：<a href=\"//github.com/miyakowork\" target=\"_blank\"style=\"font-style: italic;\"><i class=\"layui-icon\">&#xe628;</i> NoteBlog</a></li><li>qq群：123456789</li><li>前端UI：<a href=\"//layui.com\" target=\"_blank\">layui 2.x</a></li><li>后端架构：<a href=\"https://projects.spring.io/spring-boot/\" target=\"_blank\">SpringBoot</a> 1.5.9 系列等</li>','icon-temperature-','1111','//at.alicdn.com/t/font_601117_r68dogh1ev1jor.js');
+/*!40000 ALTER TABLE `text_settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
 DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `email` varchar(255) NOT NULL COMMENT '登录邮箱',
@@ -724,18 +919,25 @@ CREATE TABLE `user` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin@qq.com', '克己', 'admin', '啥时候脱单？', '等我完成100功', null, null, null, null, '1', '2017-08-07 11:13:00', '2017-08-07 11:13:02');
-INSERT INTO `user` VALUES ('2', '123@qq.com', '克己', '2870386', '你小时候最好的朋友', '123', null, '10.63.14.102', null, '17671689099', '1', '2017-08-07 17:04:43', '2017-10-26 15:26:02');
-INSERT INTO `user` VALUES ('5', 'nieyinie2008@163.com', '聂毅', '2870386', null, null, null, null, null, '17671689059', '1', '2017-10-26 11:08:28', '2017-10-26 15:26:01');
+--
+-- Dumping data for table `user`
+--
 
--- ----------------------------
--- Table structure for user_role_rel
--- ----------------------------
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'admin@qq.com','克己','admin','啥时候脱单？','等我完成100功',NULL,NULL,NULL,NULL,1,'2017-08-07 11:13:00','2017-08-07 11:13:02'),(2,'123@qq.com','克己','2870386','你小时候最好的朋友','123',NULL,'10.63.14.102',NULL,'17671689099',1,'2017-08-07 17:04:43','2017-10-26 15:26:02'),(5,'nieyinie2008@163.com','聂毅','2870386',NULL,NULL,NULL,NULL,NULL,'17671689059',1,'2017-10-26 11:08:28','2017-10-26 15:26:01');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_role_rel`
+--
+
 DROP TABLE IF EXISTS `user_role_rel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_role_rel` (
   `id` bigint(255) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` bigint(255) NOT NULL,
@@ -745,11 +947,25 @@ CREATE TABLE `user_role_rel` (
   `gmt_modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of user_role_rel
--- ----------------------------
-INSERT INTO `user_role_rel` VALUES ('1', '1', '1', '0', '2017-10-19 10:57:25', '2017-10-19 10:57:28');
-INSERT INTO `user_role_rel` VALUES ('2', '2', '2', '0', '2017-10-19 10:57:37', '2017-10-19 10:57:39');
-INSERT INTO `user_role_rel` VALUES ('3', '5', '2', '0', '2017-10-26 11:08:31', '2017-10-26 11:08:31');
-INSERT INTO `user_role_rel` VALUES ('4', '6', '2', '0', '2017-10-26 14:30:03', '2017-10-26 14:30:03');
+--
+-- Dumping data for table `user_role_rel`
+--
+
+LOCK TABLES `user_role_rel` WRITE;
+/*!40000 ALTER TABLE `user_role_rel` DISABLE KEYS */;
+INSERT INTO `user_role_rel` VALUES (1,1,1,0,'2017-10-19 10:57:25','2017-10-19 10:57:28'),(2,2,2,0,'2017-10-19 10:57:37','2017-10-19 10:57:39'),(3,5,2,0,'2017-10-26 11:08:31','2017-10-26 11:08:31'),(4,6,2,0,'2017-10-26 14:30:03','2017-10-26 14:30:03');
+/*!40000 ALTER TABLE `user_role_rel` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-09-13 16:35:35
