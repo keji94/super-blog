@@ -71,7 +71,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/getCaptcha", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/index", "anon");
+        filterChainDefinitionMap.put("/index*", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/vue", "anon");
         filterChainDefinitionMap.put("/home/createBlog.html", "anon");
@@ -79,6 +79,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/blog.html", "anon");
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/category/list", "anon");
+        filterChainDefinitionMap.put("/home/*", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //配置记住我或认证通过可以访问的地址
 

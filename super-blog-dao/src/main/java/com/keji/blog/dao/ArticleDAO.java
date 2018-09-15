@@ -44,7 +44,7 @@ public interface ArticleDAO {
     ArticleDO selectByPrimaryKey(Long id);
 
     /**
-     * 条件查找
+     * 条件查找,join了三张表,偷懒的做法，实际工作中尽量不要用join
      *
      * @param record record
      * @return List<ArticleBO>

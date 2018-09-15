@@ -1,165 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css">
-    <link rel="stylesheet" href="/static/plugins/animate/animate.min.css">
-    <link rel="stylesheet" href="/static/plugins/ztree/css/metroStyle/metroStyle.css">
-    <link rel="stylesheet" href="/static/plugins/treegrid/jquery.treegrid.css">
-    <link rel="stylesheet" href="/static/css/home/style.css">
-    <link rel="stylesheet" href="/static/css/admin/bootstrap-table.min.css">
-    <link rel="stylesheet" href="/static/css/home/index.css">
-    <link rel="icon" href="/static/images/favicon.ico">
-    <title>${settings.title}</title>
-</head>
-<body class="animated fadeIn">
-<!--顶部导航栏信息-->
-<div class="header">
-    <div class="layui-container">
-        <div class="layui-row nav-header">
-            <!--logo-->
-            <div class="layui-col-xs9 layui-col-sm3 layui-col-md3  animated flipInX">
-                <a class="logo" href="index.html">
-                    <img src="/static/images/keji.png" style="height: 30px">
-                    &nbsp;${settings.logo}
-                </a>
+<!doctype html>
+<html lang="zh">
 
-            </div>
-            <!--logo结束-->
-            <!--index页面的右上方导航-->
-            <div class="layui-col-md-offset2 layui-col-md7 layui-hide layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
-                <#if navDOS??>
-                    <#list navDOS as navDO>
-                        <#if navDO_index == 0>
-                            <a href="${navDO.url}" class="active"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
-                            <#else>
-                                <a href="${navDO.url}"><svg class="icon" aria-hidden="true"><use xlink:href="#${navDO.icon}"></use></svg>&nbsp;${navDO.name}</a>
-                        </#if>
-                    </#list>
-                </#if>
-            </div>
-            <!--右上方导航结束-->
-        </div>
-    </div>
-</div>
-<!--顶部导航栏结束-->
-<hr class="header-hr">
-<!--搜索、统计-->
-<div class="layui-container">
-    <form class="layui-form" action="">
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label"><svg class="icon" aria-hidden="true"><use xlink:href="#${settings.searchIcon}"></use></svg>&nbsp;${settings.search}</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="按Enter键搜索" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                ${settings.pageHeader}
-            </div>
-        </div>
-    </form>
-</div>
-<!--搜索、统计部分结束-->
-<!--正文部分-->
-<div id="main-body" class="layui-container">
-    <div class="layui-row layui-col-space10 animated fadeInUp">
-        <div id="article-list" class="layui-col-md9">
-            <div class="layui-collapse layui-panel layui-article">
-                <div class="layui-colla-item">
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div id="index-affix-side">
-                <#if titleList??>
-                <div class="layui-tab layui-tab-card">
-                    <ul class="layui-tab-title select-none">
-                        <#list titleList as title>
-                        <#if title_index = 0>
-                            <li class="layui-this">${title}</li>
-                        <#else/>
-                        <li>${title}</li>
-                        </#if>
-                        </#list>
-                    </ul>
-                    <div class="layui-tab-content">
-                        <#list contentList as content>
-                        <#if content_index = 0>
-                            <div class="layui-tab-item layui-show layui-text">${content.content}</div>
-                        <#else/>
-                            <div class="layui-tab-item">${content.content}</div>
-                        </#if>
-                        </#list>
-                    </div>
-                </div>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>${settings.title}</title>
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" type="text/css" href="/static/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="/static/css/home/index.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_601117_sar6yq791fb.css">
+	</head>
 
-                <div class="layui-tab layui-tab-card layui-article-cate">
-                    <div class="layui-tab-content select-none ">
-                        <p class="title">文章分类</p>
-                        <hr>
-                        <ul id="categoryTree" class="ztree"></ul>
-                    </div>
-                </div>
+	<body class="home blog custom-background round-avatars">
+		<div class="Yarn_Background" style="background-image: url(/static/images/background.jpeg);"></div>
+		<form class="js-search search-form search-form--modal" method="get" action="search.html" role="search">
+			<div class="search-form__inner">
+				<div>
+					<div id="search-container" class="ajax_search">
+						<form method="get" id="searchform" action="">
+							<div class="filter_container"><input type="text" value="" autocomplete="off" placeholder="Type then select or enter" name="s" id="search-input" />
+								<ul id="search_filtered" class="search_filtered"></ul>
+							</div>
+							<input type="submit" name="submit" id="searchsubmit" class="searchsubmit" value="" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--右上角导航-->
+		<div class="navi close" data-aos="fade-down">
+			<div class="bt-nav">
+				<div class="line line1"></div>
+				<div class="line line2"></div>
+				<div class="line line3"></div>
+			</div>
+			<div class="navbar animated fadeInRight">
+				<div class="inner">
+					<nav id="site-navigation" class="main-navigation">
+						<div id="main-menu" class="main-menu-container">
+							<div class="menu-menu-container">
+								<ul id="primary-menu" class="menu">
+									<#if navDOS??>
+										<#list navDOS as navDO>
+										<#if navDO.url?contains("index")>
+											<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-17">
+												<a href="${navDO.url}">${navDO.name}</a>
+											</li>
+										<#else>
+											<li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
+												<a href="${navDO.url}">${navDO.name}</a>
+											</li>
+										</#if>
+										</#list>
+									</#if>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- #site-navigation -->
+				</div>
+			</div>
+		</div>
+		<!--搜索-->
+		<div class="hebin" data-aos="fade-down">
+			<i class=" js-toggle-search iconfont">&#xe60e;</i>
+		</div>
+		<header id="masthead" class="overlay animated from-bottom" itemprop="brand">
+			<!--中间头像-->
+			<div class="site-branding text-center">
+				<a href="">
+					<figure>
+						<img class="custom-logo avatar" src="/static/images/keji.png" />
+					</figure>
+				</a>
+				<h3 class="blog-description"><p>${settings.title}</p></h3>
+			</div>
+			<!-- .site-branding -->
+			<div class="decor-part">
+				<div id="particles-js"></div>
+			</div>
+			<div class="animation-header">
+				<div class="decor-wrapper">
+					<svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+						<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+						<path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+						<path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+						<path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+						<path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+					</svg>
+				</div>
+			</div>
+		</header>
+		<div id="main" class="content">
+			<div class="container">
+				<!--文章-->
+				<article itemscope="itemscope">
+					<div class="posts-list js-posts" id="article-list">
 
-                <div class="layui-tab layui-tab-card layui-master-recommend">
-                    <div class="layui-tab-content select-none">
-                        <p class="title">热门博客</p>
-                        <hr>
-                        <p><a href="index.html">深入JVM虚拟机</a>!</p>
-                        <p><a href="index.html">Java8 In Action</a>!</p>
-                        <p><a href="index.html">Spring实战</a>!</p>
-                    </div>
-                </div>
+					</div>
+				</article>
+			</div>
+		</div>
 
-                <div class="layui-tab layui-tab-card layui-tags">
-                    <div class="layui-tab-content select-none">
-                        <p class="title">热门标签</p>
-                        <hr>
-                        <#if hotTag??>
-                            <#list hotTag?keys as key>
-                                <span class="layui-badge-rim">${key}(${hotTag[key]})</span>
-                            </#list>
-                        </#if>
-                    </div>
-                </div>
-                </#if>
-            </div>
-        </div>
-    </div>
-</div>
+		<footer id="footer" class="overlay animated from-top">
+			<div class="decor-wrapper">
+				<svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+					<path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+					<path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+					<path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+					<path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+				</svg>
+			</div>
+			<div class="socialize" data-aos="zoom-in">
+				<li>
+					<a title="github" class="socialicon" href="https://github.com/keji94/super-blog">
+						<i class="iconfont icon-github"></i>
+					</a>
+				</li>
+				<li class="wechat">
+					<a class="socialicon"><i class="iconfont">&#xe609;</i></a>
+					<div class="wechatimg"><img src="http://keji-image.oss-cn-hangzhou.aliyuncs.com/18-9-15/58927749.jpg"></div>
+				</li>
+				<li class="wechat">
+					<a class="socialicon"><i class="iconfont icon-qq2"></i></a>
+					<div class="wechatimg"><img src="http://keji-image.oss-cn-hangzhou.aliyuncs.com/18-9-15/69039151.jpg"></div>
+				</li>
+			</div>
+			<div class="cr">
+				Copyright&copy;2018. Design by 克己
+			</div>
+		</footer>
 
-<!--底部-->
-<div class="layui-fluid bottom-nav">
-    <div class="layui-row">
-        <div class="layui-col-md4 layui-col-md-offset4 copyright">
-            <p style="text-align: center;"><i class="fa fa-copyright"></i>&nbsp;2015-2018 赣ICP备15003721号-2 ☆ powered by
-                <a href="//wuwenbin.me" target="_blank" style="color: #1E9FFF;">KejiBlog</a> in 2018 ver3.
-            </p>
-        </div>
-    </div>
-</div>
-<!--底部结束-->
+		<script type='text/javascript' src='/static/plugins/layui/layui.js'></script>
+		<script type='text/javascript' src='/static/js/home/jquery.min.js'></script>
+		<script type='text/javascript' src='/static/js/home/plugins.js'></script>
+		<script type='text/javascript' src='/static/js/home/script.js'></script>
+		<script type='text/javascript' src='/static/js/home/particles.js'></script>
+		<script type='text/javascript' src='/static/js/home/aos.js'></script>
+		<script type='text/javascript' src='/static/js/home/index.js'></script>
+	</body>
 
-<script src="/static/plugins/layui/layui.js"></script>
-<script src="/static/plugins/jquery/jquery-2.1.4.min.js"></script>
-<script src="/static/plugins/hc-sticky/hc-sticky.min.js"></script>
-<script type="text/javascript" language="javascript" src="${settings.iconUrl}"></script>
-<script src="/static/js/admin/bootstrap-table.min.js"></script>
-<script src="/static/plugins/treegrid/jquery.treegrid.min.js"></script>
-<script src="/static/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
-<script src="/static/plugins/ztree/jquery.ztree.all.min.js"></script>
-<script src="/static/plugins/treegrid/jquery.treegrid.extension.js"></script>
-<script src="/static/plugins/treegrid/tree.table.js"></script>
-<script src="/static/js/home/index.js"></script>
-
-<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-<!--[if lt IE 9]>
-<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-</body>
 </html>

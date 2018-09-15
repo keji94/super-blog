@@ -24,4 +24,6 @@ public class NavDO {
     private String url;
 
     private Integer status;
+
+    private Integer sortId;
 }

@@ -16,11 +16,13 @@ import com.keji.blog.service.admin.NavService;
 import com.keji.blog.service.admin.TextSettingsService;
 import com.keji.blog.service.home.ArticleTagRelService;
 import com.keji.blog.util.LogUtil;
+import freemarker.template.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -62,21 +64,26 @@ public class IndexController {
             model.addAttribute("contentList", list);
             //热门标签
             model.addAttribute("hotTag", hotTag);
-            //文章列表
         } catch (Exception e) {
             LogUtil.error(logger, e, "查询文本设置发生异常");
         }
         return "/home/index";
     }
 
-    @RequestMapping(value = {"/home/createBlog"})
-    public String publishBlog() {
-        return "/home/createBlog";
+    @RequestMapping(value = {"/home/{page}"})
+    public String publishBlog(@PathVariable String page,Model model) {
+        TextSettingsDO textSettingsDO = textSettingsService.query();
+        List<NavDO> navDOS = navService.listAll(initNavDO());
+
+        model.addAttribute("settings", textSettingsDO);
+        model.addAttribute("navDOS", navDOS);
+
+        return "/home/"+page;
     }
 
     private NavDO initNavDO() {
         NavDO navDO = new NavDO();
-        navDO.setStatus(1);
+        navDO.setStatus(0);
         return navDO;
     }
 

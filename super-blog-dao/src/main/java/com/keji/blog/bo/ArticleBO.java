@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.keji.blog.dataobject.ArticleImageDO;
 import com.keji.blog.dataobject.TagDO;
 import lombok.Data;
 
 /**
- *
  * @author wb-ny291824
  * @version $Id: ArticleDO.java, v 0.1 2018/3/27 11:55 wb-ny291824 Exp $
  */
@@ -16,33 +16,28 @@ import lombok.Data;
 public class ArticleBO implements Serializable {
     private static final long serialVersionUID = 1936411868879163818L;
     /**
-    * 文章id
-    **/
+     * 文章id
+     **/
     private Long id;
 
     /**
-    * 文章标题
-    **/
+     * 文章标题
+     **/
     private String title;
 
     /**
-    * 文章状态，0：正常；1：删除
-    **/
+     * 文章状态，0：正常；1：删除
+     **/
     private Integer status;
 
     /**
-    * 是否置顶，1：置顶；0：不置顶
-    **/
+     * 是否置顶，1：置顶；0：不置顶
+     **/
     private Integer top;
 
     /**
-    * 是否可以评论 1：可以；0：不可以
-    **/
-    private Integer commentable;
-
-    /**
-    * 发表用户
-    **/
+     * 发表用户
+     **/
     private Long userId;
 
     /**
@@ -56,18 +51,18 @@ public class ArticleBO implements Serializable {
     private String categoryName;
 
     /**
-    * 创建时间
-    **/
+     * 创建时间
+     **/
     private Date gmtCreated;
 
     /**
-    * 修改时间
-    **/
+     * 修改时间
+     **/
     private Date gmtModified;
 
     /**
-    * 文章内容
-    **/
+     * 文章内容
+     **/
     private String content;
 
     /**
@@ -89,4 +84,24 @@ public class ArticleBO implements Serializable {
      * 文章标签数
      */
     private List<TagDO> tagDOS;
+
+    /**
+     * 是否可以评论
+     */
+    private Integer isCommentable;
+
+    /**
+     * 展示方式
+     */
+    private Integer previewStyle;
+
+    /**
+     * 是否置顶
+     */
+    private Integer isTop;
+
+    /**
+     * 文章图片
+     */
+    private List<ArticleImageDO> articleImageDOS;
 }

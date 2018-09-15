@@ -9,10 +9,11 @@
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, name, icon, url,status
+    id, gmt_create, gmt_modified, name, icon, url,status,sort_id
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

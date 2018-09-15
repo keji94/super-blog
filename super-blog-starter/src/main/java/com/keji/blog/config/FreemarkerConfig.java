@@ -1,10 +1,26 @@
 package com.keji.blog.config;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
+import com.keji.blog.dataobject.InfoBoardDO;
+import com.keji.blog.dataobject.NavDO;
+import com.keji.blog.dataobject.TextSettingsDO;
+import com.keji.blog.service.admin.ArticleAdminService;
+import com.keji.blog.service.admin.InfoBoardService;
+import com.keji.blog.service.admin.NavService;
+import com.keji.blog.service.admin.TextSettingsService;
+import com.keji.blog.service.home.ArticleTagRelService;
 import com.keji.blog.shiro.ShiroTag;
+import com.keji.blog.util.LogUtil;
+import freemarker.core.Configurable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +37,21 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
  */
 @Configuration
 public class FreemarkerConfig {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private TextSettingsService textSettingsService;
+    private NavService navService;
+    private InfoBoardService boardService;
+    private ArticleTagRelService articleTagRelService;
+
     @Autowired
-    protected freemarker.template.Configuration configuration;
+    public FreemarkerConfig(TextSettingsService textSettingsService, NavService navService,
+                            InfoBoardService boardService, ArticleTagRelService articleTagRelService) {
+        this.textSettingsService = textSettingsService;
+        this.navService = navService;
+        this.boardService = boardService;
+        this.articleTagRelService = articleTagRelService;
+    }
 
     /**
      * 自定义Shiro标签
@@ -56,5 +85,11 @@ public class FreemarkerConfig {
         freeMarkerViewResolver.setContentType("text/html; charset=UTF-8");
         freeMarkerViewResolver.setViewClass(FreeMarkerView.class);
         return freeMarkerViewResolver;
+    }
+
+    private NavDO initNavDO() {
+        NavDO navDO = new NavDO();
+        navDO.setStatus(1);
+        return navDO;
     }
 }

@@ -102,7 +102,7 @@ public class ArticleExtDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", good=").append(good);
         sb.append(", bad=").append(bad);
-        sb.append(", pageviews=").append(pageviews);
+        sb.append(", pageViews=").append(pageviews);
         sb.append(", articleId=").append(articleId);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);

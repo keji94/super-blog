@@ -34,11 +34,6 @@ public class ArticleDO implements Serializable {
     private Integer top;
 
     /**
-    * 是否可以评论 1：可以；0：不可以
-    **/
-    private Integer commentable;
-
-    /**
     * 发表用户
     **/
     private Long userId;
@@ -100,14 +95,6 @@ public class ArticleDO implements Serializable {
 
     public void setTop(Integer top) {
         this.top = top;
-    }
-
-    public Integer getCommentable() {
-        return commentable;
-    }
-
-    public void setCommentable(Integer commentable) {
-        this.commentable = commentable;
     }
 
     public Long getUserId() {

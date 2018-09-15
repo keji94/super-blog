@@ -43,7 +43,7 @@ public class NavServiceImpl implements NavService {
 
     @Override
     public List<NavDO> listAll(NavDO navDO) {
-        return cacheService.findListSafety(BlogConstants.NAV_KEY, NavDO.class, navCacheLoader, navDO);
+        return cacheService.findList(BlogConstants.NAV_KEY, NavDO.class, navCacheLoader, navDO);
     }
 
     @Override

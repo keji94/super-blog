@@ -5,8 +5,6 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
-        <result column="top" jdbcType="TINYINT" property="top"/>
-        <result column="commentable" jdbcType="TINYINT" property="commentable"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
         <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
@@ -19,27 +17,34 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
-        <result column="top" jdbcType="TINYINT" property="top"/>
-        <result column="commentable" jdbcType="TINYINT" property="commentable"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
         <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
-        <result column="pageviews" jdbcType="INTEGER" property="pageviews"/>
+        <result column="pageViews" jdbcType="INTEGER" property="pageviews"/>
         <result column="good" jdbcType="INTEGER" property="good"/>
         <result column="bad" jdbcType="INTEGER" property="bad"/>
         <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="preview_style" jdbcType="INTEGER" property="previewStyle"/>
+        <result column="is_commentable" jdbcType="INTEGER" property="isCommentable"/>
+        <result column="is_top" jdbcType="INTEGER" property="isTop"/>
         <collection property="tagDOS" resultMap="tag"/>
+        <collection property="articleImageDOS" column="id" select="com.keji.blog.dao.ArticleImageDAO.selectByArticleId"/>
     </resultMap>
 
     <resultMap id="tag" type="com.keji.blog.dataobject.TagDO">
         <id column="tagId" jdbcType="BIGINT" property="id"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="articleImage" type="com.keji.blog.dataobject.ArticleImageDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="article_id" property="articleId" jdbcType="BIGINT"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <sql id="Base_Column_List">
-    id, title, status, top, commentable,content, user_id, category_id, category_name,gmt_created, gmt_modified
+    id, title, status,content, user_id, category_id, category_name,gmt_created, gmt_modified
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -51,10 +56,11 @@
 
     <select id="selectByCondition" resultMap="BoResultMap" parameterType="com.keji.blog.bo.ArticleBO">
         select
-        a.id,a.title,a.content,a.status,a.top,a.category_id,a.category_name,a.commentable,a.gmt_created,
-        ae.good,ae.bad,ae.pageviews
+        a.id,a.title,a.content,a.status,a.category_id,a.category_name,a.gmt_created,
+        ae.good,ae.bad,ae.pageViews,ase.is_commentable,ase.preview_style,ase.is_top
         from article a
         left join article_ext ae on a.id = ae.article_id
+        left join article_setting ase on a.id = ase.article_id
         <where>
 
             <if test="title != null">
@@ -82,11 +88,11 @@
 
     <insert id="insert" parameterType="com.keji.blog.dataobject.ArticleDO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into article (id, title, status, 
-      top, commentable, user_id,
+      user_id,
       category_id,category_name, gmt_created, gmt_modified,
       content)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 0,
-      #{top,jdbcType=TINYINT}, #{commentable,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT},
+      #{userId,jdbcType=BIGINT},
       #{categoryId,jdbcType=BIGINT},#{categoryName,jdbcType=VARCHAR}, now(), now(),
       #{content,jdbcType=LONGVARCHAR})
   </insert>
@@ -98,12 +104,6 @@
             </if>
             <if test="status != null">
                 status = #{status,jdbcType=TINYINT},
-            </if>
-            <if test="top != null">
-                top = #{top,jdbcType=TINYINT},
-            </if>
-            <if test="commentable != null">
-                commentable = #{commentable,jdbcType=TINYINT},
             </if>
             <if test="userId != null">
                 user_id = #{userId,jdbcType=BIGINT},
@@ -130,8 +130,6 @@
     update article
     set title = #{title,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
-      top = #{top,jdbcType=TINYINT},
-      commentable = #{commentable,jdbcType=TINYINT},
       user_id = #{userId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
       category_name = #{categoryName,jdbcType=VARCHAR},
@@ -144,8 +142,6 @@
     update article
     set title = #{title,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
-      top = #{top,jdbcType=TINYINT},
-      commentable = #{commentable,jdbcType=TINYINT},
       user_id = #{userId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
       category_name = #{categoryName,jdbcType=VARCHAR},

@@ -32,7 +32,7 @@ public class TextSettingsServiceImpl implements TextSettingsService {
 
     @Override
     public TextSettingsDO query(){
-        return cacheService.findObjectSafety(BlogConstants.TEXT_SETTINGS_KEY, TextSettingsDO.class, textSettingsCacheLoader,new TextSettingsDO());
+        return cacheService.findObject(BlogConstants.TEXT_SETTINGS_KEY, TextSettingsDO.class, textSettingsCacheLoader,new TextSettingsDO());
     }
 
     @Override

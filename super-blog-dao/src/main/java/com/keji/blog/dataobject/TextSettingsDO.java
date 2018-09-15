@@ -93,4 +93,9 @@ public class TextSettingsDO implements Serializable {
      */
     private String iconUrl;
 
+    /**
+     * 首页背景图片
+     */
+    private String indexBackgroundImage;
+
 }

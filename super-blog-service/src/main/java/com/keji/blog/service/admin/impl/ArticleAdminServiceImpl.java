@@ -22,6 +22,7 @@ import com.keji.blog.redis.RedisClient;
 import com.keji.blog.redis.loader.ArticleCacheLoader;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.util.JsonUtil;
+import com.keji.blog.util.StringUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,13 +50,22 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
     public PageInfo<ArticleBO> list(ArticleBO articleBO, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         List<ArticleBO> articleBOS = articleDAO.selectByCondition(articleBO);
+
+        for (ArticleBO bo : articleBOS) {
+            String delHtmlTag = StringUtil.delHtmlTag(bo.getContent());
+            if (delHtmlTag.length() > 200) {
+                delHtmlTag = delHtmlTag.substring(0, 200);
+            }
+            bo.setContent(delHtmlTag);
+        }
+
         setArticleTag(articleBOS);
         return new PageInfo<>(articleBOS);
     }
 
     @Override
     public List<ArticleBO> listAll(ArticleBO articleBO) {
-        return cacheService.findListSafety(BlogConstants.ARTICLE_KEY, ArticleBO.class, articleCacheLoader, articleBO);
+        return cacheService.findList(BlogConstants.ARTICLE_KEY, ArticleBO.class, articleCacheLoader, articleBO);
     }
 
     @Override
@@ -71,7 +81,6 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
         List<TagDO> tagDOS = assembleTagDOS(tagNameS);
         tagDAO.insertBatch(tagDOS);
         articleDO.setTop(0);
-        articleDO.setCommentable(1);
         articleDAO.insert(articleDO);
         articleTagRelDAO.insertBatch(assembleArticleTagRelDOS(tagDOS, articleDO));
         updateCache();

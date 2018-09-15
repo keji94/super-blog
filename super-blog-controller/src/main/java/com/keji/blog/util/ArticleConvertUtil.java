@@ -27,7 +27,6 @@ public class ArticleConvertUtil {
         articleBO.setTitle(articleVO.getTitle());
         articleBO.setId(articleVO.getId());
         articleBO.setCategoryId(articleVO.getCategoryId());
-        articleBO.setCommentable(articleVO.getCommentable());
         articleBO.setContent(articleVO.getContent());
         articleBO.setStatus(articleVO.getStatus());
         articleBO.setTop(articleVO.getTop());
@@ -41,7 +40,6 @@ public class ArticleConvertUtil {
         articleDO.setTitle(articleVO.getTitle());
         articleDO.setId(articleVO.getId());
         articleDO.setCategoryId(articleVO.getCategoryId());
-        articleDO.setCommentable(articleVO.getCommentable());
         articleDO.setContent(articleVO.getContent());
         articleDO.setStatus(articleVO.getStatus());
         articleDO.setTop(articleVO.getTop());
@@ -54,7 +52,6 @@ public class ArticleConvertUtil {
         ArticleDO articleDO = new ArticleDO();
         articleDO.setTitle(articleVO.getTitle());
         articleDO.setId(articleVO.getId());
-        articleDO.setCommentable(articleVO.getCommentable());
         articleDO.setContent(articleVO.getContent());
         articleDO.setStatus(articleVO.getStatus());
         articleDO.setCategoryId(articleVO.getCategoryId());
@@ -80,17 +77,19 @@ public class ArticleConvertUtil {
         articleVO.setId(articleBO.getId());
         articleVO.setCategoryId(articleBO.getCategoryId());
         articleVO.setCategoryName(articleBO.getCategoryName());
-        articleVO.setCommentable(articleBO.getCommentable());
         articleVO.setContent(articleBO.getContent());
         articleVO.setStatus(articleBO.getStatus());
         articleVO.setTop(articleBO.getTop());
         articleVO.setUserId(articleBO.getUserId());
         articleVO.setGmtModified(articleBO.getGmtModified());
         articleVO.setGmtCreated(articleBO.getGmtCreated());
-        articleVO.setPageviews(articleBO.getPageviews());
+        articleVO.setPageViews(articleBO.getPageviews());
         articleVO.setGood(articleBO.getGood());
         articleVO.setBad(articleBO.getBad());
         articleVO.setTagDOS(articleBO.getTagDOS());
+        articleVO.setIsCommentable(articleBO.getIsCommentable());
+        articleVO.setPreviewStyle(articleBO.getPreviewStyle());
+        articleVO.setArticleImageDOS(articleBO.getArticleImageDOS());
         return articleVO;
     }
 }

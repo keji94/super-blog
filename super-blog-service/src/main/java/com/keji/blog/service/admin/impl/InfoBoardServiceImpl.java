@@ -42,7 +42,7 @@ public class InfoBoardServiceImpl implements InfoBoardService {
 
     @Override
     public List<InfoBoardDO> listAll(InfoBoardDO record) {
-        return cacheService.findListSafety(BlogConstants.INFO_BOARD_KEY,InfoBoardDO.class,cacheLoader,record);
+        return cacheService.findList(BlogConstants.INFO_BOARD_KEY,InfoBoardDO.class,cacheLoader,record);
     }
 
     @Override
