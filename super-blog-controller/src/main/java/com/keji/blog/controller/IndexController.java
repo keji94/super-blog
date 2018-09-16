@@ -4,19 +4,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-
 import com.keji.blog.bo.ArticleBO;
+import com.keji.blog.bo.LinkBO;
 import com.keji.blog.dataobject.InfoBoardDO;
 import com.keji.blog.dataobject.NavDO;
 import com.keji.blog.dataobject.TextSettingsDO;
+import com.keji.blog.dataobject.UpdateTimeLineDO;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.service.admin.NavService;
 import com.keji.blog.service.admin.TextSettingsService;
 import com.keji.blog.service.home.ArticleTagRelService;
+import com.keji.blog.service.home.LinkService;
+import com.keji.blog.service.home.UpdateTimeLineService;
 import com.keji.blog.util.LogUtil;
-import freemarker.template.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +37,27 @@ public class IndexController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
     private TextSettingsService textSettingsService;
-    @Resource
     private NavService navService;
-    @Resource
     private InfoBoardService boardService;
-    @Resource
     private ArticleTagRelService articleTagRelService;
-    @Resource
     private ArticleAdminService articleAdminService;
+    private UpdateTimeLineService timeLineService;
+    private LinkService linkService;
+
+    @Autowired
+    public IndexController(TextSettingsService textSettingsService, NavService navService,
+                           InfoBoardService boardService, ArticleTagRelService articleTagRelService,
+                           ArticleAdminService articleAdminService, UpdateTimeLineService timeLineService,
+                           LinkService linkService) {
+        this.textSettingsService = textSettingsService;
+        this.navService = navService;
+        this.boardService = boardService;
+        this.articleTagRelService = articleTagRelService;
+        this.articleAdminService = articleAdminService;
+        this.timeLineService = timeLineService;
+        this.linkService = linkService;
+    }
 
     @RequestMapping(value = {"", "/index"})
     public String index(Model model) {
@@ -72,11 +84,26 @@ public class IndexController {
 
     @RequestMapping(value = {"/home/{page}"})
     public String publishBlog(@PathVariable String page,Model model) {
+
+        String updatePageName = "update";
+        String linkPageName = "link";
+
+
         TextSettingsDO textSettingsDO = textSettingsService.query();
         List<NavDO> navDOS = navService.listAll(initNavDO());
 
         model.addAttribute("settings", textSettingsDO);
         model.addAttribute("navDOS", navDOS);
+
+        if (page.equals(updatePageName)) {
+            List<UpdateTimeLineDO> updateTimeLineDOS = timeLineService.listAll();
+            model.addAttribute("updateTimeLineDOS",updateTimeLineDOS);
+        }
+
+        if (page.equals(linkPageName)) {
+            List<LinkBO> linkBOS = linkService.listAll(new LinkBO());
+            model.addAttribute("linkBOS", linkBOS);
+        }
 
         return "/home/"+page;
     }

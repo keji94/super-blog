@@ -45,6 +45,16 @@ public class BlogConstants {
     public static final String CATEGORY_KEY = "category";
 
     /**
+     * 时间线缓存key
+     */
+    public static final String UPDATE_TIME_LINE_KEY = "update_time_line_key";
+
+    /**
+     * 链接缓存key
+     */
+    public static final String LINK_KEY = "link";
+
+    /**
      * 员工姓名校验正则:2-6位无生僻字中文
      */
     public static final String NAME_REGULAR = "[\\u4e00-\\u9fa5]{2,6}";
