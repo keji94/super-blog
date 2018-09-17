@@ -23,7 +23,10 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Autowired
     private ScheduleJobDAO scheduleJobDAO;
-    @Autowired
+    /**
+     * 有问题，暂时不能用
+     */
+    @Autowired(required = false)
     private Scheduler scheduler;
 
     @Override

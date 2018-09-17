@@ -9,19 +9,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 /**
- * springboot 和quartz整合配置
+ * springboot 和quartz整合配置，datasource有点问题，用的时候需要优化
  *
  *
  * @author wb-ny291824
  * @version $Id: ScheduleConfig.java, v 0.1 2017-11-02 11:49 wb-ny291824 Exp $$
  */
-@Configuration
 public class ScheduleConfig {
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource druidDataSource) {
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource datasource) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
-        factory.setDataSource(druidDataSource);
+        factory.setDataSource(datasource);
 
         //quartz参数
         Properties prop = new Properties();

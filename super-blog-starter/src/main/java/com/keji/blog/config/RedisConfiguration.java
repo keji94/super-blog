@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * redis配置
@@ -24,11 +25,25 @@ public class RedisConfiguration {
     @Value("${spring.redis.host}")
     private String host;
 
+    @Value("${spring.redis.port}")
+    private int port;
+
+    @Value("${spring.redis.password}")
+    private String password;
+
+    @Value("${spring.redis.timeout}")
+    private String timeout;
+
     @Bean
     public JedisPool getJedisPool() {
-        return new JedisPool(host);
+
+        return new JedisPool(new JedisPoolConfig(),host,port,3000,password);
     }
 
+    @Bean
+    public JedisPoolConfig getJedisPoolConfig() {
+        return new JedisPoolConfig();
+    }
     /**
      * 未用到
      * @return JedisCluster
