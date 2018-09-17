@@ -83,11 +83,10 @@ public class IndexController {
     }
 
     @RequestMapping(value = {"/home/{page}"})
-    public String publishBlog(@PathVariable String page,Model model) {
+    public String publishBlog(@PathVariable String page, Model model) {
 
         String updatePageName = "update";
         String linkPageName = "link";
-
 
         TextSettingsDO textSettingsDO = textSettingsService.query();
         List<NavDO> navDOS = navService.listAll(initNavDO());
@@ -97,7 +96,7 @@ public class IndexController {
 
         if (page.equals(updatePageName)) {
             List<UpdateTimeLineDO> updateTimeLineDOS = timeLineService.listAll();
-            model.addAttribute("updateTimeLineDOS",updateTimeLineDOS);
+            model.addAttribute("updateTimeLineDOS", updateTimeLineDOS);
         }
 
         if (page.equals(linkPageName)) {
@@ -105,7 +104,18 @@ public class IndexController {
             model.addAttribute("linkBOS", linkBOS);
         }
 
-        return "/home/"+page;
+        return "/home/" + page;
+    }
+
+    @RequestMapping(value = {"/home/detail"})
+    public String articleDetail(Long id, Model model) {
+        TextSettingsDO textSettingsDO = textSettingsService.query();
+        List<NavDO> navDOS = navService.listAll(initNavDO());
+        ArticleBO articleBO = articleAdminService.queryById(id);
+        model.addAttribute("articleBO", articleBO);
+        model.addAttribute("settings", textSettingsDO);
+        model.addAttribute("navDOS", navDOS);
+        return "/home/detail";
     }
 
     private NavDO initNavDO() {
@@ -115,7 +125,7 @@ public class IndexController {
     }
 
     @RequestMapping("/blog")
-    public String showBlogDetail(Long id,Model model) {
+    public String showBlogDetail(Long id, Model model) {
         ArticleBO articleBO = articleAdminService.queryById(id);
         model.addAttribute("article", articleBO);
         return "/home/blogDetail";

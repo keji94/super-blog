@@ -53,7 +53,7 @@ function getContent1(data) {
         "\t\t\t\t\t\t\t<div class=\"status_list_item icon_kyubo\">\n" +
         "\t\t\t\t\t\t\t\t<div class=\"status_user\" style=\"background-image: url("+imageUrl+");\">\n" +
         "\t\t\t\t\t\t\t\t\t<div class=\"status_section\">\n" +
-        "\t\t\t\t\t\t\t\t\t\t<a href=\"detail.html\" class=\"status_btn\">"+data.title+"</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t<a href=\"home/detail.html?id="+data.id+"\"  id='"+data.id+"' onclick='articleDetail(this.id)' class=\"status_btn\">"+data.title+"</a>\n" +
         "\t\t\t\t\t\t\t\t\t\t<p class=\"section_p\">"+data.content+"</p>\n" +
         "\t\t\t\t\t\t\t\t\t</div>\n" +
         "\t\t\t\t\t\t\t\t</div>\n" +
@@ -73,13 +73,13 @@ function getContent2(data) {
         "\t\t\t\t\t\t\t\t<div class=\"post-container review-item\">\n" +
         "\t\t\t\t\t\t\t\t\t<div class=\"row review-item-wrapper\">\n" +
         "\t\t\t\t\t\t\t\t\t\t<div class=\"col-sm-3\">\n" +
-        "\t\t\t\t\t\t\t\t\t\t\t<a rel=\"nofollow\" href=\"detail.html\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<a rel=\"nofollow\" href=\"home/detail.html\">\n" +
         "\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"review-item-img\" style=\"background-image: url("+imageUrl+");\"></div>\n" +
         "\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
         "\t\t\t\t\t\t\t\t\t\t</div>\n" +
         "\t\t\t\t\t\t\t\t\t\t<div class=\"col-sm-9 flex-xs-middle\">\n" +
         "\t\t\t\t\t\t\t\t\t\t\t<div class=\"review-item-title\">\n" +
-        "\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"detail.html\" rel=\"bookmark\">"+data.title+"</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"home/detail.html?id="+data.id+"\"  id='"+data.id+"' onclick='articleDetail(this.id)' rel=\"bookmark\">"+data.title+"</a>\n" +
         "\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
         "\t\t\t\t\t\t\t\t\t\t\t<div class=\"review-item-creator\"><b>发布日期：</b>"+data.gmtCreated+"</div>\n" +
         "\t\t\t\t\t\t\t\t\t\t\t<span class=\"review-item-info\"><b>总浏览量：</b>"+data.pageViews+"</span>\n" +
@@ -115,7 +115,7 @@ function getContent3(data) {
         "\t\t\t\t\t\t\t\t\t<div class=\"bg\" style=\"background-image: url("+imageUrl+");\"></div>\n" +
         "\t\t\t\t\t\t\t\t\t<div class=\"contentext flex-xs-middle\">\n" +
         "\t\t\t\t\t\t\t\t\t\t<div class=\"album-title\">\n" +
-        "\t\t\t\t\t\t\t\t\t\t\t<a href=\"detail.html\">"+data.title+"</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<a href=\"home/detail.html?id="+data.id+"\"  id='"+data.id+"' onclick='articleDetail(this.id)'>"+data.title+"</a>\n" +
         "\t\t\t\t\t\t\t\t\t\t</div>\n" +
         "\t\t\t\t\t\t\t\t\t\t<h5 class=\"review-item-creator\"><b>发布日期：</b>"+data.gmtCreated+"</h5>\n" +
         "\t\t\t\t\t\t\t\t\t\t<div class=\"album-content\">"+data.content+"</div>\n" +

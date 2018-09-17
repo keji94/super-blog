@@ -13,7 +13,7 @@
 	</head>
 
 	<body class="home blog custom-background round-avatars">
-	<div class="Yarn_Background" style="background-image: url(/static/images/background.jpeg);"></div>
+	<div class="Yarn_Background" style="background-image: url(${settings.indexBackgroundImage});"></div>
 		<form class="js-search search-form search-form--modal" method="get" action="search.html" role="search">
 			<div class="search-form__inner">
 				<div>
@@ -114,17 +114,17 @@
 							<#list updateTimeLineDOS as updateTimeLineDO>
 								<#if updateTimeLineDO.status == 0>
 									<li>
-										<div>${updateTimeLineDO.title}<br /><span class="time-ago">${updateTimeLineDO.gmtCreate?string('dd.MM.yyyy HH:mm:ss')}</span></div>
+										<div>${updateTimeLineDO.title}<br /><span class="time-ago">${updateTimeLineDO.gmtCreate?string('yyyy.MM.dd HH:mm:ss')}</span></div>
 									</li>
 								</#if>
 								<#if updateTimeLineDO.status == 1>
 									<li class="warning">
-										<div>${updateTimeLineDO.title}<br /><span class="time-ago">${updateTimeLineDO.gmtCreate?string('dd.MM.yyyy HH:mm:ss')}</span></div>
+										<div>${updateTimeLineDO.title}<br /><span class="time-ago">${updateTimeLineDO.gmtCreate?string('yyyy.MM.dd HH:mm:ss')}</span></div>
 									</li>
 								</#if>
 								<#if updateTimeLineDO.status == 2>
 									<li class="success">
-										<div>${updateTimeLineDO.title}<br /><span class="time-ago">${updateTimeLineDO.gmtCreate?string('dd.MM.yyyy HH:mm:ss')}</span></div>
+										<div>${updateTimeLineDO.title}<br /><span class="time-ago">${updateTimeLineDO.gmtCreate?string('yyyy.MM.dd HH:mm:ss')}</span></div>
 									</li>
 								</#if>
 						    </#list>
