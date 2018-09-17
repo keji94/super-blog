@@ -18,10 +18,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author: wb-ny291824
- * @description shiro配置类
- * @date: Created in 2017/10/19
- * @modified: By:
+ * shiro配置类
+ *
+ * @author keji
+ * @version $Id: ShiroConfiguration.java, v 0.1 2018/9/17 19:39 keji Exp $
  */
 @Configuration
 public class ShiroConfiguration {
@@ -33,11 +33,11 @@ public class ShiroConfiguration {
 
     /**
      * 启用shiro方法注解进行权限控制
-     *  @RequiresPermissions("admin"):需要admin的权限才能访问
-     *  @RequiresAuthentication 需要登录，等同于方法subject.isAuthenticated() 结果为true时。
-     *  @RequiresUser 需要登录或者被记忆，一种是成功登录的（subject.isAuthenticated() 结果为true）,另外一种是被记忆的（ subject.isRemembered()结果为true）。
-     *  @RequiresGuest 需要时guest请求。与@ RequiresUser完全相反。换言之，RequiresUser  == ! RequiresGuest 。此时subject.getPrincipal() 结果为null.
-     *  @RequiresRoles 需要某一个角色才能访问
+     *  ‘@RequiresPermissions("admin"):需要admin的权限才能访问
+     *  ’@RequiresAuthentication 需要登录，等同于方法subject.isAuthenticated() 结果为true时。
+     *  ‘@RequiresUser 需要登录或者被记忆，一种是成功登录的（subject.isAuthenticated() 结果为true）,另外一种是被记忆的（ subject.isRemembered()结果为true）。
+     *  ’@RequiresGuest 需要时guest请求。与@ RequiresUser完全相反。换言之，RequiresUser  == ! RequiresGuest 。此时subject.getPrincipal() 结果为null.
+     *  ‘@RequiresRoles 需要某一个角色才能访问
      */
     @Bean
     public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
