@@ -13,7 +13,7 @@ function nextPage(page, next) { //执行下一页的回调
         dataType: "json",
         data: {
             "pageIndex": page,
-            "pageSize": 5
+            "pageSize": 10
         },
         success: function (r) {
             if (r.success) {

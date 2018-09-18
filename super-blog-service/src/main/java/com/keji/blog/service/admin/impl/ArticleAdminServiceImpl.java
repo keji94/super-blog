@@ -25,6 +25,7 @@ import com.keji.blog.util.JsonUtil;
 import com.keji.blog.util.RedisKeyUtil;
 import com.keji.blog.util.StringUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +61,7 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
 
             String pageReviews = redisClient.get(RedisKeyUtil.getArticlePageReviewsKey(bo.getId()));
 
-            bo.setPageviews(Integer.parseInt(pageReviews));
+            bo.setPageviews(StringUtils.isEmpty(pageReviews) ? 0 : Integer.parseInt(pageReviews));
             bo.setContent(delHtmlTag);
         }
 

@@ -18,7 +18,7 @@ layui.use(['layer', 'form', 'laypage', 'laydate', 'element', 'util', 'flow', 'la
     //文章加载
     flow.load({
         elem: '#article-list' ,
-        isAuto : true,
+        isAuto : false,
         done: function (page, next) {
             //执行下一页的回调
             return article(page, next);
