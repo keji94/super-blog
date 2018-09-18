@@ -63,4 +63,12 @@ public interface ArticleAdminService {
      * @return ArticleBO
      */
     ArticleBO queryById(Long id);
+
+    /**
+     * 根据标题模糊查询
+     *
+     * @param title title
+     * @return List<ArticleBO>
+     */
+    List<ArticleBO> queryByTitle(String title);
 }

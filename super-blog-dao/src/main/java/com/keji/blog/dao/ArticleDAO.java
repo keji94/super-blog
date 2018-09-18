@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.dataobject.ArticleDO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -74,4 +75,12 @@ public interface ArticleDAO {
      * @return i
      */
     int updateByPrimaryKey(ArticleDO record);
+
+    /**
+     * 根据标题查询
+     *
+     * @param title title
+     * @return List<ArticleBO>
+     */
+    List<ArticleBO> queryByTitle(@Param("title") String title);
 }

@@ -17,8 +17,9 @@
 		<div class="search-form__inner">
 			<div>
 				<div id="search-container" class="ajax_search">
-					<form method="get" id="searchform" action="">
-						<div class="filter_container"><input type="text" value="" autocomplete="off" placeholder="Type then select or enter" name="s" id="search-input" />
+					<form method="get" id="searchform" action="search.html">
+						<div class="filter_container">
+							<input type="text" value="" autocomplete="off" placeholder="输入文章标题按enter搜索" name="key" id="search-input" />
 							<ul id="search_filtered" class="search_filtered"></ul>
 						</div>
 						<input type="submit" name="submit" id="searchsubmit" class="searchsubmit" value="" />
@@ -28,7 +29,7 @@
 		</div>
 	</form>
 	<!--右上角导航-->
-	<div class="navi close" data-aos="fade-down">
+	<div class="navi" data-aos="fade-down">
 		<div class="bt-nav">
 			<div class="line line1"></div>
 			<div class="line line2"></div>
@@ -147,24 +148,26 @@
 			<div id="panel">
 				<div class="comment-area">
 					<section class="comments">
-						<!-- 来必力City版安装代码 -->
-						<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTc3Ni8xNjMwMw==">
-							<script type="text/javascript">
-                                (function(d, s) {
-                                    var j, e = d.getElementsByTagName(s)[0];
+						<div class="comments-main">
+							<!-- 来必力City版安装代码 -->
+							<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTc3Ni8xNjMwMw==">
+								<script type="text/javascript">
+									(function(d, s) {
+										var j, e = d.getElementsByTagName(s)[0];
 
-                                    if (typeof LivereTower === 'function') { return; }
+										if (typeof LivereTower === 'function') { return; }
 
-                                    j = d.createElement(s);
-                                    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                                    j.async = true;
+										j = d.createElement(s);
+										j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+										j.async = true;
 
-                                    e.parentNode.insertBefore(j, e);
-                                })(document, 'script');
-							</script>
-							<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+										e.parentNode.insertBefore(j, e);
+									})(document, 'script');
+								</script>
+								<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+							</div>
+							<!-- City版安装代码已完成 -->
 						</div>
-						<!-- City版安装代码已完成 -->
 					</section>
 				</div>
 			</div>
@@ -208,7 +211,7 @@
 				</li>
 			</div>
 			<div class="cr">Copyright&copy; 2018. Design by
-				<a href="">17sucai</a>
+				<a href="">keji</a>
 			</div>
 		</footer>
 			<script type='text/javascript' src='/static/js/home/jquery.min.js'></script>

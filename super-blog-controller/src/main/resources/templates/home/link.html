@@ -18,8 +18,9 @@
 		<div class="search-form__inner">
 			<div>
 				<div id="search-container" class="ajax_search">
-					<form method="get" id="searchform" action="">
-						<div class="filter_container"><input type="text" value="" autocomplete="off" placeholder="Type then select or enter" name="s" id="search-input" />
+					<form method="get" id="searchform" action="search.html">
+						<div class="filter_container">
+							<input type="text" value="" autocomplete="off" placeholder="输入文章标题按enter搜索" name="key" id="search-input" />
 							<ul id="search_filtered" class="search_filtered"></ul>
 						</div>
 						<input type="submit" name="submit" id="searchsubmit" class="searchsubmit" value="" />
@@ -29,7 +30,7 @@
 		</div>
 	</form>
 	<!--右上角导航-->
-	<div class="navi close" data-aos="fade-down">
+	<div class="navi" data-aos="fade-down">
 		<div class="bt-nav">
 			<div class="line line1"></div>
 			<div class="line line2"></div>
@@ -146,7 +147,7 @@
 		</div>
 		<div class="socialize" data-aos="zoom-in">
 			<li>
-				<a title="github" class="socialicon" href="https://github.com/keji94/super-blog">
+				<a title="github" class="socialicon" href="https://github.com/keji94/super-blog" target="_blank">
 					<i class="iconfont icon-github"></i>
 				</a>
 			</li>

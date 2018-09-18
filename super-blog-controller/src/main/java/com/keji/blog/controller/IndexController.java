@@ -10,6 +10,7 @@ import com.keji.blog.dataobject.InfoBoardDO;
 import com.keji.blog.dataobject.NavDO;
 import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.dataobject.UpdateTimeLineDO;
+import com.keji.blog.redis.RedisClient;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.service.admin.InfoBoardService;
 import com.keji.blog.service.admin.NavService;
@@ -18,6 +19,8 @@ import com.keji.blog.service.home.ArticleTagRelService;
 import com.keji.blog.service.home.LinkService;
 import com.keji.blog.service.home.UpdateTimeLineService;
 import com.keji.blog.util.LogUtil;
+import com.keji.blog.util.RedisKeyUtil;
+import com.keji.blog.vo.article.ArticleSearchResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +47,13 @@ public class IndexController {
     private ArticleAdminService articleAdminService;
     private UpdateTimeLineService timeLineService;
     private LinkService linkService;
+    private RedisClient redisClient;
 
     @Autowired
     public IndexController(TextSettingsService textSettingsService, NavService navService,
                            InfoBoardService boardService, ArticleTagRelService articleTagRelService,
                            ArticleAdminService articleAdminService, UpdateTimeLineService timeLineService,
-                           LinkService linkService) {
+                           LinkService linkService, RedisClient redisClient) {
         this.textSettingsService = textSettingsService;
         this.navService = navService;
         this.boardService = boardService;
@@ -57,6 +61,7 @@ public class IndexController {
         this.articleAdminService = articleAdminService;
         this.timeLineService = timeLineService;
         this.linkService = linkService;
+        this.redisClient = redisClient;
     }
 
     @RequestMapping(value = {"", "/index"})
@@ -110,12 +115,35 @@ public class IndexController {
     @RequestMapping(value = {"/home/detail"})
     public String articleDetail(Long id, Model model) {
         TextSettingsDO textSettingsDO = textSettingsService.query();
+
+        redisClient.incr(RedisKeyUtil.getArticlePageReviewsKey(id));
+
         List<NavDO> navDOS = navService.listAll(initNavDO());
         ArticleBO articleBO = articleAdminService.queryById(id);
         model.addAttribute("articleBO", articleBO);
         model.addAttribute("settings", textSettingsDO);
         model.addAttribute("navDOS", navDOS);
         return "/home/detail";
+    }
+
+    @RequestMapping(value = {"/home/search"})
+    public String articleDetail(String key, Model model) {
+
+        TextSettingsDO textSettingsDO = textSettingsService.query();
+        List<NavDO> navDOS = navService.listAll(initNavDO());
+
+        ArticleBO bo = new ArticleBO();
+        bo.setTitle(key);
+        List<ArticleBO> articleBOS = articleAdminService.queryByTitle(key);
+
+        ArticleSearchResultVO resultVO = new ArticleSearchResultVO();
+        resultVO.setKey(key);
+        resultVO.setTotal(articleBOS.size());
+        resultVO.setArticleBOS(articleBOS);
+        model.addAttribute("resultVO", resultVO);
+        model.addAttribute("settings", textSettingsDO);
+        model.addAttribute("navDOS", navDOS);
+        return "/home/search";
     }
 
     private NavDO initNavDO() {

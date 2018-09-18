@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 80
 
 logging:
   level: debug
@@ -19,7 +19,9 @@ spring:
 
   redis:
     host: 127.0.0.1
-    password:
+    password: Nieyinie2008
+    timeout: 3000
+    port: 6379
 
 mybatis:
   type-aliases-package: com.keji.blog.dataobject

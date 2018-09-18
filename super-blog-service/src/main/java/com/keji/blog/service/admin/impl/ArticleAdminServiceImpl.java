@@ -22,6 +22,7 @@ import com.keji.blog.redis.RedisClient;
 import com.keji.blog.redis.loader.ArticleCacheLoader;
 import com.keji.blog.service.admin.ArticleAdminService;
 import com.keji.blog.util.JsonUtil;
+import com.keji.blog.util.RedisKeyUtil;
 import com.keji.blog.util.StringUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,10 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
             if (delHtmlTag.length() > 200) {
                 delHtmlTag = delHtmlTag.substring(0, 200);
             }
+
+            String pageReviews = redisClient.get(RedisKeyUtil.getArticlePageReviewsKey(bo.getId()));
+
+            bo.setPageviews(Integer.parseInt(pageReviews));
             bo.setContent(delHtmlTag);
         }
 
@@ -102,6 +107,11 @@ public class ArticleAdminServiceImpl implements ArticleAdminService {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public List<ArticleBO> queryByTitle(String title) {
+        return articleDAO.queryByTitle(title);
     }
 
     private void setArticleTag(List<ArticleBO> articleBOS) {
