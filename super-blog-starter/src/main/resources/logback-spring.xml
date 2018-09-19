@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <property name="LOG_HOME" value="/root/service/log/super-blog" />
+    <property name="LOG_HOME" value="/opt/service/log/super-blog" />
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
