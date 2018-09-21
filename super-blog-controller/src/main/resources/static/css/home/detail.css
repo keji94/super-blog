@@ -42,7 +42,7 @@ body {
 	font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;
 	font-weight: 400;
 	font-size: 16px;
-	color: rgba(2, 0, 0, .6);
+	color: rgb(0, 0, 0);
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -149,7 +149,7 @@ h6 {
 }
 
 a {
-	color: #807f83;
+	color: #0f0c83;
 	text-decoration: none
 }
 
@@ -1555,11 +1555,12 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 h1.post_title {
-	color: #918f90;
+	color: #000000;
 	font-size: 25px;
 	font-weight: 700;
 	margin-bottom: 25px;
-	text-transform: uppercase
+	text-transform: uppercase;
+	text-align: center;
 }
 
 #panel {

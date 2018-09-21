@@ -1,23 +1,18 @@
 package com.keji.blog.controller;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.keji.blog.bo.ArticleBO;
 import com.keji.blog.bo.LinkBO;
-import com.keji.blog.dataobject.InfoBoardDO;
+import com.keji.blog.dataobject.IndexSettingDO;
 import com.keji.blog.dataobject.NavDO;
-import com.keji.blog.dataobject.TextSettingsDO;
 import com.keji.blog.dataobject.UpdateTimeLineDO;
 import com.keji.blog.redis.RedisClient;
-import com.keji.blog.service.admin.ArticleAdminService;
-import com.keji.blog.service.admin.InfoBoardService;
-import com.keji.blog.service.admin.NavService;
-import com.keji.blog.service.admin.TextSettingsService;
-import com.keji.blog.service.home.ArticleTagRelService;
-import com.keji.blog.service.home.LinkService;
-import com.keji.blog.service.home.UpdateTimeLineService;
+import com.keji.blog.service.IndexSettingService;
+import com.keji.blog.service.ArticleService;
+import com.keji.blog.service.NavService;
+import com.keji.blog.service.LinkService;
+import com.keji.blog.service.UpdateTimeLineService;
 import com.keji.blog.util.LogUtil;
 import com.keji.blog.util.RedisKeyUtil;
 import com.keji.blog.vo.article.ArticleSearchResultVO;
@@ -40,47 +35,32 @@ public class IndexController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private TextSettingsService textSettingsService;
     private NavService navService;
-    private InfoBoardService boardService;
-    private ArticleTagRelService articleTagRelService;
-    private ArticleAdminService articleAdminService;
+    private ArticleService articleService;
     private UpdateTimeLineService timeLineService;
     private LinkService linkService;
     private RedisClient redisClient;
+    private IndexSettingService indexSettingService;
 
     @Autowired
-    public IndexController(TextSettingsService textSettingsService, NavService navService,
-                           InfoBoardService boardService, ArticleTagRelService articleTagRelService,
-                           ArticleAdminService articleAdminService, UpdateTimeLineService timeLineService,
-                           LinkService linkService, RedisClient redisClient) {
-        this.textSettingsService = textSettingsService;
+    public IndexController(NavService navService, ArticleService articleService, UpdateTimeLineService timeLineService,
+                           LinkService linkService, RedisClient redisClient, IndexSettingService indexSettingService) {
         this.navService = navService;
-        this.boardService = boardService;
-        this.articleTagRelService = articleTagRelService;
-        this.articleAdminService = articleAdminService;
+        this.articleService = articleService;
         this.timeLineService = timeLineService;
         this.linkService = linkService;
         this.redisClient = redisClient;
+        this.indexSettingService = indexSettingService;
     }
 
     @RequestMapping(value = {"", "/index"})
     public String index(Model model) {
         try {
-            TextSettingsDO textSettingsDO = textSettingsService.query();
+            IndexSettingDO indexSettingDO = indexSettingService.selectIndexSetting();
             List<NavDO> navDOS = navService.listAll(initNavDO());
-            List<InfoBoardDO> list = boardService.listAll(new InfoBoardDO());
-            List<String> titleList = list.stream().map(InfoBoardDO::getTitle).collect(Collectors.toList());
-            Map<String, Integer> hotTag = articleTagRelService.queryHotTag();
-            //网站文案设置
-            model.addAttribute("settings", textSettingsDO);
             //顶部右侧导航
             model.addAttribute("navDOS", navDOS);
-            //网站信息板
-            model.addAttribute("titleList", titleList);
-            model.addAttribute("contentList", list);
-            //热门标签
-            model.addAttribute("hotTag", hotTag);
+            model.addAttribute("settings", indexSettingDO);
         } catch (Exception e) {
             LogUtil.error(logger, e, "查询文本设置发生异常");
         }
@@ -93,10 +73,10 @@ public class IndexController {
         String updatePageName = "update";
         String linkPageName = "link";
 
-        TextSettingsDO textSettingsDO = textSettingsService.query();
+        IndexSettingDO indexSettingDO = indexSettingService.selectIndexSetting();
         List<NavDO> navDOS = navService.listAll(initNavDO());
 
-        model.addAttribute("settings", textSettingsDO);
+        model.addAttribute("settings", indexSettingDO);
         model.addAttribute("navDOS", navDOS);
 
         if (page.equals(updatePageName)) {
@@ -114,47 +94,47 @@ public class IndexController {
 
     @RequestMapping(value = {"/home/detail"})
     public String articleDetail(Long id, Model model) {
-        TextSettingsDO textSettingsDO = textSettingsService.query();
+        IndexSettingDO indexSettingDO = indexSettingService.selectIndexSetting();
 
         redisClient.incr(RedisKeyUtil.getArticlePageReviewsKey(id));
 
         List<NavDO> navDOS = navService.listAll(initNavDO());
-        ArticleBO articleBO = articleAdminService.queryById(id);
+        ArticleBO articleBO = articleService.queryById(id);
         model.addAttribute("articleBO", articleBO);
-        model.addAttribute("settings", textSettingsDO);
+        model.addAttribute("settings", indexSettingDO);
         model.addAttribute("navDOS", navDOS);
         return "/home/detail";
     }
 
-    @RequestMapping(value = {"/home/search"})
+    @RequestMapping(value = {"/search","/home/search"})
     public String articleDetail(String key, Model model) {
 
-        TextSettingsDO textSettingsDO = textSettingsService.query();
+        IndexSettingDO indexSettingDO = indexSettingService.selectIndexSetting();
         List<NavDO> navDOS = navService.listAll(initNavDO());
 
         ArticleBO bo = new ArticleBO();
         bo.setTitle(key);
-        List<ArticleBO> articleBOS = articleAdminService.queryByTitle(key);
+        List<ArticleBO> articleBOS = articleService.queryByTitle(key);
 
         ArticleSearchResultVO resultVO = new ArticleSearchResultVO();
         resultVO.setKey(key);
         resultVO.setTotal(articleBOS.size());
         resultVO.setArticleBOS(articleBOS);
         model.addAttribute("resultVO", resultVO);
-        model.addAttribute("settings", textSettingsDO);
+        model.addAttribute("settings", indexSettingDO);
         model.addAttribute("navDOS", navDOS);
         return "/home/search";
     }
 
     private NavDO initNavDO() {
         NavDO navDO = new NavDO();
-        navDO.setStatus(0);
+        navDO.setStatus(1);
         return navDO;
     }
 
     @RequestMapping("/blog")
     public String showBlogDetail(Long id, Model model) {
-        ArticleBO articleBO = articleAdminService.queryById(id);
+        ArticleBO articleBO = articleService.queryById(id);
         model.addAttribute("article", articleBO);
         return "/home/blogDetail";
     }

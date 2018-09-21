@@ -16,64 +16,44 @@ import lombok.Data;
 public class ArticleBO implements Serializable {
     private static final long serialVersionUID = 1936411868879163818L;
     /**
-     * 文章id
-     **/
+     * 主键
+     */
     private Long id;
 
     /**
-     * 文章标题
-     **/
-    private String title;
-
-    /**
-     * 文章状态，0：正常；1：删除
-     **/
-    private Integer status;
-
-    /**
-     * 是否置顶，1：置顶；0：不置顶
-     **/
-    private Integer top;
-
-    /**
-     * 发表用户
-     **/
-    private Long userId;
-
-    /**
-     * 分类ID
-     */
-    private Long categoryId;
-
-    /**
-     * 分类名称
-     */
-    private String categoryName;
-
-    /**
      * 创建时间
-     **/
-    private Date gmtCreated;
+     */
+    private Date gmtCreate;
 
     /**
      * 修改时间
-     **/
-    private Date gmtModified;
+     */
+    private Date gmtUpdated;
 
     /**
-     * 文章内容
-     **/
+     * 状态(0:已删除 1：正常 2：置顶)
+     */
+    private Integer status;
+
+    /**
+     * 文章标题
+     */
+    private String title;
+
+    /**
+     * 是否允许评论(0:不允许 1:允许)
+     */
+    private Integer isComment;
+
+    /**
+     * 首页预览样式(0:normal 1:advanced 2:多图模式)
+     */
+    private Integer previewStyle;
+
+    /**
+     * 内容
+     */
     private String content;
-
-    /**
-     * 点赞数
-     */
-    private Integer good;
-
-    /**
-     * 踩数
-     */
-    private Integer bad;
 
     /**
      * 浏览数
@@ -81,24 +61,9 @@ public class ArticleBO implements Serializable {
     private Integer pageviews;
 
     /**
-     * 文章标签数
+     * 文章标签
      */
     private List<TagDO> tagDOS;
-
-    /**
-     * 是否可以评论
-     */
-    private Integer isCommentable;
-
-    /**
-     * 展示方式
-     */
-    private Integer previewStyle;
-
-    /**
-     * 是否置顶
-     */
-    private Integer isTop;
 
     /**
      * 文章图片

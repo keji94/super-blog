@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * update_time_line 表的实体类
  * 
- * @author : Administrator
+ * @author : keji
  * @since : 2018-09-16
  */
 public class UpdateTimeLineDO {

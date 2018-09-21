@@ -41,7 +41,7 @@
     select
     <include refid="Base_Column_List" />
     from link
-    where status = 0
+    where status = 1
   </select>
 
 

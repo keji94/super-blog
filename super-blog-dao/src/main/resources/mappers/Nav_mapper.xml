@@ -10,10 +10,11 @@
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, name, icon, url,status,sort_id
+    id, gmt_create, gmt_modified, name, icon, url,status,sort_id,position
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -28,6 +29,7 @@
         <include refid="Base_Column_List" />
         from nav
         <where>
+            status = 1
             <if test="name != null">
                 AND name = #{name,jdbcType=VARCHAR}
             </if>
@@ -41,6 +43,9 @@
                 AND status = #{status,jdbcType=VARCHAR}
             </if>
         </where>
+
+        order by sort_id asc
+
     </select>
 
 

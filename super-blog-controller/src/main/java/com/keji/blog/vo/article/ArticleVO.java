@@ -17,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 public class ArticleVO implements Serializable {
+    private static final long serialVersionUID = 6849956477833613198L;
     /**
     * 文章id
     **/

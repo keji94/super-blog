@@ -11,7 +11,7 @@ import com.keji.blog.exception.BlogException;
 import com.keji.blog.result.BaseErrorEnum;
 import com.keji.blog.result.BaseResult;
 import com.keji.blog.result.PageResult;
-import com.keji.blog.service.admin.TagService;
+import com.keji.blog.service.TagService;
 import com.keji.blog.util.LogUtil;
 import com.keji.blog.util.TagConvertUtil;
 import com.keji.blog.util.ValidatorUtils;

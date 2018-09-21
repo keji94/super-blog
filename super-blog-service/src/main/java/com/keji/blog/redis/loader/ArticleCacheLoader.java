@@ -21,6 +21,6 @@ public class ArticleCacheLoader implements CacheLoader<ArticleBO> {
 
     @Override
     public List<ArticleBO> load(ArticleBO articleBO) {
-        return articleDAO.selectByCondition(articleBO);
+        return articleDAO.selectWithBlobs(null,null);
     }
 }

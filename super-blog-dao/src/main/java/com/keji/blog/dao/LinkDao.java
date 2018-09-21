@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.keji.blog.bo.LinkBO;
 import com.keji.blog.dataobject.LinkDO;
+import org.springframework.stereotype.Repository;
 
 /**
  * Copyright (c) 2018 Choice, Inc.
@@ -12,9 +13,10 @@ import com.keji.blog.dataobject.LinkDO;
  * 
  * link 表的java client
  * 
- * @author : Administrator
+ * @author : keji
  * @since : 2018-09-16
  */
+@Repository
 public interface LinkDao {
     /**
      *  根据主键删除数据库的记录

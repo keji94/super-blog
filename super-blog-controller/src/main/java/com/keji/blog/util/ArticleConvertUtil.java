@@ -26,12 +26,8 @@ public class ArticleConvertUtil {
         ArticleBO articleBO = new ArticleBO();
         articleBO.setTitle(articleVO.getTitle());
         articleBO.setId(articleVO.getId());
-        articleBO.setCategoryId(articleVO.getCategoryId());
         articleBO.setContent(articleVO.getContent());
         articleBO.setStatus(articleVO.getStatus());
-        articleBO.setTop(articleVO.getTop());
-        articleBO.setUserId(articleVO.getUserId());
-        articleBO.setGmtModified(articleVO.getGmtModified());
         return articleBO;
     }
 
@@ -39,26 +35,7 @@ public class ArticleConvertUtil {
         ArticleDO articleDO = new ArticleDO();
         articleDO.setTitle(articleVO.getTitle());
         articleDO.setId(articleVO.getId());
-        articleDO.setCategoryId(articleVO.getCategoryId());
-        articleDO.setContent(articleVO.getContent());
         articleDO.setStatus(articleVO.getStatus());
-        articleDO.setTop(articleVO.getTop());
-        articleDO.setUserId(articleVO.getUserId());
-        articleDO.setGmtModified(articleVO.getGmtModified());
-        return articleDO;
-    }
-
-    public static ArticleDO convertInsertVO2DO(ArticleInsertVO articleVO) {
-        ArticleDO articleDO = new ArticleDO();
-        articleDO.setTitle(articleVO.getTitle());
-        articleDO.setId(articleVO.getId());
-        articleDO.setContent(articleVO.getContent());
-        articleDO.setStatus(articleVO.getStatus());
-        articleDO.setCategoryId(articleVO.getCategoryId());
-        articleDO.setCategoryName(articleVO.getCategoryName());
-        articleDO.setTop(articleVO.getTop());
-        articleDO.setUserId(articleVO.getUserId());
-        articleDO.setGmtModified(articleVO.getGmtModified());
         return articleDO;
     }
 
@@ -75,21 +52,13 @@ public class ArticleConvertUtil {
         ArticleVO articleVO = new ArticleVO();
         articleVO.setTitle(articleBO.getTitle());
         articleVO.setId(articleBO.getId());
-        articleVO.setCategoryId(articleBO.getCategoryId());
-        articleVO.setCategoryName(articleBO.getCategoryName());
         articleVO.setContent(articleBO.getContent());
         articleVO.setStatus(articleBO.getStatus());
-        articleVO.setTop(articleBO.getTop());
-        articleVO.setUserId(articleBO.getUserId());
-        articleVO.setGmtModified(articleBO.getGmtModified());
-        articleVO.setGmtCreated(articleBO.getGmtCreated());
         articleVO.setPageViews(articleBO.getPageviews());
-        articleVO.setGood(articleBO.getGood());
-        articleVO.setBad(articleBO.getBad());
         articleVO.setTagDOS(articleBO.getTagDOS());
-        articleVO.setIsCommentable(articleBO.getIsCommentable());
         articleVO.setPreviewStyle(articleBO.getPreviewStyle());
         articleVO.setArticleImageDOS(articleBO.getArticleImageDOS());
+        articleVO.setGmtCreated(articleBO.getGmtCreate());
         return articleVO;
     }
 }

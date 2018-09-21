@@ -14,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 
  * link 表的DO
  * 
- * @author : Administrator
+ * @author : keji
  * @since : 2018-09-16
  */
 public class LinkBO {

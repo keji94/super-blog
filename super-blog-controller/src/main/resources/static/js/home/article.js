@@ -92,7 +92,7 @@ function getContent2(data) {
         "\t\t\t\t\t\t\t\t<div class=\"post-container\">\n" +
         "\t\t\t\t\t\t\t\t\t<div class=\"entry-content\">"+data.content+"</div>\n" +
         "\t\t\t\t\t\t\t\t\t<div class=\"post-footer\">\n" +
-        "\t\t\t\t\t\t\t\t\t\t<a class=\"gaz-btn primary\" href=\"\">READ MORE</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t<a class=\"gaz-btn primary\" href=\"home/detail.html?id="+data.id+"\">READ MORE</a>\n" +
         // "\t\t\t\t\t\t\t\t\t\t<span class=\"total-comments-on-post pull-right\"><a href=\"\">31 Comments</a></span>\n" +
         "\t\t\t\t\t\t\t\t\t</div>\n" +
         "\t\t\t\t\t\t\t\t</div>\n" +

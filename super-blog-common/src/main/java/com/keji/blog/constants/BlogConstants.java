@@ -18,6 +18,11 @@ public class BlogConstants {
     public static final String USER_ID_STRING = "userId";
 
     /**
+     * 首页缓存key
+     */
+    public static final String INDEX_SETTING_KEY = "index_setting";
+
+    /**
      * 博客文案缓存key
      */
     public static final String TEXT_SETTINGS_KEY = "textSettingsDO";
