@@ -3,6 +3,9 @@ package com.keji.blog.redis.impl;
 import javax.annotation.Resource;
 
 import com.keji.blog.redis.RedisClient;
+import com.keji.blog.util.LogUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -16,6 +19,8 @@ import redis.clients.jedis.JedisPool;
 @Component("redisClient")
 public class RedisClientImpl implements RedisClient {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisClientImpl.class);
+
     @Resource
     private JedisPool jedisPool;
 
@@ -23,7 +28,7 @@ public class RedisClientImpl implements RedisClient {
     public String set(String key, String value) {
         String result;
         //1.7引入的try-with-resource 它会自动关闭实现了Closable接口的类中的close()方法。jedis的close()会将jedis放回池中
-        try(Jedis jedis = jedisPool.getResource()){
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.set(key, value);
         }
         return result;
@@ -33,7 +38,7 @@ public class RedisClientImpl implements RedisClient {
     public String set(String key, String value, int seconds) {
 
         String result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.setex(key, seconds, value);
         }
         return result;
@@ -41,9 +46,11 @@ public class RedisClientImpl implements RedisClient {
 
     @Override
     public String get(String key) {
-        String result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        String result = "";
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.get(key);
+        } catch (Exception e) {
+            LogUtil.error(LOGGER,e,"redisClient.get()失败,key=%s",key);
         }
         return result;
     }
@@ -51,7 +58,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public Boolean exists(String key) {
         Boolean result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.exists(key);
         }
         return result;
@@ -60,7 +67,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public Long expire(String key, int seconds) {
         Long result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.expire(key, seconds);
         }
         return result;
@@ -69,7 +76,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public Long ttl(String key) {
         Long result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.ttl(key);
         }
         return result;
@@ -78,7 +85,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public Long incr(String key) {
         Long result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.incr(key);
         }
         return result;
@@ -87,7 +94,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public Long hset(String key, String field, String value) {
         Long result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.incr(key);
         }
         return result;
@@ -96,8 +103,8 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public String hget(String key, String field) {
         String result;
-        try(Jedis jedis = jedisPool.getResource()) {
-            result = jedis.hget(key,field);
+        try (Jedis jedis = jedisPool.getResource()) {
+            result = jedis.hget(key, field);
         }
         return result;
     }
@@ -105,7 +112,7 @@ public class RedisClientImpl implements RedisClient {
     @Override
     public Long hdel(String key, String... field) {
         Long result;
-        try(Jedis jedis = jedisPool.getResource()) {
+        try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.hdel(key);
         }
         return result;
