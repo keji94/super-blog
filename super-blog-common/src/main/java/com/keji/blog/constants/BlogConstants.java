@@ -18,6 +18,11 @@ public class BlogConstants {
     public static final String USER_ID_STRING = "userId";
 
     /**
+     * 首页缓存key
+     */
+    public static final String INDEX_SETTING_KEY = "index_setting";
+
+    /**
      * 博客文案缓存key
      */
     public static final String TEXT_SETTINGS_KEY = "textSettingsDO";
@@ -43,6 +48,16 @@ public class BlogConstants {
      * 分类信息缓存key
      */
     public static final String CATEGORY_KEY = "category";
+
+    /**
+     * 时间线缓存key
+     */
+    public static final String UPDATE_TIME_LINE_KEY = "update_time_line_key";
+
+    /**
+     * 链接缓存key
+     */
+    public static final String LINK_KEY = "link";
 
     /**
      * 员工姓名校验正则:2-6位无生僻字中文

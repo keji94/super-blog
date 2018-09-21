@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.keji.blog.dataobject.ArticleImageDO;
 import com.keji.blog.dataobject.TagDO;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 public class ArticleVO implements Serializable {
+    private static final long serialVersionUID = 6849956477833613198L;
     /**
     * 文章id
     **/
@@ -88,10 +90,25 @@ public class ArticleVO implements Serializable {
     /**
      * 浏览数
      */
-    private Integer pageviews;
+    private Integer pageViews;
 
     /**
      * 文章标签数
      */
     private List<TagDO> tagDOS;
+
+    /**
+     * 是否可以评论
+     */
+    private Integer isCommentable;
+
+    /**
+     * 展示方式
+     */
+    private Integer previewStyle;
+
+    /**
+     * 文章图片
+     */
+    private List<ArticleImageDO> articleImageDOS;
 }

@@ -4,64 +4,6 @@ layui.define(function (exports) {
     });
 });
 
-var content = "<div class=\"layui-collapse layui-panel layui-article animated flipInX\">\n" +
-    "                <div class=\"layui-colla-item\">\n" +
-    "                    <div class=\"layui-colla-content layui-show layui-article\">\n" +
-    "                        <fieldset class=\"layui-elem-field layui-field-title\">\n" +
-    "                            <legend class=\"center-to-head \"><a href='blog.html'> 有关 WebMagic 爬虫扒取 magnet 磁力链接的一些问题的解决</a></legend>\n" +
-    "                            <div class=\"layui-field-box\">\n" +
-    "                                &nbsp;&nbsp;&nbsp;&nbsp;最近在研究爬虫,想扒取资源.\n" +
-    "                                研究了多了国人的爬虫webCollector/webMagic等,最后决定使用webMagic,感觉这个比较容易上手,而且定义比较灵活,也容易懂.\n" +
-    "                                具体文档请移步:http://webmagic.io/<a class=\"loading\" href=\"blog.html\"> 阅读全文<i\n" +
-    "                                    class=\"fa fa-angle-double-right\"></i> </a>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"operation\">\n" +
-    "                                <div class=\"tags\">\n" +
-    "                                    <span class=\"layui-badge-rim\"><i class=\"fa fa-tag\"></i> 爬虫</span>\n" +
-    "                                    <span class=\"layui-badge-rim\"><i class=\"fa fa-tag\"></i> Java</span>\n" +
-    "                                    <span class=\"layui-badge-rim\"><i class=\"fa fa-tag\"></i> 开源</span>\n" +
-    "                                    <span class=\"layui-badge-rim\"><i class=\"fa fa-tag\"></i> webmagic</span>\n" +
-    "                                </div>\n" +
-    "                                <div class=\"info\">\n" +
-    "                                    <span class=\"views\"><i class=\"fa fa-eye\"></i> 265</span>\n" +
-    "                                    <span class=\"datetime\"><i class=\"fa fa-clock-o\"></i> 2018-01-08</span>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </fieldset>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>";
-
-function generatorContent(data) {
-
-    var tagBody = '';
-    for(var i = 0 ; i < data.tagDOS.length;i++) {
-        tagBody += "<span class=\"layui-badge-rim\"><i class=\"fa fa-tag\"></i> "+data.tagDOS[i].name+"</span>\n";
-    }
-
-    var content = "<div class=\"layui-collapse layui-panel layui-article animated flipInX\">\n" +
-        "                <div class=\"layui-colla-item\">\n" +
-        "                    <div class=\"layui-colla-content layui-show layui-article\">\n" +
-        "                        <fieldset class=\"layui-elem-field layui-field-title\">\n" +
-        "                            <legend class=\"center-to-head \"><a href='blog.html'>"+data.title+"</a></legend>\n" +
-        "                            <div class=\"layui-field-box\">\n"+data.content+
-        "<a class=\"loading\" href=\"blog.html?id="+data.id+"\"> 阅读全文<i\n" + "class=\"fa fa-angle-double-right\"></i> </a>\n" +
-        "                            </div>\n" +
-        "                            <div class=\"operation\">\n" +
-        "                                <div class=\"tags\">\n" +
-                                            tagBody +
-        "                                </div>\n" +
-        "                                <div class=\"info\">\n" +
-        "                                    <span class=\"views\"><i class=\"fa fa-eye\"></i>"+data.pageviews+"</span>\n" +
-        "                                    <span class=\"datetime\"><i class=\"fa fa-clock-o\"></i> "+data.gmtCreated+"</span>\n" +
-        "                                </div>\n" +
-        "                            </div>\n" +
-        "                        </fieldset>\n" +
-        "                    </div>\n" +
-        "                </div>\n" +
-        "            </div>";
-    return content;
-}
 
 function nextPage(page, next) { //执行下一页的回调
 
@@ -85,4 +27,120 @@ function nextPage(page, next) { //执行下一页的回调
             }
         }
     });
+}
+function generatorContent(data) {
+    var content;
+
+    if (1 === data.previewStyle) {
+        content = getContent1(data);
+    }else if (2 === data.previewStyle) {
+        content = getContent2(data);
+    }else if (3 === data.previewStyle) {
+        content = getContent3(data);
+    }else {
+        content = getContent1(data);
+    }
+    return content;
+}
+
+function getContent1(data) {
+    var imageUrl = "";
+    var imageDO = data.articleImageDOS[0];
+    if (!$.isEmptyObject(imageDO)) {
+        imageUrl = imageDO.imageUrl;
+    }
+    return "\t\t\t\t\t\t<div class=\"post post-layout-list\" data-aos=\"fade-up\">\n" +
+        "\t\t\t\t\t\t\t<div class=\"status_list_item icon_kyubo\">\n" +
+        "\t\t\t\t\t\t\t\t<div class=\"status_user\" style=\"background-image: url("+imageUrl+");\">\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"status_section\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t<a href=\"home/detail.html?id="+data.id+"\"  id='"+data.id+"' onclick='articleDetail(this.id)' class=\"status_btn\">"+data.title+"</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t<p class=\"section_p\">"+data.content+"</p>\n" +
+        "\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t</div>";
+}
+
+function getContent2(data) {
+    var imageUrl = "";
+    var imageDO = data.articleImageDOS[0];
+    if (!$.isEmptyObject(imageDO)) {
+        imageUrl = imageDO.imageUrl;
+    }
+
+    return "\t\t\t\t\t\t<div class=\"post post-layout-list\" data-aos=\"fade-up\">\n" +
+        "\t\t\t\t\t\t\t<div class=\"postnormal review \">\n" +
+        "\t\t\t\t\t\t\t\t<div class=\"post-container review-item\">\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"row review-item-wrapper\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t<div class=\"col-sm-3\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<a rel=\"nofollow\" href=\"home/detail.html\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"review-item-img\" style=\"background-image: url("+imageUrl+");\"></div>\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t\t<div class=\"col-sm-9 flex-xs-middle\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<div class=\"review-item-title\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"home/detail.html?id="+data.id+"\"  id='"+data.id+"' onclick='articleDetail(this.id)' rel=\"bookmark\">"+data.title+"</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<div class=\"review-item-creator\"><b>发布日期：</b>"+data.gmtCreated+"</div>\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<span class=\"review-item-info\"><b>总浏览量：</b>"+data.pageViews+"</span>\n" +
+        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"review-bg-wrapper\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t<div class=\"bg-blur\" style=\"background-image: url("+imageUrl+");\"></div>\n" +
+        "\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t<div class=\"post-container\">\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"entry-content\">"+data.content+"</div>\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"post-footer\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t<a class=\"gaz-btn primary\" href=\"home/detail.html?id="+data.id+"\">READ MORE</a>\n" +
+        // "\t\t\t\t\t\t\t\t\t\t<span class=\"total-comments-on-post pull-right\"><a href=\"\">31 Comments</a></span>\n" +
+        "\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t</div>\n"
+}
+
+function getContent3(data) {
+    var imageUrl = "";
+    var imageDO = data.articleImageDOS[0];
+    if (!$.isEmptyObject(imageDO)) {
+        imageUrl = imageDO.imageUrl;
+    }
+
+    var imagehtml = getImageHtml(data);
+
+    return "\t\t\t\t\t\t<div class=\"post post-layout-list js-gallery\" data-aos=\"fade-up\">\n" +
+        "\t\t\t\t\t\t\t<div class=\"post-album\">\n" +
+        "\t\t\t\t\t\t\t\t<div class=\"row content\">\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"bg\" style=\"background-image: url("+imageUrl+");\"></div>\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"contentext flex-xs-middle\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t<div class=\"album-title\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t\t<a href=\"home/detail.html?id="+data.id+"\"  id='"+data.id+"' onclick='articleDetail(this.id)'>"+data.title+"</a>\n" +
+        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t\t<h5 class=\"review-item-creator\"><b>发布日期：</b>"+data.gmtCreated+"</h5>\n" +
+        "\t\t\t\t\t\t\t\t\t\t<div class=\"album-content\">"+data.content+"</div>\n" +
+        "\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t<div class=\"album-thumb-width flex-xs-middle\">\n" +
+        "\t\t\t\t\t\t\t\t\t\t<div class=\"row album-thumb no-gutter\">\n" + imagehtml+
+        "\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t\t</div>\n" +
+        "\t\t\t\t\t\t</div>\n";
+}
+
+function getImageHtml(data) {
+    var imageHtml = "";
+    if (data.articleImageDOS.length >=2){
+        for (var i = 1; i < data.articleImageDOS.length; i++) {
+            imageHtml += "\t\t\t\t\t\t\t\t\t\t\t<div class=\"col-xs-4\"><img class=\"thumb\" src="+data.articleImageDOS[i].imageUrl+"/></div>\n";
+            if (i === 4) {
+                imageHtml += "\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"\">5 pics</a>\n";
+                return imageHtml;
+            }
+        }
+    }
+
+    return imageHtml;
 }

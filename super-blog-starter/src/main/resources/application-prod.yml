@@ -1,0 +1,28 @@
+server:
+  port: 80
+
+logging:
+  level: info
+
+spring:
+  # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.105.87.242:3306/super_blog?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: Nieyi2017@163.com
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  redis:
+    host: 39.105.87.242
+    password: Nieyinie2008
+    timeout: 3000
+    port: 6379
+
+mybatis:
+  type-aliases-package: com.keji.blog.dataobject
+  mapper-locations: classpath:mappers/*.xml

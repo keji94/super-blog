@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * spring拦截规则配置. 由于引入了shiro,这里的拦截器暂时不使用了.
+ * spring拦截规则配置.
  *
  * @author keji
  * @version $Id: WebMvcConfig.java, v 0.1 2018/6/1 上午10:11 keji Exp $

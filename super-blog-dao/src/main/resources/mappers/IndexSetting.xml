@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keji.blog.dao.IndexSettingDAO">
+  <resultMap id="BaseResultMap" type="com.keji.blog.dataobject.IndexSettingDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_updated" jdbcType="TIMESTAMP" property="gmtUpdated" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="logo_url" jdbcType="VARCHAR" property="logoUrl" />
+    <result column="favicon_url" jdbcType="VARCHAR" property="faviconUrl" />
+    <result column="is_search" jdbcType="INTEGER" property="isSearch" />
+    <result column="search_icon" jdbcType="VARCHAR" property="searchIcon" />
+    <result column="search_tip" jdbcType="VARCHAR" property="searchTip" />
+    <result column="background_image_url" jdbcType="VARCHAR" property="backgroundImageUrl" />
+    <result column="bottom_text" jdbcType="VARCHAR" property="bottomText" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_updated, title, logo_url, favicon_url, is_search, search_icon,
+    search_tip, background_image_url, bottom_text
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from index_setting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectDeleteByPk" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from index_setting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from index_setting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.keji.blog.dataobject.IndexSettingDO">
+    insert into index_setting (id, gmt_create, gmt_updated,
+      title, logo_url, favicon_url,
+      is_search, search_icon, search_tip,
+      background_image_url, bottom_text)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdated,jdbcType=TIMESTAMP},
+      #{title,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR}, #{faviconUrl,jdbcType=VARCHAR},
+      #{isSearch,jdbcType=INTEGER}, #{searchIcon,jdbcType=VARCHAR}, #{searchTip,jdbcType=VARCHAR},
+      #{backgroundImageUrl,jdbcType=VARCHAR}, #{bottomText,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.keji.blog.dataobject.IndexSettingDO">
+    insert into index_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdated != null">
+        gmt_updated,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="logoUrl != null">
+        logo_url,
+      </if>
+      <if test="faviconUrl != null">
+        favicon_url,
+      </if>
+      <if test="isSearch != null">
+        is_search,
+      </if>
+      <if test="searchIcon != null">
+        search_icon,
+      </if>
+      <if test="searchTip != null">
+        search_tip,
+      </if>
+      <if test="backgroundImageUrl != null">
+        background_image_url,
+      </if>
+      <if test="bottomText != null">
+        bottom_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdated != null">
+        #{gmtUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="faviconUrl != null">
+        #{faviconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isSearch != null">
+        #{isSearch,jdbcType=INTEGER},
+      </if>
+      <if test="searchIcon != null">
+        #{searchIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="searchTip != null">
+        #{searchTip,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundImageUrl != null">
+        #{backgroundImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bottomText != null">
+        #{bottomText,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.keji.blog.dataobject.IndexSettingDO">
+    update index_setting
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdated != null">
+        gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="faviconUrl != null">
+        favicon_url = #{faviconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isSearch != null">
+        is_search = #{isSearch,jdbcType=INTEGER},
+      </if>
+      <if test="searchIcon != null">
+        search_icon = #{searchIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="searchTip != null">
+        search_tip = #{searchTip,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundImageUrl != null">
+        background_image_url = #{backgroundImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bottomText != null">
+        bottom_text = #{bottomText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.keji.blog.dataobject.IndexSettingDO">
+    update index_setting
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR},
+      favicon_url = #{faviconUrl,jdbcType=VARCHAR},
+      is_search = #{isSearch,jdbcType=INTEGER},
+      search_icon = #{searchIcon,jdbcType=VARCHAR},
+      search_tip = #{searchTip,jdbcType=VARCHAR},
+      background_image_url = #{backgroundImageUrl,jdbcType=VARCHAR},
+      bottom_text = #{bottomText,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

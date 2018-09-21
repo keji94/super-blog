@@ -20,7 +20,7 @@ $(function () {
             {label: '文章标题', name: 'title', classes: "title", width: 75},
             {label: '文章分类', name: 'categoryName', classes: "categoryName", width: 75},
             {label: '发布时间', name: 'gmtCreated', width: 75},
-            {label: '浏览数', name: 'pageviews', width: 75},
+            {label: '浏览数', name: 'pageViews', width: 75},
             {
                 label: '评论功能', width: 60, name: "commentable", formatter: function (value) {
                     if (value === 1) {

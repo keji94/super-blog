@@ -13,153 +13,153 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @version $Id: ArticleDO.java, v 0.1 2018/3/27 11:55 wb-ny291824 Exp $
  */
 public class ArticleDO implements Serializable {
+
+    private static final long serialVersionUID = -4641730174827633704L;
     /**
-    * 文章id
-    **/
+     * 主键
+     */
     private Long id;
 
     /**
-    * 文章标题
-    **/
-    private String title;
+     * 创建时间
+     */
+    private Date gmtCreate;
 
     /**
-    * 文章状态，0：正常；1：删除
-    **/
+     * 修改时间
+     */
+    private Date gmtUpdated;
+
+    /**
+     * 状态(0:已删除 1：正常 2：置顶)
+     */
     private Integer status;
 
     /**
-    * 是否置顶，1：置顶；0：不置顶
-    **/
-    private Integer top;
-
-    /**
-    * 是否可以评论 1：可以；0：不可以
-    **/
-    private Integer commentable;
-
-    /**
-    * 发表用户
-    **/
-    private Long userId;
-
-    /**
-     * 分类ID
+     * 文章标题
      */
-    private Long categoryId;
+    private String title;
 
     /**
-     * 分类名称
+     * 是否允许评论(0:不允许 1:允许)
      */
-    private String categoryName;
+    private Integer isComment;
 
     /**
-    * 创建时间
-    **/
-    private Date gmtCreated;
+     * 首页预览样式(0:normal 1:advanced 2:多图模式)
+     */
+    private Integer previewStyle;
 
     /**
-    * 修改时间
-    **/
-    private Date gmtModified;
-
-    /**
-    * 文章内容
-    **/
-    private String content;
-
-    private static final long serialVersionUID = 1L;
-
+     * 主键
+     * @return id 主键
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 主键
+     * @param id 主键
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    /**
+     * 创建时间
+     * @return gmt_create 创建时间
+     */
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    /**
+     * 创建时间
+     * @param gmtCreate 创建时间
+     */
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
+    /**
+     * 修改时间
+     * @return gmt_updated 修改时间
+     */
+    public Date getGmtUpdated() {
+        return gmtUpdated;
+    }
+
+    /**
+     * 修改时间
+     * @param gmtUpdated 修改时间
+     */
+    public void setGmtUpdated(Date gmtUpdated) {
+        this.gmtUpdated = gmtUpdated;
+    }
+
+    /**
+     * 状态(0:已删除 1：正常 2：置顶)
+     * @return status 状态(0:已删除 1：正常 2：置顶)
+     */
     public Integer getStatus() {
         return status;
     }
 
+    /**
+     * 状态(0:已删除 1：正常 2：置顶)
+     * @param status 状态(0:已删除 1：正常 2：置顶)
+     */
     public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Integer getTop() {
-        return top;
+    /**
+     * 文章标题
+     * @return title 文章标题
+     */
+    public String getTitle() {
+        return title;
     }
 
-    public void setTop(Integer top) {
-        this.top = top;
+    /**
+     * 文章标题
+     * @param title 文章标题
+     */
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
-    public Integer getCommentable() {
-        return commentable;
+    /**
+     * 是否允许评论(0:不允许 1:允许)
+     * @return is_comment 是否允许评论(0:不允许 1:允许)
+     */
+    public Integer getIsComment() {
+        return isComment;
     }
 
-    public void setCommentable(Integer commentable) {
-        this.commentable = commentable;
+    /**
+     * 是否允许评论(0:不允许 1:允许)
+     * @param isComment 是否允许评论(0:不允许 1:允许)
+     */
+    public void setIsComment(Integer isComment) {
+        this.isComment = isComment;
     }
 
-    public Long getUserId() {
-        return userId;
+    /**
+     * 首页预览样式(0:normal 1:advanced 2:多图模式)
+     * @return preview_style 首页预览样式(0:normal 1:advanced 2:多图模式)
+     */
+    public Integer getPreviewStyle() {
+        return previewStyle;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Date getGmtCreated() {
-        return gmtCreated;
-    }
-
-    public void setGmtCreated(Date gmtCreated) {
-        this.gmtCreated = gmtCreated;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    /**
+     * 首页预览样式(0:normal 1:advanced 2:多图模式)
+     * @param previewStyle 首页预览样式(0:normal 1:advanced 2:多图模式)
+     */
+    public void setPreviewStyle(Integer previewStyle) {
+        this.previewStyle = previewStyle;
     }
 
     @Override
