@@ -10,13 +10,13 @@ import org.slf4j.LoggerFactory;
  * IO流工具类
  *
  * @author wb-ny291824
- * @version $Id: IOUtil.java, v 0.1 2017-12-19 11:22 wb-ny291824 Exp $$
+ * @version $Id: IoUtil.java, v 0.1 2017-12-19 11:22 wb-ny291824 Exp $$
  */
-public class IOUtil {
+public class IoUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(IOUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(IoUtil.class);
 
-    private IOUtil() {}
+    private IoUtil() {}
 
     public static void close(Closeable...closeAbles) {
         try {

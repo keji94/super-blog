@@ -2,6 +2,9 @@ package com.keji.blog.dataobject;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * Copyright (c) 2018 Choice, Inc.
  * All Rights Reserved.
@@ -158,5 +161,10 @@ public class UpdateTimeLineDO {
      */
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

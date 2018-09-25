@@ -32,17 +32,17 @@ public interface NavService {
      * 修改
      * @param navDO record
      */
-    void update(NavDO navDO) throws JsonProcessingException;
+    void update(NavDO navDO);
 
     /**
      * 新增
      * @param navDO record
      */
-    void insert(NavDO navDO) throws JsonProcessingException;
+    void insert(NavDO navDO);
 
     /**
      * 删除
      * @param ids id
      */
-    void delete(Long[] ids) throws JsonProcessingException;
+    void delete(Long[] ids);
 }

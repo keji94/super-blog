@@ -40,7 +40,7 @@ public interface ArticleDAO {
     /**
      *  根据指定主键获取一条数据库记录
      *
-     * @param id
+     * @param id 主键
      * @return 实体
      */
     ArticleDO selectByPrimaryKey(Long id);
@@ -49,6 +49,7 @@ public interface ArticleDAO {
      * 查询文章
      *
      * @param title 标题
+     * @param id 主键
      * @return  List<ArticleBO>
      */
     List<ArticleBO> selectWithBlobs(@Param("title") String title,@Param("id") Long id);
