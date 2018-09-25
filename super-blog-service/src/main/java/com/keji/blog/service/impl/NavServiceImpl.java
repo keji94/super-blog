@@ -48,30 +48,29 @@ public class NavServiceImpl implements NavService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(NavDO navDO) throws JsonProcessingException {
+    public void update(NavDO navDO) {
         navDAO.updateByPrimaryKeySelective(navDO);
         updateCache();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insert(NavDO navDO) throws JsonProcessingException {
+    public void insert(NavDO navDO) {
         navDAO.insert(navDO);
         updateCache();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(Long[] ids) throws JsonProcessingException {
+    public void delete(Long[] ids) {
         navDAO.deleteBatch(ids);
         updateCache();
     }
 
     /**
      * 更新缓存
-     * @throws JsonProcessingException ex
      */
-    private void updateCache() throws JsonProcessingException {
+    private void updateCache() {
         //更新缓存
         List<NavDO> value = navDAO.selectByCondition(new NavDO());
         redisClient.set(BlogConstants.NAV_KEY, JsonUtil.object2Json(value));
